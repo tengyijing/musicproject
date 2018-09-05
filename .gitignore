@@ -8,9 +8,12 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 <<<<<<< HEAD
+<<<<<<< HEAD
 .project
 .classpath
 .settings
+=======
+>>>>>>> refs/remotes/origin/master
 =======
 >>>>>>> refs/remotes/origin/master
 
