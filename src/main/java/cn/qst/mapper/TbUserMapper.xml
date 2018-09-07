@@ -14,6 +14,7 @@
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="imgid" property="imgid" jdbcType="INTEGER" />
   </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -302,4 +303,26 @@
       imgid = #{imgid,jdbcType=INTEGER}
     where uid = #{uid,jdbcType=CHAR}
   </update>
+  
+  <select id="selectByUname" parameterType="java.lang.String" resultType="java.lang.String">
+  select `uname` from `tb_user` where `uname` = "#{value}"
+  </select>
+  
+  <select id = "selectByEmail" parameterType="java.lang.String" resultType="java.lang.String">
+  select `email` from `tb_user` where `email` = "#{value}"
+  </select>
+  
+  <select id = "selectByPhone" parameterType="java.lang.String" resultType="java.lang.String">
+  select `phone` from `tb_user` where `phone` = "#{value}"
+  </select>
 </mapper>
+
+
+
+
+
+
+
+
+
+

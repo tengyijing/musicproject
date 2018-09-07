@@ -53,7 +53,7 @@
                     <div class="item col-xs-12">
                         <span class="intelligent-label f-fl"><b class="ftx04">*</b>用户名：</span>    
                         <div class="f-fl item-ifo">
-                            <input type="text" maxlength="20" class="txt03 f-r3 required" tabindex="1" data-valid="isNonEmpty||between:3-20||isUname||isUserNameYan" data-error="用户名不能为空||用户名长度3-20位||只能输入字母、数字、下划线，且以英文字母开头||用户名已注册" id="adminNo" />                            <span class="ie8 icon-close close hide"></span>
+                            <input type="text" maxlength="20" class="txt03 f-r3 required" tabindex="1" data-valid="isNonEmpty||between:3-20||isUname||isUserNameYan" data-error="用户名不能为空||用户名长度3-20位||只能输入字母、数字、下划线，且以英文字母开头||用户名已注册" id="uname" />                            <span class="ie8 icon-close close hide"></span>
                             <label class="icon-sucessfill blank hide"></label>
                             <label class="focus"><span>3-20位，英文字母、数字、下划线的组合，以英文字母开头</span></label>
                             <label class="focus valid" id="xianshi"></label>
@@ -140,7 +140,7 @@
                         <div class="f-fl item-ifo">
                            <a href="javascript:;" class="btn btn-blue f-r3" id="btn_part1">下一步</a> 
                                <div class="go-regist">
-			                                                已有帐号,请<a href="login.jsp" class="link">登录</a>
+			                                                已有帐号,请<a href="User/login.action" class="link">登录</a>
 		                       </div>                        
                         </div>
                     </div>                
@@ -149,7 +149,7 @@
                 <div class="part2" style="display:none">
                 	<div class="alert alert-info" style="width:700px" id="successEmail"></div>                    
                     <div class="item col-xs-12 f-mb10" style="height:auto">
-                        <span class="intelligent-label f-fl">手机号码：</span>    
+                        <span class="intelligent-label f-fl">邮箱：</span>    
                         <div class="f-fl item-ifo c-blue" id="xianshiEmail">
                             
                         </div>
@@ -162,7 +162,7 @@
                             <span class="btn btn-gray f-r3 f-ml5 f-size13" id="verifyYz" style="width:97px;" onclick="sentPhone()">发送验证码</span>
                             <span class="ie8 icon-close close hide" style="right:130px"></span>
                             <label class="icon-sucessfill blank hide"></label>
-                            <label class="focus"><span>请查收验证码，并填写短信中的验证码（此验证码3分钟内有效）</span></label>   
+                            <label class="focus"><span>请查收验证码，并填写邮件的验证码（此验证码3分钟内有效）</span></label>   
                             <label class="focus valid" id="yanzheng"></label>                        
                         </div>
                     </div>
