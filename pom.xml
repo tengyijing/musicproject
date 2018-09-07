@@ -36,6 +36,7 @@
 		<freemarker.version>2.3.23</freemarker.version>
 		<quartz.version>2.2.2</quartz.version>
 	</properties>
+	<!-- jar包地址管理 -->
 	<dependencyManagement>
 		<dependencies>
 			<!-- 时间操作组件 -->
@@ -222,9 +223,10 @@
 				<artifactId>freemarker</artifactId>
 				<version>${freemarker.version}</version>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
+	
+	<!-- 应用jar包 -->
 	<dependencies>
 		<!-- Apache工具组件 -->
 		<dependency>
