@@ -18,8 +18,21 @@ public class TbUserServiceImpl implements TbUserService {
     @Autowired
     private TbUserMapper tbUserMapper;
 
-    @Override
-    public TbUser selectByPrimaryKey() {
-        return tbUserMapper.selectByPrimaryKey("100");
-    }
+    /**
+     * 根据名字验证用户名是否重复
+     * @param uname 用户名
+     * @return 查找到值即返回name，没有即返回null
+     */
+	@Override
+	public String selectByUname(String uname) {
+		// TODO Auto-generated method stub
+		String name = tbUserMapper.selectByUname(uname);
+		if (name == null) {
+			return null;
+		} else {
+			return name;
+		}
+	}
+
+    
 }

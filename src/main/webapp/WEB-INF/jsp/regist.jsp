@@ -53,7 +53,7 @@
                     <div class="item col-xs-12">
                         <span class="intelligent-label f-fl"><b class="ftx04">*</b>用户名：</span>    
                         <div class="f-fl item-ifo">
-                            <input type="text" maxlength="20" class="txt03 f-r3 required" tabindex="1" data-valid="isNonEmpty||between:3-20||isUname||isUserNameYan" data-error="用户名不能为空||用户名长度3-20位||只能输入字母、数字、下划线，且以英文字母开头||用户名已注册" id="adminNo" />                            <span class="ie8 icon-close close hide"></span>
+                            <input type="text" maxlength="20" class="txt03 f-r3 required" tabindex="1" data-valid="isNonEmpty||between:3-20||isUname||isUserNameYan" data-error="用户名不能为空||用户名长度3-20位||只能输入字母、数字、下划线，且以英文字母开头||用户名已注册" id="uname" />                            <span class="ie8 icon-close close hide"></span>
                             <label class="icon-sucessfill blank hide"></label>
                             <label class="focus"><span>3-20位，英文字母、数字、下划线的组合，以英文字母开头</span></label>
                             <label class="focus valid" id="xianshi"></label>

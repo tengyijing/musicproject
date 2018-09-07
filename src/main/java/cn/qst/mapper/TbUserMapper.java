@@ -27,4 +27,10 @@ public interface TbUserMapper {
     int updateByPrimaryKeySelective(TbUser record);
 
     int updateByPrimaryKey(TbUser record);
+    
+    /**
+     * 效验用户名是否重复
+     * 根据用户名直接查找是否有该用户名
+     */
+    String selectByUname(String uname);
 }

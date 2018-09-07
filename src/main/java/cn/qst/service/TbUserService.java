@@ -14,5 +14,5 @@ import org.springframework.stereotype.Service;
 
 public interface TbUserService {
 
-    TbUser selectByPrimaryKey();
+    String selectByUname(String uname);
 }
