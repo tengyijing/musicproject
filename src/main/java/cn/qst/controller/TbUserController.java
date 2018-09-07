@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ser.std.EnumMapSerializer;
+
 /**
  * @author lk 2018/9/7 11:23
  * @description:
@@ -62,7 +64,11 @@ public class TbUserController {
 		return "login";
 	}
 	
-	//效验用户名是否为唯一
+	/**
+	 * 效验用户名是否为唯一
+	 * @param uname
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/verifyUname", method = {RequestMethod.POST})
 	public Boolean verifyUname(String uname) {
@@ -75,4 +81,35 @@ public class TbUserController {
 	 	}
 		return flag;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/verifyEmail", method = {RequestMethod.POST})
+	public Boolean verifyEmail(String email) {
+		boolean flag = false;
+		String email1 = tbUserService.selectByEmail(email);
+		if (email1 == null) {
+			flag = true;
+		} 
+		return flag;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/verifyPhone", method = {RequestMethod.POST})
+	public Boolean verifyPhone(String phone) {
+		boolean flag = false;
+		String phone1 = tbUserService.selectByPhone(phone);
+		if (phone1 == null) {
+			flag = true;
+		} 
+		return flag;
+	}
+	
+	
 }
+
+
+
+
+
+
+
