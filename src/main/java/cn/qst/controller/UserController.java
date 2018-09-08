@@ -3,14 +3,11 @@ package cn.qst.controller;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.TbUserService;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.databind.ser.std.EnumMapSerializer;
 
 /**
  * @author lk 2018/9/7 11:23
@@ -19,19 +16,10 @@ import com.fasterxml.jackson.databind.ser.std.EnumMapSerializer;
 
 @Controller
 @RequestMapping("/User")
-public class TbUserController {
+public class UserController {
 
 	@Autowired
 	private TbUserService tbUserService;
-
-	/**
-	 * 跳转登陆界面get方法
-	 * @return
-	 */
-	@RequestMapping(value = "/login", method = { RequestMethod.GET })
-	public String login() {
-		return "login";
-	}
 	
 	/**
 	 * 登陆，检查账号密码时候正确
@@ -103,13 +91,4 @@ public class TbUserController {
 		} 
 		return flag;
 	}
-	
-	
 }
-
-
-
-
-
-
-

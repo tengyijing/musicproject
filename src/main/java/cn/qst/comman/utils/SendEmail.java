@@ -43,7 +43,7 @@ public class SendEmail {
     public static String sendEamilCode(String email) {
         HtmlEmail send = new HtmlEmail();
         String resultCode = achieveCode(); // 获取随机验证码
-        try {
+        try{
             send.setHostName("smtp.qq.com");
             send.setSmtpPort(465); //端口号
             send.setSSLOnConnect(true); //开启SSL加密

@@ -140,7 +140,7 @@
                         <div class="f-fl item-ifo">
                            <a href="javascript:;" class="btn btn-blue f-r3" id="btn_part1">下一步</a> 
                                <div class="go-regist">
-			                                                已有帐号,请<a href="User/login.action" class="link">登录</a>
+			                                                已有帐号,请<a href="/page.action?view=login" class="link">登录</a>
 		                       </div>                        
                         </div>
                     </div>                
