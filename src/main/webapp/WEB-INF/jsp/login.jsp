@@ -133,7 +133,7 @@ function regist(validate){
 			</form>
 		</div>
 		<div class="go-regist">
-			没有帐号,请<a href="/page.action?view=regist" class="link">注册</a>
+			没有帐号,请<a href="/regist" class="link">注册</a>
 		</div>
 	</div>
 </div>	

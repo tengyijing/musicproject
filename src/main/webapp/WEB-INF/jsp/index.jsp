@@ -98,8 +98,8 @@
          <p style="margin-left:4px;margin-top:5px;"><a href="Logout.do"><img src="source/images/退出.png"></a></p>  
          </div>
         <div class="header-login"style="margin-right:-10px;">
-          <a href="/page.action?view=login" class="open-green" id="login">登录</a>
-          <a href="/page.action?view=regist" class="open-vip" id="reg">注册</a>
+          <a href="/login" class="open-green" id="login">登录</a>
+          <a href="/regist" class="open-vip" id="reg">注册</a>
         </div>
       </div>
       <ul class="header-subNav" style="margin-top:20px;">
