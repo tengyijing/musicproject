@@ -1,7 +1,6 @@
 package cn.qst.service.impl;
 
 import cn.qst.mapper.TbUserMapper;
-import cn.qst.pojo.TbUser;
 import cn.qst.service.TbUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -25,15 +25,16 @@ var type = '${type}';
 
 </script>
 </head>
-<body onload="userLogin('${username}');">
+<%-- <body onload="userLogin('${username}');"> --%>
+<body>
 	<!--模糊画布-->
 	<div class="blur">
 		<canvas style="width:1366px;height:700px;opacity:0;" width="1366" height="700" id="canvas">
 	</div>
 	<div class="playerMain">
 		<div class="top">
-			<a style="cursor: pointer;" href="../../index.jsp" ><h2 class="logoaichang"
-                                                                    onmouseover="huan()" onmouseout="huan2()">爱唱音乐</h2></a>
+			<a style="cursor: pointer;" href="/" >
+			<h2 class="logoaichang" onmouseover="huan()" onmouseout="huan2()">爱唱音乐</h2></a>
 			        <script> $(window).load(function(){fPlay('${id}')});
 			        $(window).load(function(){bian('${type}')});</script>
 			<div class="mainNav">
@@ -72,12 +73,12 @@ var type = '${type}';
 							onclick="payment();"></a>
 						<div class="col" style="margin-left: -60px; width: 180px;">
 							<ul class="menuUL2">
-							<c:forEach items="${musicList3}" var="music" varStatus="index1">
+							<c:forEach items="${musicList}" var="music" varStatus="index1">
 								<li class="menuLi2 cur">
-								<div  class="beijing hp" single2="${music.songSingle }">
+								<div  class="beijing hp" single2="${music.name }">
 								 <i class="icon isplay2"></i>
-								 <a href="playList.do?type=${music.songSingle }"style="color:black; background-color:transparent;">${music.songSingle }</a>
-								 <i class="cicon dele2" single3="${music.songSingle }" delNo="${index1.index}"></i>
+								 <a href="playList.do?type=${music.mlid }"style="color:black; background-color:transparent;">${music.name }</a>
+								 <i class="cicon dele2" single3="${music.name }" delNo="${index1.index}"></i>
 								 </div>
 								</li>
 							</c:forEach>
@@ -100,7 +101,7 @@ var type = '${type}';
 						<div class="scrollView">
 							<!-- <div class="scroll"></div> -->
 							<ul class="songUL">
-							<c:forEach items="${musicList2}" var="music" varStatus="index">
+							<c:forEach items="${songs}" var="music" varStatus="index">
 								<li class="songList" ListName="${music.id}">
 									<div class="songLMain">
 										<div class="check">
@@ -137,10 +138,10 @@ var type = '${type}';
 					<div class="songSingleChoose">
 					    <div class="inner-container"> 
 							<ul class="menuUL3" style="width:120px;height:200px;">
-							<c:forEach items="${musicList3}" var="music" varStatus="index1">
+							<c:forEach items="${musicList}" var="music" varStatus="index1">
 								<li class="menuLi3 cur">
-								<a class="beijing" single="${music.songSingle}">
-								 <i class="icon isplay2"></i>${music.songSingle}</a>
+								<a class="beijing" single="${music.name}">
+								 <i class="icon isplay2"></i>${music.name}</a>
 								 
 								</li>
 							</c:forEach>
