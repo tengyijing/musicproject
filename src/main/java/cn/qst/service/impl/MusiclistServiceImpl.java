@@ -9,7 +9,7 @@ import cn.qst.mapper.TbMusiclistMapper;
 import cn.qst.pojo.TbMusiclist;
 import cn.qst.service.MusiclistService;
 
-@Service()
+@Service
 public class MusiclistServiceImpl implements MusiclistService {
 	
 	@Autowired

@@ -350,4 +350,9 @@
       MVid = #{mvid,jdbcType=INTEGER}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
+  <select id="selectByLid" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"></include>
+  	FROM `tb_music` WHERE lid=#{lid}
+  </select>
+
 </mapper>

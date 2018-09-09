@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbMusiclist;
 import cn.qst.pojo.TbUser;
+import cn.qst.service.MusicService;
 import cn.qst.service.MusiclistService;
 
 /**
@@ -27,8 +28,8 @@ public class PlayMusicCotroller {
 	@Autowired
 	private MusiclistService musiclistService;
 	
-//	@Autowired
-//	private MusicService musicService;
+	@Autowired
+	private MusicService musicService;
 	
 	// 跳转到音乐播放
 	@RequestMapping("/play")
@@ -41,8 +42,11 @@ public class PlayMusicCotroller {
 		map.addAttribute("musicList", musiclists);
 		
 		// 显示音乐列表
-		List<TbMusic> musics = null;
-		map.addAttribute("songs", null);
+		List<TbMusic> musics = musicService.selectByMusicList("");
+		map.addAttribute("songs", musics);
+		
+		// 历史音乐播放列表
+		
 		
 		return "playMusic";
 	}
