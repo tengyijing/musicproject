@@ -303,4 +303,10 @@
       isdownload = #{isdownload,jdbcType=BIT}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByLid" resultMap="BaseResultMap">
+  	SELECT `tb_music`.mid, mname, fileUrl, playsum, uploaddate, sname, image, MVid, status, lyricsurl, isdownload
+  	FROM `tb_music`,`tb_music_musiclist` WHERE `tb_music`.`mid`=`tb_music_musiclist`.`mid` AND `mlid`=#{mlid}
+  </select>
+
 </mapper>

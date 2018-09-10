@@ -12,5 +12,5 @@ import cn.qst.pojo.TbMusic;
  */
 
 public interface MusicService {
-	List<TbMusic> selectByMusicList(String id);
+	List<TbMusic> selectByMusicList(int id);
 }

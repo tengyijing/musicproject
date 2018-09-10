@@ -16,8 +16,8 @@ public class MusicServiceImpl implements MusicService {
 	private TbMusicMapper tbMusicMapper;
 	
 	@Override
-	public List<TbMusic> selectByMusicList(String id) {
-		return null;
+	public List<TbMusic> selectByMusicList(int id) {
+		return tbMusicMapper.selectByLid(id);
 	}
 
 }

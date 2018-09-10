@@ -46,13 +46,13 @@ public class PlayMusicCotroller {
 		// 显示的歌曲列表
 		List<TbMusic> musics = null;
 		if( type == null || "now".equals(type) ) { // 默认正在播放
-			musics = musicService.selectByMusicList("");
+			musics = musicService.selectByMusicList(-1);
 		} else if( "history".equals(type) ) { // 历史播放
 			musics = historyList;
 		} else if( "myLove".equals(type) ) { // 我喜欢的音乐
 			musics = null;
 		} else { // 根据歌单id查找对应的歌曲
-			musics = musicService.selectByMusicList(type);
+			musics = musicService.selectByMusicList(Integer.parseInt(type));
 		}
 		map.addAttribute("songs", musics);
 		
