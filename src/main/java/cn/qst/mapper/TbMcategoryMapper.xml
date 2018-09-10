@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.qst.mapper.TbMcategory1Mapper" >
-  <resultMap id="BaseResultMap" type="cn.qst.pojo.TbMcategory1" >
-    <id column="c1id" property="c1id" jdbcType="INTEGER" />
-    <result column="c1name" property="c1name" jdbcType="CHAR" />
+<mapper namespace="cn.qst.mapper.TbMcategoryMapper" >
+  <resultMap id="BaseResultMap" type="cn.qst.pojo.TbMcategory" >
+    <id column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="CHAR" />
+    <result column="parentid" property="parentid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    c1id, c1name
+    cid, cname, parentid, status
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qst.pojo.TbMcategory1Example" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qst.pojo.TbMcategoryExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_mcategory1
+    from tb_mcategory
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,56 +85,76 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from tb_mcategory1
-    where c1id = #{c1id,jdbcType=INTEGER}
+    from tb_mcategory
+    where cid = #{cid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_mcategory1
-    where c1id = #{c1id,jdbcType=INTEGER}
+    delete from tb_mcategory
+    where cid = #{cid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.qst.pojo.TbMcategory1Example" >
-    delete from tb_mcategory1
+  <delete id="deleteByExample" parameterType="cn.qst.pojo.TbMcategoryExample" >
+    delete from tb_mcategory
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.qst.pojo.TbMcategory1" >
-    insert into tb_mcategory1 (c1id, c1name)
-    values (#{c1id,jdbcType=INTEGER}, #{c1name,jdbcType=CHAR})
+  <insert id="insert" parameterType="cn.qst.pojo.TbMcategory" >
+    insert into tb_mcategory (cid, cname, parentid, 
+      status)
+    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=CHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{status,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="cn.qst.pojo.TbMcategory1" >
-    insert into tb_mcategory1
+  <insert id="insertSelective" parameterType="cn.qst.pojo.TbMcategory" >
+    insert into tb_mcategory
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="c1id != null" >
-        c1id,
+      <if test="cid != null" >
+        cid,
       </if>
-      <if test="c1name != null" >
-        c1name,
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="c1id != null" >
-        #{c1id,jdbcType=INTEGER},
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
       </if>
-      <if test="c1name != null" >
-        #{c1name,jdbcType=CHAR},
+      <if test="cname != null" >
+        #{cname,jdbcType=CHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.qst.pojo.TbMcategory1Example" resultType="java.lang.Integer" >
-    select count(*) from tb_mcategory1
+  <select id="countByExample" parameterType="cn.qst.pojo.TbMcategoryExample" resultType="java.lang.Integer" >
+    select count(*) from tb_mcategory
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_mcategory1
+    update tb_mcategory
     <set >
-      <if test="record.c1id != null" >
-        c1id = #{record.c1id,jdbcType=INTEGER},
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
       </if>
-      <if test="record.c1name != null" >
-        c1name = #{record.c1name,jdbcType=CHAR},
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=CHAR},
+      </if>
+      <if test="record.parentid != null" >
+        parentid = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -140,25 +162,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_mcategory1
-    set c1id = #{record.c1id,jdbcType=INTEGER},
-      c1name = #{record.c1name,jdbcType=CHAR}
+    update tb_mcategory
+    set cid = #{record.cid,jdbcType=INTEGER},
+      cname = #{record.cname,jdbcType=CHAR},
+      parentid = #{record.parentid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.qst.pojo.TbMcategory1" >
-    update tb_mcategory1
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qst.pojo.TbMcategory" >
+    update tb_mcategory
     <set >
-      <if test="c1name != null" >
-        c1name = #{c1name,jdbcType=CHAR},
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=CHAR},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
       </if>
     </set>
-    where c1id = #{c1id,jdbcType=INTEGER}
+    where cid = #{cid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.qst.pojo.TbMcategory1" >
-    update tb_mcategory1
-    set c1name = #{c1name,jdbcType=CHAR}
-    where c1id = #{c1id,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="cn.qst.pojo.TbMcategory" >
+    update tb_mcategory
+    set cname = #{cname,jdbcType=CHAR},
+      parentid = #{parentid,jdbcType=INTEGER},
+      status = #{status,jdbcType=BIT}
+    where cid = #{cid,jdbcType=INTEGER}
   </update>
 </mapper>
