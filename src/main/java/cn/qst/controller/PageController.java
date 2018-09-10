@@ -14,7 +14,7 @@ public class PageController {
 	//主页跳转
 	@RequestMapping("/")
 	public String indexJsp() {
-		return "playMusic";
+		return "index";
 	}
 	
 	//页面跳转
