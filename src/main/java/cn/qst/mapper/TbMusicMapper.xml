@@ -5,17 +5,14 @@
     <id column="mid" property="mid" jdbcType="INTEGER" />
     <result column="mname" property="mname" jdbcType="CHAR" />
     <result column="fileUrl" property="fileurl" jdbcType="VARCHAR" />
-    <result column="filesize" property="filesize" jdbcType="VARCHAR" />
-    <result column="format" property="format" jdbcType="VARCHAR" />
     <result column="playsum" property="playsum" jdbcType="INTEGER" />
-    <result column="downloadsum" property="downloadsum" jdbcType="INTEGER" />
     <result column="uploaddate" property="uploaddate" jdbcType="DATE" />
-    <result column="updatedate" property="updatedate" jdbcType="DATE" />
-    <result column="likesum" property="likesum" jdbcType="INTEGER" />
     <result column="sname" property="sname" jdbcType="VARCHAR" />
-    <result column="lid" property="lid" jdbcType="INTEGER" />
-    <result column="imgid" property="imgid" jdbcType="INTEGER" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="MVid" property="mvid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="lyricsurl" property="lyricsurl" jdbcType="VARCHAR" />
+    <result column="isdownload" property="isdownload" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -76,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    mid, mname, fileUrl, filesize, format, playsum, downloadsum, uploaddate, updatedate, 
-    likesum, sname, lid, imgid, MVid
+    mid, mname, fileUrl, playsum, uploaddate, sname, image, MVid, status, lyricsurl, 
+    isdownload
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qst.pojo.TbMusicExample" >
     select
@@ -111,15 +108,13 @@
   </delete>
   <insert id="insert" parameterType="cn.qst.pojo.TbMusic" >
     insert into tb_music (mid, mname, fileUrl, 
-      filesize, format, playsum, 
-      downloadsum, uploaddate, updatedate, 
-      likesum, sname, lid, 
-      imgid, MVid)
+      playsum, uploaddate, sname, 
+      image, MVid, status, lyricsurl, 
+      isdownload)
     values (#{mid,jdbcType=INTEGER}, #{mname,jdbcType=CHAR}, #{fileurl,jdbcType=VARCHAR}, 
-      #{filesize,jdbcType=VARCHAR}, #{format,jdbcType=VARCHAR}, #{playsum,jdbcType=INTEGER}, 
-      #{downloadsum,jdbcType=INTEGER}, #{uploaddate,jdbcType=DATE}, #{updatedate,jdbcType=DATE}, 
-      #{likesum,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{lid,jdbcType=INTEGER}, 
-      #{imgid,jdbcType=INTEGER}, #{mvid,jdbcType=INTEGER})
+      #{playsum,jdbcType=INTEGER}, #{uploaddate,jdbcType=DATE}, #{sname,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{mvid,jdbcType=INTEGER}, #{status,jdbcType=BIT}, #{lyricsurl,jdbcType=VARCHAR}, 
+      #{isdownload,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="cn.qst.pojo.TbMusic" >
     insert into tb_music
@@ -133,38 +128,29 @@
       <if test="fileurl != null" >
         fileUrl,
       </if>
-      <if test="filesize != null" >
-        filesize,
-      </if>
-      <if test="format != null" >
-        format,
-      </if>
       <if test="playsum != null" >
         playsum,
-      </if>
-      <if test="downloadsum != null" >
-        downloadsum,
       </if>
       <if test="uploaddate != null" >
         uploaddate,
       </if>
-      <if test="updatedate != null" >
-        updatedate,
-      </if>
-      <if test="likesum != null" >
-        likesum,
-      </if>
       <if test="sname != null" >
         sname,
       </if>
-      <if test="lid != null" >
-        lid,
-      </if>
-      <if test="imgid != null" >
-        imgid,
+      <if test="image != null" >
+        image,
       </if>
       <if test="mvid != null" >
         MVid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lyricsurl != null" >
+        lyricsurl,
+      </if>
+      <if test="isdownload != null" >
+        isdownload,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -177,38 +163,29 @@
       <if test="fileurl != null" >
         #{fileurl,jdbcType=VARCHAR},
       </if>
-      <if test="filesize != null" >
-        #{filesize,jdbcType=VARCHAR},
-      </if>
-      <if test="format != null" >
-        #{format,jdbcType=VARCHAR},
-      </if>
       <if test="playsum != null" >
         #{playsum,jdbcType=INTEGER},
-      </if>
-      <if test="downloadsum != null" >
-        #{downloadsum,jdbcType=INTEGER},
       </if>
       <if test="uploaddate != null" >
         #{uploaddate,jdbcType=DATE},
       </if>
-      <if test="updatedate != null" >
-        #{updatedate,jdbcType=DATE},
-      </if>
-      <if test="likesum != null" >
-        #{likesum,jdbcType=INTEGER},
-      </if>
       <if test="sname != null" >
         #{sname,jdbcType=VARCHAR},
       </if>
-      <if test="lid != null" >
-        #{lid,jdbcType=INTEGER},
-      </if>
-      <if test="imgid != null" >
-        #{imgid,jdbcType=INTEGER},
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
       </if>
       <if test="mvid != null" >
         #{mvid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="lyricsurl != null" >
+        #{lyricsurl,jdbcType=VARCHAR},
+      </if>
+      <if test="isdownload != null" >
+        #{isdownload,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -230,38 +207,29 @@
       <if test="record.fileurl != null" >
         fileUrl = #{record.fileurl,jdbcType=VARCHAR},
       </if>
-      <if test="record.filesize != null" >
-        filesize = #{record.filesize,jdbcType=VARCHAR},
-      </if>
-      <if test="record.format != null" >
-        format = #{record.format,jdbcType=VARCHAR},
-      </if>
       <if test="record.playsum != null" >
         playsum = #{record.playsum,jdbcType=INTEGER},
-      </if>
-      <if test="record.downloadsum != null" >
-        downloadsum = #{record.downloadsum,jdbcType=INTEGER},
       </if>
       <if test="record.uploaddate != null" >
         uploaddate = #{record.uploaddate,jdbcType=DATE},
       </if>
-      <if test="record.updatedate != null" >
-        updatedate = #{record.updatedate,jdbcType=DATE},
-      </if>
-      <if test="record.likesum != null" >
-        likesum = #{record.likesum,jdbcType=INTEGER},
-      </if>
       <if test="record.sname != null" >
         sname = #{record.sname,jdbcType=VARCHAR},
       </if>
-      <if test="record.lid != null" >
-        lid = #{record.lid,jdbcType=INTEGER},
-      </if>
-      <if test="record.imgid != null" >
-        imgid = #{record.imgid,jdbcType=INTEGER},
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
       </if>
       <if test="record.mvid != null" >
         MVid = #{record.mvid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.lyricsurl != null" >
+        lyricsurl = #{record.lyricsurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdownload != null" >
+        isdownload = #{record.isdownload,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -273,17 +241,14 @@
     set mid = #{record.mid,jdbcType=INTEGER},
       mname = #{record.mname,jdbcType=CHAR},
       fileUrl = #{record.fileurl,jdbcType=VARCHAR},
-      filesize = #{record.filesize,jdbcType=VARCHAR},
-      format = #{record.format,jdbcType=VARCHAR},
       playsum = #{record.playsum,jdbcType=INTEGER},
-      downloadsum = #{record.downloadsum,jdbcType=INTEGER},
       uploaddate = #{record.uploaddate,jdbcType=DATE},
-      updatedate = #{record.updatedate,jdbcType=DATE},
-      likesum = #{record.likesum,jdbcType=INTEGER},
       sname = #{record.sname,jdbcType=VARCHAR},
-      lid = #{record.lid,jdbcType=INTEGER},
-      imgid = #{record.imgid,jdbcType=INTEGER},
-      MVid = #{record.mvid,jdbcType=INTEGER}
+      image = #{record.image,jdbcType=VARCHAR},
+      MVid = #{record.mvid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=BIT},
+      lyricsurl = #{record.lyricsurl,jdbcType=VARCHAR},
+      isdownload = #{record.isdownload,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -297,38 +262,29 @@
       <if test="fileurl != null" >
         fileUrl = #{fileurl,jdbcType=VARCHAR},
       </if>
-      <if test="filesize != null" >
-        filesize = #{filesize,jdbcType=VARCHAR},
-      </if>
-      <if test="format != null" >
-        format = #{format,jdbcType=VARCHAR},
-      </if>
       <if test="playsum != null" >
         playsum = #{playsum,jdbcType=INTEGER},
-      </if>
-      <if test="downloadsum != null" >
-        downloadsum = #{downloadsum,jdbcType=INTEGER},
       </if>
       <if test="uploaddate != null" >
         uploaddate = #{uploaddate,jdbcType=DATE},
       </if>
-      <if test="updatedate != null" >
-        updatedate = #{updatedate,jdbcType=DATE},
-      </if>
-      <if test="likesum != null" >
-        likesum = #{likesum,jdbcType=INTEGER},
-      </if>
       <if test="sname != null" >
         sname = #{sname,jdbcType=VARCHAR},
       </if>
-      <if test="lid != null" >
-        lid = #{lid,jdbcType=INTEGER},
-      </if>
-      <if test="imgid != null" >
-        imgid = #{imgid,jdbcType=INTEGER},
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
       </if>
       <if test="mvid != null" >
         MVid = #{mvid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="lyricsurl != null" >
+        lyricsurl = #{lyricsurl,jdbcType=VARCHAR},
+      </if>
+      <if test="isdownload != null" >
+        isdownload = #{isdownload,jdbcType=BIT},
       </if>
     </set>
     where mid = #{mid,jdbcType=INTEGER}
@@ -337,22 +293,14 @@
     update tb_music
     set mname = #{mname,jdbcType=CHAR},
       fileUrl = #{fileurl,jdbcType=VARCHAR},
-      filesize = #{filesize,jdbcType=VARCHAR},
-      format = #{format,jdbcType=VARCHAR},
       playsum = #{playsum,jdbcType=INTEGER},
-      downloadsum = #{downloadsum,jdbcType=INTEGER},
       uploaddate = #{uploaddate,jdbcType=DATE},
-      updatedate = #{updatedate,jdbcType=DATE},
-      likesum = #{likesum,jdbcType=INTEGER},
       sname = #{sname,jdbcType=VARCHAR},
-      lid = #{lid,jdbcType=INTEGER},
-      imgid = #{imgid,jdbcType=INTEGER},
-      MVid = #{mvid,jdbcType=INTEGER}
+      image = #{image,jdbcType=VARCHAR},
+      MVid = #{mvid,jdbcType=INTEGER},
+      status = #{status,jdbcType=BIT},
+      lyricsurl = #{lyricsurl,jdbcType=VARCHAR},
+      isdownload = #{isdownload,jdbcType=BIT}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
-  <select id="selectByLid" resultMap="BaseResultMap">
-  	SELECT <include refid="Base_Column_List"></include>
-  	FROM `tb_music` WHERE lid=#{lid}
-  </select>
-
 </mapper>

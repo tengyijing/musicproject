@@ -442,123 +442,63 @@ public class TbMusiclistExample {
             return (Criteria) this;
         }
 
-        public Criteria andLikesumIsNull() {
-            addCriterion("likesum is null");
+        public Criteria andImageIsNull() {
+            addCriterion("image is null");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumIsNotNull() {
-            addCriterion("likesum is not null");
+        public Criteria andImageIsNotNull() {
+            addCriterion("image is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumEqualTo(Integer value) {
-            addCriterion("likesum =", value, "likesum");
+        public Criteria andImageEqualTo(Integer value) {
+            addCriterion("image =", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumNotEqualTo(Integer value) {
-            addCriterion("likesum <>", value, "likesum");
+        public Criteria andImageNotEqualTo(Integer value) {
+            addCriterion("image <>", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumGreaterThan(Integer value) {
-            addCriterion("likesum >", value, "likesum");
+        public Criteria andImageGreaterThan(Integer value) {
+            addCriterion("image >", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("likesum >=", value, "likesum");
+        public Criteria andImageGreaterThanOrEqualTo(Integer value) {
+            addCriterion("image >=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumLessThan(Integer value) {
-            addCriterion("likesum <", value, "likesum");
+        public Criteria andImageLessThan(Integer value) {
+            addCriterion("image <", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumLessThanOrEqualTo(Integer value) {
-            addCriterion("likesum <=", value, "likesum");
+        public Criteria andImageLessThanOrEqualTo(Integer value) {
+            addCriterion("image <=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumIn(List<Integer> values) {
-            addCriterion("likesum in", values, "likesum");
+        public Criteria andImageIn(List<Integer> values) {
+            addCriterion("image in", values, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumNotIn(List<Integer> values) {
-            addCriterion("likesum not in", values, "likesum");
+        public Criteria andImageNotIn(List<Integer> values) {
+            addCriterion("image not in", values, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumBetween(Integer value1, Integer value2) {
-            addCriterion("likesum between", value1, value2, "likesum");
+        public Criteria andImageBetween(Integer value1, Integer value2) {
+            addCriterion("image between", value1, value2, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLikesumNotBetween(Integer value1, Integer value2) {
-            addCriterion("likesum not between", value1, value2, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidIsNull() {
-            addCriterion("imgid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidIsNotNull() {
-            addCriterion("imgid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidEqualTo(Integer value) {
-            addCriterion("imgid =", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidNotEqualTo(Integer value) {
-            addCriterion("imgid <>", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidGreaterThan(Integer value) {
-            addCriterion("imgid >", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("imgid >=", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidLessThan(Integer value) {
-            addCriterion("imgid <", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidLessThanOrEqualTo(Integer value) {
-            addCriterion("imgid <=", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidIn(List<Integer> values) {
-            addCriterion("imgid in", values, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidNotIn(List<Integer> values) {
-            addCriterion("imgid not in", values, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidBetween(Integer value1, Integer value2) {
-            addCriterion("imgid between", value1, value2, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidNotBetween(Integer value1, Integer value2) {
-            addCriterion("imgid not between", value1, value2, "imgid");
+        public Criteria andImageNotBetween(Integer value1, Integer value2) {
+            addCriterion("image not between", value1, value2, "image");
             return (Criteria) this;
         }
 

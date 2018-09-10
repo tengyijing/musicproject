@@ -27,7 +27,4 @@ public interface TbMusiclistMapper {
     int updateByPrimaryKeySelective(TbMusiclist record);
 
     int updateByPrimaryKey(TbMusiclist record);
-    
-    List<TbMusiclist> selectByUid(String uid);
-    
 }

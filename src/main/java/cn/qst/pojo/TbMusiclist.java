@@ -2,11 +2,6 @@ package cn.qst.pojo;
 
 import java.util.Date;
 
-/**
- * 歌单实体类
- * @author Administrator
- *
- */
 public class TbMusiclist {
     private Integer mlid;
 
@@ -18,9 +13,7 @@ public class TbMusiclist {
 
     private Integer musicsum;
 
-    private Integer likesum;
-
-    private Integer imgid;
+    private Integer image;
 
     private String uid;
 
@@ -64,20 +57,12 @@ public class TbMusiclist {
         this.musicsum = musicsum;
     }
 
-    public Integer getLikesum() {
-        return likesum;
+    public Integer getImage() {
+        return image;
     }
 
-    public void setLikesum(Integer likesum) {
-        this.likesum = likesum;
-    }
-
-    public Integer getImgid() {
-        return imgid;
-    }
-
-    public void setImgid(Integer imgid) {
-        this.imgid = imgid;
+    public void setImage(Integer image) {
+        this.image = image;
     }
 
     public String getUid() {

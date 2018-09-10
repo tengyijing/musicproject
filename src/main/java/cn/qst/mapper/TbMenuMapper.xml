@@ -5,6 +5,8 @@
     <id column="mid" property="mid" jdbcType="INTEGER" />
     <result column="mname" property="mname" jdbcType="VARCHAR" />
     <result column="parentmid" property="parentmid" jdbcType="INTEGER" />
+    <result column="ename" property="ename" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    mid, mname, parentmid
+    mid, mname, parentmid, ename, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qst.pojo.TbMenuExample" >
     select
@@ -98,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.qst.pojo.TbMenu" >
-    insert into tb_menu (mid, mname, parentmid
-      )
-    values (#{mid,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, #{parentmid,jdbcType=INTEGER}
-      )
+    insert into tb_menu (mid, mname, parentmid, 
+      ename, status)
+    values (#{mid,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, #{parentmid,jdbcType=INTEGER}, 
+      #{ename,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="cn.qst.pojo.TbMenu" >
     insert into tb_menu
@@ -115,6 +117,12 @@
       <if test="parentmid != null" >
         parentmid,
       </if>
+      <if test="ename != null" >
+        ename,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="mid != null" >
@@ -125,6 +133,12 @@
       </if>
       <if test="parentmid != null" >
         #{parentmid,jdbcType=INTEGER},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -146,6 +160,12 @@
       <if test="record.parentmid != null" >
         parentmid = #{record.parentmid,jdbcType=INTEGER},
       </if>
+      <if test="record.ename != null" >
+        ename = #{record.ename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +175,9 @@
     update tb_menu
     set mid = #{record.mid,jdbcType=INTEGER},
       mname = #{record.mname,jdbcType=VARCHAR},
-      parentmid = #{record.parentmid,jdbcType=INTEGER}
+      parentmid = #{record.parentmid,jdbcType=INTEGER},
+      ename = #{record.ename,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +191,21 @@
       <if test="parentmid != null" >
         parentmid = #{parentmid,jdbcType=INTEGER},
       </if>
+      <if test="ename != null" >
+        ename = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
     </set>
     where mid = #{mid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.qst.pojo.TbMenu" >
     update tb_menu
     set mname = #{mname,jdbcType=VARCHAR},
-      parentmid = #{parentmid,jdbcType=INTEGER}
+      parentmid = #{parentmid,jdbcType=INTEGER},
+      ename = #{ename,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
 </mapper>

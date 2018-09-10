@@ -2,11 +2,6 @@ package cn.qst.pojo;
 
 import java.util.Date;
 
-/**
- * 音乐实体类
- * @author Administrator
- *
- */
 public class TbMusic {
     private Integer mid;
 
@@ -14,27 +9,21 @@ public class TbMusic {
 
     private String fileurl;
 
-    private String filesize;
-
-    private String format;
-
     private Integer playsum;
-
-    private Integer downloadsum;
 
     private Date uploaddate;
 
-    private Date updatedate;
-
-    private Integer likesum;
-
     private String sname;
 
-    private Integer lid;
-
-    private Integer imgid;
+    private String image;
 
     private Integer mvid;
+
+    private Boolean status;
+
+    private String lyricsurl;
+
+    private Boolean isdownload;
 
     public Integer getMid() {
         return mid;
@@ -60,36 +49,12 @@ public class TbMusic {
         this.fileurl = fileurl == null ? null : fileurl.trim();
     }
 
-    public String getFilesize() {
-        return filesize;
-    }
-
-    public void setFilesize(String filesize) {
-        this.filesize = filesize == null ? null : filesize.trim();
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format == null ? null : format.trim();
-    }
-
     public Integer getPlaysum() {
         return playsum;
     }
 
     public void setPlaysum(Integer playsum) {
         this.playsum = playsum;
-    }
-
-    public Integer getDownloadsum() {
-        return downloadsum;
-    }
-
-    public void setDownloadsum(Integer downloadsum) {
-        this.downloadsum = downloadsum;
     }
 
     public Date getUploaddate() {
@@ -100,22 +65,6 @@ public class TbMusic {
         this.uploaddate = uploaddate;
     }
 
-    public Date getUpdatedate() {
-        return updatedate;
-    }
-
-    public void setUpdatedate(Date updatedate) {
-        this.updatedate = updatedate;
-    }
-
-    public Integer getLikesum() {
-        return likesum;
-    }
-
-    public void setLikesum(Integer likesum) {
-        this.likesum = likesum;
-    }
-
     public String getSname() {
         return sname;
     }
@@ -124,20 +73,12 @@ public class TbMusic {
         this.sname = sname == null ? null : sname.trim();
     }
 
-    public Integer getLid() {
-        return lid;
+    public String getImage() {
+        return image;
     }
 
-    public void setLid(Integer lid) {
-        this.lid = lid;
-    }
-
-    public Integer getImgid() {
-        return imgid;
-    }
-
-    public void setImgid(Integer imgid) {
-        this.imgid = imgid;
+    public void setImage(String image) {
+        this.image = image == null ? null : image.trim();
     }
 
     public Integer getMvid() {
@@ -146,5 +87,29 @@ public class TbMusic {
 
     public void setMvid(Integer mvid) {
         this.mvid = mvid;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getLyricsurl() {
+        return lyricsurl;
+    }
+
+    public void setLyricsurl(String lyricsurl) {
+        this.lyricsurl = lyricsurl == null ? null : lyricsurl.trim();
+    }
+
+    public Boolean getIsdownload() {
+        return isdownload;
+    }
+
+    public void setIsdownload(Boolean isdownload) {
+        this.isdownload = isdownload;
     }
 }

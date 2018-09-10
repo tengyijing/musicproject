@@ -12,21 +12,5 @@ public interface TbUserService {
 	 * @param uname
 	 * @return
 	 */
-	String selectByUname(String uname);
-
-	/**
-	 * 效验注册用户的邮箱
-	 * 
-	 * @param email
-	 * @return
-	 */
-	String selectByEmail(String email);
-	
-	/**
-	 * 效验注册用户电话号码
-	 * 
-	 * @param phone 电话号码
-	 * @return 电话号码
-	 */
-	String selectByPhone(String phone);
+	Boolean selectByUname(String uname);
 }

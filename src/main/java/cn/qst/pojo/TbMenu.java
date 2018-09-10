@@ -1,16 +1,15 @@
 package cn.qst.pojo;
 
-/**
- * 菜单实体类
- * @author Administrator
- *
- */
 public class TbMenu {
     private Integer mid;
 
     private String mname;
 
     private Integer parentmid;
+
+    private String ename;
+
+    private Boolean status;
 
     public Integer getMid() {
         return mid;
@@ -34,5 +33,21 @@ public class TbMenu {
 
     public void setParentmid(Integer parentmid) {
         this.parentmid = parentmid;
+    }
+
+    public String getEname() {
+        return ename;
+    }
+
+    public void setEname(String ename) {
+        this.ename = ename == null ? null : ename.trim();
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

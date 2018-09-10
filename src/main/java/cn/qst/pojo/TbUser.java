@@ -1,12 +1,5 @@
 package cn.qst.pojo;
 
-import java.util.Date;
-
-/**
- * 用户实体类
- * @author Administrator
- *
- */
 public class TbUser {
     private String uid;
 
@@ -20,15 +13,13 @@ public class TbUser {
 
     private Byte sex;
 
-    private Date birthday;
-
-    private Date logindate;
-
     private Byte vip;
 
     private String address;
 
-    private Integer imgid;
+    private String image;
+
+    private Boolean status;
 
     public String getUid() {
         return uid;
@@ -78,22 +69,6 @@ public class TbUser {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Date getLogindate() {
-        return logindate;
-    }
-
-    public void setLogindate(Date logindate) {
-        this.logindate = logindate;
-    }
-
     public Byte getVip() {
         return vip;
     }
@@ -110,11 +85,19 @@ public class TbUser {
         this.address = address == null ? null : address.trim();
     }
 
-    public Integer getImgid() {
-        return imgid;
+    public String getImage() {
+        return image;
     }
 
-    public void setImgid(Integer imgid) {
-        this.imgid = imgid;
+    public void setImage(String image) {
+        this.image = image == null ? null : image.trim();
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

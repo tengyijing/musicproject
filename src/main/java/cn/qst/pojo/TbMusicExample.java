@@ -332,146 +332,6 @@ public class TbMusicExample {
             return (Criteria) this;
         }
 
-        public Criteria andFilesizeIsNull() {
-            addCriterion("filesize is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeIsNotNull() {
-            addCriterion("filesize is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeEqualTo(String value) {
-            addCriterion("filesize =", value, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeNotEqualTo(String value) {
-            addCriterion("filesize <>", value, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeGreaterThan(String value) {
-            addCriterion("filesize >", value, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeGreaterThanOrEqualTo(String value) {
-            addCriterion("filesize >=", value, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeLessThan(String value) {
-            addCriterion("filesize <", value, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeLessThanOrEqualTo(String value) {
-            addCriterion("filesize <=", value, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeLike(String value) {
-            addCriterion("filesize like", value, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeNotLike(String value) {
-            addCriterion("filesize not like", value, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeIn(List<String> values) {
-            addCriterion("filesize in", values, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeNotIn(List<String> values) {
-            addCriterion("filesize not in", values, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeBetween(String value1, String value2) {
-            addCriterion("filesize between", value1, value2, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFilesizeNotBetween(String value1, String value2) {
-            addCriterion("filesize not between", value1, value2, "filesize");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatIsNull() {
-            addCriterion("format is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatIsNotNull() {
-            addCriterion("format is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatEqualTo(String value) {
-            addCriterion("format =", value, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatNotEqualTo(String value) {
-            addCriterion("format <>", value, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatGreaterThan(String value) {
-            addCriterion("format >", value, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatGreaterThanOrEqualTo(String value) {
-            addCriterion("format >=", value, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatLessThan(String value) {
-            addCriterion("format <", value, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatLessThanOrEqualTo(String value) {
-            addCriterion("format <=", value, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatLike(String value) {
-            addCriterion("format like", value, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatNotLike(String value) {
-            addCriterion("format not like", value, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatIn(List<String> values) {
-            addCriterion("format in", values, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatNotIn(List<String> values) {
-            addCriterion("format not in", values, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatBetween(String value1, String value2) {
-            addCriterion("format between", value1, value2, "format");
-            return (Criteria) this;
-        }
-
-        public Criteria andFormatNotBetween(String value1, String value2) {
-            addCriterion("format not between", value1, value2, "format");
-            return (Criteria) this;
-        }
-
         public Criteria andPlaysumIsNull() {
             addCriterion("playsum is null");
             return (Criteria) this;
@@ -532,66 +392,6 @@ public class TbMusicExample {
             return (Criteria) this;
         }
 
-        public Criteria andDownloadsumIsNull() {
-            addCriterion("downloadsum is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumIsNotNull() {
-            addCriterion("downloadsum is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumEqualTo(Integer value) {
-            addCriterion("downloadsum =", value, "downloadsum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumNotEqualTo(Integer value) {
-            addCriterion("downloadsum <>", value, "downloadsum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumGreaterThan(Integer value) {
-            addCriterion("downloadsum >", value, "downloadsum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("downloadsum >=", value, "downloadsum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumLessThan(Integer value) {
-            addCriterion("downloadsum <", value, "downloadsum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumLessThanOrEqualTo(Integer value) {
-            addCriterion("downloadsum <=", value, "downloadsum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumIn(List<Integer> values) {
-            addCriterion("downloadsum in", values, "downloadsum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumNotIn(List<Integer> values) {
-            addCriterion("downloadsum not in", values, "downloadsum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumBetween(Integer value1, Integer value2) {
-            addCriterion("downloadsum between", value1, value2, "downloadsum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadsumNotBetween(Integer value1, Integer value2) {
-            addCriterion("downloadsum not between", value1, value2, "downloadsum");
-            return (Criteria) this;
-        }
-
         public Criteria andUploaddateIsNull() {
             addCriterion("uploaddate is null");
             return (Criteria) this;
@@ -649,126 +449,6 @@ public class TbMusicExample {
 
         public Criteria andUploaddateNotBetween(Date value1, Date value2) {
             addCriterionForJDBCDate("uploaddate not between", value1, value2, "uploaddate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateIsNull() {
-            addCriterion("updatedate is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateIsNotNull() {
-            addCriterion("updatedate is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateEqualTo(Date value) {
-            addCriterionForJDBCDate("updatedate =", value, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("updatedate <>", value, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateGreaterThan(Date value) {
-            addCriterionForJDBCDate("updatedate >", value, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("updatedate >=", value, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateLessThan(Date value) {
-            addCriterionForJDBCDate("updatedate <", value, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("updatedate <=", value, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateIn(List<Date> values) {
-            addCriterionForJDBCDate("updatedate in", values, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("updatedate not in", values, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("updatedate between", value1, value2, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("updatedate not between", value1, value2, "updatedate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumIsNull() {
-            addCriterion("likesum is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumIsNotNull() {
-            addCriterion("likesum is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumEqualTo(Integer value) {
-            addCriterion("likesum =", value, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumNotEqualTo(Integer value) {
-            addCriterion("likesum <>", value, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumGreaterThan(Integer value) {
-            addCriterion("likesum >", value, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("likesum >=", value, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumLessThan(Integer value) {
-            addCriterion("likesum <", value, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumLessThanOrEqualTo(Integer value) {
-            addCriterion("likesum <=", value, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumIn(List<Integer> values) {
-            addCriterion("likesum in", values, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumNotIn(List<Integer> values) {
-            addCriterion("likesum not in", values, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumBetween(Integer value1, Integer value2) {
-            addCriterion("likesum between", value1, value2, "likesum");
-            return (Criteria) this;
-        }
-
-        public Criteria andLikesumNotBetween(Integer value1, Integer value2) {
-            addCriterion("likesum not between", value1, value2, "likesum");
             return (Criteria) this;
         }
 
@@ -842,123 +522,73 @@ public class TbMusicExample {
             return (Criteria) this;
         }
 
-        public Criteria andLidIsNull() {
-            addCriterion("lid is null");
+        public Criteria andImageIsNull() {
+            addCriterion("image is null");
             return (Criteria) this;
         }
 
-        public Criteria andLidIsNotNull() {
-            addCriterion("lid is not null");
+        public Criteria andImageIsNotNull() {
+            addCriterion("image is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLidEqualTo(Integer value) {
-            addCriterion("lid =", value, "lid");
+        public Criteria andImageEqualTo(String value) {
+            addCriterion("image =", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLidNotEqualTo(Integer value) {
-            addCriterion("lid <>", value, "lid");
+        public Criteria andImageNotEqualTo(String value) {
+            addCriterion("image <>", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLidGreaterThan(Integer value) {
-            addCriterion("lid >", value, "lid");
+        public Criteria andImageGreaterThan(String value) {
+            addCriterion("image >", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("lid >=", value, "lid");
+        public Criteria andImageGreaterThanOrEqualTo(String value) {
+            addCriterion("image >=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLidLessThan(Integer value) {
-            addCriterion("lid <", value, "lid");
+        public Criteria andImageLessThan(String value) {
+            addCriterion("image <", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLidLessThanOrEqualTo(Integer value) {
-            addCriterion("lid <=", value, "lid");
+        public Criteria andImageLessThanOrEqualTo(String value) {
+            addCriterion("image <=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLidIn(List<Integer> values) {
-            addCriterion("lid in", values, "lid");
+        public Criteria andImageLike(String value) {
+            addCriterion("image like", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLidNotIn(List<Integer> values) {
-            addCriterion("lid not in", values, "lid");
+        public Criteria andImageNotLike(String value) {
+            addCriterion("image not like", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLidBetween(Integer value1, Integer value2) {
-            addCriterion("lid between", value1, value2, "lid");
+        public Criteria andImageIn(List<String> values) {
+            addCriterion("image in", values, "image");
             return (Criteria) this;
         }
 
-        public Criteria andLidNotBetween(Integer value1, Integer value2) {
-            addCriterion("lid not between", value1, value2, "lid");
+        public Criteria andImageNotIn(List<String> values) {
+            addCriterion("image not in", values, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidIsNull() {
-            addCriterion("imgid is null");
+        public Criteria andImageBetween(String value1, String value2) {
+            addCriterion("image between", value1, value2, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidIsNotNull() {
-            addCriterion("imgid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidEqualTo(Integer value) {
-            addCriterion("imgid =", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidNotEqualTo(Integer value) {
-            addCriterion("imgid <>", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidGreaterThan(Integer value) {
-            addCriterion("imgid >", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("imgid >=", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidLessThan(Integer value) {
-            addCriterion("imgid <", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidLessThanOrEqualTo(Integer value) {
-            addCriterion("imgid <=", value, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidIn(List<Integer> values) {
-            addCriterion("imgid in", values, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidNotIn(List<Integer> values) {
-            addCriterion("imgid not in", values, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidBetween(Integer value1, Integer value2) {
-            addCriterion("imgid between", value1, value2, "imgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgidNotBetween(Integer value1, Integer value2) {
-            addCriterion("imgid not between", value1, value2, "imgid");
+        public Criteria andImageNotBetween(String value1, String value2) {
+            addCriterion("image not between", value1, value2, "image");
             return (Criteria) this;
         }
 
@@ -1019,6 +649,196 @@ public class TbMusicExample {
 
         public Criteria andMvidNotBetween(Integer value1, Integer value2) {
             addCriterion("MVid not between", value1, value2, "mvid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Boolean value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Boolean value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Boolean value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Boolean value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Boolean value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Boolean> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Boolean> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Boolean value1, Boolean value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlIsNull() {
+            addCriterion("lyricsurl is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlIsNotNull() {
+            addCriterion("lyricsurl is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlEqualTo(String value) {
+            addCriterion("lyricsurl =", value, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlNotEqualTo(String value) {
+            addCriterion("lyricsurl <>", value, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlGreaterThan(String value) {
+            addCriterion("lyricsurl >", value, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlGreaterThanOrEqualTo(String value) {
+            addCriterion("lyricsurl >=", value, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlLessThan(String value) {
+            addCriterion("lyricsurl <", value, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlLessThanOrEqualTo(String value) {
+            addCriterion("lyricsurl <=", value, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlLike(String value) {
+            addCriterion("lyricsurl like", value, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlNotLike(String value) {
+            addCriterion("lyricsurl not like", value, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlIn(List<String> values) {
+            addCriterion("lyricsurl in", values, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlNotIn(List<String> values) {
+            addCriterion("lyricsurl not in", values, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlBetween(String value1, String value2) {
+            addCriterion("lyricsurl between", value1, value2, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andLyricsurlNotBetween(String value1, String value2) {
+            addCriterion("lyricsurl not between", value1, value2, "lyricsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadIsNull() {
+            addCriterion("isdownload is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadIsNotNull() {
+            addCriterion("isdownload is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadEqualTo(Boolean value) {
+            addCriterion("isdownload =", value, "isdownload");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadNotEqualTo(Boolean value) {
+            addCriterion("isdownload <>", value, "isdownload");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadGreaterThan(Boolean value) {
+            addCriterion("isdownload >", value, "isdownload");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("isdownload >=", value, "isdownload");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadLessThan(Boolean value) {
+            addCriterion("isdownload <", value, "isdownload");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadLessThanOrEqualTo(Boolean value) {
+            addCriterion("isdownload <=", value, "isdownload");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadIn(List<Boolean> values) {
+            addCriterion("isdownload in", values, "isdownload");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadNotIn(List<Boolean> values) {
+            addCriterion("isdownload not in", values, "isdownload");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadBetween(Boolean value1, Boolean value2) {
+            addCriterion("isdownload between", value1, value2, "isdownload");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsdownloadNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("isdownload not between", value1, value2, "isdownload");
             return (Criteria) this;
         }
     }
