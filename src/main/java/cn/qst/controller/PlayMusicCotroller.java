@@ -68,7 +68,13 @@ public class PlayMusicCotroller {
 		 */
 		return null;
 	}
-
+	
+	// 歌单创建请求
+	
+	// 歌单删除请求
+	
+	// 歌单修改请求
+	
 
 	public void setHistoryList(List<TbMusic> historyList) {
 		this.historyList = historyList;
