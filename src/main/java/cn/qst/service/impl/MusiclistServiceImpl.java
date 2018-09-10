@@ -18,7 +18,7 @@ public class MusiclistServiceImpl implements MusiclistService {
 	// 根据用户id查找器创建的歌单
 	@Override
 	public List<TbMusiclist> selectByUid(String uid) {
-		return musicListDao.selectByUid(uid);
+		return null;
 	}
 
 	

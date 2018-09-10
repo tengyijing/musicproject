@@ -293,6 +293,136 @@ public class TbMenuExample {
             addCriterion("parentmid not between", value1, value2, "parentmid");
             return (Criteria) this;
         }
+
+        public Criteria andEnameIsNull() {
+            addCriterion("ename is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameIsNotNull() {
+            addCriterion("ename is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameEqualTo(String value) {
+            addCriterion("ename =", value, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameNotEqualTo(String value) {
+            addCriterion("ename <>", value, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameGreaterThan(String value) {
+            addCriterion("ename >", value, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameGreaterThanOrEqualTo(String value) {
+            addCriterion("ename >=", value, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameLessThan(String value) {
+            addCriterion("ename <", value, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameLessThanOrEqualTo(String value) {
+            addCriterion("ename <=", value, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameLike(String value) {
+            addCriterion("ename like", value, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameNotLike(String value) {
+            addCriterion("ename not like", value, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameIn(List<String> values) {
+            addCriterion("ename in", values, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameNotIn(List<String> values) {
+            addCriterion("ename not in", values, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameBetween(String value1, String value2) {
+            addCriterion("ename between", value1, value2, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnameNotBetween(String value1, String value2) {
+            addCriterion("ename not between", value1, value2, "ename");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Boolean value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Boolean value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Boolean value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Boolean value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Boolean value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Boolean> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Boolean> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Boolean value1, Boolean value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

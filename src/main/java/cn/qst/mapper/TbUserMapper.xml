@@ -8,13 +8,11 @@
     <result column="email" property="email" jdbcType="CHAR" />
     <result column="phone" property="phone" jdbcType="CHAR" />
     <result column="sex" property="sex" jdbcType="TINYINT" />
-    <result column="birthday" property="birthday" jdbcType="DATE" />
-    <result column="logindate" property="logindate" jdbcType="TIMESTAMP" />
     <result column="VIP" property="vip" jdbcType="TINYINT" />
     <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="imgid" property="imgid" jdbcType="INTEGER" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
   </resultMap>
-
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -74,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    uid, uname, password, email, phone, sex, birthday, logindate, VIP, address, imgid
+    uid, uname, password, email, phone, sex, VIP, address, image, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qst.pojo.TbUserExample" >
     select
@@ -108,13 +106,11 @@
   </delete>
   <insert id="insert" parameterType="cn.qst.pojo.TbUser" >
     insert into tb_user (uid, uname, password, 
-      email, phone, sex, birthday, 
-      logindate, VIP, address, 
-      imgid)
+      email, phone, sex, VIP, 
+      address, image, status)
     values (#{uid,jdbcType=CHAR}, #{uname,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
-      #{email,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{sex,jdbcType=TINYINT}, #{birthday,jdbcType=DATE}, 
-      #{logindate,jdbcType=TIMESTAMP}, #{vip,jdbcType=TINYINT}, #{address,jdbcType=VARCHAR}, 
-      #{imgid,jdbcType=INTEGER})
+      #{email,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{sex,jdbcType=TINYINT}, #{vip,jdbcType=TINYINT}, 
+      #{address,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="cn.qst.pojo.TbUser" >
     insert into tb_user
@@ -137,20 +133,17 @@
       <if test="sex != null" >
         sex,
       </if>
-      <if test="birthday != null" >
-        birthday,
-      </if>
-      <if test="logindate != null" >
-        logindate,
-      </if>
       <if test="vip != null" >
         VIP,
       </if>
       <if test="address != null" >
         address,
       </if>
-      <if test="imgid != null" >
-        imgid,
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -172,20 +165,17 @@
       <if test="sex != null" >
         #{sex,jdbcType=TINYINT},
       </if>
-      <if test="birthday != null" >
-        #{birthday,jdbcType=DATE},
-      </if>
-      <if test="logindate != null" >
-        #{logindate,jdbcType=TIMESTAMP},
-      </if>
       <if test="vip != null" >
         #{vip,jdbcType=TINYINT},
       </if>
       <if test="address != null" >
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="imgid != null" >
-        #{imgid,jdbcType=INTEGER},
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -216,20 +206,17 @@
       <if test="record.sex != null" >
         sex = #{record.sex,jdbcType=TINYINT},
       </if>
-      <if test="record.birthday != null" >
-        birthday = #{record.birthday,jdbcType=DATE},
-      </if>
-      <if test="record.logindate != null" >
-        logindate = #{record.logindate,jdbcType=TIMESTAMP},
-      </if>
       <if test="record.vip != null" >
         VIP = #{record.vip,jdbcType=TINYINT},
       </if>
       <if test="record.address != null" >
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.imgid != null" >
-        imgid = #{record.imgid,jdbcType=INTEGER},
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -244,11 +231,10 @@
       email = #{record.email,jdbcType=CHAR},
       phone = #{record.phone,jdbcType=CHAR},
       sex = #{record.sex,jdbcType=TINYINT},
-      birthday = #{record.birthday,jdbcType=DATE},
-      logindate = #{record.logindate,jdbcType=TIMESTAMP},
       VIP = #{record.vip,jdbcType=TINYINT},
       address = #{record.address,jdbcType=VARCHAR},
-      imgid = #{record.imgid,jdbcType=INTEGER}
+      image = #{record.image,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -271,20 +257,17 @@
       <if test="sex != null" >
         sex = #{sex,jdbcType=TINYINT},
       </if>
-      <if test="birthday != null" >
-        birthday = #{birthday,jdbcType=DATE},
-      </if>
-      <if test="logindate != null" >
-        logindate = #{logindate,jdbcType=TIMESTAMP},
-      </if>
       <if test="vip != null" >
         VIP = #{vip,jdbcType=TINYINT},
       </if>
       <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="imgid != null" >
-        imgid = #{imgid,jdbcType=INTEGER},
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
       </if>
     </set>
     where uid = #{uid,jdbcType=CHAR}
@@ -296,33 +279,10 @@
       email = #{email,jdbcType=CHAR},
       phone = #{phone,jdbcType=CHAR},
       sex = #{sex,jdbcType=TINYINT},
-      birthday = #{birthday,jdbcType=DATE},
-      logindate = #{logindate,jdbcType=TIMESTAMP},
       VIP = #{vip,jdbcType=TINYINT},
       address = #{address,jdbcType=VARCHAR},
-      imgid = #{imgid,jdbcType=INTEGER}
+      image = #{image,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT}
     where uid = #{uid,jdbcType=CHAR}
   </update>
-  
-  <select id="selectByUname" parameterType="java.lang.String" resultType="java.lang.String">
-  select `uname` from `tb_user` where `uname` = "#{value}"
-  </select>
-  
-  <select id = "selectByEmail" parameterType="java.lang.String" resultType="java.lang.String">
-  select `email` from `tb_user` where `email` = "#{value}"
-  </select>
-  
-  <select id = "selectByPhone" parameterType="java.lang.String" resultType="java.lang.String">
-  select `phone` from `tb_user` where `phone` = "#{value}"
-  </select>
 </mapper>
-
-
-
-
-
-
-
-
-
-

@@ -1,8 +1,6 @@
 package cn.qst.pojo;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class TbUserExample {
@@ -104,32 +102,6 @@ public class TbUserExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andUidIsNull() {
@@ -542,126 +514,6 @@ public class TbUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayIsNull() {
-            addCriterion("birthday is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayIsNotNull() {
-            addCriterion("birthday is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayEqualTo(Date value) {
-            addCriterionForJDBCDate("birthday =", value, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayNotEqualTo(Date value) {
-            addCriterionForJDBCDate("birthday <>", value, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayGreaterThan(Date value) {
-            addCriterionForJDBCDate("birthday >", value, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("birthday >=", value, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayLessThan(Date value) {
-            addCriterionForJDBCDate("birthday <", value, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("birthday <=", value, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayIn(List<Date> values) {
-            addCriterionForJDBCDate("birthday in", values, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayNotIn(List<Date> values) {
-            addCriterionForJDBCDate("birthday not in", values, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("birthday between", value1, value2, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andBirthdayNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("birthday not between", value1, value2, "birthday");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateIsNull() {
-            addCriterion("logindate is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateIsNotNull() {
-            addCriterion("logindate is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateEqualTo(Date value) {
-            addCriterion("logindate =", value, "logindate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateNotEqualTo(Date value) {
-            addCriterion("logindate <>", value, "logindate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateGreaterThan(Date value) {
-            addCriterion("logindate >", value, "logindate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateGreaterThanOrEqualTo(Date value) {
-            addCriterion("logindate >=", value, "logindate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateLessThan(Date value) {
-            addCriterion("logindate <", value, "logindate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateLessThanOrEqualTo(Date value) {
-            addCriterion("logindate <=", value, "logindate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateIn(List<Date> values) {
-            addCriterion("logindate in", values, "logindate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateNotIn(List<Date> values) {
-            addCriterion("logindate not in", values, "logindate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateBetween(Date value1, Date value2) {
-            addCriterion("logindate between", value1, value2, "logindate");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogindateNotBetween(Date value1, Date value2) {
-            addCriterion("logindate not between", value1, value2, "logindate");
-            return (Criteria) this;
-        }
-
         public Criteria andVipIsNull() {
             addCriterion("VIP is null");
             return (Criteria) this;
@@ -792,63 +644,133 @@ public class TbUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andImgidIsNull() {
-            addCriterion("imgid is null");
+        public Criteria andImageIsNull() {
+            addCriterion("image is null");
             return (Criteria) this;
         }
 
-        public Criteria andImgidIsNotNull() {
-            addCriterion("imgid is not null");
+        public Criteria andImageIsNotNull() {
+            addCriterion("image is not null");
             return (Criteria) this;
         }
 
-        public Criteria andImgidEqualTo(Integer value) {
-            addCriterion("imgid =", value, "imgid");
+        public Criteria andImageEqualTo(String value) {
+            addCriterion("image =", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidNotEqualTo(Integer value) {
-            addCriterion("imgid <>", value, "imgid");
+        public Criteria andImageNotEqualTo(String value) {
+            addCriterion("image <>", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidGreaterThan(Integer value) {
-            addCriterion("imgid >", value, "imgid");
+        public Criteria andImageGreaterThan(String value) {
+            addCriterion("image >", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("imgid >=", value, "imgid");
+        public Criteria andImageGreaterThanOrEqualTo(String value) {
+            addCriterion("image >=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidLessThan(Integer value) {
-            addCriterion("imgid <", value, "imgid");
+        public Criteria andImageLessThan(String value) {
+            addCriterion("image <", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidLessThanOrEqualTo(Integer value) {
-            addCriterion("imgid <=", value, "imgid");
+        public Criteria andImageLessThanOrEqualTo(String value) {
+            addCriterion("image <=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidIn(List<Integer> values) {
-            addCriterion("imgid in", values, "imgid");
+        public Criteria andImageLike(String value) {
+            addCriterion("image like", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidNotIn(List<Integer> values) {
-            addCriterion("imgid not in", values, "imgid");
+        public Criteria andImageNotLike(String value) {
+            addCriterion("image not like", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidBetween(Integer value1, Integer value2) {
-            addCriterion("imgid between", value1, value2, "imgid");
+        public Criteria andImageIn(List<String> values) {
+            addCriterion("image in", values, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImgidNotBetween(Integer value1, Integer value2) {
-            addCriterion("imgid not between", value1, value2, "imgid");
+        public Criteria andImageNotIn(List<String> values) {
+            addCriterion("image not in", values, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageBetween(String value1, String value2) {
+            addCriterion("image between", value1, value2, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageNotBetween(String value1, String value2) {
+            addCriterion("image not between", value1, value2, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Boolean value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Boolean value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Boolean value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Boolean value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Boolean value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Boolean> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Boolean> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Boolean value1, Boolean value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
     }

@@ -7,8 +7,7 @@
     <result column="playsum" property="playsum" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="musicsum" property="musicsum" jdbcType="INTEGER" />
-    <result column="likesum" property="likesum" jdbcType="INTEGER" />
-    <result column="imgid" property="imgid" jdbcType="INTEGER" />
+    <result column="image" property="image" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -70,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    mlid, createdate, playsum, name, musicsum, likesum, imgid, uid
+    mlid, createdate, playsum, name, musicsum, image, uid
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qst.pojo.TbMusiclistExample" >
     select
@@ -104,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="cn.qst.pojo.TbMusiclist" >
     insert into tb_musiclist (mlid, createdate, playsum, 
-      name, musicsum, likesum, 
-      imgid, uid)
+      name, musicsum, image, 
+      uid)
     values (#{mlid,jdbcType=INTEGER}, #{createdate,jdbcType=DATE}, #{playsum,jdbcType=INTEGER}, 
-      #{name,jdbcType=VARCHAR}, #{musicsum,jdbcType=INTEGER}, #{likesum,jdbcType=INTEGER}, 
-      #{imgid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR})
+      #{name,jdbcType=VARCHAR}, #{musicsum,jdbcType=INTEGER}, #{image,jdbcType=INTEGER}, 
+      #{uid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.qst.pojo.TbMusiclist" >
     insert into tb_musiclist
@@ -128,11 +127,8 @@
       <if test="musicsum != null" >
         musicsum,
       </if>
-      <if test="likesum != null" >
-        likesum,
-      </if>
-      <if test="imgid != null" >
-        imgid,
+      <if test="image != null" >
+        image,
       </if>
       <if test="uid != null" >
         uid,
@@ -154,11 +150,8 @@
       <if test="musicsum != null" >
         #{musicsum,jdbcType=INTEGER},
       </if>
-      <if test="likesum != null" >
-        #{likesum,jdbcType=INTEGER},
-      </if>
-      <if test="imgid != null" >
-        #{imgid,jdbcType=INTEGER},
+      <if test="image != null" >
+        #{image,jdbcType=INTEGER},
       </if>
       <if test="uid != null" >
         #{uid,jdbcType=VARCHAR},
@@ -189,11 +182,8 @@
       <if test="record.musicsum != null" >
         musicsum = #{record.musicsum,jdbcType=INTEGER},
       </if>
-      <if test="record.likesum != null" >
-        likesum = #{record.likesum,jdbcType=INTEGER},
-      </if>
-      <if test="record.imgid != null" >
-        imgid = #{record.imgid,jdbcType=INTEGER},
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=INTEGER},
       </if>
       <if test="record.uid != null" >
         uid = #{record.uid,jdbcType=VARCHAR},
@@ -210,8 +200,7 @@
       playsum = #{record.playsum,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       musicsum = #{record.musicsum,jdbcType=INTEGER},
-      likesum = #{record.likesum,jdbcType=INTEGER},
-      imgid = #{record.imgid,jdbcType=INTEGER},
+      image = #{record.image,jdbcType=INTEGER},
       uid = #{record.uid,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -232,11 +221,8 @@
       <if test="musicsum != null" >
         musicsum = #{musicsum,jdbcType=INTEGER},
       </if>
-      <if test="likesum != null" >
-        likesum = #{likesum,jdbcType=INTEGER},
-      </if>
-      <if test="imgid != null" >
-        imgid = #{imgid,jdbcType=INTEGER},
+      <if test="image != null" >
+        image = #{image,jdbcType=INTEGER},
       </if>
       <if test="uid != null" >
         uid = #{uid,jdbcType=VARCHAR},
@@ -250,15 +236,8 @@
       playsum = #{playsum,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       musicsum = #{musicsum,jdbcType=INTEGER},
-      likesum = #{likesum,jdbcType=INTEGER},
-      imgid = #{imgid,jdbcType=INTEGER},
+      image = #{image,jdbcType=INTEGER},
       uid = #{uid,jdbcType=VARCHAR}
     where mlid = #{mlid,jdbcType=INTEGER}
   </update>
-  
-  <select id="selectByUid" resultMap="BaseResultMap">
-  	SELECT <include refid="Base_Column_List"></include>
-  	FROM `tb_musiclist` WHERE uid=#{uid}
-  </select>
-  
 </mapper>

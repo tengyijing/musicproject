@@ -60,35 +60,20 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/verifyUname", method = {RequestMethod.POST})
 	public Boolean verifyUname(String uname) {
-		boolean flag;
-	 	String name = tbUserService.selectByUname(uname);
-	 	if (name == null) {
-	 		flag = false;
-	 	} else {
-	 		flag = true;
-	 	}
-		return flag;
+		return tbUserService.selectByUname(uname);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/verifyEmail", method = {RequestMethod.POST})
 	public Boolean verifyEmail(String email) {
-		boolean flag = false;
-		String email1 = tbUserService.selectByEmail(email);
-		if (email1 == null) {
-			flag = true;
-		} 
-		return flag;
+		//return tbUserService.selectByEmail(email);
+		return true;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/verifyPhone", method = {RequestMethod.POST})
 	public Boolean verifyPhone(String phone) {
-		boolean flag = false;
-		String phone1 = tbUserService.selectByPhone(phone);
-		if (phone1 == null) {
-			flag = true;
-		} 
-		return flag;
+		//String phone1 = tbUserService.selectByPhone(phone);
+		return true;
 	}
 }
