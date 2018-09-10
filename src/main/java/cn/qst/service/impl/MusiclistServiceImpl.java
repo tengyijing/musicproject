@@ -27,4 +27,27 @@ public class MusiclistServiceImpl implements MusiclistService {
 		this.musicListDao = musicListDao;
 	}
 
+
+
+	@Override
+	public boolean deleteById(int mlid) {
+		return musicListDao.deleteByPrimaryKey(mlid)==1;
+	}
+
+
+
+	@Override
+	public boolean update(TbMusiclist musiclist) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public boolean save(TbMusiclist musiclist) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

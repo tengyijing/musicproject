@@ -13,4 +13,7 @@ import cn.qst.pojo.TbMusiclist;
 
 public interface MusiclistService {
 	List<TbMusiclist> selectByUid(String uid);
+	boolean deleteById(int mlid);
+	boolean update(TbMusiclist musiclist);
+	boolean save(TbMusiclist musiclist);
 }
