@@ -55,15 +55,15 @@ var type = '${type}';
 			<div class="mainWrap">
 				<div class="leftBar">
 					<ul class="menuUL">
-						<li class="menuLi cur"><a href="playList.do?type=1" class="bianse"
+						<li class="menuLi cur"><a href="/play?type=1" class="bianse"
 							onclick="menuLi()"> <i
 								class="icon iplay"></i> 正在播放
 						</a></li>
-						<li class="menuLi cur"><a href="playList.do?type=2" class="bianse2"
+						<li class="menuLi cur"><a href="/play?type=history" class="bianse2"
 							onclick="menuLi3()"> <i
 								class="icon ihst"></i> 播放历史
 						</a></li>
-						<li class="menuLi cur"><a href="playList.do?type=3" class="bianse3"
+						<li class="menuLi cur"><a href="/play?type=3" class="bianse3"
 							onclick="menuLi5()"> <i
 								class="icon ishouc"></i> 我喜欢的音乐
 						</a></li>
@@ -77,7 +77,7 @@ var type = '${type}';
 								<li class="menuLi2 cur">
 								<div  class="beijing hp" single2="${music.name }">
 								 <i class="icon isplay2"></i>
-								 <a href="playList.do?type=${music.mlid }"style="color:black; background-color:transparent;">${music.name }</a>
+								 <a href="/play?type=${music.mlid }"style="color:black; background-color:transparent;">${music.name }</a>
 								 <i class="cicon dele2" single3="${music.name }" delNo="${index1.index}"></i>
 								 </div>
 								</li>
