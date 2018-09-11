@@ -42,8 +42,11 @@ public class PlayMusicCotroller {
 	@RequestMapping("/play")
 	public String playPage(ModelMap map, HttpSession session, String type) {
 		// TbUser user = (TbUser) session.getAttribute("user");
+		
+		/*--------删除开始-----------*/
 		TbUser user = new TbUser();
 		user.setUid("1");
+		/*--------删除结束-----------*/
 		
 		// 查询用户歌单
 		List<TbMusiclist> musiclists = musiclistService.selectByUid(user.getUid());
@@ -93,8 +96,12 @@ public class PlayMusicCotroller {
 		Map<String, Object> result = new HashMap<>();
 		// 获取创建歌单的用户
 		TbUser user = (TbUser) session.getAttribute("user");
+		
+		/*--------删除开始-----------*/
 		if( user == null ) user = new TbUser();
 		user.setUid("1");
+		/*--------删除结束-----------*/
+		
 		if( "v".equalsIgnoreCase(s.trim()) ) { // 验证名字是否存在 falg=true为不存在
 			boolean flag = musiclistService.selectByNameAndUid(musicListName, user.getUid())==null;
 			String r = flag==true?"true":"false";
