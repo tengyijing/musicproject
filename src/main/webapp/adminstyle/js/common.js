@@ -32,7 +32,7 @@ var TT = TAOTAO = {
 	// 格式化时间
 	formatDateTime : function(val,row){
 		var now = new Date(val);
-    	return now.format("yyyy-MM-dd hh:mm:ss");
+    	return now.format("yyyy-MM-dd");
 	},
 	// 格式化连接
 	formatUrl : function(val,row){
@@ -41,19 +41,13 @@ var TT = TAOTAO = {
 		}
 		return "";
 	},
-	// 格式化价格
-	formatPrice : function(val,row){
-		return (val/1000).toFixed(2);
-	},
 	// 格式化商品的状态
 	formatItemStatus : function formatStatus(val,row){
         if (val == 1){
             return '正常';
-        } else if(val == 2){
+        } else if(val == 0){
         	return '<span style="color:red;">下架</span>';
-        } else {
-        	return '未知';
-        }
+        } 
     },
     
     init : function(data){
@@ -75,8 +69,8 @@ var TT = TAOTAO = {
         			<ul></ul>\
         		</div>');
     		// 回显图片
-        	if(data && data.pics){
-        		var imgs = data.pics.split(",");
+        	if(data && data.image){
+        		var imgs = data.image.split(",");
         		for(var i in imgs){
         			if($.trim(imgs[i]).length > 0){
         				_ele.siblings(".pics").find("ul").append("<li><a href='"+imgs[i]+"' target='_blank'><img src='"+imgs[i]+"' width='80' height='50' /></a></li>");
@@ -192,32 +186,7 @@ var TT = TAOTAO = {
     	$(".panel-tool-close").click();
     },
     
-    changeItemParam : function(node,formId){
-    	$.getJSON("/item/param/query/itemcatid/" + node.id,function(data){
-			  if(data.status == 200 && data.data){
-				 $("#"+formId+" .params").show();
-				 var paramData = JSON.parse(data.data.paramData);
-				 var html = "<ul>";
-				 for(var i in paramData){
-					 var pd = paramData[i];
-					 html+="<li><table>";
-					 html+="<tr><td colspan=\"2\" class=\"group\">"+pd.group+"</td></tr>";
-					 
-					 for(var j in pd.params){
-						 var ps = pd.params[j];
-						 html+="<tr><td class=\"param\"><span>"+ps+"</span>: </td><td><input autocomplete=\"off\" type=\"text\"/></td></tr>";
-					 }
-					 
-					 html+="</li></table>";
-				 }
-				 html+= "</ul>";
-				 $("#"+formId+" .params td").eq(1).html(html);
-			  }else{
-				 $("#"+formId+" .params").hide();
-				 $("#"+formId+" .params td").eq(1).empty();
-			  }
-		  });
-    },
+    
     getSelectionsIds : function (select){
     	var list = $(select);
     	var sels = list.datagrid("getSelections");

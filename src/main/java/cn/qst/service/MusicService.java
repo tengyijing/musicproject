@@ -3,6 +3,7 @@ package cn.qst.service;
 import java.util.List;
 
 import cn.qst.comman.pojo.AdminResult;
+import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.pojo.TbMusic;
 
 /**
@@ -24,4 +25,6 @@ public interface MusicService {
 	boolean addMusicToMusicList(int mlid, int mid);
 	// 从歌单中删除音乐
 	boolean deleteMusicFromMusicList(int mlid, int mid);
+	//查询所有音乐并分页显示
+	EasyUiDataGridResult fundMusicAll(int page , int rows);
 }

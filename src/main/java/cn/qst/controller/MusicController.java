@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cn.qst.comman.fastdfs.FileUploadUtils;
 import cn.qst.comman.pojo.AdminResult;
+import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.pojo.TbMusic;
 import cn.qst.service.MusicService;
 
@@ -23,9 +24,18 @@ public class MusicController {
 	private String IMAGE_SERVER_URL;
 	
 	
+	//添加音乐
 	@RequestMapping("/music/addmusic")
 	@ResponseBody
 	public AdminResult addMusic(TbMusic music) {
 			return musicService.addMusic(music);
+	}
+	
+	//查询所有音乐分页显示
+	@RequestMapping("/music/list")
+	@ResponseBody
+	public EasyUiDataGridResult fundMusicAll(int page , int rows) {	
+		EasyUiDataGridResult result = musicService.fundMusicAll(page , rows);
+		return result;
 	}
 }
