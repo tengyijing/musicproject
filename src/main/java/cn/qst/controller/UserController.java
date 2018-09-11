@@ -27,9 +27,23 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
+	
 	/**
-	 * 登陆，检查账号密码时候正确
+	 * 查询用户个人信息，根据登陆时session中存储的“username”的用户名
+	 * @param request 获取session对象
+	 * @return 跳转到个人信息页面
+	 */
+	@RequestMapping("/personalInfo")
+	public String personalInfo(HttpServletRequest request) {
+		String uname = (String) request.getSession().getAttribute("username");
+		TbUser user = userService.selectPersonalInfo(uname);
+		request.setAttribute("user", user);
+		return "personal";
+	}
+	
+	/**
+	 * 登陆，检查账号密码时候正确，并将用户名 以及 图片的名称 存入session中
+	 * 分别命名为 “usrename” “imgstr”
 	 *
 	 * @return
 	 */
@@ -38,8 +52,10 @@ public class UserController {
 	public Boolean login(String userName, String passWord, HttpSession session) {
 		TbUser user = userService.login(userName, passWord);
 		if (user != null) {
-//			session.setAttribute("loginUser", user);
+			StringBuilder builder = new StringBuilder("/source/images/headPhoto/");
+			builder.append("user.png");
 			session.setAttribute("username", user.getUname());
+			session.setAttribute("imgstr", builder);
 			return true;
 		} else {
 			return false;
@@ -47,8 +63,8 @@ public class UserController {
 	}
 
 	/**
-	 * 注册写入数据库 uid, uname, password, email, phone, sex(0男，1女，2保密）, image,status(0false:删除 ，1true存在), VIP
-	 * （0 非，1是）
+	 * 注册写入数据库 uid, uname, password, email, phone, sex(0男，1女，2保密）,
+	 *  image,status(0false:删除 ，1true存在), VIP（0 非，1是）
 	 *
 	 * @return
 	 */
@@ -58,8 +74,8 @@ public class UserController {
 		user.setUid(UUID.randomUUID().toString().replace("-", "").toLowerCase());
 		user.setPassword(MD5Utils.md5(user.getPassword()));
 		user.setVip((byte) 0);
-		//图片的url地址，测试使用 <img src="/source/images/headPhoto/default.jpeg"/>
-		user.setImage("default.jpeg");
+		// /source/images/headPhoto/user.png  默认头像
+		user.setImage("user.png");
 		user.setStatus(true);
 		return userService.regist(user);
 	}
@@ -135,5 +151,7 @@ public class UserController {
 		}
 		return flag;
 	}
+	
+	
 	
 }
