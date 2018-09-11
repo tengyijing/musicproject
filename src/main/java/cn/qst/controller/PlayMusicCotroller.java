@@ -1,6 +1,9 @@
 package cn.qst.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import cn.qst.comman.utils.JsonUtils;
 import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbMusiclist;
 import cn.qst.pojo.TbUser;
@@ -61,15 +66,49 @@ public class PlayMusicCotroller {
 	
 	
 	// 音乐播放
-	public String playMusic(ModelMap map) {
+	public String playMusic(ModelMap map, int mid) {
 		/*
 		 * 1、根据音乐id查找对应的音乐以及歌词
 		 * 2、将音乐添加到播放历史歌单当中
+		 * 3、返回json数据
 		 */
+		mid = 1;
+		TbMusic music = musicService.selectByPrimaryKey(mid);
+		map.addAttribute("music", music);
+		
+		// 将当前播放的音乐放入历史播放歌单当中
+		if( historyList == null ) {
+			historyList = new ArrayList<>();
+		}
+		historyList.add(music);
 		return null;
 	}
 	
 	// 歌单创建请求
+	@RequestMapping(value = "/addMusicList", method = { RequestMethod.POST})
+	@ResponseBody
+	public String createList(String musicListName, HttpSession session) {
+		// 创建返回对象
+		Map<String, Object> result = new HashMap<>();
+		// 获取创建歌单的用户
+		TbUser user = (TbUser) session.getAttribute("user");
+		
+		/*
+		 * 创建歌单实体对象
+		 * 	设置名称
+		 * 	设置图片为默认图片
+		 * 	设置创建时间
+		 * 	设置创建人id
+		 */
+		TbMusiclist musiclist = new TbMusiclist();
+		musiclist.setName(musicListName);
+		musiclist.setUid(user.getUid());
+		
+		// 保存歌单实体对象
+		boolean flag = musiclistService.save(musiclist);
+		result.put("flag", flag);
+		return JsonUtils.objectToJson(result);
+	}
 	
 	// 歌单删除请求
 	

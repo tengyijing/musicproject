@@ -44,8 +44,7 @@ public class MusiclistServiceImpl implements MusiclistService {
 
 	@Override
 	public boolean save(TbMusiclist musiclist) {
-		// TODO Auto-generated method stub
-		return false;
+		return musicListDao.insertSelective(musiclist)==1;
 	}
 	
 	
