@@ -336,11 +336,18 @@
 
 	<select id="selectByUnameOrUname"
 		parameterType="java.lang.String" resultType="cn.qst.pojo.TbUser">
-		select `uname`,`password`, `email`, `phone`, `sex`, `vip`,
+		select `uname`,`password`,
+		`email`, `phone`, `sex`, `vip`,
 		`address`, `image`, `status`
-		from `tb_user` where `uname` = #{value}
+		from
+		`tb_user` where `uname` = #{value}
 	</select>
-
+<!--parameterType = "java.lang.String"-->
+	<select id="selectCity"
+	 resultType = "cn.qst.pojo.TbCity">
+		select c.name name, p.name pname from tb_city c inner join tb_province p
+	 	on c.pid = p.pid where c.cid = 1
+	</select>
 </mapper>
 
 
