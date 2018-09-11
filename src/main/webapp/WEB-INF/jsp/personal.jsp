@@ -395,12 +395,12 @@
 
 							<p>
 								<em>VIP：</em>
-					 			<c:choose>
-					 				<c:when test="${user.vip == 0 }">
-					 					<!-- 充值会员 -->
+								<c:choose>
+									<c:when test="${user.vip == 0 }">
+										<!-- 充值会员 -->
 					 				    非会员，赶紧成为我们的<span><a href="">会员</a></span>，享受更多资源
 					 				</c:when>
-					 				<c:otherwise>
+									<c:otherwise>
 					 					恭喜你是我们的会员
 					 				</c:otherwise>
 								</c:choose>
@@ -443,9 +443,17 @@
 									id="birthday" type="text" value="${birthday}"> <font>(可能有惊喜哦)</font>
 							</p>  -->
 							<p>
-								<em>居住城市：</em> <input type="text" name="city" id="city"
+								<em>居住城市：</em> <!-- <input type="text" name="city" id="city"
 									value="${city}"
-									style="width: 200px; height: 30px; border: 1px #ccc solid; margin-top: 11px; font-size: 12px; text-align: center; color: #343434; float: left" />
+									style="width: 200px; height: 30px; border: 1px #ccc solid; margin-top: 11px; font-size: 12px; text-align: center; color: #343434; float: left" />-->
+									<c:choose>
+										<c:when test = "${user.address == null}">
+											查询出城市信息选择
+										</c:when>
+										<c:otherwise>
+											直接显示城市信息
+										</c:otherwise>
+									</c:choose>
 							</p>
 							<a
 								style="text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;"

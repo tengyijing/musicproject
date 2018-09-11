@@ -1,5 +1,6 @@
 package cn.qst.mapper;
 
+import cn.qst.pojo.TbCity;
 import cn.qst.pojo.TbUser;
 import cn.qst.pojo.TbUserExample;
 import java.util.List;
@@ -63,5 +64,10 @@ public interface TbUserMapper {
      * @return
      */
     TbUser selectByUnameOrUname(String uname);
-    
+
+    /**
+     * 根据 地址id 查询用户所在的地区
+     * @return
+     */
+    TbCity selectCity();
 }
