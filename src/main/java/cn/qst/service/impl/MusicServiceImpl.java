@@ -1,10 +1,12 @@
 package cn.qst.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.qst.comman.pojo.AdminResult;
 import cn.qst.mapper.TbMusicMapper;
 import cn.qst.mapper.TbMusic_MusicListMapper;
 import cn.qst.pojo.TbMusic;
@@ -36,6 +38,15 @@ public class MusicServiceImpl implements MusicService {
 	@Override
 	public boolean deleteMusicFromMusicList(int mlid, int mid) {
 		return tbMusic_MusicListMapper.delete(mlid, mid)==1;
+	}
+	
+	@Override
+	public AdminResult addMusic(TbMusic music) {
+		//补全属性
+		Date date = new Date();
+		music.setUploaddate(date);
+		tbMusicMapper.insertSelective(music);
+		return AdminResult.ok();
 	}
 	
 }
