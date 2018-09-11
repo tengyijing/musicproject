@@ -16,4 +16,5 @@ public interface MusiclistService {
 	boolean deleteById(int mlid);
 	boolean update(TbMusiclist musiclist);
 	boolean save(TbMusiclist musiclist);
+	TbMusiclist selectByNameAndUid(String musicListName, String uid);
 }

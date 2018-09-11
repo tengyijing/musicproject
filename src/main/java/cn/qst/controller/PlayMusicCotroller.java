@@ -1,6 +1,10 @@
 package cn.qst.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import cn.qst.comman.utils.JsonUtils;
 import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbMusiclist;
 import cn.qst.pojo.TbUser;
@@ -36,8 +42,11 @@ public class PlayMusicCotroller {
 	@RequestMapping("/play")
 	public String playPage(ModelMap map, HttpSession session, String type) {
 		// TbUser user = (TbUser) session.getAttribute("user");
+		
+		/*--------删除开始-----------*/
 		TbUser user = new TbUser();
 		user.setUid("1");
+		/*--------删除结束-----------*/
 		
 		// 查询用户歌单
 		List<TbMusiclist> musiclists = musiclistService.selectByUid(user.getUid());
@@ -61,19 +70,77 @@ public class PlayMusicCotroller {
 	
 	
 	// 音乐播放
-	public String playMusic(ModelMap map) {
+	public String playMusic(ModelMap map, int mid) {
 		/*
 		 * 1、根据音乐id查找对应的音乐以及歌词
 		 * 2、将音乐添加到播放历史歌单当中
+		 * 3、返回json数据
 		 */
+		mid = 1;
+		TbMusic music = musicService.selectByPrimaryKey(mid);
+		map.addAttribute("music", music);
+		
+		// 将当前播放的音乐放入历史播放歌单当中
+		if( historyList == null ) {
+			historyList = new ArrayList<>();
+		}
+		historyList.add(music);
 		return null;
 	}
 	
 	// 歌单创建请求
+	@RequestMapping(value = "/addMusicList", method = { RequestMethod.POST})
+	@ResponseBody
+	public String createList(String musicListName, HttpSession session, String s) {
+		// 创建返回对象
+		Map<String, Object> result = new HashMap<>();
+		// 获取创建歌单的用户
+		TbUser user = (TbUser) session.getAttribute("user");
+		
+		/*--------删除开始-----------*/
+		if( user == null ) user = new TbUser();
+		user.setUid("1");
+		/*--------删除结束-----------*/
+		
+		if( "v".equalsIgnoreCase(s.trim()) ) { // 验证名字是否存在 falg=true为不存在
+			boolean flag = musiclistService.selectByNameAndUid(musicListName, user.getUid())==null;
+			String r = flag==true?"true":"false";
+			result.put("flag", r);
+		} else if( "w".equalsIgnoreCase(s.trim()) ){
+			/*
+			 * 创建歌单实体对象
+			 * 	设置名称
+			 * 	设置图片为默认图片
+			 * 	设置创建时间
+			 * 	设置创建人id
+			 */
+			TbMusiclist musiclist = new TbMusiclist();
+			musiclist.setName(musicListName);
+			musiclist.setUid(user.getUid());
+			musiclist.setCreatedate(new Date());
+			// 设置默认图片
+			musiclist.setImage("1");
+			
+			// 保存歌单实体对象
+			boolean flag = musiclistService.save(musiclist);
+			if( flag ) {
+				musiclist = musiclistService.selectByNameAndUid(musicListName, user.getUid());
+				result.put("mlid", musiclist.getMlid());
+			}
+		}
+		return JsonUtils.objectToJson(result);
+	}
 	
 	// 歌单删除请求
-	
-	// 歌单修改请求
+	@RequestMapping(value = "deletMusicList", method = { RequestMethod.POST })
+	@ResponseBody
+	public String deletMusicList(String musicListId) {
+		if( musicListId == null ) return null;
+		int mlid = Integer.parseInt(musicListId);
+		boolean flag = musiclistService.deleteById(mlid);
+		if( !flag ) return null;
+		return JsonUtils.objectToJson("1");
+	}
 	
 
 	public void setHistoryList(List<TbMusic> historyList) {

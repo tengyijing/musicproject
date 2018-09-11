@@ -44,13 +44,25 @@ public class MusiclistServiceImpl implements MusiclistService {
 
 	@Override
 	public boolean save(TbMusiclist musiclist) {
-		// TODO Auto-generated method stub
-		return false;
+		return musicListDao.insertSelective(musiclist)==1;
 	}
 	
 	
 	public void setMusicListDao(TbMusiclistMapper musicListDao) {
 		this.musicListDao = musicListDao;
+	}
+
+
+
+	@Override
+	public TbMusiclist selectByNameAndUid(String musicListName, String uid) {
+		TbMusiclistExample example = new TbMusiclistExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andNameEqualTo(musicListName);
+		criteria.andUidEqualTo(uid);
+		List<TbMusiclist> list = musicListDao.selectByExample(example);
+		if( list!=null && list.size()>0 ) return list.get(0);
+		return null;
 	}
 
 }

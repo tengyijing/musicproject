@@ -2,6 +2,7 @@ package cn.qst.service;
 
 import java.util.List;
 
+import cn.qst.comman.pojo.AdminResult;
 import cn.qst.pojo.TbMusic;
 
 /**
@@ -13,4 +14,14 @@ import cn.qst.pojo.TbMusic;
 
 public interface MusicService {
 	List<TbMusic> selectByMusicList(int id);
+	
+	TbMusic selectByPrimaryKey(int mid);
+	
+	//添加音乐
+	AdminResult addMusic(TbMusic music);
+	
+	// 添加音乐到歌单
+	boolean addMusicToMusicList(int mlid, int mid);
+	// 从歌单中删除音乐
+	boolean deleteMusicFromMusicList(int mlid, int mid);
 }

@@ -80,6 +80,7 @@ public class AdminController {
 		return list;
 	}
 
+
 	/**
 	 * 把每个音乐进行分类处理
 	 * @return
@@ -99,4 +100,5 @@ public class AdminController {
 		}	
 		return list;
 	}
+
 }

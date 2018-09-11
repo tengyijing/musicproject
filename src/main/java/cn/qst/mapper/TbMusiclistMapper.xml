@@ -7,7 +7,7 @@
     <result column="playsum" property="playsum" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="musicsum" property="musicsum" jdbcType="INTEGER" />
-    <result column="image" property="image" jdbcType="INTEGER" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -106,7 +106,7 @@
       name, musicsum, image, 
       uid)
     values (#{mlid,jdbcType=INTEGER}, #{createdate,jdbcType=DATE}, #{playsum,jdbcType=INTEGER}, 
-      #{name,jdbcType=VARCHAR}, #{musicsum,jdbcType=INTEGER}, #{image,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{musicsum,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, 
       #{uid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.qst.pojo.TbMusiclist" >
@@ -151,7 +151,7 @@
         #{musicsum,jdbcType=INTEGER},
       </if>
       <if test="image != null" >
-        #{image,jdbcType=INTEGER},
+        #{image,jdbcType=VARCHAR},
       </if>
       <if test="uid != null" >
         #{uid,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
         musicsum = #{record.musicsum,jdbcType=INTEGER},
       </if>
       <if test="record.image != null" >
-        image = #{record.image,jdbcType=INTEGER},
+        image = #{record.image,jdbcType=VARCHAR},
       </if>
       <if test="record.uid != null" >
         uid = #{record.uid,jdbcType=VARCHAR},
@@ -200,7 +200,7 @@
       playsum = #{record.playsum,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       musicsum = #{record.musicsum,jdbcType=INTEGER},
-      image = #{record.image,jdbcType=INTEGER},
+      image = #{record.image,jdbcType=VARCHAR},
       uid = #{record.uid,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -222,7 +222,7 @@
         musicsum = #{musicsum,jdbcType=INTEGER},
       </if>
       <if test="image != null" >
-        image = #{image,jdbcType=INTEGER},
+        image = #{image,jdbcType=VARCHAR},
       </if>
       <if test="uid != null" >
         uid = #{uid,jdbcType=VARCHAR},
@@ -236,7 +236,7 @@
       playsum = #{playsum,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       musicsum = #{musicsum,jdbcType=INTEGER},
-      image = #{image,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
       uid = #{uid,jdbcType=VARCHAR}
     where mlid = #{mlid,jdbcType=INTEGER}
   </update>
