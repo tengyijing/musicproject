@@ -14,7 +14,8 @@
 
   <script src="../../source/js/jquery.min.js"></script>
   <script src="../../source/js/script.js"></script>
-    <script src="../../source/js/index.js"></script>
+      <script src="/myjs/index.js"></script>
+
 
   <!-- 分类 -->
 <link rel="stylesheet" data-dist="true" href="../../source/musicclassify/css/lomegwdp.css" />
@@ -32,26 +33,21 @@
 <!--提示框-->
 <link href="../../source/SearchMusic/css/qikoo.css" type="text/css" rel="stylesheet" />
 <script src="../../source/SearchMusic/js/qikoo.js"></script>
+<script type="text/javascript">
+var id = ${id}
 
+
+</script>
 </head>
 <body onload="getName('${username}');">
+
    <header class="header">
     <div class="header-container"  style="width:1200px;">
             <div class="header-top">
         <a href="../../index.jsp" class="logo"></a>
         <nav class="header-nav">
-          <ul>
-            <li><a href="../../index.jsp" class="header-nav__cur">音乐基地</a></li>
-            <li><a href="myMusic.do">我的歌声</a></li>
-            <li><a href="playList.do?type=1" target='_new'>音乐盒</a></li>
-            <c:choose>
-        <c:when test="${username== null or username==''}">
-            <li onclick="userLogin2('${username}')"><a>唱聊IM</a></li>
-        </c:when>
-        <c:otherwise>
-         <li><a href="bin/chat.jsp">唱聊IM</a></li>
-        </c:otherwise>
-        </c:choose>
+          <ul id="topmusicClassify">
+            
            
           </ul>
         </nav>
@@ -114,13 +110,8 @@
           <a href="regist.jsp" class="open-vip" id="reg">注册</a>
         </div>
       </div>
-      <ul class="header-subNav" style="margin-top:20px;">
-        <li><a href="../../index.jsp">首页</a></li>
-        <li><a href="recommendedSongs.do">个性推荐</a></li>
-        <li><a href="rank.do">排行榜</a></li>
-        <li><a href="musicClassify.jsp"  class="subNav-cur">音乐分类</a></li>
-        <li><a href="getDynamic.do">音乐圈</a></li>
-        <li><a href="huati.jsp">话题</a></li>
+      <ul class="header-subNav" style="margin-top:20px;" id="topmusicClassifyChild">
+        
         
       </ul>
     </div>

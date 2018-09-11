@@ -7,19 +7,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>LoveMusic</title>
-  <link rel="shortcut icon" href="source/images/logo-b.png" />
-  <link rel="stylesheet" href="source/css/reset.css">
-  <link rel="stylesheet" href="source/css/index.css">
-  <script type="text/javascript" src="source/js/jquery.js"></script>
-  <script src="source/js/script.js"></script>
-  <script src="source/js/index.js"></script>
+  <link rel="shortcut icon" href="/source/images/logo-b.png" />
+  <link rel="stylesheet" href="/source/css/reset.css">
+  <link rel="stylesheet" href="/source/css/index.css">
+  <script type="text/javascript" src="/source/js/jquery.js"></script>
+  <script src="/source/js/script.js"></script>
+  <script src="/myjs/index.js"></script>
 
     
   <!-- 轮播图 -->
-  <link rel="stylesheet" type="text/css" href="source/content-top-resource/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/source/content-top-resource/css/style.css" />
   <!-- 提示框 -->
-<link href="source/SearchMusic/css/qikoo.css" type="text/css" rel="stylesheet" />
-<script src="source/SearchMusic/js/qikoo.js"></script>
+<link href="/source/SearchMusic/css/qikoo.css" type="text/css" rel="stylesheet" />
+<script src="/source/SearchMusic/js/qikoo.js"></script>
+<script type="text/javascript">
+var id=1;
+</script>
 </head>
 
 <body onload="getName('${username}');">
@@ -28,25 +31,15 @@
             <div class="header-top">
         <a href="index.jsp" class="logo"></a>
         <nav class="header-nav">
-          <ul>
-            <li><a href="index.jsp" class="header-nav__cur">音乐基地</a></li>
-            <li><a href="myMusic.do">我的歌声</a></li>
-            <li><a href="playList.do?type=1" target='_new'>音乐盒</a></li>
-            <c:choose>
-        <c:when test="${username== null or username==''}">
-            <li onclick="userLogin2('${username}')"><a>唱聊IM</a></li>
-        </c:when>
-        <c:otherwise>
-         <li><a href="bin/chat.jsp">唱聊IM</a></li>
-        </c:otherwise>
-        </c:choose>
+          <ul id="topindex">
+        
            
           </ul>
         </nav>
         <div class="header-search" style="margin-left:-20px;">
         <form action="searchMusic.do" method="post" id="searchform">
           <input style="width:170px;" type="text" class="text" placeholder="我是歌手第四季" name="musicName" id="musicName" speech x-webkit-speech />
-          <span class="btn" id="vid" style="float:left;"><i><img  style="margin-top:6px;"src="source/images/video.png" ></i></span>
+          <span class="btn" id="vid" style="float:left;"><i><img  style="margin-top:6px;"src="/source/images/video.png" ></i></span>
           <span class="btn" onclick="search();"><i class="icon-sprite"></i></span>
           </form>
           <div class="videoFrame">
@@ -85,7 +78,7 @@
          <div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;display:none">
          <c:choose>
         <c:when test="${imgstr== null or imgstr==''}">
-            <a href="userInfo.do"><img src="source/images/user.png" id="img1"/></a>
+            <a href="userInfo.do"><img src="/source/images/user.png" id="img1"/></a>
         </c:when>
         <c:otherwise>
         <a href="userInfo.do"><img src="${imgstr}" id="img2"/></a>
@@ -94,21 +87,16 @@
          </div>
          <div id="name" style="display:none;padding-top:35px;"><a href="userInfo.do" style="cursor:pointer" ><i  onmouseover = "xianshi()"  onmouseout = "xiaoshi2()">${username}</i></a></div>
          <div id="xianshi">
-         <p style="margin-left:5px;margin-top:3px;"><a href="userInfo.do"><img src="source/images/个人.png"></a></p>
-         <p style="margin-left:4px;margin-top:5px;"><a href="Logout.do"><img src="source/images/退出.png"></a></p>  
+         <p style="margin-left:5px;margin-top:3px;"><a href="userInfo.do"><img src="/source/images/个人.png"></a></p>
+         <p style="margin-left:4px;margin-top:5px;"><a href="Logout.do"><img src="/source/images/退出.png"></a></p>  
          </div>
         <div class="header-login"style="margin-right:-10px;">
           <a href="/login" class="open-green" id="login">登录</a>
           <a href="/regist" class="open-vip" id="reg">注册</a>
         </div>
       </div>
-      <ul class="header-subNav" style="margin-top:20px;">
-        <li><a href="#" class="subNav-cur">首页</a></li>
-        <li><a href="recommendedSongs.do">个性推荐</a></li>
-        <li><a href="rank.do">排行榜</a></li>
-        <li><a href="musicClassify.jsp">音乐分类</a></li>
-        <li><a href="getDynamic.do">音乐圈</a></li>
-        <li><a href="huati.jsp">话题</a></li>
+      <ul class="header-subNav" style="margin-top:20px;" id="topindexChild">
+        
       </ul>
     </div>
   </header>
@@ -128,12 +116,12 @@
                 <ul>
                     <li id="imgCard0">
                         <a href=""><span style="opacity:0;"></span></a>      
-                        <img src="source/content-top-resource/main_banner/big0120150101183428.jpg" alt="">
+                        <img src="/source/content-top-resource/main_banner/big0120150101183428.jpg" alt="">
                         <p style="bottom:0">周杰伦粉丝版</p>
                     </li> 
                     <li id="imgCard1">
                         <a href=""><span style="opacity:0.4;"></span></a>      
-                        <img src="source/content-top-resource/main_banner/big0020150102211033.jpg" alt="">
+                        <img src="/source/content-top-resource/main_banner/big0020150102211033.jpg" alt="">
                         <p>乐侃有声节目第二期</p>
                     </li> 
                     <li id="imgCard2">
