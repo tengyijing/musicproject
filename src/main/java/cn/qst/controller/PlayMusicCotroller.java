@@ -1,6 +1,7 @@
 package cn.qst.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,32 +88,52 @@ public class PlayMusicCotroller {
 	// 歌单创建请求
 	@RequestMapping(value = "/addMusicList", method = { RequestMethod.POST})
 	@ResponseBody
-	public String createList(String musicListName, HttpSession session) {
+	public String createList(String musicListName, HttpSession session, String s) {
 		// 创建返回对象
 		Map<String, Object> result = new HashMap<>();
 		// 获取创建歌单的用户
 		TbUser user = (TbUser) session.getAttribute("user");
-		
-		/*
-		 * 创建歌单实体对象
-		 * 	设置名称
-		 * 	设置图片为默认图片
-		 * 	设置创建时间
-		 * 	设置创建人id
-		 */
-		TbMusiclist musiclist = new TbMusiclist();
-		musiclist.setName(musicListName);
-		musiclist.setUid(user.getUid());
-		
-		// 保存歌单实体对象
-		boolean flag = musiclistService.save(musiclist);
-		result.put("flag", flag);
+		if( user == null ) user = new TbUser();
+		user.setUid("1");
+		if( "v".equalsIgnoreCase(s.trim()) ) { // 验证名字是否存在 falg=true为不存在
+			boolean flag = musiclistService.selectByNameAndUid(musicListName, user.getUid())==null;
+			String r = flag==true?"true":"false";
+			result.put("flag", r);
+		} else if( "w".equalsIgnoreCase(s.trim()) ){
+			/*
+			 * 创建歌单实体对象
+			 * 	设置名称
+			 * 	设置图片为默认图片
+			 * 	设置创建时间
+			 * 	设置创建人id
+			 */
+			TbMusiclist musiclist = new TbMusiclist();
+			musiclist.setName(musicListName);
+			musiclist.setUid(user.getUid());
+			musiclist.setCreatedate(new Date());
+			// 设置默认图片
+			musiclist.setImage("1");
+			
+			// 保存歌单实体对象
+			boolean flag = musiclistService.save(musiclist);
+			if( flag ) {
+				musiclist = musiclistService.selectByNameAndUid(musicListName, user.getUid());
+				result.put("mlid", musiclist.getMlid());
+			}
+		}
 		return JsonUtils.objectToJson(result);
 	}
 	
 	// 歌单删除请求
-	
-	// 歌单修改请求
+	@RequestMapping(value = "deletMusicList", method = { RequestMethod.POST })
+	@ResponseBody
+	public String deletMusicList(String musicListId) {
+		if( musicListId == null ) return null;
+		int mlid = Integer.parseInt(musicListId);
+		boolean flag = musiclistService.deleteById(mlid);
+		if( !flag ) return null;
+		return JsonUtils.objectToJson("1");
+	}
 	
 
 	public void setHistoryList(List<TbMusic> historyList) {

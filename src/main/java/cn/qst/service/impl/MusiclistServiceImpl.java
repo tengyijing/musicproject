@@ -52,4 +52,17 @@ public class MusiclistServiceImpl implements MusiclistService {
 		this.musicListDao = musicListDao;
 	}
 
+
+
+	@Override
+	public TbMusiclist selectByNameAndUid(String musicListName, String uid) {
+		TbMusiclistExample example = new TbMusiclistExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andNameEqualTo(musicListName);
+		criteria.andUidEqualTo(uid);
+		List<TbMusiclist> list = musicListDao.selectByExample(example);
+		if( list!=null && list.size()>0 ) return list.get(0);
+		return null;
+	}
+
 }
