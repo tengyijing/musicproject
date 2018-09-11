@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="../../source/css/index.css">
 <script src="../../source/js/jquery.js"></script>
 <script src="../../source/js/script.js"></script>
-<script src="../../source/js/index.js"></script>
+  <script src="/myjs/index.js"></script>
 <!-- 主体 -->
 <link rel="stylesheet" href="../../source/mysong/css/main.css">
 <script src="../../source/mysong/js/main.js"></script>

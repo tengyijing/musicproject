@@ -14,7 +14,8 @@
 
   <script src="../../source/js/jquery.min.js"></script>
   <script src="../../source/js/script.js"></script>
-    <script src="../../source/js/index.js"></script>
+      <script src="/myjs/index.js"></script>
+
 
   <!-- 分类 -->
 <link rel="stylesheet" data-dist="true" href="../../source/musicclassify/css/lomegwdp.css" />
@@ -34,6 +35,8 @@
 <script src="../../source/SearchMusic/js/qikoo.js"></script>
 <script type="text/javascript">
 var id = ${id}
+
+
 </script>
 </head>
 <body onload="getName('${username}');">

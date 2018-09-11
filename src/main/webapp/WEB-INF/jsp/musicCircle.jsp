@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../../source/css/index.css">
   <script src="../../source/js/jquery.js"></script>
   <script src="../../source/js/script.js"></script>
-  <script src="../../source/js/index.js"></script>
+  <script src="/myjs/index.js"></script>
   <script src="source/mysong/js/main2.js"></script>
   <!-- 中部 -->
   <link href="../../source/css/common.css?v7.2" type="text/css" rel="stylesheet" />

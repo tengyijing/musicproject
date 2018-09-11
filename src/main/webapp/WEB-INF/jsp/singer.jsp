@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="../../source/css/index.css">
 <script src="../../source/js/jquery.js"></script>
 <script src="../../source/js/script.js"></script>
-<script src="../../source/js/index.js"></script>
+  <script src="/myjs/index.js"></script>
 <!-- 头部 -->
 <!-- 音乐人 -->
 <style>

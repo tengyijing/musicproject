@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="../../source/css/index.css">
 <script src="../../source/js/jquery.min.js"></script>
 <script src="../../source/js/script.js"></script>
-<script src="../../source/js/index.js"></script>
+  <script src="/myjs/index.js"></script>
 <link href="../../source/huati/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <link href="../../source/huati/css/style.css" type="text/css" rel="stylesheet">
 <style>

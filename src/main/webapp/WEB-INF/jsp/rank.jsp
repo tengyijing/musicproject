@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="../../source/css/index.css">
   <script src="../../source/js/jquery.min.js"></script>
   <script src="../../source/js/script.js"></script>
-<script src="../../source/js/index.js"></script>
+  <script src="/myjs/index.js"></script>
 <!-- 排行榜 -->
           
 <link rel="stylesheet" data-dist="true" href="../../source/content/css/lomegwdp.css"/>
