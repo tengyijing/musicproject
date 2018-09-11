@@ -4,7 +4,7 @@ import cn.qst.mapper.TbUserMapper;
 import cn.qst.pojo.TbUser;
 import cn.qst.pojo.TbUserExample;
 import cn.qst.pojo.TbUserExample.Criteria;
-import cn.qst.service.TbUserService;
+import cn.qst.service.UserService;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class UserServiceImpl implements TbUserService {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private TbUserMapper tbUserMapper;

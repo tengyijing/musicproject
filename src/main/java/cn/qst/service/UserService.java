@@ -5,7 +5,7 @@ package cn.qst.service;
  * @description:
  */
 
-public interface TbUserService {
+public interface UserService {
 	/**
 	 * 效验注册用户的用户名
 	 * 

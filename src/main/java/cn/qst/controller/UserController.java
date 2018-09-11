@@ -1,7 +1,7 @@
 package cn.qst.controller;
 
 import cn.qst.pojo.TbUser;
-import cn.qst.service.TbUserService;
+import cn.qst.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
 
 	@Autowired
-	private TbUserService tbUserService;
+	private UserService UserService;
 	
 	/**
 	 * 登陆，检查账号密码时候正确
@@ -60,7 +60,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/verifyUname", method = {RequestMethod.POST})
 	public Boolean verifyUname(String uname) {
-		return tbUserService.selectByUname(uname);
+		return UserService.selectByUname(uname);
 	}
 	
 	@ResponseBody
