@@ -228,6 +228,12 @@
 	
 	<!-- 应用jar包 -->
 	<dependencies>
+		<!-- 引入fastdfs的客户端 -->
+		<dependency>
+			<groupId>fastdfs_client</groupId>
+  			<artifactId>fastdfs_client</artifactId>
+ 			<version>1.25</version>
+		</dependency>
 		<!-- Apache工具组件 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>

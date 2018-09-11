@@ -68,5 +68,4 @@ public class AdminController {
 		list.add(mPList);
 		return list;
 	}
-
 }
