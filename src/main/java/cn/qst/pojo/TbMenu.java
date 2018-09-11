@@ -50,4 +50,10 @@ public class TbMenu {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+	@Override
+	public String toString() {
+		return "TbMenu [mid=" + mid + ", mname=" + mname + ", parentmid=" + parentmid + ", ename=" + ename + ", status="
+				+ status + "]";
+	}
 }

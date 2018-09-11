@@ -21,7 +21,7 @@
 <link href="/source/SearchMusic/css/qikoo.css" type="text/css" rel="stylesheet" />
 <script src="/source/SearchMusic/js/qikoo.js"></script>
 <script type="text/javascript">
-var id=1;
+var menuid=1;
 </script>
 </head>
 
