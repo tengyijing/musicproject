@@ -1,5 +1,6 @@
 package cn.qst.service.impl;
 
+import cn.qst.comman.utils.MD5Utils;
 import cn.qst.mapper.TbUserMapper;
 import cn.qst.pojo.TbUser;
 import cn.qst.pojo.TbUserExample;
@@ -66,4 +67,26 @@ public class UserServiceImpl implements UserService {
 		}
 		return true;
 	}
+
+	/**
+	 * 登陆，通过用户名查询信息
+	 * @param uname
+	 * @return 
+	 */
+	@Override
+	public TbUser login(String userName, String passWord) {
+		// TODO Auto-generated method stub
+	 	TbUser user = tbUserMapper.selectByUnameOrUname(userName);
+	 	if (user == null) {
+	 		return null;
+	 	} else {
+	 		if (user.getPassword().equals(MD5Utils.md5(passWord))) {
+	 			return user;
+	 		} else {
+	 			return null;
+	 		}
+	 	}
+	}
+	
+	
 }
