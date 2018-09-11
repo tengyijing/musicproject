@@ -40,4 +40,11 @@ public interface UserService {
 	 * @return
 	 */
 	Boolean regist(TbUser tbUser);
+	
+	/**
+	 * 登陆，通过用户名
+	 * @param uname
+	 * @return
+	 */
+	TbUser login(String userName, String passWord);
 }

@@ -14,6 +14,11 @@ public interface TbUserMapper {
 
     int insert(TbUser record);
 
+    /**
+     * 注册调用的方法
+     * @param record
+     * @return
+     */
     int insertSelective(TbUser record);
 
     List<TbUser> selectByExample(TbUserExample example);
@@ -51,4 +56,12 @@ public interface TbUserMapper {
      * @return 电话号码
      */
     String selectByPhone(String phone);
+    
+    /**
+     * 登陆，通过用户名进行登陆
+     * @param uname
+     * @return
+     */
+    TbUser selectByUnameOrUname(String uname);
+    
 }

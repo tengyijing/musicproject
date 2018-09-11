@@ -1,5 +1,6 @@
 package cn.qst.controller;
 
+import cn.qst.comman.utils.MD5Utils;
 import cn.qst.comman.utils.SendEmail;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.UserService;
@@ -10,6 +11,7 @@ import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -36,10 +38,16 @@ public class UserController {
 	 * @param tbUser
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/login", method = { RequestMethod.POST })
-	public String login(TbUser tbUser) {
-
-		return "redirect:index.jsp";
+	public Boolean login(String userName, String passWord, HttpSession session) {
+		TbUser user = userService.login(userName, passWord);
+		if (user != null) {
+			session.setAttribute("loginUser", user);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -52,6 +60,7 @@ public class UserController {
 	@RequestMapping(value = "/regist", method = { RequestMethod.POST })
 	public Boolean regist(TbUser user) {
 		user.setUid(UUID.randomUUID().toString().replace("-", "").toLowerCase());
+		user.setPassword(MD5Utils.md5(user.getPassword()));
 		user.setVip((byte) 0);
 		//图片的url地址，测试使用
 		user.setImage("default");

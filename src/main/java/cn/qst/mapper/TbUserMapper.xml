@@ -28,7 +28,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -60,7 +61,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -78,7 +80,8 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		uid, uname, password, email, phone, sex, VIP, address, image, status
+		uid, uname, password, email, phone, sex, VIP, address,
+		image, status
 	</sql>
 	<select id="selectByExample" resultMap="BaseResultMap"
 		parameterType="cn.qst.pojo.TbUserExample">
@@ -103,7 +106,8 @@
 		where uid = #{uid,jdbcType=CHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from tb_user
+		delete from
+		tb_user
 		where uid = #{uid,jdbcType=CHAR}
 	</delete>
 	<delete id="deleteByExample"
@@ -114,14 +118,18 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="cn.qst.pojo.TbUser">
-		insert into tb_user (uid, uname, password,
+		insert into tb_user (uid,
+		uname, password,
 		email, phone, sex, VIP,
 		address, image, status)
-		values (#{uid,jdbcType=CHAR}, #{uname,jdbcType=CHAR},
+		values
+		(#{uid,jdbcType=CHAR}, #{uname,jdbcType=CHAR},
 		#{password,jdbcType=CHAR},
-		#{email,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{sex,jdbcType=TINYINT},
+		#{email,jdbcType=CHAR},
+		#{phone,jdbcType=CHAR}, #{sex,jdbcType=TINYINT},
 		#{vip,jdbcType=TINYINT},
-		#{address,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
+		#{address,jdbcType=VARCHAR},
+		#{image,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
 	</insert>
 	<insert id="insertSelective" parameterType="cn.qst.pojo.TbUser">
 		insert into tb_user
@@ -239,15 +247,22 @@
 	<update id="updateByExample" parameterType="map">
 		update tb_user
 		set uid = #{record.uid,jdbcType=CHAR},
-		uname = #{record.uname,jdbcType=CHAR},
-		password = #{record.password,jdbcType=CHAR},
-		email = #{record.email,jdbcType=CHAR},
+		uname =
+		#{record.uname,jdbcType=CHAR},
+		password =
+		#{record.password,jdbcType=CHAR},
+		email =
+		#{record.email,jdbcType=CHAR},
 		phone = #{record.phone,jdbcType=CHAR},
 		sex = #{record.sex,jdbcType=TINYINT},
-		VIP = #{record.vip,jdbcType=TINYINT},
-		address = #{record.address,jdbcType=VARCHAR},
-		image = #{record.image,jdbcType=VARCHAR},
-		status = #{record.status,jdbcType=BIT}
+		VIP =
+		#{record.vip,jdbcType=TINYINT},
+		address =
+		#{record.address,jdbcType=VARCHAR},
+		image =
+		#{record.image,jdbcType=VARCHAR},
+		status =
+		#{record.status,jdbcType=BIT}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -294,11 +309,14 @@
 		email = #{email,jdbcType=CHAR},
 		phone = #{phone,jdbcType=CHAR},
 		sex = #{sex,jdbcType=TINYINT},
-		VIP = #{vip,jdbcType=TINYINT},
+		VIP =
+		#{vip,jdbcType=TINYINT},
 		address = #{address,jdbcType=VARCHAR},
-		image = #{image,jdbcType=VARCHAR},
+		image =
+		#{image,jdbcType=VARCHAR},
 		status = #{status,jdbcType=BIT}
-		where uid = #{uid,jdbcType=CHAR}
+		where uid =
+		#{uid,jdbcType=CHAR}
 	</update>
 
 	<select id="selectByUname" parameterType="java.lang.String"
@@ -316,4 +334,16 @@
 		select `phone` from `tb_user` where `phone` = #{value}
 	</select>
 
+	<select id="selectByUnameOrUname"
+		parameterType="java.lang.String" resultType="cn.qst.pojo.TbUser">
+		select `uname`,
+		`password`, `email`, `phone`, `sex`, `vip`, `address`, `image`,
+		`status`
+		from `tb_user` where `uname` = #{value}
+	</select>
+
 </mapper>
+
+
+
+
