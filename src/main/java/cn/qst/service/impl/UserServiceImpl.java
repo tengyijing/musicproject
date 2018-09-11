@@ -87,6 +87,18 @@ public class UserServiceImpl implements UserService {
 	 		}
 	 	}
 	}
+
+	/**
+	 * 根据用户名查找个人信息
+	 * @param uname 用户名
+	 * @return 封装了用户信息的TbUser对象
+	 */
+	@Override
+	public TbUser selectPersonalInfo(String uname) {
+		// TODO Auto-generated method stub
+		return tbUserMapper.selectByUnameOrUname(uname);
+	}
+	
 	
 	
 }

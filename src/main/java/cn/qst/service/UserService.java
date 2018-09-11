@@ -47,4 +47,11 @@ public interface UserService {
 	 * @return
 	 */
 	TbUser login(String userName, String passWord);
+	
+	/**
+	 * 查找登陆用户的个人信息，通过用户名
+	 * @param uname
+	 * @return
+	 */
+	TbUser selectPersonalInfo(String uname);
 }
