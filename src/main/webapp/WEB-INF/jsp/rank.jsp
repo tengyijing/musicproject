@@ -30,6 +30,9 @@ body::-webkit-scrollbar-track-piece{background-color:#ccc;}
 <!-- 提示框 -->
 <link href="../../source/SearchMusic/css/qikoo.css" type="text/css" rel="stylesheet" />
 <script src="../../source/SearchMusic/js/qikoo.js"></script>
+<script type="text/javascript">
+var id=${id}
+</script>
 </head>
 <body onload="getName('${username}');">
    <header class="header">
@@ -37,18 +40,8 @@ body::-webkit-scrollbar-track-piece{background-color:#ccc;}
             <div class="header-top">
         <a href="../../index.jsp" class="logo"></a>
         <nav class="header-nav">
-          <ul>
-            <li><a href="../../index.jsp" class="header-nav__cur">音乐基地</a></li>
-            <li><a href="myMusic.do">我的歌声</a></li>
-            <li><a href="playList.do?type=1" target='_new'>音乐盒</a></li>
-            <c:choose>
-        <c:when test="${username== null or username==''}">
-            <li onclick="userLogin2('${username}')"><a>唱聊IM</a></li>
-        </c:when>
-        <c:otherwise>
-         <li><a href="bin/chat.jsp">唱聊IM</a></li>
-        </c:otherwise>
-        </c:choose>
+          <ul id="toprank">
+            
            
           </ul>
         </nav>
@@ -111,13 +104,8 @@ body::-webkit-scrollbar-track-piece{background-color:#ccc;}
           <a href="regist.jsp" class="open-vip" id="reg">注册</a>
         </div>
       </div>
-      <ul class="header-subNav" style="margin-top:20px;">
-        <li><a href="../../index.jsp">首页</a></li>
-        <li><a href="recommendedSongs.do">个性推荐</a></li>
-        <li><a href="rank.do"  class="subNav-cur">排行榜</a></li>
-        <li><a href="musicClassify.jsp">音乐分类</a></li>
-        <li><a href="getDynamic.do">音乐圈</a></li>
-        <li><a href="huati.jsp">话题</a></li>
+      <ul class="header-subNav" style="margin-top:20px;" id="toprankChild">
+       
         
       </ul>
     </div>

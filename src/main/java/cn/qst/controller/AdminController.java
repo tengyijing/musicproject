@@ -3,16 +3,15 @@ package cn.qst.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.qst.comman.utils.JsonUtils;
+
 import cn.qst.pojo.TbMenu;
 import cn.qst.service.MenuService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * 管理员针对页面调整
@@ -29,7 +28,7 @@ public class AdminController {
 
 	
 	/**
-	 * 传不同的页面到前台
+	 * 根据不同的页面返回相应的菜单
 	 * @param id 通过id来得到当前跳转页面的菜单属性
 	 * @return 返回一个json数据到前台页面
 	 */
@@ -37,7 +36,6 @@ public class AdminController {
 	@RequestMapping("/queryAll")
 	public List<Object> queryAll(Integer id) {
 		List<TbMenu> tbMenus = menuService.queryAll();
-		tbMenus.forEach(name -> System.out.println(name));
 		List<TbMenu> mPList = new ArrayList<>();
 		// 查询所有一级菜单
 		for (TbMenu tbMenu : tbMenus) {

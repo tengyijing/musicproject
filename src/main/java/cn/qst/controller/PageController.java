@@ -1,5 +1,7 @@
 package cn.qst.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +21,8 @@ public class PageController {
 	
 	//页面跳转
 	@RequestMapping("/{page}")
-	public String pageJsp(String page) {
+	public String pageJsp(String page,Integer id,Map<String, Object>map) {
+		map.put("id", id);
 		return page;
 	}
 }
