@@ -13,7 +13,7 @@ public class TbMusiclist {
 
     private Integer musicsum;
 
-    private Integer image;
+    private String image;
 
     private String uid;
 
@@ -57,12 +57,12 @@ public class TbMusiclist {
         this.musicsum = musicsum;
     }
 
-    public Integer getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Integer image) {
-        this.image = image;
+    public void setImage(String image) {
+        this.image = image == null ? null : image.trim();
     }
 
     public String getUid() {

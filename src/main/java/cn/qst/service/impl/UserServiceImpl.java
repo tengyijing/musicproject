@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * 登陆，通过用户名查询信息
-	 * @param uname
+	 *
 	 * @return 
 	 */
 	@Override

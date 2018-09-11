@@ -69,8 +69,7 @@ var type = '${type}';
 						</a></li>
 					</ul>
 					<div class="collectOut">
-						<span class="colS">创建的歌单</span> <a href="#" class="colA"
-							onclick="payment();"></a>
+						<span class="colS">创建的歌单</span> <a class="colA" onclick="payment();"></a>
 						<div class="col" style="margin-left: -60px; width: 180px;">
 							<ul class="menuUL2">
 							<c:forEach items="${musicList}" var="music" varStatus="index1">
@@ -78,7 +77,7 @@ var type = '${type}';
 								<div  class="beijing hp" single2="${music.name }">
 								 <i class="icon isplay2"></i>
 								 <a href="/play?type=${music.mlid }"style="color:black; background-color:transparent;">${music.name }</a>
-								 <i class="cicon dele2" single3="${music.name }" delNo="${index1.index}"></i>
+								 <i class="cicon dele2" single3="${music.mlid }" delNo="${index1.index}"></i>
 								 </div>
 								</li>
 							</c:forEach>
@@ -86,7 +85,7 @@ var type = '${type}';
 						</div>
 					</div>
 
-					<audio id="audio" src="songs/1.mp3"></audio>
+					<audio id="audio" src="http://other.web.nf01.sycdn.kuwo.cn/resource/n3/84/59/1143440808.mp3"></audio>
 				</div>
 				<div class="mainBody">
 					<div class="playHd">
@@ -102,22 +101,24 @@ var type = '${type}';
 							<!-- <div class="scroll"></div> -->
 							<ul class="songUL">
 							<c:forEach items="${songs}" var="music" varStatus="index">
-								<li class="songList" ListName="${music.id}">
+								<li class="songList" ListName="${music.mid}">
 									<div class="songLMain">
 										<div class="check">
-											<input class="checkIn" name="choose" type="checkbox" select="0" value="${music.id}">
+											<input class="checkIn" name="choose" type="checkbox" select="0" value="${music.mid}">
 										</div>
 										<div class="start">
-											<em sonN="${music.id}" ListId="${index.index}"><input type="text" style="display:none;" name="son" value="${music.id}">${index.index+1}</em>
+											<em sonN="${music.mid}" musicUrl="${music.fileurl}" ListId="${index.index}"><input type="text" style="display:none;" name="son" value="${music.mid}">${index.index+1}</em>
 										</div>
 										<div class="songBd">
-											<div class="col colsn">${music.musicName}</div>
-											<div class="col colcn">${music.singer}</div>
-											<div class="col">${music.special}</div>
+											<div class="col colsn">${music.mname}</div>
+											<div class="col colcn">${music.sname}</div>
+											<%-- <div class="col">${music.special}</div> --%>
+											<div class="col">待添加</div>
 										</div>
 										<div class="control" hp="123">
 										    <c:choose>
-                                            <c:when test="${music.love==1}">
+                                            <%-- <c:when test="${music.love==1}"> --%>
+                                            <c:when test="${music.isdownload==true}">
                                             <a class="cicon love" style="background-position:0 -131px" loveN="1"></a> 
                                             </c:when>
                                             <c:otherwise>

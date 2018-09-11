@@ -452,52 +452,62 @@ public class TbMusiclistExample {
             return (Criteria) this;
         }
 
-        public Criteria andImageEqualTo(Integer value) {
+        public Criteria andImageEqualTo(String value) {
             addCriterion("image =", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImageNotEqualTo(Integer value) {
+        public Criteria andImageNotEqualTo(String value) {
             addCriterion("image <>", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImageGreaterThan(Integer value) {
+        public Criteria andImageGreaterThan(String value) {
             addCriterion("image >", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImageGreaterThanOrEqualTo(Integer value) {
+        public Criteria andImageGreaterThanOrEqualTo(String value) {
             addCriterion("image >=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImageLessThan(Integer value) {
+        public Criteria andImageLessThan(String value) {
             addCriterion("image <", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImageLessThanOrEqualTo(Integer value) {
+        public Criteria andImageLessThanOrEqualTo(String value) {
             addCriterion("image <=", value, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImageIn(List<Integer> values) {
+        public Criteria andImageLike(String value) {
+            addCriterion("image like", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageNotLike(String value) {
+            addCriterion("image not like", value, "image");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageIn(List<String> values) {
             addCriterion("image in", values, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImageNotIn(List<Integer> values) {
+        public Criteria andImageNotIn(List<String> values) {
             addCriterion("image not in", values, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImageBetween(Integer value1, Integer value2) {
+        public Criteria andImageBetween(String value1, String value2) {
             addCriterion("image between", value1, value2, "image");
             return (Criteria) this;
         }
 
-        public Criteria andImageNotBetween(Integer value1, Integer value2) {
+        public Criteria andImageNotBetween(String value1, String value2) {
             addCriterion("image not between", value1, value2, "image");
             return (Criteria) this;
         }
