@@ -7,14 +7,10 @@ import cn.qst.service.UserService;
 
 import java.util.UUID;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,8 +30,7 @@ public class UserController {
 
 	/**
 	 * 登陆，检查账号密码时候正确
-	 * 
-	 * @param tbUser
+	 *
 	 * @return
 	 */
 	@ResponseBody
@@ -43,7 +38,8 @@ public class UserController {
 	public Boolean login(String userName, String passWord, HttpSession session) {
 		TbUser user = userService.login(userName, passWord);
 		if (user != null) {
-			session.setAttribute("loginUser", user);
+//			session.setAttribute("loginUser", user);
+			session.setAttribute("username", user.getUname());
 			return true;
 		} else {
 			return false;
@@ -62,8 +58,8 @@ public class UserController {
 		user.setUid(UUID.randomUUID().toString().replace("-", "").toLowerCase());
 		user.setPassword(MD5Utils.md5(user.getPassword()));
 		user.setVip((byte) 0);
-		//图片的url地址，测试使用
-		user.setImage("default");
+		//图片的url地址，测试使用 <img src="/source/images/headPhoto/default.jpeg"/>
+		user.setImage("default.jpeg");
 		user.setStatus(true);
 		return userService.regist(user);
 	}
