@@ -2,12 +2,18 @@ package cn.qst.comman.utils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import info.monitorenter.cpdetector.io.ASCIIDetector;
+import info.monitorenter.cpdetector.io.CodepageDetectorProxy;
+import info.monitorenter.cpdetector.io.JChardetFacade;
+import info.monitorenter.cpdetector.io.UnicodeDetector;
 
 public class DownloadLyric {
 	private static HttpRequest request = new HttpRequest();
@@ -108,6 +114,36 @@ public class DownloadLyric {
 			return null;
 		}
 		return null;
+	}
+
+	public static String download(String url) {
+		try {
+			StringBuffer strBuff = new StringBuffer();
+			CodepageDetectorProxy detector = CodepageDetectorProxy.getInstance();
+			//JChardetFacade封装了由Mozilla组织提供的JChardet，它可以完成大多数文件的编码测定
+			detector.add(JChardetFacade.getInstance());
+			// ASCIIDetector用于ASCII编码测定
+			detector.add(ASCIIDetector.getInstance());
+			// UnicodeDetector用于Unicode家族编码的测定
+			detector.add(UnicodeDetector.getInstance());
+			Charset charset = null;
+			URL urlTmp = new URL(url);
+			charset = detector.detectCodepage(urlTmp);
+			detector = null;
+			String charsetName = charset.name();
+			charset = null;
+			HttpResponse response = request.sendGet(url,charsetName);
+			Vector<String> contentVector = response.getContentCollection();
+			response = null;
+			for (Iterator<String> iterator = contentVector.iterator(); iterator.hasNext();) {
+				String string = iterator.next();
+				strBuff.append(string+"\n");
+			}
+			return strBuff.toString();
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 	
 }

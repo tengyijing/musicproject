@@ -102,8 +102,8 @@ public class PlayMusicCotroller {
 			res.put("lrc", lrc);
 			return JsonUtils.objectToJson(res);
 		} else { // 含有url地址
-			// 读取url地址，返回字符串
-			String lrc = "";
+			// 读取url地址，返回字符串	
+			String lrc = DownloadLyric.download(url);
 			Map<String, Object> res = new HashMap<String, Object>();
 			res.put("lrc", lrc);
 			return JsonUtils.objectToJson(res);
