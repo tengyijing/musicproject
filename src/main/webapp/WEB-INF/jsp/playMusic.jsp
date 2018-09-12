@@ -229,11 +229,11 @@ var type = '${type}';
 					</div>
 				</div>
 				<div class="vol">
-					<a href="#" class="pinBtn" onclick="pinBtnchange()"></a>
+					<a class="pinBtn" onclick="pinBtnchange()"></a>
 					<div class="volm">
 						<a class="volSpeaker" onclick="volSpeakerchange()"></a>
 						<div class="volControl">
-							<a href="#" class="dian2"></a>
+							<a class="dian2"></a>
 						</div>
 					</div>
 				</div>

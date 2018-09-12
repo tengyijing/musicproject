@@ -50,7 +50,7 @@ function userLogin(username) {
 			$.ajax({
 			    url : "/addMusicList", 
 				type: "post", 
-				async:false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
+				async:true,
 				contentType:"application/x-www-form-urlencoded",
 				data: {musicListName:musicListName,
 					   s:"w",
@@ -179,32 +179,32 @@ function userLogin(username) {
 		var flag3 = false;
 		function pinBtnchange(){
 			if(flag3){
-			$(".pinBtn").removeClass('changeBg');
-			$(".mainBody").show();
-			$(".leftBar").show();
-			$(".mainOuther").removeClass('mainOuther2');
-			$(".albumCover").removeClass('albumCover2');
-			$(".canvas1").removeClass('canvas12');
-			$(".albumSale").removeClass('albumSale2');
-			$(".lyr").css("font-size","12px");
-			$(".lyr").css("line-height","normal");
-			$(".lyr").css("color","black");
-			$(".middle").css("background-color","#fff");
-			$(".middle").removeClass('bg');
-			flag3=false;
-			}else{
-			$(".pinBtn").addClass('changeBg');
-			$(".mainBody").hide();
-			$(".leftBar").hide();
-			$(".mainOuther").addClass('mainOuther2');
-			$(".albumCover").addClass('albumCover2');
-			$(".canvas1").addClass('canvas12');
-			$(".albumSale").addClass('albumSale2');
-			$(".lyr").css("font-size","18px");
-			$(".lyr").css("line-height","26px");
-		    $(".lyr").css("color","#fff");
-			$(".middle").addClass('bg');
-			flag3=true;
+				$(".pinBtn").removeClass('changeBg');
+				$(".mainBody").show();
+				$(".leftBar").show();
+				$(".mainOuther").removeClass('mainOuther2');
+				$(".albumCover").removeClass('albumCover2');
+				$(".canvas1").removeClass('canvas12');
+				$(".albumSale").removeClass('albumSale2');
+				$(".lyr").css("font-size","12px");
+				$(".lyr").css("line-height","normal");
+				$(".lyr").css("color","black");
+				$(".middle").css("background-color","#fff");
+				$(".middle").removeClass('bg');
+				flag3=false;
+			} else {
+				$(".pinBtn").addClass('changeBg');
+				$(".mainBody").hide();
+				$(".leftBar").hide();
+				$(".mainOuther").addClass('mainOuther2');
+				$(".albumCover").addClass('albumCover2');
+				$(".canvas1").addClass('canvas12');
+				$(".albumSale").addClass('albumSale2');
+				$(".lyr").css("font-size","18px");
+				$(".lyr").css("line-height","26px");
+			    $(".lyr").css("color","#fff");
+				$(".middle").addClass('bg');
+				flag3=true;
 			}
 		}
 
@@ -302,9 +302,6 @@ $(function(){
 			//删除我喜爱音乐的歌曲
 		    qikoo.dialog2.confirm('确定要将歌曲从我喜欢的音乐删除吗？',function(){
 		    moveMusic(sid,3) //从我喜爱的音乐列表中删除
-//			if(type==3){
-//				window.location.reload();
-//		    }
 		    $(i).css("background-position","-28px -130px");
 		    $(i).attr("loveN","0");
 		    if(sid==singID){
@@ -330,7 +327,6 @@ $(function(){
 	$(".dele").click(function(){
 		var sid=$(this).parent().parent().find(".start em").attr("sonN");
 		var ListId=$(this).parent().parent().find(".start em").text()-1;
-			//$(this).parent().parent().find(".start em").attr("ListId");
 		qikoo.dialog2.confirm('确定要将歌曲从当前列表删除吗？',function(){
 			
 		$(".songUL li:eq("+ListId+")").remove();
@@ -879,7 +875,7 @@ function getReady(src, mname, sname)//在显示歌词前做好准备工作
 	sortAr();
 	scrollBar(); 
 }
-function sToArray(str)//解析如“[02:02][00:24]没想到是你”的字符串前放入数组
+function sToArray(str)
 {  
 	
    var left=0;//"["的个数
@@ -893,7 +889,7 @@ function sToArray(str)//解析如“[02:02][00:24]没想到是你”的字符串
       for(var i=0;i<leftAr.length;i++) 
       {  
          lytext[tflag]=str.substring(str.lastIndexOf("]")+1);//放歌词 
-         lytime[tflag]=conSeconds(str.substring(leftAr[i]+1,leftAr[i]+6));//放时间
+         lytime[tflag]=conSeconds(str.substring(leftAr[i]+1,leftAr[i]+9));//放时间
          tflag++; 
       } 
    } 
@@ -907,9 +903,8 @@ function conSeconds(t)//把形如：01：25的时间转化成秒；
    var m=t.substring(0,t.indexOf(":")); 
    var s=t.substring(t.indexOf(":")+1); 
    m=parseInt(m.replace(/0/,""));
-   var totalt=parseInt(m)*60+parseInt(s); 
-  
-	return totalt; 
+   var totalt=parseInt(m)*60+parseFloat(s); 
+   return totalt; 
 } 
 
 function mPlay()//开始播放
