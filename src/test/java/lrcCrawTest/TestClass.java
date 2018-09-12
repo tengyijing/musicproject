@@ -8,6 +8,7 @@ public class TestClass {
 	
 	@Test
 	public void test01() {
-		DownloadLyric.startDownload("浪人琵琶", "胡66");
+		String temp = DownloadLyric.startDownload("消愁", "毛不易");
+		System.out.println(temp);
 	}
 }

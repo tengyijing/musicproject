@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.qst.comman.utils.DownloadLyric;
 import cn.qst.comman.utils.JsonUtils;
 import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbMusiclist;
@@ -67,7 +68,7 @@ public class PlayMusicCotroller {
 		
 		return "playMusic";
 	}
-	
+
 	// 音乐播放
 	public String playMusic(ModelMap map, int mid) {
 		/*
@@ -88,17 +89,21 @@ public class PlayMusicCotroller {
 	}
 	
 	// 歌词获取
+	@RequestMapping(value = "/getLy", method = { RequestMethod.POST })
+	@ResponseBody
 	public String getLrc(String url, String songName, String singerName) {
 		/*
 		 * 传入url，如果有url就直接获取url的内容
 		 * 如果没有url，则从网络中抓取相关歌词
 		 */
 		if( url == null || "".equals(url.trim()) ) {// 没有url信息
-			
+			String lrc = DownloadLyric.startDownload(songName, singerName);
+			Map<String, Object> res = new HashMap<String, Object>();
+			res.put("lrc", lrc);
+			return JsonUtils.objectToJson(res);
 		} else { // 含有url地址
-			
+			return null;
 		}
-		return null;
 	}
 	
 	// 歌单创建请求

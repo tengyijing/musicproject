@@ -10,7 +10,14 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 	<!-- 配置注解驱动 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<!-- 消息转换器,解决responseBody返回中外乱码问题 -->
+	   <mvc:message-converters register-defaults="true">
+	      <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+	         <property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+	      </bean>
+	   </mvc:message-converters>
+	</mvc:annotation-driven>
 	<!-- 加载文件服务器的配置文件 -->
 	<context:property-placeholder location="classpath:fastdfs/resource.properties"/>
 	<!-- 定义文件上传解析器 -->

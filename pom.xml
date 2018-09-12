@@ -364,10 +364,79 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		
+		<!--  第三方jar包加载  -->
+		<dependency> 
+			<groupId>cn.aelfred</groupId>  
+			<artifactId>aelfred</artifactId>  
+			<version>1.2</version>  
+			<scope>system</scope>  
+			<systemPath>${project.basedir}/src/main/resources/lib/aelfred-1.2.jar</systemPath>
+		</dependency>
+		<dependency> 
+			<groupId>cn.chardet</groupId>  
+			<artifactId>chardet</artifactId>  
+			<version>1.0</version>  
+			<scope>system</scope>  
+			<systemPath>${project.basedir}/src/main/resources/lib/chardet-1.0.jar</systemPath>
+		</dependency>
+		<dependency> 
+			<groupId>cn.cpdetector</groupId>  
+			<artifactId>cpdetector</artifactId>  
+			<version>1.0.8</version>  
+			<scope>system</scope>  
+			<systemPath>${project.basedir}/src/main/resources/lib/cpdetector_1.0.8.jar</systemPath>
+		</dependency>
+		<dependency> 
+			<groupId>cn.httpclient</groupId>  
+			<artifactId>httpclient</artifactId>  
+			<version>4.2.5</version>  
+			<scope>system</scope>  
+			<systemPath>${project.basedir}/src/main/resources/lib/httpclient-4.2.5.jar</systemPath>
+		</dependency>
+		<dependency> 
+			<groupId>cn.httpclient-cache</groupId>  
+			<artifactId>httpclient-cache</artifactId>  
+			<version>4.2.5</version>  
+			<scope>system</scope>  
+			<systemPath>${project.basedir}/src/main/resources/lib/httpclient-cache-4.2.5.jar</systemPath>
+		</dependency>
+		<dependency> 
+			<groupId>cn.httpcore</groupId>  
+			<artifactId>httpcore</artifactId>  
+			<version>4.2.5</version>  
+			<scope>system</scope>  
+			<systemPath>${project.basedir}/src/main/resources/lib/httpcore-4.2.4.jar</systemPath>
+		</dependency>
+		<dependency> 
+			<groupId>cn.httpmime</groupId>  
+			<artifactId>httpmime</artifactId>  
+			<version>4.2.5</version>  
+			<scope>system</scope>  
+			<systemPath>${project.basedir}/src/main/resources/lib/httpmime-4.2.5.jar</systemPath>
+		</dependency>
+		
+		
 	</dependencies>
 	<!-- 插件配置 -->
 	<build>
 		<plugins>
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-war-plugin</artifactId>
+		        <configuration>
+		            <webResources>
+		                <resource>
+		                    <directory>src/main/resources/lib</directory>
+		                    <targetPath>WEB-INF/lib/</targetPath>
+		                    <includes>
+		                        <include>**/*.jar</include>
+		                    </includes>
+		                </resource>
+		            </webResources>
+		        </configuration>
+			</plugin>
 			<!-- java编译插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -389,22 +458,6 @@
 					<port>8080</port>
 				</configuration>
 			</plugin>
-			
-			<plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-war-plugin</artifactId>
-		        <configuration>
-		            <webResources>
-		                <resource>
-		                    <directory>src/main/resources/lib</directory>
-		                    <targetPath>WEB-INF/lib/</targetPath>
-		                    <includes>
-		                        <include>**/*.jar</include>
-		                    </includes>
-		                </resource>
-		            </webResources>
-		        </configuration>
-		</plugin>
 		</plugins>
 	</build>
 </project>
