@@ -107,7 +107,7 @@ var type = '${type}';
 											<input class="checkIn" name="choose" type="checkbox" select="0" value="${music.mid}">
 										</div>
 										<div class="start">
-											<em sonN="${music.mid}" musicUrl="${music.fileurl}" ListId="${index.index}"><input type="text" style="display:none;" name="son" value="${music.mid}">${index.index+1}</em>
+											<em sonN="${music.mid}" lrc="${music.lyricsurl}" musicUrl="${music.fileurl}" imgurl="${music.image }" ListId="${index.index}"><input type="text" style="display:none;" name="son" value="${music.mid}">${index.index+1}</em>
 										</div>
 										<div class="songBd">
 											<div class="col colsn">${music.mname}</div>
@@ -186,8 +186,8 @@ var type = '${type}';
 				</div>
 				<div class="mainOuther">
 					<div class="albumCover">
-						<a href="#"> <img src="../../source/playmusic/images/2.jpg" width="200" height="200" id="canvas1"
-                                          class="canvas1">
+						<a href="#">
+							<img src="source/playmusic/images/2.jpg" width="200" height="200" id="canvas1" class="canvas1">
 						</a>
 					</div>
 					<div class="albumSale"></div>
@@ -229,11 +229,11 @@ var type = '${type}';
 					</div>
 				</div>
 				<div class="vol">
-					<a href="#" class="pinBtn" onclick="pinBtnchange()"></a>
+					<a class="pinBtn" onclick="pinBtnchange()"></a>
 					<div class="volm">
 						<a class="volSpeaker" onclick="volSpeakerchange()"></a>
 						<div class="volControl">
-							<a href="#" class="dian2"></a>
+							<a class="dian2"></a>
 						</div>
 					</div>
 				</div>

@@ -31,20 +31,17 @@
 	         <tr>
 	            <td>歌词文件:</td>
 	            <td>
-	               <a href="javascript:void(0)" class="easyui-linkbutton lyricsurlFileUpload">上传歌词资源文件</a>
+	               <a href="javascript:void(0)" class="easyui-linkbutton lyricsFileUpload">上传歌词资源文件</a>
 	                 <input type="text" name="lyricsurl" id="lyricsurl"/>
 	            </td>
 	        </tr>
 	    </table>
-	    <input type="hidden" name="itemParams"/>
-	    <input type="hidden" name="itemParamId"/>
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
 	</div>
 </div>
 <script type="text/javascript">
-	var itemEditEditor ;
 	$(function(){
 		//实例化编辑器
 		itemEditEditor = TAOTAO.createEditor("#itemeEditForm [name=desc]");
@@ -55,33 +52,9 @@
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		$("#itemeEditForm [name=price]").val(eval($("#itemeEditForm [name=priceView]").val()) * 1000);
-		itemEditEditor.sync();
-		
-		var paramJson = [];
-		$("#itemeEditForm .params li").each(function(i,e){
-			var trs = $(e).find("tr");
-			var group = trs.eq(0).text();
-			var ps = [];
-			for(var i = 1;i<trs.length;i++){
-				var tr = trs.eq(i);
-				ps.push({
-					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
-					"v" : $.trim(tr.find("input").val())
-				});
-			}
-			paramJson.push({
-				"group" : group,
-				"params": ps
-			});
-		});
-		paramJson = JSON.stringify(paramJson);
-		
-		$("#itemeEditForm [name=itemParams]").val(paramJson);
-		
-		$.post("/rest/item/update",$("#itemeEditForm").serialize(), function(data){
+		$.post("/music/update",$("#itemeEditForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','修改商品成功!','info',function(){
+				$.messager.alert('提示','修改音乐成功!','info',function(){
 					$("#itemEditWindow").window('close');
 					$("#itemList").datagrid("reload");
 				});

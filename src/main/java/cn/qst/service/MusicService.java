@@ -26,5 +26,11 @@ public interface MusicService {
 	// 从歌单中删除音乐
 	boolean deleteMusicFromMusicList(int mlid, int mid);
 	//查询所有音乐并分页显示
-	EasyUiDataGridResult fundMusicAll(int page , int rows);
+	EasyUiDataGridResult fundMusicAll(int page , int rows , TbMusic music);
+	//修改音乐
+	AdminResult updateMusic(TbMusic music);
+	//删除音乐
+	AdminResult deleteMusic(List<Integer> idList);
+	//修改音乐的上线下线状态
+	AdminResult updateMusicStatus(List<Integer> idList , boolean status);
 }

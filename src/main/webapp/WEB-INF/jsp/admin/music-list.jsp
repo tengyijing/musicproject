@@ -14,6 +14,8 @@
 </table>
 <div id="itemEditWindow" class="easyui-window" title="编辑音乐" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/admin/music-edit'" style="width:80%;height:80%;padding:10px;">
 </div>
+<div id="itemsearchWindow" class="easyui-window" title="搜索音乐" data-options="modal:true,closed:true,iconCls:'icon-search',href:'/admin/music-search'" style="width:40%;height:40%;padding:5px;">
+</div>
 <script>
 
     function getSelectionsIds(){
@@ -23,6 +25,7 @@
     	for(var i in sels){
     		ids.push(sels[i].mid);
     	}
+    	ids = ids.join(",");
     	return ids;
     }
     
@@ -30,7 +33,7 @@
         text:'新增',
         iconCls:'icon-add',
         handler:function(){
-        	$(".tree-title:contains('新增商品')").parent().click();
+        	$(".tree-title:contains('新增音乐')").parent().click();
         }
     },{
         text:'编辑',
@@ -38,11 +41,11 @@
         handler:function(){
         	var ids = getSelectionsIds();
         	if(ids.length == 0){
-        		$.messager.alert('提示','必须选择一个商品才能编辑!');
+        		$.messager.alert('提示','必须选择一首音乐才能编辑!');
         		return ;
         	}
         	if(ids.indexOf(',') > 0){
-        		$.messager.alert('提示','只能选择一个商品!');
+        		$.messager.alert('提示','只能选择一首商品!');
         		return ;
         	}
         	
@@ -64,15 +67,15 @@
         handler:function(){
         	var ids = getSelectionsIds();
         	if(ids.length == 0){
-        		$.messager.alert('提示','未选中商品!');
+        		$.messager.alert('提示','未选中音乐!');
         		return ;
         	}
-        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品吗？',function(r){
+        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的音乐吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/rest/item/delete",params, function(data){
+                	$.post("/music/delete",params, function(data){
             			if(data.status == 200){
-            				$.messager.alert('提示','删除商品成功!',undefined,function(){
+            				$.messager.alert('提示','删除音乐成功!',undefined,function(){
             					$("#itemList").datagrid("reload");
             				});
             			}
@@ -81,20 +84,20 @@
         	});
         }
     },'-',{
-        text:'下架',
+        text:'下线',
         iconCls:'icon-remove',
         handler:function(){
         	var ids = getSelectionsIds();
         	if(ids.length == 0){
-        		$.messager.alert('提示','未选中商品!');
+        		$.messager.alert('提示','未选中音乐!');
         		return ;
         	}
-        	$.messager.confirm('确认','确定下架ID为 '+ids+' 的商品吗？',function(r){
+        	$.messager.confirm('确认','确定下线ID为 '+ids+' 的音乐吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/rest/item/instock",params, function(data){
+                	$.post("/item/instock",params, function(data){
             			if(data.status == 200){
-            				$.messager.alert('提示','下架商品成功!',undefined,function(){
+            				$.messager.alert('提示','下线音乐成功!',undefined,function(){
             					$("#itemList").datagrid("reload");
             				});
             			}
@@ -103,20 +106,20 @@
         	});
         }
     },{
-        text:'上架',
+        text:'上线',
         iconCls:'icon-remove',
         handler:function(){
         	var ids = getSelectionsIds();
         	if(ids.length == 0){
-        		$.messager.alert('提示','未选中商品!');
+        		$.messager.alert('提示','未选中音乐!');
         		return ;
         	}
-        	$.messager.confirm('确认','确定上架ID为 '+ids+' 的商品吗？',function(r){
+        	$.messager.confirm('确认','确定上线ID为 '+ids+' 的音乐吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/rest/item/reshelf",params, function(data){
+                	$.post("/music/reshelf",params, function(data){
             			if(data.status == 200){
-            				$.messager.alert('提示','上架商品成功!',undefined,function(){
+            				$.messager.alert('提示','上线成功!',undefined,function(){
             					$("#itemList").datagrid("reload");
             				});
             			}
@@ -124,5 +127,16 @@
         	    }
         	});
         }
+    },'-',{
+    	 id:'search', 
+         text:'搜索', 
+         iconCls:'icon-search',
+         handler:function(){
+        	 $("#itemsearchWindow").window({
+          		onLoad :function(){
+          			
+          		}
+          	}).window("open")
+         }
     }];
 </script>

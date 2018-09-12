@@ -24,7 +24,15 @@
 	            <td>音乐文件:</td>
 	            <td>
 	               <a href="javascript:void(0)" class="easyui-linkbutton musicFileUpload">上传资源文件</a>
-	                 <input type="text" name="fileurl" id="fileurl"/>
+	                 <input type="text"  name="fileurl" id="fileurl"/>
+	            </td>
+	        </tr>
+	        
+	        <tr>
+	            <td>歌词文件:</td>
+	            <td>
+	               <a href="javascript:void(0)" class="easyui-linkbutton lyricsFileUpload">上传资源文件</a>
+	                 <input type="text"  name="lyricsurl" id="lyricsurl"/>
 	            </td>
 	        </tr>
 	    </table>
