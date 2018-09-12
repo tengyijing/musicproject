@@ -20,6 +20,8 @@ import info.monitorenter.cpdetector.io.CodepageDetectorProxy;
 import info.monitorenter.cpdetector.io.JChardetFacade;
 import info.monitorenter.cpdetector.io.UnicodeDetector;
 
+
+// 待完善
 public class DownloadLyric {
 	private static HttpRequest request = new HttpRequest();
 	public final static String LRC_EXT = ".lrc";
