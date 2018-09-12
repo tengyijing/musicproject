@@ -44,9 +44,9 @@ var TT = TAOTAO = {
 	// 格式化商品的状态
 	formatItemStatus : function formatStatus(val,row){
         if (val == 1){
-            return '正常';
-        } else if(val == 0){
-        	return '<span style="color:red;">下架</span>';
+            return '上线';
+        } else{
+        	return '<span style="color:red;">下线</span>';
         } 
     },
     
@@ -211,6 +211,19 @@ var TT = TAOTAO = {
 					showRemote : false,
 					clickFn : function(url) {
 						$("#fileurl").val(url);
+						this.hideDialog();
+					}
+				});
+			});
+		});
+    	
+    	$(".lyricsFileUpload").click(function(){
+			var _self = $(this);
+			KindEditor.editor(TT.kingEditorParams).loadPlugin('image', function() {
+				this.plugin.imageDialog({
+					showRemote : false,
+					clickFn : function(url) {
+						$("#lyricsurl").val(url);
 						this.hideDialog();
 					}
 				});

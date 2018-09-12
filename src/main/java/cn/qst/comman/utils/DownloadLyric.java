@@ -17,7 +17,7 @@ import info.monitorenter.cpdetector.io.UnicodeDetector;
 
 public class DownloadLyric {
 	private static HttpRequest request = new HttpRequest();
-	public final static String LRC_EXT = ".lrc";
+	public final static String LRC_EXT = "lrc";
 	public final static String BASE_URL="http://www.90lrc.cn";
 	
 	

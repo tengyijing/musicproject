@@ -1,5 +1,10 @@
 package cn.qst.comman.fastdfs;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUploadUtils {
@@ -15,5 +20,20 @@ public class FileUploadUtils {
 		//上传文件 返回一个图片路径(不带服务器的ip地址)
 		String path = fastDFSClient.uploadFile(uploadFile.getBytes(), extName);
 		return path;
+	}
+	
+	//文件上传
+	public static String fileUpload2(String str , String extName) {
+		try {
+			//通过图片服务器的配置文件初始化文件上传客户端
+			FastDFSClient fastDFSClient = new FastDFSClient("classpath:fastdfs/client.conf");
+			//上传文件 返回一个图片路径(不带服务器的ip地址)
+			String path = fastDFSClient.uploadFile(str.getBytes(),extName);
+			return path;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

@@ -8,13 +8,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.qst.comman.fastdfs.FileUploadUtils;
 import cn.qst.comman.utils.DownloadLyric;
 import cn.qst.comman.utils.JsonUtils;
 import cn.qst.pojo.TbMusic;
@@ -38,6 +41,9 @@ public class PlayMusicCotroller {
 	@Autowired
 	private MusicService musicService;
 	private List<TbMusic> historyList;
+	//上传文件的url地址
+	@Value("${IMAGE_SERVER_URL}")
+	private String IMAGE_SERVER_URL;
 	
 	// 跳转到音乐播放
 	@RequestMapping("/play")
@@ -91,13 +97,19 @@ public class PlayMusicCotroller {
 	// 歌词获取
 	@RequestMapping(value = "/getLy", method = { RequestMethod.POST })
 	@ResponseBody
-	public String getLrc(String url, String songName, String singerName, String id) {
+	public String getLrc(String url, String songName, String singerName, int id) {
 		/*
 		 * 传入url，如果有url就直接获取url的内容
 		 * 如果没有url，则从网络中抓取相关歌词
 		 */
 		if( url == null || "".equals(url.trim()) ) {// 没有url信息
 			String lrc = DownloadLyric.startDownload(songName, singerName);
+			String path = IMAGE_SERVER_URL+FileUploadUtils.fileUpload2(lrc, DownloadLyric.LRC_EXT);
+			//将歌词文件路径添加到对应的音乐
+			TbMusic music = new TbMusic();
+			music.setMid(id);
+			music.setLyricsurl(path);
+			musicService.updateMusic(music );
 			Map<String, Object> res = new HashMap<String, Object>();
 			res.put("lrc", lrc);
 			return JsonUtils.objectToJson(res);
