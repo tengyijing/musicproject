@@ -580,7 +580,7 @@ $(function(){
 		singerName2 =$(this).parent().parent().find(".colcn").html();//获取歌手名称
 		/*播放歌词*/
 		var lrcUrl = $(this).attr("lrc");
-		getReady(lrcUrl, songName2, singerName2);//准备播放
+		getReady(lrcUrl, songName2, singerName2, sid);//准备播放
 		mPlay();//显示歌词
 		//对audio元素监听pause事件
 		/*外观改变*/
@@ -801,7 +801,7 @@ var lytext=new Array();//放存汉字的歌词
 var lytime=new Array();//存放时间
 var delay=10; var line=0; var scrollh=0; 
 var songIndex=2;
-function getLy(src, mname, sname)//取得歌词 
+function getLy(src, mname, sname, mid)//取得歌词 
 { 	
 	var ly="";
 	$.ajax({
@@ -812,7 +812,8 @@ function getLy(src, mname, sname)//取得歌词
 		data: {
 			url:src,
 			songName:mname,
-			singerName:sname
+			singerName:sname,
+			id:mid,
         },
 		success: function(data){
 			if( typeof data == "string" ) data = JSON.parse(data);
@@ -852,9 +853,9 @@ function scrollBar()//设置滚动条的滚动
          document.getElementById("lyr").scrollTop-=1; 
       window.setTimeout("scrollBar()",delay); 
 } 
-function getReady(src, mname, sname)//在显示歌词前做好准备工作 
+function getReady(src, mname, sname, mid)//在显示歌词前做好准备工作 
 { 	
-	var ly=getLy(src, mname, sname);//得到歌词
+	var ly=getLy(src, mname, sname, mid);//得到歌词
 	if (ly=="" || ly==null || typeof(ly) == "undefined") {
 		$("#lry").html("本歌暂无歌词！");
 	};
