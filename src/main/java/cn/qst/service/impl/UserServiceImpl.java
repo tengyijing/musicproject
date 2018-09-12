@@ -3,11 +3,8 @@ package cn.qst.service.impl;
 import cn.qst.comman.utils.MD5Utils;
 import cn.qst.mapper.TbUserMapper;
 import cn.qst.pojo.TbUser;
-import cn.qst.pojo.TbUserExample;
-import cn.qst.pojo.TbUserExample.Criteria;
 import cn.qst.service.UserService;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

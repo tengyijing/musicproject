@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.qst.comman.fastdfs.FileUploadUtils;
-import cn.qst.comman.pojo.AdminResult;
 import cn.qst.comman.utils.JsonUtils;
 
 @Controller
@@ -29,13 +28,13 @@ public class FileUploadController {
 			String path = FileUploadUtils.fileUpload(uploadFile);
 			//拼接文件服务器的url(将ip地址带上得到一个完整的网络路径)
 			String url = IMAGE_SERVER_URL + path;
-			Map result = new HashMap();
+			Map<String, Object> result = new HashMap<>();
 			result.put("error", 0);
 			result.put("url", url);
 			return JsonUtils.objectToJson(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			Map result = new HashMap();
+			Map<String, Object> result = new HashMap<>();
 			result.put("error", 1);
 			result.put("massege", "上传失败");
 			return JsonUtils.objectToJson(result);
