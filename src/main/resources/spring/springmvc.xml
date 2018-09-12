@@ -44,6 +44,8 @@
 	<mvc:resources location="/myjs/" mapping="/myjs/**"/>
 	<mvc:resources mapping="/source/**" location="/source/"/>
 	<mvc:resources location="/adminstyle/" mapping="/adminstyle/**"/>
+	<mvc:resources location="/playmusic/" mapping="/playmusic/**"/>
+
 	<!-- 引用dubbo服务 -->
 	<!-- <dubbo:application name="taotao-manager-web"/>
 	<dubbo:registry protocol="zookeeper" address="192.168.25.167:2181"/>	

@@ -6,20 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>爱唱音乐-播放</title>
-<link rel="shortcut icon" href="../../source/images/logo-b.png" />
-<link rel="stylesheet" type="text/css" href="../../source/playmusic/css/scroll.css">
-<link rel="stylesheet" type="text/css" href="../../source/playmusic/css/playMusic.css">
-<script type="text/javascript" src="../../source/playmusic/js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="../../source/playmusic/js/jquery-ui.js"></script>
-<script type="text/javascript" src="../../source/playmusic/js/canvas.js"></script>
-<script type="text/javascript" src="../../source/playmusic/js/mousewheel.js"></script>
-<script type="text/javascript" src="../../source/playmusic/js/scroll.js"></script>
-<script type="text/javascript" src="../../source/playmusic/js/playMusic.js"></script>
+<link rel="shortcut icon" href="/playmusic/images/logo-b.png" />
+<link rel="stylesheet" type="text/css" href="/playmusic/css/scroll.css">
+<link rel="stylesheet" type="text/css" href="/playmusic/css/playMusic.css">
+<script type="text/javascript" src="/playmusic/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/playmusic/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/playmusic/js/canvas.js"></script>
+<script type="text/javascript" src="/playmusic/js/mousewheel.js"></script>
+<script type="text/javascript" src="/playmusic/js/scroll.js"></script>
+<script type="text/javascript" src="/playmusic/js/playMusic.js"></script>
 
 <!--新建歌单-->
 
-<link href="../../source/playmusic/css/qikoo.css" type="text/css" rel="stylesheet" />
-<script src="../../source/playmusic/js/qikoo.js"></script>
+<link href="/playmusic/css/qikoo.css" type="text/css" rel="stylesheet" />
+<script src="/playmusic/js/qikoo.js"></script>
 <script>
 var type = '${type}';
 
@@ -33,7 +33,7 @@ var type = '${type}';
 	</div>
 	<div class="playerMain">
 		<div class="top">
-			<a style="cursor: pointer;" href="../../index.jsp" >
+			<a style="cursor: pointer;" href="/index" >
 			<h2 class="logoaichang" onmouseover="huan()" onmouseout="huan2()">爱唱音乐</h2></a>
 			        <script> $(window).load(function(){fPlay('${id}')});
 			        $(window).load(function(){bian('${type}')});</script>
@@ -41,7 +41,7 @@ var type = '${type}';
 			<div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;">
          <c:choose>
         <c:when test="${imgstr== null or imgstr==''}">
-            <a href="userInfo.do"><img src="../../source/images/user.png" id="img1"/></a>
+            <a href="userInfo.do"><img src="/playmusic/images/user.png" id="img1"/></a>
         </c:when>
         <c:otherwise>
         <a href="userInfo.do"><img src="${imgstr}" id="img2"/></a>
@@ -187,7 +187,7 @@ var type = '${type}';
 				<div class="mainOuther">
 					<div class="albumCover">
 						<a href="#">
-							<img src="source/playmusic/images/2.jpg" width="200" height="200" id="canvas1" class="canvas1">
+							<img src="playmusic/images/2.jpg" width="200" height="200" id="canvas1" class="canvas1">
 						</a>
 					</div>
 					<div class="albumSale"></div>
