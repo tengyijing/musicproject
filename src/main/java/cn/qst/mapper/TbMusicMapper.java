@@ -29,4 +29,9 @@ public interface TbMusicMapper {
     int updateByPrimaryKey(TbMusic record);
     
     List<TbMusic> selectByLid(int lid);
+    
+   
+    List<TbMusic> selectBySname(String sname);
+    
+    
 }

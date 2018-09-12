@@ -20,6 +20,9 @@
 <!-- 分类 -->
 <link rel="stylesheet" data-dist="true"
 	href="../../source/musicclassify/css/lomegwdp.css" />
+	
+	
+	
 
 <!-- 中部 -->
 <link rel="stylesheet" type="text/css"
@@ -46,7 +49,7 @@
 </script>
 <style type="text/css">
 
-.mod-tags1 {
+ .mod-tags1 {
 	padding-right: 20px;
 }
 .mod-tags1  {
@@ -149,13 +152,11 @@ padding-top: 12px;
 }
 .mod-tags1 dl.mod-tags-h173 {
 	height: 173px !important;
-} 
+}  
 </style>
 </head>
 <body onload="getName('${username}');">
-<div style="position: relative;">
-
-</div>
+<a href="/musicClassify/queryAll">dsfsdf</a>
 
 	<header class="header">
 	<div class="header-container" style="width: 1200px;">
@@ -260,6 +261,10 @@ padding-top: 12px;
 			</div>
 		</div>
 	</div>
+
+
+
+
 
 	<c:choose>
 		<c:when test="${musicListSize2== null or musicListSize2=='0'}">
@@ -604,13 +609,13 @@ padding-top: 12px;
 	}
 }(jQuery));
 
-$(".zxf_pagediv").createPage({
+/* $(".zxf_pagediv").createPage({
 	pageNum: ${count},
 	current: ${pageNo},
 	backfun: function(e) {
 	//console.log(e);//回调
 } 
-})
+}) */
 
 
 

@@ -26,7 +26,17 @@ $(function() {
 	})
 })
 
-function choose(ab){
-	alert(ab)
-	alert("123")
-}
+$(function (){
+	$.ajax({
+		type:'get',
+		url : '/musicClassify/queryAll',
+		success:function(data){
+			
+			/*alert(data.total)
+			alert(data.rows[0].mid)
+			str = "<img src='"+data.rows[0].image+"'  />"
+			alert(str)
+			$("#tt").html(str)*/
+		}
+	})
+})

@@ -309,4 +309,11 @@
   	FROM `tb_music`,`tb_music_musiclist` WHERE `tb_music`.`mid`=`tb_music_musiclist`.`mid` AND `mlid`=#{mlid}
   </select>
 
+<select id="selectBySname" resultMap="BaseResultMap">
+SELECT *
+FROM `tb_music`
+where `sname` = #{ssname}
+</select>
+
+
 </mapper>

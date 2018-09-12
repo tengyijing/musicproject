@@ -1,4 +1,6 @@
 $(function () {
+	alert("sdfsdf")
+	alert(menuid)
 	$.ajax({
 		type:'get',
 		url:'/admin/queryMenuAll',
@@ -13,12 +15,14 @@ $(function () {
 					}else {
 						str+="<li><a href='/"+data[3][i].ename+"?menuid="+data[3][i].mid+"' >"+data[3][i].mname+"</a></li>";	
 					}	
-				}else{
+				}else if(data[3][i].parentmid!=0){
 					if(data[3][i].mid==data[1]){
 						str1+="<li><a href='#' class='subNav-cur'>"+data[3][i].mname+"</a></li>";
 					}else{
 						str1+="<li><a href='/"+data[3][i].ename+"?menuid="+data[3][i].mid+"' >"+data[3][i].mname+"</a></li>";	
 					}
+				}else{
+					alert("sdfsdfsdfsd")	
 				}			
 			}
 			$("#top"+data[2]).html(str);

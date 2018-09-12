@@ -112,4 +112,12 @@ public class TbMusic {
     public void setIsdownload(Boolean isdownload) {
         this.isdownload = isdownload;
     }
+
+	@Override
+	public String toString() {
+		return "TbMusic [mid=" + mid + ", mname=" + mname + ", fileurl=" + fileurl + ", playsum=" + playsum
+				+ ", uploaddate=" + uploaddate + ", sname=" + sname + ", image=" + image + ", mvid=" + mvid
+				+ ", status=" + status + ", lyricsurl=" + lyricsurl + ", isdownload=" + isdownload + "]";
+	}
+    
 }
