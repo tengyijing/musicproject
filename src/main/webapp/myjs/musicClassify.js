@@ -11,7 +11,7 @@ $(function() {
 					var j = i + 1;
 					while (j < data.length) {
 						if (data[j].parentid != 0) {
-							str += "<dd><a href='#?cat="+data[j].cname+"'>" + data[j].cname + "</a></dd>";
+							str += "<dd><a href='javascript:choose("+data[j].cid+")'>" + data[j].cname + "</a></dd>";
 						} else {
 							break;
 						}
@@ -21,8 +21,12 @@ $(function() {
 				}
 				str+="</dl>";
 			}
-			alert(str)
 				$("#musicmcategory").html(str);
 		}
 	})
 })
+
+function choose(ab){
+	alert(ab)
+	alert("123")
+}
