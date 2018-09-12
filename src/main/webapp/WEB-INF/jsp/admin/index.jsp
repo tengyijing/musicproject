@@ -24,7 +24,7 @@
          		<span>音乐管理</span>
          		<ul>
 	         		<li data-options="attributes:{'url':'/admin/music-add'}">新增音乐</li>
-	         		<li data-options="attributes:{'url':'item-list'}">查询音乐</li>
+	         		<li data-options="attributes:{'url':'/admin/music-list'}">查询音乐</li>
 	         	</ul>
          	</li>
          	<li>

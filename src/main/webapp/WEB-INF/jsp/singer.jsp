@@ -36,7 +36,7 @@
       rel="stylesheet" />
 <script src="../../source/SearchMusic/js/qikoo.js"></script>
 <script type="text/javascript">
-var id=${id}
+var menuid=${menuid}
 </script>
 </head>
 <body onload="getName('${username}');">

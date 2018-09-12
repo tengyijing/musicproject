@@ -22,8 +22,8 @@ public class PageController {
 	
 	//页面跳转
 	@RequestMapping("/{page}")
-	public String pageJsp(String page,Integer id,Map<String, Object>map) {
-		map.put("id", id);
+	public String pageJsp(String page,Integer menuid,Map<String, Object>map) {
+		map.put("menuid", menuid);
 		return page;
 	}
 	

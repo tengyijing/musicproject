@@ -1,8 +1,8 @@
 $(function () {
 	$.ajax({
 		type:'get',
-		url:'/admin/queryAll',
-		data:{id:id},
+		url:'/admin/queryMenuAll',
+		data:{menuid:menuid},
 		success:function(data){
 			var str = "";
 			var str1 = "";
@@ -11,13 +11,13 @@ $(function () {
 					if(data[3][i].mid==data[0]){
 						str+="<li><a href='#' class='header-nav__cur'>"+data[3][i].mname+"</a></li>";	
 					}else {
-						str+="<li><a href='/"+data[3][i].ename+"?id="+data[3][i].mid+"' >"+data[3][i].mname+"</a></li>";	
+						str+="<li><a href='/"+data[3][i].ename+"?menuid="+data[3][i].mid+"' >"+data[3][i].mname+"</a></li>";	
 					}	
 				}else{
 					if(data[3][i].mid==data[1]){
 						str1+="<li><a href='#' class='subNav-cur'>"+data[3][i].mname+"</a></li>";
 					}else{
-						str1+="<li><a href='/"+data[3][i].ename+"?id="+data[3][i].mid+"' >"+data[3][i].mname+"</a></li>";	
+						str1+="<li><a href='/"+data[3][i].ename+"?menuid="+data[3][i].mid+"' >"+data[3][i].mname+"</a></li>";	
 					}
 				}			
 			}
