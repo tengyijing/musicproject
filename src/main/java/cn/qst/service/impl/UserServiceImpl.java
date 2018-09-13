@@ -50,7 +50,23 @@ public class UserServiceImpl implements UserService {
 		String returnEmail = tbUserMapper.selectByEmail(email);
 		return returnEmail != null ? false : true;
 	}
-	
+
+	/**
+	 * 根据用户名查询出用户的信息，在和邮箱比较，是否正确
+	 *
+	 * @param uname 用户名
+	 * @param email 邮箱地址
+	 * @return
+	 */
+	@Override
+	public Boolean selectByUnameAndEmail(String uname, String email) {
+		TbUser user = tbUserMapper.selectByUnameOrUname(uname);
+		if (user == null) {
+			return false;
+		} else {
+			return user.getEmail().equals(email) ? true : false;
+		}
+	}
 	/**
 	 * 注册写入数据库 uid, uname, password, email, phone, sex, image,status(0:删除 ，1存在), VIP
 	 * （0 非，1是）
@@ -87,6 +103,24 @@ public class UserServiceImpl implements UserService {
 	 			return null;
 	 		}
 	 	}
+	}
+
+	/**
+	 * 修改密码
+	 * @param userName
+	 * @param passWord
+	 * @return
+	 */
+ 	public Boolean changePassword(String userName, String passWord) {
+ 		TbUser user = new TbUser();
+ 		user.setPassword(passWord);
+ 		user.setUname(userName);
+ 		int i = tbUserMapper.changePassword(user);
+ 		if (i == 0) {
+ 			return false;
+		} else {
+ 			return true;
+		}
 	}
 
 	/**

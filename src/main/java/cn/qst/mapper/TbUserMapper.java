@@ -66,12 +66,6 @@ public interface TbUserMapper {
      */
     TbUser selectByUnameOrUname(String uname);
 
-//    /**
-//     * 根据 地址id 查询用户所在的地区
-//     * @return
-//     */
-//    TbCity selectCity();
-
     /**
      * 根据 地址id 查询用户所在的地区
      * @return
@@ -90,4 +84,10 @@ public interface TbUserMapper {
      * @return
      */
     List<TbCity> selectCityByPid(Integer pid);
+
+    /**
+     * 修改用户密码
+     * @return
+     */
+    int changePassword(TbUser user);
 }
