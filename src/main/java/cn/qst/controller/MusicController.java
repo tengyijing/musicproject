@@ -33,7 +33,7 @@ public class MusicController {
 			return musicService.addMusic(music);
 	}
 	
-	//查询所有音乐分页显示
+	//查询音乐分页显示
 	@RequestMapping("/music/list")
 	@ResponseBody
 	public EasyUiDataGridResult fundMusicAll( Integer page , Integer rows , TbMusic music) {
