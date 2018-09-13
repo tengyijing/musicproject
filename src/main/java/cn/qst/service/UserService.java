@@ -1,6 +1,10 @@
 package cn.qst.service;
 
+import cn.qst.pojo.TbCity;
+import cn.qst.pojo.TbProvince;
 import cn.qst.pojo.TbUser;
+
+import java.util.List;
 
 /**
  * @author lk 2018/9/7 11:22
@@ -54,4 +58,24 @@ public interface UserService {
 	 * @return
 	 */
 	TbUser selectPersonalInfo(String uname);
+
+	/**
+	 * 根据用户的地址id 查询用户所在地区
+	 * @param addressId
+	 * @return
+	 */
+	TbCity selectUserCity(String addressId);
+
+	/**
+	 * 查询所有的省信息
+	 * @return
+	 */
+	List<TbProvince> selectProvince();
+
+	/**
+	 * 查询所有市的信息根据市id
+	 * @param pid
+	 * @return
+	 */
+	List<TbCity> selectCityByPid(Integer pid);
 }
