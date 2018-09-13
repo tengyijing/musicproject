@@ -206,8 +206,7 @@ function userLogin(username) {
 					async:false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
 					contentType:"application/x-www-form-urlencoded",
 					data: {
-						id:sid,
-						del:0,
+						id:sid
 			        },
 					success: function(data){
 					}  
@@ -216,14 +215,14 @@ function userLogin(username) {
 		
 		//音乐从列表删除
 		function moveMusic(sid,type){
-			//alert("运行"+"sid:"+sid+"   "+type)
 				$.ajax({
-				    url : "/loveMusic", 
+				    url : "/delMusicFromList", 
 					type: "post", 
 					async:false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
 					contentType:"application/x-www-form-urlencoded",
-					data: {id:sid,
-						   del:1,
+					data: {
+						id:sid,
+						ty:type,
 			        },
 					success: function(data){
 					}  
@@ -291,7 +290,7 @@ $(function(){
 			var i = this;
 			//删除我喜爱音乐的歌曲
 		    qikoo.dialog2.confirm('确定要将歌曲从我喜欢的音乐删除吗？',function(){
-		    moveMusic(sid,3) //从我喜爱的音乐列表中删除
+		    moveMusic(sid, "myLove") //从我喜爱的音乐列表中删除
 		    $(i).css("background-position","-28px -130px");
 		    $(i).attr("loveN","0");
 		    if(sid==singID){
@@ -317,18 +316,16 @@ $(function(){
 	$(".dele").click(function(){
 		var sid=$(this).parent().parent().find(".start em").attr("sonN");
 		var ListId=$(this).parent().parent().find(".start em").text()-1;
-		qikoo.dialog2.confirm('确定要将歌曲从当前列表删除吗？',function(){
-			
-		$(".songUL li:eq("+ListId+")").remove();
-		moveMusic(sid,type); //从列表中删除 
-		for(var i=0; i<$(".songUL li").length; i++){
-			$(".songUL li:eq("+i+")").find(".start em").html(i+1);
-		}
-		var len = $(".songUL li").length-1;
-		$(".mainBody").find("#gequ").html("歌曲("+len+")");
-	    },function(){
-		});
-		
+		qikoo.dialog2.confirm('确定要将歌曲从当前列表删除吗？', function(){
+				$(".songUL li:eq("+ListId+")").remove();
+				moveMusic(sid,type); //从列表中删除 
+				for(var i=0; i<$(".songUL li").length; i++){
+					$(".songUL li:eq("+i+")").find(".start em").html(i+1);
+				}
+				var len = $(".songUL li").length-1;
+				$(".mainBody").find("#gequ").html("歌曲("+len+")");
+			},
+		function(){});
 	});
 	
 	//点击删除歌单
@@ -422,7 +419,6 @@ $(function(){
 			qikoo.dialog2.confirm('确定要删除所选的歌曲吗？',function(){
 				for(var i=0;i<ch.length;i++){
 					if(ch[i].checked){
-						//alert(ch[i].value)
 						moveMusic(ch[i].value,type);
 					}
 				}
@@ -915,4 +911,15 @@ function mPlay()//开始播放
 }
 function fPlay(songIndex){
 	$(".start em[sonN="+songIndex+"]").click();
-} 
+}
+function bian(type){
+	if(type=="now"){
+		menuLi();
+	} else if(type=="history"){
+		menuLi3();
+	} else if(type=="myLove"){
+		menuLi5();
+	} else {
+		
+	}
+}

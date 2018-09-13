@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.ExtendedSSLSession;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.druid.sql.dialect.oracle.ast.clause.ModelClause.ReturnRowsClause;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.fasterxml.jackson.databind.util.ArrayBuilders.BooleanBuilder;
+import com.sun.tools.doclint.Checker.Flag;
 
 import cn.qst.comman.fastdfs.FileUploadUtils;
 import cn.qst.comman.utils.DownloadLyric;
@@ -27,6 +30,7 @@ import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbMusiclist;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.MusicService;
+import cn.qst.service.Music_MusicListService;
 import cn.qst.service.MusiclistService;
 
 /**
@@ -42,22 +46,27 @@ public class PlayMusicCotroller {
 	@Autowired
 	private MusiclistService musiclistService;
 	@Autowired
+	private Music_MusicListService music_musicListService;
+	@Autowired
 	private MusicService musicService;
 	private List<TbMusic> historyList;
 	private List<TbMusic> loveList;
+	private List<TbMusic> nowList;
 	//上传文件的url地址
 	@Value("${IMAGE_SERVER_URL}")
 	private String IMAGE_SERVER_URL;
 	
 	// 跳转到音乐播放
 	@RequestMapping("/play")
-	public String playPage(ModelMap map, HttpSession session, String type) {
-		// TbUser user = (TbUser) session.getAttribute("user");
+	public String playPage(ModelMap map, HttpSession session, String type, int id) {
+		// 用户登录后可访问
 		
+		// TbUser user = (TbUser) session.getAttribute("user");
 		/*--------删除开始-----------*/
 		TbUser user = new TbUser();
 		user.setUid("1");
 		/*--------删除结束-----------*/
+		
 		
 		// 查询用户歌单
 		List<TbMusiclist> musiclists = musiclistService.selectByUid(user.getUid());
@@ -66,7 +75,17 @@ public class PlayMusicCotroller {
 		// 显示的歌曲列表
 		List<TbMusic> musics = null;
 		if( type == null || "now".equals(type) ) { // 默认正在播放
-			musics = musicService.selectByMusicList(-1);
+			TbMusic music = musicService.selectByPrimaryKey(id);
+			if( nowList==null ) nowList = new ArrayList<>();
+			// 去重
+			boolean flag = true;
+			for(TbMusic te: nowList) {
+				if( te.getMid() == id ) {
+					flag = false;
+				}
+			}
+			if( flag ) nowList.add(music);
+			musics = nowList;
 		} else if( "history".equals(type) ) { // 历史播放
 			musics = historyList;
 		} else if( "myLove".equals(type) ) { // 我喜欢的音乐
@@ -75,6 +94,10 @@ public class PlayMusicCotroller {
 			musics = musicService.selectByMusicList(Integer.parseInt(type));
 		}
 		map.addAttribute("songs", musics);
+		map.addAttribute("type", type);
+		Integer defalutId = null;
+		if( musics!=null && musics.size()>0 ) defalutId=musics.get(0).getMid();
+		map.addAttribute("id", defalutId);
 		// 保存id到数组中
 		List<Integer> loves = null;
 		if( loveList != null && loveList.size()>0 ) {
@@ -104,24 +127,48 @@ public class PlayMusicCotroller {
 		if( historyList == null ) {
 			historyList = new ArrayList<>();
 		}
-		historyList.add(music);
+		boolean flag = true;
+		for(TbMusic temp: historyList ) {
+			if( temp.getMid() == mid ) {
+				flag = false;
+			}
+		}
+		if( flag ) historyList.add(music);
 		return JsonUtils.objectToJson("1");
 	}
 	
 	// 添加到喜爱的音乐
-	@RequestMapping(value="/loveMusic", method= {RequestMethod.POST})
+	@RequestMapping(value = "/loveMusic", method= {RequestMethod.POST})
 	@ResponseBody
-	public String addLove(int id, int del) {
+	public String addLove(int id) {
 		TbMusic music = musicService.selectByPrimaryKey(id);
-		if( del == 1 ) { // 移除喜爱音乐
-			for(TbMusic temp: loveList) {
-				if( temp.getMid() == id ) {
-					loveList.remove(temp);
+		if( loveList == null ) loveList = new ArrayList<>();
+		loveList.add(music);
+		return JsonUtils.objectToJson("1");
+	}
+	
+	
+	// 从列表中删除音乐
+	@RequestMapping(value="/delMusicFromList", method= {RequestMethod.POST})
+	@ResponseBody
+	public String del(int id, String ty) {
+		if( ty==null || "".equals(ty.trim()) || ty=="now" ) {
+			
+		} else if( "history".equals(ty) ) {
+			for(TbMusic te: historyList ) {
+				if( te.getMid() == id ) {
+					historyList.remove(te);
 				}
 			}
-		} else { // 添加喜爱音乐
-			if( loveList == null ) loveList = new ArrayList<>();
-			loveList.add(music);
+		} else if( "myLove".equals(ty) ) {
+			for(TbMusic te: loveList ) {
+				if( te.getMid() == id ) {
+					loveList.remove(te);
+				}
+			}
+		} else {
+			int type = Integer.parseInt(ty);
+			music_musicListService.del(type, id);
 		}
 		return JsonUtils.objectToJson("1");
 	}
@@ -220,6 +267,10 @@ public class PlayMusicCotroller {
 
 	public void setLoveList(List<TbMusic> loveList) {
 		this.loveList = loveList;
+	}
+
+	public void setNowList(List<TbMusic> nowList) {
+		this.nowList = nowList;
 	}
 	
 }
