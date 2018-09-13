@@ -804,6 +804,9 @@ var songIndex=2;
 function getLy(src, mname, sname, mid)//取得歌词 
 { 	
 	var ly="";
+	// 初始化
+	lytext=new Array();
+	lytime=new Array();
 	$.ajax({
 		url : "/getLy", 
 		type: "post", 
@@ -823,9 +826,13 @@ function getLy(src, mname, sname, mid)//取得歌词
  	return ly; 
 } 
 function show(t)//显示歌词 
-{ 
+{
 	var div1=document.getElementById("lyr");//取得层
-	document.getElementById("lyr").innerHTML=" ";//每次调用清空以前的一次 
+	document.getElementById("lyr").innerHTML=" ";//每次调用清空以前的一次
+	if( lytime.length == 0 ){
+		document.getElementById("lyr").innerHTML="暂无歌词";
+		return ;
+	}
 	if(t<lytime[lytime.length-1])//先舍弃数组的最后一个
 		{ 	
 			for(var k=0;k<lytext.length;k++)
@@ -858,6 +865,7 @@ function getReady(src, mname, sname, mid)//在显示歌词前做好准备工作
 	var ly=getLy(src, mname, sname, mid);//得到歌词
 	if (ly=="" || ly==null || typeof(ly) == "undefined") {
 		$("#lry").html("本歌暂无歌词！");
+		return ;
 	};
 	var arrly=ly.split("\n");//转化成数组
   	tflag=0;
