@@ -115,19 +115,12 @@ function userLogin(username) {
 		function yincangdanqu(){
 			$(".modedanqu").hide();
 			}
-		function hp(){
-			var h = $(".playerCon").attr("playStyle");
-			alert(h);
-		}
 
 		//右侧功能按钮点击变色	 
 		function menuLi(){
 			$(".bianse3").css("background-color","#fff");
 			$(".bianse2").css("background-color","#fff");
 			$(".bianse").css("background-color","#f0f0f0");
-		}
-		function menuLi2(){
-			//$(".bianse").css("background-color","#fff");
 		}
 		function menuLi3(){
 			$(".bianse").css("background-color","#fff");
@@ -141,9 +134,6 @@ function userLogin(username) {
 			$(".bianse").css("background-color","#fff");
 			$(".bianse2").css("background-color","#fff");
 			$(".bianse3").css("background-color","#f0f0f0");
-		}
-		function menuLi6(){
-			//$(".bianse3").css("background-color","#fff");
 		}
 		
 		function bian(type){
@@ -606,6 +596,7 @@ $(function(){
 		var singerName =$(this).parent().parent().find(".colcn").html();
 		$(".songName").html(songName);
 		$(".songPlayer").html(singerName);
+		$(".tc3").attr("href", "/music/detail?mid="+sid);
 		/*换右侧图片*/
 		var urlImg = $(this).attr("imgurl");
 		$("#canvas1").attr("src", urlImg);
@@ -740,7 +731,7 @@ function loadBG(){
 	var ctx=c.getContext("2d");
 	var img=document.getElementById("canvas1");
 	ctx.drawImage(img,45,45,139,115,0,0,1366,700);
-	stackBlurCanvasRGBA('canvas',0,0,1366,700,5);
+	// stackBlurCanvasRGBA('canvas',0,0,1366,700,5);
 }
 function calcTime(time){
 	var hour;         	var minute;    	var second;
@@ -766,20 +757,7 @@ function updateProgress(ev){
 	var llef = Math.floor(lef).toString()+"px";
 	$(".dian").css("left",llef);
 	if(this.currentTime>60&&qw==true){
-		$.ajax({
-	    url : "listening.do", 
-		type: "post", 
-		async:false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
-		contentType:"application/x-www-form-urlencoded",
-		data: {musicId:sid2,
-			   musicName:songName2,
-			   singer:singerName2
-        },
-		success: function(data){
-		}
-		
-	});
-	qw = false;
+		qw = false;
 	}
 }
 function audioPlay(ev){
