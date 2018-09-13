@@ -2,12 +2,16 @@ package cn.qst.service.impl;
 
 import cn.qst.comman.utils.MD5Utils;
 import cn.qst.mapper.TbUserMapper;
+import cn.qst.pojo.TbCity;
+import cn.qst.pojo.TbProvince;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.UserService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author lk 2018/9/7 11:22
@@ -95,7 +99,28 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return tbUserMapper.selectByUnameOrUname(uname);
 	}
-	
-	
+
+	/**
+	 * 根据用户地址id，查询用户的具体信息
+	 */
+	@Override
+	public TbCity selectUserCity(String addressId) {
+		// TODO Auto-generated method stub
+		return tbUserMapper.selectUserCity(addressId);
+	}
+
+	/**
+	 * 查询所有城市的信息
+	 * @return
+	 */
+	@Override
+	public List<TbProvince> selectProvince() {
+		// TODO Auto-generated method stub
+		return tbUserMapper.selectAllProvince();
+	}
+
+	public List<TbCity> selectCityByPid(Integer pid) {
+		return tbUserMapper.selectCityByPid(pid);
+	}
 	
 }

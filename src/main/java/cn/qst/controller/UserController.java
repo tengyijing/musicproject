@@ -2,9 +2,12 @@ package cn.qst.controller;
 
 import cn.qst.comman.utils.MD5Utils;
 import cn.qst.comman.utils.SendEmail;
+import cn.qst.pojo.TbCity;
+import cn.qst.pojo.TbProvince;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.UserService;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +30,55 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
+	/**
+	 * 根据用户地址id 查询用户地址信息
+	 *
+	 * @param addressId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/userCityInfo")
+	public TbCity userCityInfo(String addressId) {
+		return userService.selectUserCity(addressId);
+	}
+
+	/**
+	 * 查询所有省信息
+	 *
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/allProvinceInfo")
+	public List<TbProvince> allProvinceInfo() {
+		return userService.selectProvince();
+	}
+
+	/**
+	 * 城市信息
+	 *
+	 * @param pid 省id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/CityInfoById")
+	public List<TbCity> findCityInfo(Integer pid) {
+		return userService.selectCityByPid(pid);
+	}
+
+	/**
+	 * 注销登陆
+	 *
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/exit")
+	public String exitUser(HttpSession session) {
+		session.removeAttribute("username");
+		session.removeAttribute("imgstr");
+		return "index";
+	}
+
 	/**
 	 * 查询用户个人信息，根据登陆时session中存储的“username”的用户名
 	 * @param request 获取session对象
@@ -48,11 +99,11 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/login", method = { RequestMethod.POST })
+	@RequestMapping(value = "/login")
 	public Boolean login(String userName, String passWord, HttpSession session) {
 		TbUser user = userService.login(userName, passWord);
 		if (user != null) {
-			StringBuilder builder = new StringBuilder("/source/images/headPhoto/");
+			StringBuilder builder = new StringBuilder("/images/headPhoto/");
 			builder.append("user.png");
 			session.setAttribute("username", user.getUname());
 			session.setAttribute("imgstr", builder);
@@ -87,7 +138,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/verifyUname", method = { RequestMethod.POST })
+	@RequestMapping(value = "/verifyUname")
 	public Boolean verifyUname(String uname) {
 		return userService.selectByName(uname);
 	}
@@ -99,7 +150,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/verifyEmail", method = { RequestMethod.POST })
+	@RequestMapping(value = "/verifyEmail")
 	public Boolean verifyEmail(String email) {
 		return userService.selectByEmail(email);
 	}
@@ -111,7 +162,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/verifyPhone", method = { RequestMethod.POST })
+	@RequestMapping(value = "/verifyPhone")
 	public Boolean verifyPhone(String phone) {
 		return userService.selectByPhone(phone);
 	}
@@ -123,7 +174,7 @@ public class UserController {
 	 * @return 确认是否发送成功
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/sendEmail", method = { RequestMethod.POST })
+	@RequestMapping(value = "/sendEmail")
 	public Boolean sendEmail(String email, HttpSession session) {
 		boolean flag = false;
 	 	String code = SendEmail.sendEamilCode(email);
@@ -142,7 +193,7 @@ public class UserController {
 	 * @return 确认是否正确
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/verifyCode", method = { RequestMethod.POST })
+	@RequestMapping(value = "/verifyCode")
 	public Boolean verifyCode(String verifyNo, HttpServletRequest request) {
 		boolean flag = false;
 		String code = (String) request.getSession().getAttribute("code");
@@ -151,7 +202,5 @@ public class UserController {
 		}
 		return flag;
 	}
-	
-	
-	
+
 }
