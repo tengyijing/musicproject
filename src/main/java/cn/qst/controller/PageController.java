@@ -111,6 +111,9 @@ public class PageController {
 		list.add(name);
 		mPList.addAll(mCList);
 		list.add(mPList);
+		for(Object object:list) {
+			System.out.println(object.toString());
+		}
 		return list;
 	}
 

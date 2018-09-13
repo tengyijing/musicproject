@@ -151,9 +151,7 @@ var menuid=${menuid}
           <a href="regist.jsp" class="open-vip" id="reg">注册</a>
         </div>
       </div>
-      <ul class="header-subNav" style="margin-top:20px;" id="topmysongChild">
-        
-      </ul>
+     
     </div>
   </header>
 	<!-- 中部上 -->

@@ -60,4 +60,10 @@ public class TbMenu {
     public void setIsparent(Boolean isparent) {
         this.isparent = isparent;
     }
+
+	@Override
+	public String toString() {
+		return "TbMenu [mid=" + mid + ", mname=" + mname + ", parentmid=" + parentmid + ", ename=" + ename + ", status="
+				+ status + ", isparent=" + isparent + "]";
+	}
 }

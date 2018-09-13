@@ -4,6 +4,7 @@ package cn.qst.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
@@ -34,9 +35,9 @@ public class MusicClassifyController {
 	 */
 	@ResponseBody
 	@RequestMapping("/musicClassify/queryAll")
-	public PageInfo<AlbumResult> queryAll() {
+	public PageInfo<AlbumResult> queryAll(@RequestParam(value="pageIndex",defaultValue="1")Integer pageNum) {
 		/*EasyUiDataGridResult fundSnameAll = musicClassifyService.fundSnameAll(1, 4);*/
-		PageInfo<AlbumResult> pageInfo = musicClassifyService.fundSnameAll(7,1);
+		PageInfo<AlbumResult> pageInfo = musicClassifyService.fundSnameAll(pageNum,1);
 		return pageInfo;
 	}
 }
