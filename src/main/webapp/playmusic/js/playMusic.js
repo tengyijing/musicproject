@@ -546,7 +546,20 @@ $(function(){
 		$(".songName").attr("singID",sid);
 		var murl = $(this).attr("musicUrl");
 		var loveN = $(this).parent().parent().find(".love").attr("loveN");
-		
+		$.ajax({
+			url : "/play/playmusic", 
+			type: "post", 
+			async:false,
+			contentType:"application/x-www-form-urlencoded",
+			data: {
+				mid:sid,
+	        },
+			success: function(data){
+			},
+			error:function (XMLHttpRequest, textStatus, errorThrown) {
+				alert("播放出错");
+		    }   
+		});
 		if(loveN==1){
 			$(".tc1").css("background-position","0 -131px");
 		}else{

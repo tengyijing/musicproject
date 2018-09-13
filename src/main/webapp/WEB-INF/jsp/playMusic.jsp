@@ -193,20 +193,21 @@ var type = '${type}';
 		<div class="bottom" style="background-color: black;">
 			<div class="playerWrap">
 				<div class="playerCon" playStyle="0">
-					<a href="#" class="pbtn prevBtn"></a>
-					<a href="#" class="pbtn playBtn" isplay="0"></a>
-					<a href="#" class="pbtn nextBtn"></a>
+					<a  class="pbtn prevBtn"></a>
+					<a  class="pbtn playBtn" isplay="0"></a>
+					<a  class="pbtn nextBtn"></a>
 					<div style="color: #fff;" class="modesuiji">随机播放</div>
 					<div style="color: #fff;" class="modeshunxv">顺序播放</div>
 					<div style="color: #fff;" class="modedanqu">单曲循环</div>
-					<a href="#" class="mode" onClick="mode2()"></a>
-					<a href="#" class="mode2" onClick="mode3()"></a>
-					<a href="#" class="mode3" onClick="mode()"></a>
+					<a  class="mode" onClick="mode2()"></a>
+					<a  class="mode2" onClick="mode3()"></a>
+					<a  class="mode3" onClick="mode()"></a>
 				</div>
 				<div class="playInfo">
 					<div class="trackInfo">
-						<a href="#" class="songName" singID="0" onclick="xs()">未知歌名</a> - <a href="#"
-							class="songPlayer">未知歌手</a>
+						<a class="songName" singID="0" onclick="xs()">未知歌名</a>
+							- 
+						<a class="songPlayer">未知歌手</a>
 						<div class="trackCon">
 							<a class="tc1" onclick="tc1change()"></a>
 							<a class="tc2"></a>

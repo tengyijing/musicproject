@@ -75,13 +75,14 @@ public class PlayMusicCotroller {
 	}
 
 	// 音乐播放
+	@RequestMapping(value = "/play/playmusic", method= {RequestMethod.POST})
+	@ResponseBody
 	public String playMusic(ModelMap map, int mid) {
 		/*
 		 * 1、根据音乐id查找对应的音乐以及歌词
 		 * 2、将音乐添加到播放历史歌单当中
 		 * 3、返回json数据
 		 */
-		mid = 1;
 		TbMusic music = musicService.selectByPrimaryKey(mid);
 		map.addAttribute("music", music);
 		
@@ -90,7 +91,7 @@ public class PlayMusicCotroller {
 			historyList = new ArrayList<>();
 		}
 		historyList.add(music);
-		return null;
+		return JsonUtils.objectToJson("1");
 	}
 
 	// 歌词获取
