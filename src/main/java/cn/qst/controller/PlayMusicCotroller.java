@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -76,13 +75,14 @@ public class PlayMusicCotroller {
 	}
 
 	// 音乐播放
+	@RequestMapping(value = "/play/playmusic", method= {RequestMethod.POST})
+	@ResponseBody
 	public String playMusic(ModelMap map, int mid) {
 		/*
 		 * 1、根据音乐id查找对应的音乐以及歌词
 		 * 2、将音乐添加到播放历史歌单当中
 		 * 3、返回json数据
 		 */
-		mid = 1;
 		TbMusic music = musicService.selectByPrimaryKey(mid);
 		map.addAttribute("music", music);
 		
@@ -91,7 +91,7 @@ public class PlayMusicCotroller {
 			historyList = new ArrayList<>();
 		}
 		historyList.add(music);
-		return null;
+		return JsonUtils.objectToJson("1");
 	}
 
 	// 歌词获取
@@ -104,12 +104,16 @@ public class PlayMusicCotroller {
 		 */
 		if( url == null || "".equals(url.trim()) ) {// 没有url信息
 			String lrc = DownloadLyric.startDownload(songName, singerName);
+			
+			/* 正式版本才能用
 			String path = IMAGE_SERVER_URL+FileUploadUtils.fileUpload2(lrc, DownloadLyric.LRC_EXT);
 			//将歌词文件路径添加到对应的音乐
 			TbMusic music = new TbMusic();
 			music.setMid(id);
 			music.setLyricsurl(path);
 			musicService.updateMusic(music );
+			*/
+			
 			Map<String, Object> res = new HashMap<String, Object>();
 			res.put("lrc", lrc);
 			return JsonUtils.objectToJson(res);

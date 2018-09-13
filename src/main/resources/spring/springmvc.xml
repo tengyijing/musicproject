@@ -45,6 +45,7 @@
 	<mvc:resources mapping="/source/**" location="/source/"/>
 	<mvc:resources location="/adminstyle/" mapping="/adminstyle/**"/>
 	<mvc:resources location="/playmusic/" mapping="/playmusic/**"/>
+	<mvc:resources location="/images/" mapping="/images/**"/>
 
 	<!-- 引用dubbo服务 -->
 	<!-- <dubbo:application name="taotao-manager-web"/>

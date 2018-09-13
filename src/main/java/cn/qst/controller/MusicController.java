@@ -23,6 +23,11 @@ public class MusicController {
 	@Value("${IMAGE_SERVER_URL}")
 	private String IMAGE_SERVER_URL;
 	
+	// 跳转到音乐详情
+	@RequestMapping("/music/detail")
+	public String musicDetailPage(String mid) {
+		return null;
+	}
 	
 	//添加音乐
 	@RequestMapping("/music/addmusic")

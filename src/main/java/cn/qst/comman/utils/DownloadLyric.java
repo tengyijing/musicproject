@@ -35,8 +35,12 @@ public class DownloadLyric {
 		// 获取查看歌词页面
 		String lrcEnterUrl = getShowLrcUrl(urlSearch);
 		if( lrcEnterUrl == null || "".equals(lrcEnterUrl.trim())  ) {
-			System.err.println("sorry,未找到【" + name + "】的歌词......");
-			return null;
+			// 去掉歌手再找一次
+			lrcEnterUrl = getShowLrcUrl(BASE_URL+"/so.php?wd="+name);
+			if( lrcEnterUrl == null || "".equals(lrcEnterUrl.trim())) {
+				System.err.println("sorry,未找到【" + name + "】的歌词......");
+				return null;
+			}
 		}
 		// 获取歌词
 		String lrc = downloadHref(BASE_URL+lrcEnterUrl);
@@ -82,6 +86,7 @@ public class DownloadLyric {
 				}
 			}
 		} catch (IOException e) {
+			System.err.println("歌词获取错误");
 			return null;
 		}
 		return lrcString;

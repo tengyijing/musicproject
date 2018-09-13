@@ -19,7 +19,9 @@
 	type="text/css" />
 <script type="text/javascript"
 	src="../../source/regist/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="../../source/regist/js/register.js"></script>
+
+<script type="text/javascript" src="../../myjs/register.js"></script>
+
 <script
 	src="../../source/regist/pictureYanZheng/js/jquery-1.12.3.min.js"></script>
 <script src="../../source/regist/pictureYanZheng/js/jquery.idcode.js"></script>
