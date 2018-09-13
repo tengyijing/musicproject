@@ -21,7 +21,6 @@ import com.alibaba.druid.sql.dialect.oracle.ast.clause.ModelClause.ReturnRowsCla
 import com.alibaba.druid.support.json.JSONUtils;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.fasterxml.jackson.databind.util.ArrayBuilders.BooleanBuilder;
-import com.sun.tools.doclint.Checker.Flag;
 
 import cn.qst.comman.fastdfs.FileUploadUtils;
 import cn.qst.comman.utils.DownloadLyric;
@@ -185,14 +184,14 @@ public class PlayMusicCotroller {
 		if( url == null || "".equals(url.trim()) ) {// 没有url信息
 			String lrc = DownloadLyric.startDownload(songName, singerName);
 			
-			/* 正式版本才能用
+		/*	// 正式版本才能用
 			String path = IMAGE_SERVER_URL+FileUploadUtils.fileUpload2(lrc, DownloadLyric.LRC_EXT);
 			//将歌词文件路径添加到对应的音乐
 			TbMusic music = new TbMusic();
 			music.setMid(id);
 			music.setLyricsurl(path);
-			musicService.updateMusic(music );
-			*/
+			musicService.updateMusic(music );*/
+			
 			
 			Map<String, Object> res = new HashMap<String, Object>();
 			res.put("lrc", lrc);

@@ -90,6 +90,7 @@ public class PageController {
 				name = tbMenu.getEname();
 				child = null;
 			} else {
+				//判断其子类是否是一级父类
 				if (tbMenu.getParentmid() != 12) {
 					parent = tbMenu.getParentmid();
 					child = tbMenu.getMid();
