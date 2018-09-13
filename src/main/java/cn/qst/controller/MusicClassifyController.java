@@ -36,7 +36,7 @@ public class MusicClassifyController {
 	@ResponseBody
 	@RequestMapping("/musicClassify/queryAll")
 	public EasyUiDataGridResult queryAll() {
-		// 将一个歌手的信息统计
+		
 		EasyUiDataGridResult fundSnameAll = musicClassifyService.fundSnameAll(1, 1);
 		return fundSnameAll;
 	}
