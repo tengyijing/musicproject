@@ -29,7 +29,7 @@ var type = '${type}';
 <body>
 	<!--模糊画布-->
 	<div class="blur">
-		<canvas style="width:1366px;height:700px;opacity:0;" width="1366" height="700" id="canvas">
+		<canvas style="width:1366px;height:700px;opacity:0;" width="1366" height="700" id="canvas"></canvas>
 	</div>
 	<div class="playerMain">
 		<div class="top">
