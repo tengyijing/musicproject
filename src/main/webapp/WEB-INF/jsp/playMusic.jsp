@@ -41,10 +41,10 @@ var type = '${type}';
 			<div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;">
          <c:choose>
         <c:when test="${imgstr== null or imgstr==''}">
-            <a href="userInfo.do"><img src="/playmusic/images/user.png" id="img1"/></a>
+            <a href="/userInfo"><img src="/playmusic/images/user.png" id="img1"/></a>
         </c:when>
         <c:otherwise>
-        <a href="userInfo.do"><img src="${imgstr}" id="img2"/></a>
+        <a href="/userInfo"><img src="${imgstr}" id="img2"/></a>
         </c:otherwise>
         </c:choose>
          </div>
@@ -125,8 +125,8 @@ var type = '${type}';
                                             <a class="cicon love" loveN="0"></a> 
                                             </c:otherwise>
                                             </c:choose> 
-											<a class="cicon more" style="display: none"></a>
-											 <a class="cicon dele" style="display: none"></a>
+											<a href="/music/detail?mid=${music.mid}" title="音乐详情" class="cicon more" style="display: none"></a>
+											<a class="cicon dele" style="display: none"></a>
 										</div>
 									</div>
 								</li>
@@ -170,25 +170,20 @@ var type = '${type}';
 								<input class="checkAll" name="allChecked" type="checkbox" select="0">
 							</div>
 							<div class="uiItem">
-								<a href="#" class="itIcon itDele">删除</a>
+								<a class="itIcon itDele">删除</a>
 							</div>
 							<div class="uiItem">
-								<a href="#" class="itIcon itShou">收藏</a>
+								<a class="itIcon itShou">收藏</a>
 							</div>
 							<div class="uiItem">
-								<a href="#" class="itIcon itJin">添加到歌单</a>
-							</div>
-							<div class="uiItem">
-								<a href="#" class="itIcon itMore" onclick="hp()">更多</a>
+								<a class="itIcon itJin">添加到歌单</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="mainOuther">
 					<div class="albumCover">
-						<a href="#">
-							<img src="playmusic/images/2.jpg" width="200" height="200" id="canvas1" class="canvas1">
-						</a>
+						<a><img src="playmusic/images/2.jpg" width="200" height="200" id="canvas1" class="canvas1"></a>
 					</div>
 					<div class="albumSale"></div>
 					<div id="lyr" class="lyr"></div>
@@ -213,8 +208,9 @@ var type = '${type}';
 						<a href="#" class="songName" singID="0" onclick="xs()">未知歌名</a> - <a href="#"
 							class="songPlayer">未知歌手</a>
 						<div class="trackCon">
-							<a href="#" class="tc1" onclick="tc1change()"></a> <a href="#"
-								class="tc2"></a> <a href="#" class="tc3"></a>
+							<a class="tc1" onclick="tc1change()"></a>
+							<a class="tc2"></a>
+							<a class="tc3" title="音乐详情"></a>
 						</div>
 					</div>
 					<div class="playerLength">
@@ -222,7 +218,7 @@ var type = '${type}';
 						<div class="progress">
 							<div class="pro1"></div>
 							<div class="pro2">
-								<a href="#" class="dian"></a>
+								<a class="dian"></a>
 							</div>
 						</div>
 						<div class="duration">00:00</div>
