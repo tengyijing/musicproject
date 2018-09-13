@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.druid.sql.dialect.oracle.ast.clause.ModelClause.ReturnRowsClause;
+import com.alibaba.druid.support.json.JSONUtils;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
 import cn.qst.comman.fastdfs.FileUploadUtils;
 import cn.qst.comman.utils.DownloadLyric;
 import cn.qst.comman.utils.JsonUtils;
@@ -40,6 +44,7 @@ public class PlayMusicCotroller {
 	@Autowired
 	private MusicService musicService;
 	private List<TbMusic> historyList;
+	private List<TbMusic> loveList;
 	//上传文件的url地址
 	@Value("${IMAGE_SERVER_URL}")
 	private String IMAGE_SERVER_URL;
@@ -65,11 +70,20 @@ public class PlayMusicCotroller {
 		} else if( "history".equals(type) ) { // 历史播放
 			musics = historyList;
 		} else if( "myLove".equals(type) ) { // 我喜欢的音乐
-			musics = null;
+			musics = loveList;
 		} else { // 根据歌单id查找对应的歌曲
 			musics = musicService.selectByMusicList(Integer.parseInt(type));
 		}
 		map.addAttribute("songs", musics);
+		// 保存id到数组中
+		List<Integer> loves = null;
+		if( loveList != null && loveList.size()>0 ) {
+			loves = new ArrayList<>();
+			for(TbMusic temp: loveList) {
+				loves.add(temp.getMid());
+			}
+		}
+		map.addAttribute("love", loves);
 		
 		return "playMusic";
 	}
@@ -93,7 +107,26 @@ public class PlayMusicCotroller {
 		historyList.add(music);
 		return JsonUtils.objectToJson("1");
 	}
-
+	
+	// 添加到喜爱的音乐
+	@RequestMapping(value="/loveMusic", method= {RequestMethod.POST})
+	@ResponseBody
+	public String addLove(int id, int del) {
+		TbMusic music = musicService.selectByPrimaryKey(id);
+		if( del == 1 ) { // 移除喜爱音乐
+			for(TbMusic temp: loveList) {
+				if( temp.getMid() == id ) {
+					loveList.remove(temp);
+				}
+			}
+		} else { // 添加喜爱音乐
+			if( loveList == null ) loveList = new ArrayList<>();
+			loveList.add(music);
+		}
+		return JsonUtils.objectToJson("1");
+	}
+	
+	
 	// 歌词获取
 	@RequestMapping(value = "/getLy", method = { RequestMethod.POST })
 	@ResponseBody
@@ -184,4 +217,9 @@ public class PlayMusicCotroller {
 	public void setHistoryList(List<TbMusic> historyList) {
 		this.historyList = historyList;
 	}
+
+	public void setLoveList(List<TbMusic> loveList) {
+		this.loveList = loveList;
+	}
+	
 }

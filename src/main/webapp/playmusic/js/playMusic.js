@@ -201,12 +201,13 @@ function userLogin(username) {
 		//喜爱音乐添加
 		function addLoveMusic(sid){
 				$.ajax({
-				    url : "playMusic.do", 
+				    url : "/loveMusic", 
 					type: "post", 
 					async:false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
 					contentType:"application/x-www-form-urlencoded",
-					data: {id:sid,
-						   type:3,
+					data: {
+						id:sid,
+						del:0,
 			        },
 					success: function(data){
 					}  
@@ -217,12 +218,12 @@ function userLogin(username) {
 		function moveMusic(sid,type){
 			//alert("运行"+"sid:"+sid+"   "+type)
 				$.ajax({
-				    url : "deleteMusicList.do", 
+				    url : "/loveMusic", 
 					type: "post", 
 					async:false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
 					contentType:"application/x-www-form-urlencoded",
 					data: {id:sid,
-						   type:type,
+						   del:1,
 			        },
 					success: function(data){
 					}  
@@ -278,7 +279,6 @@ $(function(){
 		var loveN=$(this).attr("loveN");
 		var sid=$(this).parent().parent().find(".start em").attr("sonN");
 		var singID = $(".songName").attr("singID");
-		//alert(singID)
 		if(loveN==0){
 			$(this).css("background-position","0 -131px");
 			$(this).attr("loveN","1");
@@ -557,7 +557,7 @@ $(function(){
 			success: function(data){
 			},
 			error:function (XMLHttpRequest, textStatus, errorThrown) {
-				alert("播放出错");
+				alert("服务器错误，无法保存历史歌单");
 		    }   
 		});
 		if(loveN==1){
@@ -623,7 +623,7 @@ $(function(){
 	
 	/*双击播放*/
 	$(".songList").dblclick(function(){
-		var sid = $(this).find(".start em").html();
+		var sid = $(this).find(".start em").attr("sonN");
 		$(".start em[sonN="+sid+"]").click();
 	});
 	/*底部进度条控制*/
