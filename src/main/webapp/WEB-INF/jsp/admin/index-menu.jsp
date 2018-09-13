@@ -12,7 +12,7 @@
 <script type="text/javascript">
 $(function(){
 	$("#contentCategory").tree({
-		url : '/content/category/list',
+		url : '/menu/list',
 		animate: true,
 		method : "GET",
 		onContextMenu: function(e,node){
@@ -26,19 +26,23 @@ $(function(){
         onAfterEdit : function(node){
         	var _tree = $(this);
         	if(node.id == 0){
+        		if(node.text==null||node.text == ''){
+        			$.messager.alert('提示','菜单名不能为空');
+        			return
+        		}
         		// 新增节点
-        		$.post("/content/category/create",{parentId:node.parentId,name:node.text},function(data){
+        		$.post("/menu/add",{parentId:node.parentId,name:node.text},function(data){
         			if(data.status == 200){
         				_tree.tree("update",{
             				target : node.target,
-            				id : data.data.id
+            				id : data.data.mid
             			});
         			}else{
         				$.messager.alert('提示','创建'+node.text+' 分类失败!');
         			}
         		});
         	}else{
-        		$.post("/content/category/update",{id:node.id,name:node.text});
+        		$.post("/menu/update",{id:node.id,name:node.text});
         	}
         }
 	});
@@ -62,7 +66,7 @@ function menuHandler(item){
 	}else if(item.name === "delete"){
 		$.messager.confirm('确认','确定删除名为 '+node.text+' 的分类吗？',function(r){
 			if(r){
-				$.post("/content/category/delete/",{parentId:node.parentId,id:node.id},function(){
+				$.post("/menu/delete/",{parentId:node.parentId,id:node.id},function(){
 					tree.tree("remove",node.target);
 				});	
 			}

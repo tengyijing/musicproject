@@ -74,26 +74,18 @@
 
 			<div id="nameicon" class="center_header"
 				style="margin-left: 60px; margin-right: 10px; float: left; display: none">
-				<c:choose>
-					<c:when test="${imgstr== null or imgstr==''}">
-						<a href="userInfo.do"><img src="/source/images/user.png"
-							id="img1" /></a>
-					</c:when>
-					<c:otherwise>
-						<a href="userInfo.do"><img src="${imgstr}" id="img2" /></a>
-					</c:otherwise>
-				</c:choose>
+				<a href="User/personalInfo"><img src="${imgstr}" id="img2" /></a>
 			</div>
 			<div id="name" style="display: none; padding-top: 35px;">
-				<a href="userInfo.do" style="cursor: pointer"><i
+				<a href="User/personalInfo" style="cursor: pointer"><i
 					onmouseover="xianshi()" onmouseout="xiaoshi2()">${username}</i></a>
 			</div>
 			<div id="xianshi">
 				<p style="margin-left: 5px; margin-top: 3px;">
-					<a href="userInfo.do"><img src="/source/images/个人.png"></a>
+					<a href="User/personalInfo"><img src="/images/person.png"></a>
 				</p>
 				<p style="margin-left: 4px; margin-top: 5px;">
-					<a href="Logout.do"><img src="/source/images/退出.png"></a>
+					<a href="User/exit"><img src="/images/exit.png"></a>
 				</p>
 			</div>
 			<div class="header-login" style="margin-right: -10px;">

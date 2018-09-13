@@ -17,12 +17,6 @@ public interface MenuService {
 	 */
 	public List<TbMenu> queryAll();
 	/**
-	 * 添加一个菜单选项
-	 * @param tbMenu
-	 * @return
-	 */
-	public int addMenu(TbMenu tbMenu);
-	/**
 	 * 通过父类id查询父类的子菜单
 	 * @param parent 
 	 * @return
@@ -34,4 +28,6 @@ public interface MenuService {
 	 * @return
 	 */
 	public TbMenu query(Integer mid);
+
+	
 }

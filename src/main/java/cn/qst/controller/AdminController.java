@@ -3,15 +3,13 @@ package cn.qst.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.qst.comman.pojo.EasyUiDataGridResult;
-import cn.qst.pojo.TbMcategory;
-import cn.qst.pojo.TbMenu;
-import cn.qst.service.MenuService;
-import cn.qst.service.MusicClassifyService;
+import cn.qst.comman.pojo.AdminResult;
+import cn.qst.comman.pojo.EasyUiTreeNode;
+import cn.qst.service.AdminService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,11 +20,41 @@ import java.util.List;
  *
  */
 @Controller
-
 public class AdminController {
 
+
+	@Autowired
+	private AdminService adminService;
+		
+	//根据父类id查询菜单
+	@RequestMapping("/menu/list")
+	@ResponseBody
+	public List<EasyUiTreeNode> getMenubyParentId(@RequestParam(name="id",defaultValue="0") int id){
+		List<EasyUiTreeNode> menuList = adminService.getMenubyParentId(id);
+		return menuList;
+	}
 	
+	//添加菜单
+	@RequestMapping("/menu/add")
+	@ResponseBody
+	public AdminResult addMenu(Integer parentId , String name) {
+		return adminService.addMenu(parentId , name);
+	}
+	
+	//修改添加菜单
+	@RequestMapping("/menu/update")
+	@ResponseBody
+	public AdminResult updateMenu(Integer id , String name) {
+		return adminService.updateMenu(id , name);
+	}
+	
+	//删除菜单
+	@RequestMapping("/menu/delete")
+	@ResponseBody
+	public AdminResult deleteMenu(Integer parentId,Integer id) {
+		//删除菜单
+		adminService.deleteMenu(id);
+		//判断该类的父类是否还有子节点 没有的话把自身改为子目录
+		return adminService.isParent(parentId);
+	}
 }
-
-
-

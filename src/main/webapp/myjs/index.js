@@ -7,13 +7,13 @@ $(function () {
 			var str = "";
 			var str1 = "";
 			for(var i=0;i<data[3].length;i++){
-				if(data[3][i].parentmid==0){
+				if(data[3][i].parentmid==12){
 					if(data[3][i].mid==data[0]){
 						str+="<li><a href='#' class='header-nav__cur'>"+data[3][i].mname+"</a></li>";	
 					}else {
 						str+="<li><a href='/"+data[3][i].ename+"?menuid="+data[3][i].mid+"' >"+data[3][i].mname+"</a></li>";	
 					}	
-				}else if(data[3][i].parentmid!=0){
+				}else if(data[3][i].parentmid!=12){
 					if(data[3][i].mid==data[1]){
 						str1+="<li><a href='#' class='subNav-cur'>"+data[3][i].mname+"</a></li>";
 					}else{

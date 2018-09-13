@@ -115,19 +115,12 @@ function userLogin(username) {
 		function yincangdanqu(){
 			$(".modedanqu").hide();
 			}
-		function hp(){
-			var h = $(".playerCon").attr("playStyle");
-			alert(h);
-		}
 
 		//右侧功能按钮点击变色	 
 		function menuLi(){
 			$(".bianse3").css("background-color","#fff");
 			$(".bianse2").css("background-color","#fff");
 			$(".bianse").css("background-color","#f0f0f0");
-		}
-		function menuLi2(){
-			//$(".bianse").css("background-color","#fff");
 		}
 		function menuLi3(){
 			$(".bianse").css("background-color","#fff");
@@ -141,9 +134,6 @@ function userLogin(username) {
 			$(".bianse").css("background-color","#fff");
 			$(".bianse2").css("background-color","#fff");
 			$(".bianse3").css("background-color","#f0f0f0");
-		}
-		function menuLi6(){
-			//$(".bianse3").css("background-color","#fff");
 		}
 		
 		function bian(type){
@@ -556,7 +546,20 @@ $(function(){
 		$(".songName").attr("singID",sid);
 		var murl = $(this).attr("musicUrl");
 		var loveN = $(this).parent().parent().find(".love").attr("loveN");
-		
+		$.ajax({
+			url : "/play/playmusic", 
+			type: "post", 
+			async:false,
+			contentType:"application/x-www-form-urlencoded",
+			data: {
+				mid:sid,
+	        },
+			success: function(data){
+			},
+			error:function (XMLHttpRequest, textStatus, errorThrown) {
+				alert("播放出错");
+		    }   
+		});
 		if(loveN==1){
 			$(".tc1").css("background-position","0 -131px");
 		}else{
@@ -606,6 +609,7 @@ $(function(){
 		var singerName =$(this).parent().parent().find(".colcn").html();
 		$(".songName").html(songName);
 		$(".songPlayer").html(singerName);
+		$(".tc3").attr("href", "/music/detail?mid="+sid);
 		/*换右侧图片*/
 		var urlImg = $(this).attr("imgurl");
 		$("#canvas1").attr("src", urlImg);
@@ -740,7 +744,7 @@ function loadBG(){
 	var ctx=c.getContext("2d");
 	var img=document.getElementById("canvas1");
 	ctx.drawImage(img,45,45,139,115,0,0,1366,700);
-	stackBlurCanvasRGBA('canvas',0,0,1366,700,5);
+	// stackBlurCanvasRGBA('canvas',0,0,1366,700,5);
 }
 function calcTime(time){
 	var hour;         	var minute;    	var second;
@@ -766,20 +770,7 @@ function updateProgress(ev){
 	var llef = Math.floor(lef).toString()+"px";
 	$(".dian").css("left",llef);
 	if(this.currentTime>60&&qw==true){
-		$.ajax({
-	    url : "listening.do", 
-		type: "post", 
-		async:false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
-		contentType:"application/x-www-form-urlencoded",
-		data: {musicId:sid2,
-			   musicName:songName2,
-			   singer:singerName2
-        },
-		success: function(data){
-		}
-		
-	});
-	qw = false;
+		qw = false;
 	}
 }
 function audioPlay(ev){
@@ -804,6 +795,9 @@ var songIndex=2;
 function getLy(src, mname, sname, mid)//取得歌词 
 { 	
 	var ly="";
+	// 初始化
+	lytext=new Array();
+	lytime=new Array();
 	$.ajax({
 		url : "/getLy", 
 		type: "post", 
@@ -823,9 +817,13 @@ function getLy(src, mname, sname, mid)//取得歌词
  	return ly; 
 } 
 function show(t)//显示歌词 
-{ 
+{
 	var div1=document.getElementById("lyr");//取得层
-	document.getElementById("lyr").innerHTML=" ";//每次调用清空以前的一次 
+	document.getElementById("lyr").innerHTML=" ";//每次调用清空以前的一次
+	if( lytime.length == 0 ){
+		document.getElementById("lyr").innerHTML="暂无歌词";
+		return ;
+	}
 	if(t<lytime[lytime.length-1])//先舍弃数组的最后一个
 		{ 	
 			for(var k=0;k<lytext.length;k++)
@@ -858,6 +856,7 @@ function getReady(src, mname, sname, mid)//在显示歌词前做好准备工作
 	var ly=getLy(src, mname, sname, mid);//得到歌词
 	if (ly=="" || ly==null || typeof(ly) == "undefined") {
 		$("#lry").html("本歌暂无歌词！");
+		return ;
 	};
 	var arrly=ly.split("\n");//转化成数组
   	tflag=0;

@@ -6,7 +6,6 @@ public class TbCity {
   private Integer cid;
   private String name;
   private Integer pid;
-
   private String pname;
 
   public String getPname() {

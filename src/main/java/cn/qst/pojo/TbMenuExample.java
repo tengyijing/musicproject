@@ -423,6 +423,66 @@ public class TbMenuExample {
             addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
+
+        public Criteria andIsparentIsNull() {
+            addCriterion("isparent is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentIsNotNull() {
+            addCriterion("isparent is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentEqualTo(Boolean value) {
+            addCriterion("isparent =", value, "isparent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentNotEqualTo(Boolean value) {
+            addCriterion("isparent <>", value, "isparent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentGreaterThan(Boolean value) {
+            addCriterion("isparent >", value, "isparent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("isparent >=", value, "isparent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentLessThan(Boolean value) {
+            addCriterion("isparent <", value, "isparent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentLessThanOrEqualTo(Boolean value) {
+            addCriterion("isparent <=", value, "isparent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentIn(List<Boolean> values) {
+            addCriterion("isparent in", values, "isparent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentNotIn(List<Boolean> values) {
+            addCriterion("isparent not in", values, "isparent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentBetween(Boolean value1, Boolean value2) {
+            addCriterion("isparent between", value1, value2, "isparent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsparentNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("isparent not between", value1, value2, "isparent");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
