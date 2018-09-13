@@ -9,7 +9,11 @@ import org.springframework.beans.factory.config.ListFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageInfo;
+
 import cn.qst.comman.pojo.EasyUiDataGridResult;
+import cn.qst.pojo.AlbumResult;
 import cn.qst.pojo.TbMusic;
 import cn.qst.service.MusicClassifyService;
 import cn.qst.service.MusicService;
@@ -35,8 +39,9 @@ public class MusicClassifyController {
 	 */
 	@ResponseBody
 	@RequestMapping("/musicClassify/queryAll")
-	public EasyUiDataGridResult queryAll() {
-		EasyUiDataGridResult fundSnameAll = musicClassifyService.fundSnameAll(1, 1);
-		return fundSnameAll;
+	public PageInfo<AlbumResult> queryAll() {
+		/*EasyUiDataGridResult fundSnameAll = musicClassifyService.fundSnameAll(1, 4);*/
+		PageInfo<AlbumResult> pageInfo = musicClassifyService.fundSnameAll(7,1);
+		return pageInfo;
 	}
 }
