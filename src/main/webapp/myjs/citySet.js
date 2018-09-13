@@ -1,8 +1,9 @@
-﻿function getAddress(address) {
+﻿//进入页面即触发
+// 根据用户地址信息显示，用户有地址即显示地址以及修改按钮
+//没有即显示添加按钮
+function getAddress(address) {
     if (address != null && address != "") {
         userCityInfo(address);
-    } else {
-        allCityInfo();
     }
 }
 
@@ -16,9 +17,9 @@ function userCityInfo(address) {
         data: {addressId: address},
         success: function (data) {
             var str = "";
-            str += data.pname + "   " + data.name;
+            str += "        " + data.pname + "   " + data.name;
             str += "&nbsp;&nbsp;&nbsp;&nbsp;";
-            str += "<button onclick=\" \">立即修改</button>";
+            str += "<button onclick=\"\">立即修改</button>";
             $("#address").html(str);
         }
     })
@@ -34,9 +35,11 @@ function allCityInfo() {
         contentType: "application/x-www-form-urlencoded",
         success: function (data) {
             var str = "";
+            str += "<select onclick=\"gitCityInfo()\">";
             for (var i = 0; i < data.length; i++) {
                 str += "<option value=\" " + data[i].pid + " \"> " + data[i].name + "</option>";
             }
+            str += "</select>";
             $("#province").html(str);
             //第一次加载显示 市  信息
             gitCityInfo();
@@ -56,9 +59,12 @@ function gitCityInfo() {
         data:{pid:pid},
         success: function (data) {
             var str = "";
+            str += "<select>";
             for (var i = 0; i < data.length; i++) {
                 str += "<option value=\" " + data[i].cid + " \"> " + data[i].name + "</option>";
             }
+            str += "</select>";
+            str += "";
             $("#cityInfo").html(str);
         }
     })

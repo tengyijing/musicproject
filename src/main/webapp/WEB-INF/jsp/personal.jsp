@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css"
           href="../../source/person/css/css.css">
     <script src="../../source/person/js/jquery-1.8.3.min.js"></script>
-    <script src="../../source/person/js/index2.js"></script>
+    <script src="../../myjs/index2.js"></script>
     <link rel="stylesheet" type="text/css"
           href="../../source/person/css/center.css">
 
@@ -388,16 +388,16 @@
                             <em>邮箱：</em><i>${user.email}</i><a href="#fst1"
                                                                style="text-decoration: none;">立即修改</a>
                         </p>
-                        <p>
-                            <em>手机号：</em><i>${user.phone}</i><a href="#fst2"
-                                                                style="text-decoration: none;">立即修改</a>
+                        <p id="userPhone">
+                            <em>手机号：</em><i>${user.phone}</i>
+                            <a href="#fst2" style="text-decoration: none;">立即修改</a>
                         </p>
 
                         <p>
                             <em>VIP：</em>
                             <c:choose>
                                 <c:when test="${user.vip == 0 }">
-                                    <!-- 充值会员 -->
+                                    <!-- 充值会员 暂时不做-->
                                     非会员，赶紧成为我们的<span><a href="">会员</a></span>，享受更多资源
                                 </c:when>
                                 <c:otherwise>
@@ -408,7 +408,6 @@
 
                         <p>
                             <em>性别：</em>
-                          
                             <c:choose>
                                 <c:when test="${user.sex==0}">
                                     <input type="radio" name="sex" value="unknown" class="sex_m">
@@ -448,20 +447,18 @@
                             <!-- <input type="text" name="city" id="city"
 									value="${city}"
 									style="width: 200px; height: 30px; border: 1px #ccc solid; margin-top: 11px; font-size: 12px; text-align: center; color: #343434; float: left" />-->
-                            <span id = "address">
-                                <button onclick="">修改</button>
-                                <select id = "province" onclick="gitCityInfo()">
+                            <span id="address">
+                                <span id="province">
+                                    <span><a onclick="allCityInfo()">立即添加</a>
+                                </span>
+                                </span>
+                                <span id="cityInfo">
 
-                                </select>
-
-                                <select id = "cityInfo">
-
-                                </select>
+                                </span>
                             </span>
                         </p>
-                        <a
-                                style="text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;"
-                                class="public_m3" onclick="sumb();">保存修改</a>
+                        <a style="text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;"
+                           class="public_m3" onclick="sumb();">保存修改</a>
                     </form>
                 </div>
             </div>
@@ -480,23 +477,18 @@
             </div>
             <div class="public_m4">
                 <p>
-                    <em>绑定手机号码：</em> <input type="text"
-                                            style="height: 23px; border: 1px solid #eaeaea; width: 140px">
-                    <input type="button" id="btnsj" class="btn_mfyzm" value="获取验证码"
-                           style="border: 1px solid #c8c8c8; margin-left: 6px"/>
-                </p>
-                <p>
-                    <em>收到的验证码：</em> <input type="text"
+                    <em>绑定手机号码：</em> <input id="phone" type="text"
                                             style="height: 23px; border: 1px solid #eaeaea; width: 140px">
                 </p>
-                <a href="#" class="public_m3" style="text-decoration: none;">立即绑定</a>
+                <a href="#" onclick="getPhone()" class="public_m3" style="text-decoration: none;">立即绑定</a>
             </div>
         </div>
         <!--一条开始-->
         <div class="public_m1">
             <div class="public_m2">
-                <a name="fst1">绑定邮箱修改</a>
+                <a name="fst1"></a>
             </div>
+            绑定邮箱修改
             <!--提示信息-->
             <div class="tip_notem">
                 <ul>

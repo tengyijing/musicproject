@@ -160,7 +160,7 @@ body::-webkit-scrollbar-track-piece {
 									style="color: blue; vertical-align: middle;">记住密码</span>
 							</div>
 							<div>
-								<a href="forgetPassword.jsp"
+								<a href="/forgetPassword"
 									style="float: right; margin-right: 40px; text-decoration: none;">忘记密码？</a>
 							</div>
 							<div class="row btnArea">

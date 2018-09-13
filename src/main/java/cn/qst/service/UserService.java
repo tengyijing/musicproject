@@ -32,10 +32,19 @@ public interface UserService {
 	/**
 	 * 效验用户邮件是否重复
 	 *
-	 * @param email
+	 * @param email 邮箱地址
 	 * @return
 	 */
 	Boolean selectByEmail(String email);
+
+	/**
+	 * 根据用户名查询出用户的信息，在和邮箱比较，是否正确
+	 *
+	 * @param uname 用户名
+	 * @param email 邮箱地址
+	 * @return
+	 */
+	Boolean selectByUnameAndEmail(String uname, String email);
 
 	/**
 	 * 注册用户，添加到用户表中
@@ -51,6 +60,14 @@ public interface UserService {
 	 * @return
 	 */
 	TbUser login(String userName, String passWord);
+
+	/**
+	 * 修改密码
+	 * @param userName
+	 * @param passWord
+	 * @return
+	 */
+	Boolean changePassword(String userName, String passWord);
 
 	/**
 	 * 根据用户名查询个人信息
