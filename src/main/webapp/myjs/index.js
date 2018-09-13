@@ -1,6 +1,4 @@
 $(function () {
-	alert("sdfsdf")
-	alert(menuid)
 	$.ajax({
 		type:'get',
 		url:'/admin/queryMenuAll',

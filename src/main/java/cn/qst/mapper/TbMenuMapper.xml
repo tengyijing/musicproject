@@ -7,6 +7,7 @@
     <result column="parentmid" property="parentmid" jdbcType="INTEGER" />
     <result column="ename" property="ename" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="BIT" />
+    <result column="isparent" property="isparent" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    mid, mname, parentmid, ename, status
+    mid, mname, parentmid, ename, status, isparent
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qst.pojo.TbMenuExample" >
     select
@@ -100,10 +101,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.qst.pojo.TbMenu" >
+  	<selectKey keyProperty="mid" resultType="int" order="AFTER">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
     insert into tb_menu (mid, mname, parentmid, 
-      ename, status)
+      ename, status, isparent)
     values (#{mid,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, #{parentmid,jdbcType=INTEGER}, 
-      #{ename,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
+      #{ename,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{isparent,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="cn.qst.pojo.TbMenu" >
     insert into tb_menu
@@ -123,6 +127,9 @@
       <if test="status != null" >
         status,
       </if>
+      <if test="isparent != null" >
+        isparent,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="mid != null" >
@@ -139,6 +146,9 @@
       </if>
       <if test="status != null" >
         #{status,jdbcType=BIT},
+      </if>
+      <if test="isparent != null" >
+        #{isparent,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -166,6 +176,9 @@
       <if test="record.status != null" >
         status = #{record.status,jdbcType=BIT},
       </if>
+      <if test="record.isparent != null" >
+        isparent = #{record.isparent,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +190,8 @@
       mname = #{record.mname,jdbcType=VARCHAR},
       parentmid = #{record.parentmid,jdbcType=INTEGER},
       ename = #{record.ename,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=BIT}
+      status = #{record.status,jdbcType=BIT},
+      isparent = #{record.isparent,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +211,9 @@
       <if test="status != null" >
         status = #{status,jdbcType=BIT},
       </if>
+      <if test="isparent != null" >
+        isparent = #{isparent,jdbcType=BIT},
+      </if>
     </set>
     where mid = #{mid,jdbcType=INTEGER}
   </update>
@@ -205,7 +222,8 @@
     set mname = #{mname,jdbcType=VARCHAR},
       parentmid = #{parentmid,jdbcType=INTEGER},
       ename = #{ename,jdbcType=VARCHAR},
-      status = #{status,jdbcType=BIT}
+      status = #{status,jdbcType=BIT},
+      isparent = #{isparent,jdbcType=BIT}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
 </mapper>
