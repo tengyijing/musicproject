@@ -31,7 +31,7 @@ $(function (){
 		type:'get',
 		url : '/musicClassify/queryAll',
 		success:function(data){
-			
+			alert(data[0].total)
 			/*alert(data.total)
 			alert(data.rows[0].mid)
 			str = "<img src='"+data.rows[0].image+"'  />"

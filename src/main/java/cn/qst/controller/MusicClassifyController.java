@@ -36,7 +36,6 @@ public class MusicClassifyController {
 	@ResponseBody
 	@RequestMapping("/musicClassify/queryAll")
 	public EasyUiDataGridResult queryAll() {
-		
 		EasyUiDataGridResult fundSnameAll = musicClassifyService.fundSnameAll(1, 1);
 		return fundSnameAll;
 	}
