@@ -184,12 +184,12 @@ var menuid=${menuid}
 	</section>
 	<!-- end -->
 	<!-- 中部中 -->
-	<div class="header-login3" style="margin-top: 20px;">
-		<a class="open-vip" id="playall">我的作品</a>
+	<div class="header-login3" style="margin-top: 20px;" id="topmysongChild">
+		<!-- <a class="open-vip" id="playall">我的作品</a>
 		<a class="open-vip" id="guanzhu">关注</a>
 		<a class="open-vip" id="shangchuan">上传音乐作品</a>
 		<a class="open-vip" id="share">分享至音乐圈</a>
-		<a class="open-vip" id="listening">听歌排行</a>
+		<a class="open-vip" id="listening">听歌排行</a> -->
 	</div>
 
 
