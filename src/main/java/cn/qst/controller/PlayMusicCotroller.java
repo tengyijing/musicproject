@@ -55,9 +55,10 @@ public class PlayMusicCotroller {
 	@Value("${IMAGE_SERVER_URL}")
 	private String IMAGE_SERVER_URL;
 	
+	
 	// 跳转到音乐播放
 	@RequestMapping("/play")
-	public String playPage(ModelMap map, HttpSession session, String type, int id) {
+	public String playPage(ModelMap map, HttpSession session, String type, String id) {
 		// 用户登录后可访问
 		
 		// TbUser user = (TbUser) session.getAttribute("user");
@@ -68,22 +69,29 @@ public class PlayMusicCotroller {
 		
 		
 		// 查询用户歌单
-		List<TbMusiclist> musiclists = musiclistService.selectByUid(user.getUid());
-		map.addAttribute("musicList", musiclists);
-		
+		if( user != null ) {
+			List<TbMusiclist> musiclists = musiclistService.selectByUid(user.getUid());
+			map.addAttribute("musicList", musiclists);
+		}
+
 		// 显示的歌曲列表
 		List<TbMusic> musics = null;
+		int mid = 0;
+		if( id != null ) mid = Integer.parseInt(id);
 		if( type == null || "now".equals(type) ) { // 默认正在播放
-			TbMusic music = musicService.selectByPrimaryKey(id);
-			if( nowList==null ) nowList = new ArrayList<>();
-			// 去重
-			boolean flag = true;
-			for(TbMusic te: nowList) {
-				if( te.getMid() == id ) {
-					flag = false;
+			// 如果传过来id，代表直接播放歌曲，可以直接将歌曲添加到正在播放列表
+			if( mid != 0 ) {
+				TbMusic music = musicService.selectByPrimaryKey(mid);
+				if( nowList == null ) nowList = new ArrayList<>();
+				// 去重
+				boolean flag = true;
+				for(TbMusic te: nowList) {
+					if( te.getMid() == mid ) {
+						flag = false;
+					}
 				}
+				if( flag ) nowList.add(music);
 			}
-			if( flag ) nowList.add(music);
 			musics = nowList;
 		} else if( "history".equals(type) ) { // 历史播放
 			musics = historyList;
@@ -95,9 +103,13 @@ public class PlayMusicCotroller {
 		map.addAttribute("songs", musics);
 		map.addAttribute("type", type);
 		Integer defalutId = null;
-		if( musics!=null && musics.size()>0 ) defalutId=musics.get(0).getMid();
-		map.addAttribute("id", defalutId);
-		// 保存id到数组中
+		// 传过来id的话，就直接播放这首歌
+		if( mid != 0 ) defalutId = mid;
+		else if( musics!=null && musics.size()>0 ) defalutId=musics.get(0).getMid();
+		
+		// map.addAttribute("id", defalutId);
+		
+		// 将我喜爱的音乐的id到数组中，控制前端红星的显示
 		List<Integer> loves = null;
 		if( loveList != null && loveList.size()>0 ) {
 			loves = new ArrayList<>();
@@ -110,6 +122,7 @@ public class PlayMusicCotroller {
 		return "playMusic";
 	}
 
+	
 	// 音乐播放
 	@RequestMapping(value = "/play/playmusic", method= {RequestMethod.POST})
 	@ResponseBody
@@ -126,6 +139,7 @@ public class PlayMusicCotroller {
 		if( historyList == null ) {
 			historyList = new ArrayList<>();
 		}
+		// 如果历史歌单已经有这首歌，就不需要再次添加了
 		boolean flag = true;
 		for(TbMusic temp: historyList ) {
 			if( temp.getMid() == mid ) {
@@ -135,6 +149,7 @@ public class PlayMusicCotroller {
 		if( flag ) historyList.add(music);
 		return JsonUtils.objectToJson("1");
 	}
+	
 	
 	// 添加到喜爱的音乐
 	@RequestMapping(value = "/loveMusic", method= {RequestMethod.POST})
@@ -147,12 +162,34 @@ public class PlayMusicCotroller {
 	}
 	
 	
+	// 添加音乐到列表
+	@RequestMapping(value="/addList")
+	@ResponseBody
+	public String addList(String lid, String id) {
+		if( lid == null || id == null ) {
+			return JsonUtils.objectToJson("参数错误");
+		}
+		int mlid = Integer.parseInt(lid);
+		int mid = Integer.parseInt(id);
+		if( music_musicListService.countByMlidAndMid(mlid, mid) == 1 ) {
+			return JsonUtils.objectToJson("歌曲已经存在歌单");
+		}
+		boolean flag = music_musicListService.save(mlid, mid);
+		if( flag ) return JsonUtils.objectToJson("添加成功");
+		else return JsonUtils.objectToJson("添加失败");
+	}
+	
+	
 	// 从列表中删除音乐
 	@RequestMapping(value="/delMusicFromList", method= {RequestMethod.POST})
 	@ResponseBody
 	public String del(int id, String ty) {
 		if( ty==null || "".equals(ty.trim()) || ty=="now" ) {
-			
+			for(TbMusic te: nowList ) {
+				if( te.getMid() == id ) {
+					nowList.remove(te);
+				}
+			}
 		} else if( "history".equals(ty) ) {
 			for(TbMusic te: historyList ) {
 				if( te.getMid() == id ) {
@@ -185,7 +222,7 @@ public class PlayMusicCotroller {
 			String lrc = DownloadLyric.startDownload(songName, singerName);
 			
 		/*	// 正式版本才能用
-			String path = IMAGE_SERVER_URL+FileUploadUtils.fileUpload2(lrc, DownloadLyric.LRC_EXT);
+			String path = IMAGE_SERVER_URL+FileUploadUtils.fileUpload(lrc, DownloadLyric.LRC_EXT);
 			//将歌词文件路径添加到对应的音乐
 			TbMusic music = new TbMusic();
 			music.setMid(id);
@@ -204,6 +241,7 @@ public class PlayMusicCotroller {
 			return JsonUtils.objectToJson(res);
 		}
 	}
+	
 	
 	// 歌单创建请求
 	@RequestMapping(value = "/addMusicList", method = { RequestMethod.POST})
@@ -248,6 +286,7 @@ public class PlayMusicCotroller {
 		return JsonUtils.objectToJson(result);
 	}
 	
+	
 	// 歌单删除请求
 	@RequestMapping(value = "deletMusicList", method = { RequestMethod.POST })
 	@ResponseBody
@@ -263,11 +302,9 @@ public class PlayMusicCotroller {
 	public void setHistoryList(List<TbMusic> historyList) {
 		this.historyList = historyList;
 	}
-
 	public void setLoveList(List<TbMusic> loveList) {
 		this.loveList = loveList;
 	}
-
 	public void setNowList(List<TbMusic> nowList) {
 		this.nowList = nowList;
 	}

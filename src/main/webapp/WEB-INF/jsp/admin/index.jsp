@@ -30,7 +30,8 @@
          	<li>
          		<span>菜单管理</span>
          		<ul>
-	         		<li data-options="attributes:{'url':'/admin/index-menu'}">菜单管理</li>
+	         		<li data-options="attributes:{'url':'/admin/index-menu'}">菜单维护</li>
+	         		<li data-options="attributes:{'url':'/admin/index-menu-content'}">菜单内容维护</li>
 	         	</ul>
          	</li>
          </ul>

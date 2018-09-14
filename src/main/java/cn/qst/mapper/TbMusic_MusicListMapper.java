@@ -6,4 +6,6 @@ public interface TbMusic_MusicListMapper {
 	int save(int mlid, int mid);
 	// 从歌单中删除音乐
 	int delete(int mlid, int mid);
+	// 统计次数
+	int countByMlidAndMid(int mlid, int mid);
 }

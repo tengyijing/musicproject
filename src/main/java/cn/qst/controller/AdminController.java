@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.qst.comman.pojo.AdminResult;
+import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.comman.pojo.EasyUiTreeNode;
 import cn.qst.service.AdminService;
 
@@ -56,5 +57,11 @@ public class AdminController {
 		adminService.deleteMenu(id);
 		//判断该类的父类是否还有子节点 没有的话把自身改为子目录
 		return adminService.isParent(parentId);
+	}
+	@RequestMapping("/menu/content")
+	@ResponseBody
+	public EasyUiDataGridResult getMenuContent(Integer page , Integer rows , Integer mid) {
+		
+		return null;
 	}
 }
