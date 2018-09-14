@@ -359,7 +359,32 @@
 	</select>
 
     <update id = "changePassword" parameterType="cn.qst.pojo.TbUser">
-        update tb_user set `password` = #{user.password} where `uname` = #{user.uname}
+        update tb_user set `password` = #{password} where `uname` = #{uname}
+    </update>
+
+    <update id="changeUserInfo" parameterType="cn.qst.pojo.TbUser">
+        update tb_user
+        <set>
+            <if test="password != null">
+                `password` = #{password,jdbcType=CHAR},
+            </if>
+            <if test="email != null">
+                `email` = #{email,jdbcType=CHAR},
+            </if>
+            <if test="phone != null">
+                `phone` = #{phone,jdbcType=CHAR},
+            </if>
+            <if test="sex != null">
+                `sex` = #{sex,jdbcType=TINYINT},
+            </if>
+            <if test="vip != null">
+                `VIP` = #{vip,jdbcType=TINYINT},
+            </if>
+            <if test="address != null">
+                `address` = #{address,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where `uname` = #{uname,jdbcType=CHAR}
     </update>
 </mapper>
 

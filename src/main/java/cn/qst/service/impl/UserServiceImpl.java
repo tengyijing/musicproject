@@ -23,7 +23,17 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private TbUserMapper tbUserMapper;
-	
+
+	/**
+	 * 更新用户的信息
+	 * @param user 封装了用户的性别，vip，邮箱地址，电话，用户名
+	 * @return 成功即返回true 失败即返回 false
+	 */
+	@Override
+	public Boolean changeUserInfo(TbUser user) {
+		return tbUserMapper.changeUserInfo(user) == 1 ? true : false;
+	}
+
 	/**
 	 * 根据传入的用户姓名信息进行效验，是否含有重复数据
 	 * 
@@ -56,7 +66,7 @@ public class UserServiceImpl implements UserService {
 	 *
 	 * @param uname 用户名
 	 * @param email 邮箱地址
-	 * @return
+	 * @return 成功即返回true 失败即返回 false
 	 */
 	@Override
 	public Boolean selectByUnameAndEmail(String uname, String email) {
@@ -88,7 +98,7 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * 登陆，通过用户名查询信息
 	 *
-	 * @return 
+	 * @return  成功即返回true 失败即返回 false
 	 */
 	@Override
 	public TbUser login(String userName, String passWord) {
@@ -107,9 +117,9 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * 修改密码
-	 * @param userName
-	 * @param passWord
-	 * @return
+	 * @param userName 用户名
+	 * @param passWord 密码
+	 * @return 成功即返回true 失败即返回 false
 	 */
  	public Boolean changePassword(String userName, String passWord) {
  		TbUser user = new TbUser();
@@ -145,7 +155,7 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * 查询所有城市的信息
-	 * @return
+	 * @return 城市的list集合信息
 	 */
 	@Override
 	public List<TbProvince> selectProvince() {
@@ -153,8 +163,13 @@ public class UserServiceImpl implements UserService {
 		return tbUserMapper.selectAllProvince();
 	}
 
+	/**
+	 * 根据地址id查询用户所在地址
+	 * @param pid 地址id
+	 * @return 地址的信息
+	 */
 	public List<TbCity> selectCityByPid(Integer pid) {
 		return tbUserMapper.selectCityByPid(pid);
 	}
-	
+
 }

@@ -373,7 +373,6 @@
                                     }
                                 });
                         }
-
                         function reload() {
                             window.location.reload();
                         }
@@ -382,15 +381,19 @@
                 </div>
                 <!--right-->
                 <div class="zp_nrm_r">
-                    <form action="saveOtherInfo.do" method="post" id="form1">
-
-                        <p>
-                            <em>邮箱：</em><i>${user.email}</i><a href="#fst1"
-                                                               style="text-decoration: none;">立即修改</a>
+                    <form action="/User/changUserInfo" method="post" id="form1">
+                        <span>
+                            <input value="${user.uname}" style="display:none" name="uname">
+                        </span>
+                        <p id = "userEmail">
+                            <em>邮箱：</em><i>${user.email}</i>
+                            <a href="#fst1" style="text-decoration: none;">立即修改</a>
+                            <input type="text" name="email" value="" style="display:none">
                         </p>
                         <p id="userPhone">
                             <em>手机号：</em><i>${user.phone}</i>
                             <a href="#fst2" style="text-decoration: none;">立即修改</a>
+                            <input type="text" name="phone" value="" style="display:none">
                         </p>
 
                         <p>
@@ -399,9 +402,11 @@
                                 <c:when test="${user.vip == 0 }">
                                     <!-- 充值会员 暂时不做-->
                                     非会员，赶紧成为我们的<span><a href="">会员</a></span>，享受更多资源
+                                    <input type="text" name="vip" value="0" style="display:none">
                                 </c:when>
                                 <c:otherwise>
                                     恭喜你是我们的会员
+                                    <input type="text" name="vip" value="1" style="display:none">
                                 </c:otherwise>
                             </c:choose>
                         </p>
@@ -410,43 +415,36 @@
                             <em>性别：</em>
                             <c:choose>
                                 <c:when test="${user.sex==0}">
-                                    <input type="radio" name="sex" value="unknown" class="sex_m">
+                                    <input type="radio" name="sex" value="2" class="sex_m">
                                     <i>保密</i>
-                                    <input type="radio" name="sex" value="m" class="sex_m"
+                                    <input type="radio" name="sex" value="0" class="sex_m"
                                            checked="true">
                                     <i>男</i>
-                                    <input type="radio" name="sex" value="f" class="sex_m">
+                                    <input type="radio" name="sex" value="1" class="sex_m">
                                     <i>女</i>
                                 </c:when>
                                 <c:when test="${user.sex==1}">
-                                    <input type="radio" name="sex" value="unknown" class="sex_m">
+                                    <input type="radio" name="sex" value="2" class="sex_m">
                                     <i>保密</i>
-                                    <input type="radio" name="sex" value="m" class="sex_m">
+                                    <input type="radio" name="sex" value="0" class="sex_m">
                                     <i>男</i>
-                                    <input type="radio" name="sex" value="f" class="sex_m"
+                                    <input type="radio" name="sex" value="1" class="sex_m"
                                            checked="true">
                                     <i>女</i>
                                 </c:when>
                                 <c:otherwise>
-                                    <input type="radio" name="sex" value="unknown" class="sex_m"
+                                    <input type="radio" name="sex" value="2" class="sex_m"
                                            checked="true">
                                     <i>保密</i>
-                                    <input type="radio" name="sex" value="m" class="sex_m">
+                                    <input type="radio" name="sex" value="0" class="sex_m">
                                     <i>男</i>
-                                    <input type="radio" name="sex" value="f" class="sex_m">
+                                    <input type="radio" name="sex" value="1" class="sex_m">
                                     <i>女</i>
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <!--<p>
-								<em>生日：</em> <input class="datainp" name="birthday"
-									id="birthday" type="text" value="${birthday}"> <font>(可能有惊喜哦)</font>
-							</p>  -->
                         <p>
                             <em>居住城市：</em>
-                            <!-- <input type="text" name="city" id="city"
-									value="${city}"
-									style="width: 200px; height: 30px; border: 1px #ccc solid; margin-top: 11px; font-size: 12px; text-align: center; color: #343434; float: left" />-->
                             <span id="address">
                                 <span id="province">
                                     <span><a onclick="allCityInfo()">立即添加</a>
@@ -502,40 +500,10 @@
                     <em>绑定邮箱地址：</em> <input type="text" name="email" id="email"
                                             style="width: 200px; height: 30px; border: 1px #ccc solid; margin-top: 11px; font-size: 12px; color: #343434; float: left">
                 </p>
-                <a style="text-decoration: none; cursor: pointer;"
-                   class="public_m3" onclick="PasswordRewrite();">保存修改</a>
+                <a style="text-decoration: none; cursor: pointer;" href="#"
+                   class="public_m3" onclick="getEmail();">保存修改</a>
             </div>
         </div>
-        <!--一条开始-->
-        <div class="public_m1">
-            <div class="public_m2">登录密码修改</div>
-            <!--提示信息-->
-            <div class="tip_notem">
-                <ul>
-                    <li>1.请牢记登录密码</li>
-                    <li>2.如果丢失密码，可以通过绑定的手机或邮箱找到</li>
-                </ul>
-            </div>
-            <div class="public_m4">
-                <p>
-                    <em>原密码：</em> <input type="password" name="password" id="password"
-                                         style="height: 23px; border: 1px solid #eaeaea; width: 140px">
-                </p>
-                <p>
-                    <em>新的密码：</em> <input type="password" name="password2"
-                                          id="password2"
-                                          style="height: 23px; border: 1px solid #eaeaea; width: 140px">
-                </p>
-                <p>
-                    <em>确认密码：</em> <input type="password" name="password3"
-                                          id="password3"
-                                          style="height: 23px; border: 1px solid #eaeaea; width: 140px">
-                </p>
-                <a style="text-decoration: none; cursor: pointer;"
-                   class="public_m3" onclick="PasswordRewrite();">保存修改</a>
-            </div>
-        </div>
-
     </div>
 </div>
 <!-- footer -->

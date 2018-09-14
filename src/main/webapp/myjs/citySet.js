@@ -59,7 +59,7 @@ function gitCityInfo() {
         data:{pid:pid},
         success: function (data) {
             var str = "";
-            str += "<select>";
+            str += "<select name=\"address\">";
             for (var i = 0; i < data.length; i++) {
                 str += "<option value=\" " + data[i].cid + " \"> " + data[i].name + "</option>";
             }

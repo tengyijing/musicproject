@@ -1,10 +1,21 @@
+//获取手机号码，并动态写入页面
 function getPhone() {
     var phone = document.getElementById("phone").value;
-    phoneBinding();
     var str = "";
     str += "<em>手机号：</em><i>" + phone + "</i>";
     str += "<a href=\"#fst2\" style=\"text-decoration: none;\">立即修改</a>";
+    str += "<input type=\"text\" name=\"phone\" value=\" " + phone + "\" style=\"display:none\">";
     $("#userPhone").html(str);
+}
+
+//获取邮箱地址，并动态写入页面
+function getEmail() {
+	var email = document.getElementById("email").value;
+	var str = "";
+	str += "<em>邮箱：</em><i> " +email+ " </i>";
+	str += "<a href=\"#fst1\" style=\"text-decoration: none;\">立即修改</a>";
+	str += "<input type=\"text\" name=\"email\" value=\" " + email + "\" style=\"display:none\">";
+	$("#userEmail").html(str);
 }
 
 function sumb(){

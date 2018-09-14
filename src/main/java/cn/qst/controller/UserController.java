@@ -8,7 +8,10 @@ import cn.qst.pojo.TbProvince;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +33,28 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    /**
+     * 将客户端空白输入传入""转为null
+     *
+     * @param binder 不知道
+     */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param user 封装了用户的性别，vip，邮箱地址，电话，用户名,地址
+     * @return 重定向到个人显示信息界面
+     */
+    @RequestMapping(value = "/changUserInfo", method = {RequestMethod.POST})
+    public String changeUserInfo(TbUser user) {
+        userService.changeUserInfo(user);
+        return "redirect:personalInfo";
+    }
 
     /**
      * 根据用户地址id 查询用户地址信息
@@ -103,10 +128,8 @@ public class UserController {
     public Boolean login(String userName, String passWord, HttpSession session) {
         TbUser user = userService.login(userName, passWord);
         if (user != null) {
-            StringBuilder builder = new StringBuilder("/images/headPhoto/");
-            builder.append("user.png");
             session.setAttribute("username", user.getUname());
-            session.setAttribute("imgstr", builder);
+            session.setAttribute("imgstr", user.getImage());
             return true;
         } else {
             return false;
@@ -126,7 +149,7 @@ public class UserController {
         user.setPassword(MD5Utils.md5(user.getPassword()));
         user.setVip((byte) 0);
         // /source/images/headPhoto/user.png 默认头像
-        user.setImage("user.png");
+        user.setImage("/images/headPhoto/user.png");
         user.setStatus(true);
         return userService.regist(user);
     }
