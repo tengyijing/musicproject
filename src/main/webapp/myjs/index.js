@@ -40,6 +40,9 @@ $(function () {
 			}
 			$("#top"+data[2]).html(str);
 			$("#top"+data[2]+"Child").html(str1);
+			if(data.length==5){
+				childMenu(data[4])
+			}
 		}
 	})
 })
@@ -144,4 +147,58 @@ function userLogin2(username){
 	qikoo.dialog3.alert("用户未登录，请登录");
 }
 
+function childMenu(tbMenu) {
+	var str="";
+	if(menuid==4){
+			for(var i=0;i<tbMenu.length;i++){
+				var name = tbMenu[i].mname;
+			if(tbMenu[i].mname=='新歌榜'){
+				str+="<div class='mod mod-song-rank js-mod mod-newsong monkey='H_NI_billboard_new data-js-mod-name='new_index_billboard_new' >";
+			}else if(tbMenu[i].mname=='热歌榜'){
+				str+="<div class='mod mod-song-rank js-mod mod-hotsong monkey='H_NI_billboard_hot data-js-mod-name='new_index_billboard_hot' >";
+			}else if(tbMenu[i].mname=='歌手榜'){
+				str+="<div class='mod mod-song-rank js-mod mod-artistsong monkey='H_NI_billboard_artist data-js-mod-name='new_index_billboard_artist' >";
+			}
+			str+="<div class='hd'>";
+			str+="<h2 class='title'>"+name+"</h2>";
+			str+="<span><a href='javascript:;' class='icon-play-all play-all js-play-song'></a></span>";
+			str+="</div>";
+			str+="	<div class='bd'>";
+			str+="<ul class='song-list'>";
+			
+			str+=topRank(tbMenu[i].mid);
+			str+="</ul>";
+			str+="</div></div>";
+			
+		}
+		$("#ranktop").html(str);
+	}
+	
+}
 
+function topRank(mid){
+	var str = "";
+	$.ajax({
+		type:'get',
+		data:{mid:mid},
+		url:'/musicClassify/rank',
+		async : false,
+		success:function(data){
+			for(var i=0;i<data.length;i++){
+				str+="<li class=' top"+i+"'><div class='index'>"+i+"</div>";
+				str+="<div class='status status-steady'>";
+				str+="<i class='icon-status'></i>";
+				str+="</div><div class='song-info'><div class='info'><div class='song'>";
+				str+="<a  title='我管你' style='text-decoration:none;' href='playMusic.do?id=1&type=1' target='_new'>漂洋过海来看你</a><span";
+				str+="class='artist'> <span class='author_list'";
+				str+="title='华晨宇'> <a hidefocus='true' href='playMusic.do?id=1&type=1' target='_new'>周深</a>";
+				str+="</span></span></div></div></div>";
+				str+="<div class='opera-icon' >";
+				str+="<a href='javascript:;' class='opera-icon-play icon icon-music-play js-play-song'></a>" ;
+				str+="<a href='javascript:;' class='opera-icon-add icon icon-music-collect js-add'></a>";
+				str+="</div></li>";						
+			}
+		}
+	})
+	return str;
+}

@@ -33,5 +33,7 @@ public interface TbMusicMapper {
    
     List<TbMusic> selectBySname(String sname);
     
+    List<Integer> selectByCid(Integer cid);
     
+
 }
