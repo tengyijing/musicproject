@@ -55,6 +55,7 @@ public class PlayMusicCotroller {
 	@Value("${IMAGE_SERVER_URL}")
 	private String IMAGE_SERVER_URL;
 	
+	
 	// 跳转到音乐播放
 	@RequestMapping("/play")
 	public String playPage(ModelMap map, HttpSession session, String type, String id) {
@@ -105,7 +106,9 @@ public class PlayMusicCotroller {
 		// 传过来id的话，就直接播放这首歌
 		if( mid != 0 ) defalutId = mid;
 		else if( musics!=null && musics.size()>0 ) defalutId=musics.get(0).getMid();
-		map.addAttribute("id", defalutId);
+		
+		// map.addAttribute("id", defalutId);
+		
 		// 将我喜爱的音乐的id到数组中，控制前端红星的显示
 		List<Integer> loves = null;
 		if( loveList != null && loveList.size()>0 ) {
@@ -119,6 +122,7 @@ public class PlayMusicCotroller {
 		return "playMusic";
 	}
 
+	
 	// 音乐播放
 	@RequestMapping(value = "/play/playmusic", method= {RequestMethod.POST})
 	@ResponseBody
@@ -146,6 +150,7 @@ public class PlayMusicCotroller {
 		return JsonUtils.objectToJson("1");
 	}
 	
+	
 	// 添加到喜爱的音乐
 	@RequestMapping(value = "/loveMusic", method= {RequestMethod.POST})
 	@ResponseBody
@@ -154,6 +159,24 @@ public class PlayMusicCotroller {
 		if( loveList == null ) loveList = new ArrayList<>();
 		loveList.add(music);
 		return JsonUtils.objectToJson("1");
+	}
+	
+	
+	// 添加音乐到列表
+	@RequestMapping(value="/addList")
+	@ResponseBody
+	public String addList(String lid, String id) {
+		if( lid == null || id == null ) {
+			return JsonUtils.objectToJson("参数错误");
+		}
+		int mlid = Integer.parseInt(lid);
+		int mid = Integer.parseInt(id);
+		if( music_musicListService.countByMlidAndMid(mlid, mid) == 1 ) {
+			return JsonUtils.objectToJson("歌曲已经存在歌单");
+		}
+		boolean flag = music_musicListService.save(mlid, mid);
+		if( flag ) return JsonUtils.objectToJson("添加成功");
+		else return JsonUtils.objectToJson("添加失败");
 	}
 	
 	
@@ -219,6 +242,7 @@ public class PlayMusicCotroller {
 		}
 	}
 	
+	
 	// 歌单创建请求
 	@RequestMapping(value = "/addMusicList", method = { RequestMethod.POST})
 	@ResponseBody
@@ -262,6 +286,7 @@ public class PlayMusicCotroller {
 		return JsonUtils.objectToJson(result);
 	}
 	
+	
 	// 歌单删除请求
 	@RequestMapping(value = "deletMusicList", method = { RequestMethod.POST })
 	@ResponseBody
@@ -277,11 +302,9 @@ public class PlayMusicCotroller {
 	public void setHistoryList(List<TbMusic> historyList) {
 		this.historyList = historyList;
 	}
-
 	public void setLoveList(List<TbMusic> loveList) {
 		this.loveList = loveList;
 	}
-
 	public void setNowList(List<TbMusic> nowList) {
 		this.nowList = nowList;
 	}

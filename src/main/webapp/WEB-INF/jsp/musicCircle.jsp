@@ -25,7 +25,7 @@
 
 <!--提示框-->
 <link href="../../source/SearchMusic/css/qikoo.css" type="text/css" rel="stylesheet" />
-<script src="../../source/SearchMusic/js/qikoo.js"></script>
+<script src="../../myjs/qikoo.js"></script>
 <style>
 /*滚动条*/
 ::-webkit-scrollbar{width:6px; height:6px;}
@@ -39,7 +39,7 @@ body::-webkit-scrollbar-track-piece{background-color:#ccc;}
 </style>
 <!-- 提示框 -->
 <link href="../../source/SearchMusic/css/qikoo.css" type="text/css" rel="stylesheet" />
-<script src="../../source/SearchMusic/js/qikoo.js"></script>
+<script src="../../myjs/qikoo.js"></script>
 <script type="text/javascript">
 var menuid=${menuid}
 </script>
@@ -95,23 +95,16 @@ var menuid=${menuid}
         </div>
         
          <div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;display:none">
-         <c:choose>
-        <c:when test="${imgstr== null or imgstr==''}">
-            <a href="userInfo.do"><img src="../../source/images/user.png" id="img1"/></a>
-        </c:when>
-        <c:otherwise>
-        <a href="userInfo.do"><img src="${imgstr}" id="img2"/></a>
-        </c:otherwise>
-        </c:choose>
+        <a href="User/personalInfo"><img src="${imgstr}" id="img2"/></a>
          </div>
-         <div id="name" style="display:none;padding-top:35px;"><a href="userInfo.do" style="cursor:pointer" ><i  onmouseover = "xianshi()"  onmouseout = "xiaoshi2()">${username}</i></a></div>
+         <div id="name" style="display:none;padding-top:35px;"><a href="User/personalInfo" style="cursor:pointer" ><i  onmouseover = "xianshi()"  onmouseout = "xiaoshi2()">${username}</i></a></div>
          <div id="xianshi">
-         <p style="margin-left:5px;margin-top:3px;"><a href="userInfo.do"><img src="../../source/images/个人.png"></a></p>
-         <p style="margin-left:4px;margin-top:5px;"><a href="Logout.do"><img src="../../source/images/退出.png"></a></p>
+         <p style="margin-left:5px;margin-top:3px;"><a href="User/personalInfo"><img src="/images/person.png"></a></p>
+         <p style="margin-left:4px;margin-top:5px;"><a href="User/exit"><img src="/images/exit.png"></a></p>
          </div>
         <div class="header-login"style="margin-right:-10px;">
-          <a href="login.jsp" class="open-green" id="login">登录</a>
-          <a href="regist.jsp" class="open-vip" id="reg">注册</a>
+          <a href="/login" class="open-green" id="login">登录</a>
+          <a href="/register" class="open-vip" id="reg">注册</a>
         </div>
       </div>
       <ul class="header-subNav" style="margin-top:20px;" id="topmusicCircleChild">

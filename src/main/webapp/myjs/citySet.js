@@ -19,8 +19,8 @@ function userCityInfo(address) {
             var str = "";
             str += "        " + data.pname + "   " + data.name;
             str += "&nbsp;&nbsp;&nbsp;&nbsp;";
-            str += "<button onclick=\"\">立即修改</button>";
-            $("#address").html(str);
+            str += "<button onclick=\"allCityInfo()\">立即修改</button>";
+            $("#province").html(str);
         }
     })
 }
@@ -59,7 +59,7 @@ function gitCityInfo() {
         data:{pid:pid},
         success: function (data) {
             var str = "";
-            str += "<select>";
+            str += "<select name=\"address\">";
             for (var i = 0; i < data.length; i++) {
                 str += "<option value=\" " + data[i].cid + " \"> " + data[i].name + "</option>";
             }

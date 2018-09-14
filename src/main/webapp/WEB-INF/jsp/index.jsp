@@ -21,18 +21,18 @@
 <!-- 提示框 -->
 <link href="/source/SearchMusic/css/qikoo.css" type="text/css"
 	rel="stylesheet" />
-<script src="/source/SearchMusic/js/qikoo.js"></script>
+<script src="/myjs/qikoo.js"></script>
 <script type="text/javascript">
 	var menuid = 2;
 </script>
 </head>
 
 <body onload="getName('${username}');">
-<a href="javascript:ab()">sdfsdfsdf</a>
+
 	<header class="header">
 	<div class="header-container" style="width: 1200px;">
 		<div class="header-top">
-			<a href="index.jsp" class="logo"></a>
+			<a href="/index" class="logo"></a>
 			<nav class="header-nav">
 			<ul id="topindex">
 

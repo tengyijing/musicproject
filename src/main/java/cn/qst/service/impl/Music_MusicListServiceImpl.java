@@ -22,4 +22,9 @@ public class Music_MusicListServiceImpl implements Music_MusicListService {
 		return music_muscilistDao.delete(mlid, mid)==1;
 	}
 
+	@Override
+	public int countByMlidAndMid(int mlid, int mid) {
+		return music_muscilistDao.countByMlidAndMid(mlid, mid);
+	}
+
 }
