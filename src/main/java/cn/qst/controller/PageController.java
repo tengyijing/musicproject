@@ -59,8 +59,7 @@ public class PageController {
 	/**
 	 * 根据不同的页面返回相应的菜单
 	 * 
-	 * @param id
-	 *            通过id来得到当前跳转页面的菜单属性
+	 * @param id通过id来得到当前跳转页面的菜单属性
 	 * @return 返回一个json数据到前台页面
 	 */
 	@ResponseBody
@@ -79,28 +78,26 @@ public class PageController {
 		List<TbMenu> mCList = new ArrayList<>();
 		// 取得父菜单的id和判断是否需要直接跳转到首个子菜单id
 		Integer parent = 0;
+		//取得个单独页面的菜单选项
+		List<TbMenu> mClsit1 = new ArrayList<>();
+		
 		Integer child = 0;
 		String name;
 		// 判断传回的值的菜单属性是否是父菜单
 		if (tbMenu.getIsparent()) {
 			parent = tbMenu.getMid();
-			mCList = menuService.queryByParent(tbMenu.getMid());
-			// 判断父类菜单有没有子菜单.
-			if (mCList.size() == 0) {
-				name = tbMenu.getEname();
-				child = null;
-			} else {
+			mCList = menuService.queryByParent(tbMenu.getMid());	
 				//判断其子类是否是一级父类
 				if (tbMenu.getParentmid() != 12) {
 					parent = tbMenu.getParentmid();
 					child = tbMenu.getMid();
 					name = tbMenu.getEname();
 					mCList = menuService.queryByParent(parent);
+					mClsit1 = menuService.queryByParent(tbMenu.getMid());
 				} else {
 					child = mCList.get(0).getMid();
 					name = mCList.get(0).getEname();
 				}
-			}
 		} else {
 			parent = tbMenu.getParentmid();
 			mCList = menuService.queryByParent(parent);
@@ -112,8 +109,8 @@ public class PageController {
 		list.add(name);
 		mPList.addAll(mCList);
 		list.add(mPList);
-		for(Object object:list) {
-			System.out.println(object.toString());
+		if(mClsit1.size()!=0) {
+			list.add(mClsit1);
 		}
 		return list;
 	}
@@ -139,6 +136,5 @@ public class PageController {
 			}
 		}
 		return list;
-	}
-
+	}	
 }
