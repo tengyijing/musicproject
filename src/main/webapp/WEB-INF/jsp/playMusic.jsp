@@ -133,7 +133,6 @@ var type = '${type}';
 									</div>
 								</li>
 								</c:forEach>
-								<li class="songList"></li>
 							</ul>
 						</div>
 						
@@ -143,7 +142,7 @@ var type = '${type}';
 							<ul class="menuUL3" style="width:120px;height:200px;">
 							<c:forEach items="${musicList}" var="music" varStatus="index1">
 								<li class="menuLi3 cur">
-								<a class="beijing" single="${music.name}">
+								<a class="beijing" single="${music.mlid}">
 								 <i class="icon isplay2"></i>${music.name}</a>
 								</li>
 							</c:forEach>
@@ -183,7 +182,7 @@ var type = '${type}';
 						</div>
 					</div>
 				</div>
-				<div class="mainOuther">
+				<div class="mainOuther he">
 					<div class="albumCover">
 						<a><img src="playmusic/images/uploading.gif" width="200" height="200" id="canvas1" class="canvas1"></a>
 					</div>

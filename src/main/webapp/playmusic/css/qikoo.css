@@ -1,4 +1,6 @@
-
+.he{
+	display:none;
+}
 .mod-dialog-bg {
 	background: #000;
 	opacity: .5;
