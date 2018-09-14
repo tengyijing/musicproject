@@ -133,7 +133,6 @@ var type = '${type}';
 									</div>
 								</li>
 								</c:forEach>
-								<li class="songList"></li>
 							</ul>
 						</div>
 						
@@ -183,7 +182,7 @@ var type = '${type}';
 						</div>
 					</div>
 				</div>
-				<div class="mainOuther">
+				<div class="mainOuther he">
 					<div class="albumCover">
 						<a><img src="playmusic/images/uploading.gif" width="200" height="200" id="canvas1" class="canvas1"></a>
 					</div>

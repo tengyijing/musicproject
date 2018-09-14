@@ -169,6 +169,7 @@ function userLogin(username) {
 		var flag3 = false;
 		function pinBtnchange(){
 			if(flag3){
+				$(".mainOuther").addClass('he');
 				$(".pinBtn").removeClass('changeBg');
 				$(".mainBody").show();
 				$(".leftBar").show();
@@ -183,6 +184,7 @@ function userLogin(username) {
 				$(".middle").removeClass('bg');
 				flag3=false;
 			} else {
+				$(".mainOuther").removeClass('he');
 				$(".pinBtn").addClass('changeBg');
 				$(".mainBody").hide();
 				$(".leftBar").hide();
@@ -585,7 +587,7 @@ $(function(){
 		/*外观改变*/
 		var html="";
 		html+='<div class="manyou">';
-		html+='	<a href="#" class="manyouA">查看详细信息</a>';
+		html+='<a href="/music/detail?mid='+sid+'" class="manyouA">查看详细信息</a>';
 		html+='</div>';
 		$(".start em").css({
 			"background":"",
