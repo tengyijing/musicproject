@@ -2,6 +2,7 @@ package cn.qst.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 
 import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.pojo.AlbumResult;
@@ -30,5 +31,5 @@ public interface MusicClassifyService {
 	/**
 	 * 对所有歌手进行分页处理
 	 */
-	EasyUiDataGridResult fundSnameAll(int page , int rows);
+	PageInfo<AlbumResult> fundSnameAll(int page , int rows);
 }

@@ -11,5 +11,6 @@
 	  SELECT sname,count(*) songs,sum(playsum) tryListening
 	  FROM `tb_music`
 	  GROUP BY sname
+	  ORDER BY SUM(playsum) desc
   </select>
 </mapper>
