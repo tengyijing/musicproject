@@ -25,25 +25,7 @@
 <script src="../../myjs/citySet.js"></script>
 <!-- 上传头像 -->
 <script src="../../source/person/headImage/head/jquery.min.js"></script>
-<link rel="shortcut icon" href="../../source/images/logo-b.png" />
-<link type="text/css" rel="stylesheet"
-	href="../../source/regist/css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet"
-	href="../../source/regist/css/gloab.css">
-<link type="text/css" rel="stylesheet"
-	href="../../source/regist/css/index.css">
-<link href="../../source/regist/pictureYanZheng/css/jquery.idcode.css"
-	type="text/css" rel="stylesheet">
-<link href="../../source/regist/css/style.css" rel="stylesheet"
-	type="text/css" />
-<script type="text/javascript"
-	src="../../source/regist/js/jquery-1.11.1.min.js"></script>
 
-<script type="text/javascript" src="../../myjs/register.js"></script>
-
-<script
-	src="../../source/regist/pictureYanZheng/js/jquery-1.12.3.min.js"></script>
-<script src="../../source/regist/pictureYanZheng/js/jquery.idcode.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../source/person/headImage/css/bootstrap.min.css">
 <link href="../../source/person/headImage/head/cropper.min.css"
@@ -71,7 +53,6 @@
 <!--页脚 -->
 <link rel="stylesheet" type="text/css"
 	href="../../source/person/footer/index.css">
-<script type="text/javascript" src="../../myjs/register.js"></script>
 </head>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -498,10 +479,8 @@
 			</div>
 			<!--一条开始-->
 			<div class="public_m1">
-				<div class="public_m2">
-					<a name="fst1"></a>
-				</div>
-				绑定邮箱修改
+
+				<div class="public_m2">绑定邮箱修改</div>
 				<!--提示信息-->
 				<div class="tip_notem">
 					<ul>
@@ -518,7 +497,7 @@
 						 -->
 					</p>
 					<a style="text-decoration: none; cursor: pointer;" href="#"
-						class="public_m3" onclick="getEmail();">保存修改</a>
+						class="public_m3" onclick="getEmail();">立即绑定</a>
 				</div>
 			</div>
 		</div>
