@@ -1,5 +1,6 @@
 package cn.qst.controller;
 
+import cn.qst.comman.fastdfs.FileUploadUtils;
 import cn.qst.comman.utils.Base64;
 import cn.qst.comman.utils.MD5Utils;
 import cn.qst.comman.utils.SendEmail;
@@ -9,6 +10,7 @@ import cn.qst.pojo.TbProvince;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,11 +18,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +34,12 @@ import java.util.UUID;
 @RequestMapping("/User")
 public class UserController {
 
+	/**
+	 * 服务器ip地址
+	 */
+	@Value("${IMAGE_SERVER_URL}")
+	private String IMAGE_SERVER_URL;
+	
 	@Autowired
 	private UserService userService;
 
@@ -61,21 +67,35 @@ public class UserController {
 		return "redirect:personalInfo";
 	}
 
+	/**
+	 * 以比特流上传图片文件，并获取sessino中“username” 的用户名，
+	 * 将该用户的图片的地址，写入到数据库
+	 *
+	 * @param imgDate 比特类型图片数据
+	 * @param request 获取session对象中的 用户名
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/upHeadImage")
 	public Boolean upHeadImage(String imgDate, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		TbUser user = new TbUser();
-		user.setUname((String) (session.getAttribute("username")));
+		String uname = (String) (session.getAttribute("username"));
+		if (uname == null) {
+			return false;
+		}
+		user.setUname(uname);
 		String str = imgDate.substring(imgDate.indexOf(",") + 1);
 		byte[] bs = Base64.GenerateImage(str);
 		if (bs == null) {
 			return false;
 		}
-		//jpg图片后缀
-		//不为空即调用 文件上传，并返回访问路径（不带id地址需自己拼接）
+		//jpg图片后缀,以及上传图片的不带ip地址的url
+		String path = FileUploadUtils.fileUpload(bs, "jgp");
+		//拼接ip和地址
+		user.setImage(IMAGE_SERVER_URL + path);
 		//将图片存入数据库
-		return null;
+		return userService.upHeadImage(user);
 	}
 
 	/**
@@ -251,23 +271,24 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/sendEmail")
-	public Boolean sendEmail(String email, HttpSession session, HttpServletRequest request) {
+	public Boolean sendEmail(String email,String sendFlag, HttpSession session, HttpServletRequest request) {
 		boolean flag = false;
 		String code = null;
 		Date codeOverTime = (Date) request.getSession().getAttribute("codeOverTime");
 		if (codeOverTime != null) {
-			if (TimeUtils.compareTime(TimeUtils.getNowTime(), codeOverTime)) {
-				code = (String) request.getSession().getAttribute("code");
-			} else {
-				code = SendEmail.sendEamilCode(email);
+			if (TimeUtils.compareTime(codeOverTime, TimeUtils.getNowTime())) {
+				code = SendEmail.sendEamilCode(email, sendFlag);
 				if (code != null) {
 					session.setAttribute("code", code);
 					session.setAttribute("codeOverTime", TimeUtils.addMinuteTime(3));
 					flag = true;
 				}
+			} else {
+				//此判断供测试及演示使用，打印出每次的code；
+				code =(String) session.getAttribute("code");
 			}
 		} else {
-			code = SendEmail.sendEamilCode(email);
+			code = SendEmail.sendEamilCode(email, sendFlag);
 			if (code != null) {
 				session.setAttribute("code", code);
 				session.setAttribute("codeOverTime", TimeUtils.addMinuteTime(3));
@@ -300,7 +321,6 @@ public class UserController {
 		}
 		String code = (String) session.getAttribute("code");
 		if (code.equals(verifyNo)) {
-			session.removeAttribute("codeOverTime");
 			flag = true;
 		}
 		return flag;

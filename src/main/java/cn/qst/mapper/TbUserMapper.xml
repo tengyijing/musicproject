@@ -386,6 +386,11 @@
         </set>
         where `uname` = #{uname,jdbcType=CHAR}
     </update>
+    
+    <update id="upHeadImage" parameterType="cn.qst.pojo.TbUser">
+    update tb_user set `image` = #{image,jdbcType=CHAR}
+    where `uname` = #{uname,jdbcType=CHAR}
+    </update>
 </mapper>
 
 

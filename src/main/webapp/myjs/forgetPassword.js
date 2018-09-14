@@ -145,6 +145,7 @@ function sentPhone(){
 		contentType:"application/x-www-form-urlencoded",//(默认: "application/x-www-form-urlencoded") 发送信息至服务器时内容编码类型。默认值适合大多数应用场合。
         data: {
             email: $("#email").val(),//userName:$("#adminNo").val(),
+            sendFlag:"changePassword",
         },
 		dataType:'json',
          success: function(json){//如果调用servlet成功，响应200。请求成功后回调函数。这个方法有两个参数：服务器返回数据，返回状态(可以缺省)。

@@ -168,8 +168,22 @@ public class UserServiceImpl implements UserService {
 	 * @param pid 地址id
 	 * @return 地址的信息
 	 */
+	@Override
 	public List<TbCity> selectCityByPid(Integer pid) {
 		return tbUserMapper.selectCityByPid(pid);
 	}
+
+	/**
+	 * 修改用户头像
+	 * @param user 用户名，以及图片的url地址
+	 * @return 修改成功即返回true 失败即false
+	 */
+	@Override
+	public Boolean upHeadImage(TbUser user) {
+		// TODO Auto-generated method stub
+		return tbUserMapper.upHeadImage(user) == 1 ? true : false; 
+	}
+	
+	
 
 }

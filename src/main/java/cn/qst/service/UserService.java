@@ -104,4 +104,11 @@ public interface UserService {
 	 * @return list集合
 	 */
 	List<TbCity> selectCityByPid(Integer pid);
+	
+	/**
+	 * 修改用户头像
+	 * @param user 用户名，以及图片的url地址
+	 * @return 修改成功即返回true 失败即false
+	 */
+	Boolean upHeadImage(TbUser user);
 }

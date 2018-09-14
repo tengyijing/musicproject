@@ -97,4 +97,12 @@ public interface TbUserMapper {
      * @return
      */
     int changeUserInfo(TbUser user);
+    
+    /**
+     * 修改用户的头像url地址
+     * 
+     * @param user 传入了用户名，以及图片url地址
+     * @return
+     */
+    int upHeadImage(TbUser user);
 }

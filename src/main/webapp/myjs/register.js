@@ -46,7 +46,7 @@ function GetUserName() {
 function CheckUserName() {
     var User;
     $.ajax({
-        url: "User/verifyUname", //(默认: 当前页地址) 发送请求的地址
+        url: "/User/verifyUname", //(默认: 当前页地址) 发送请求的地址
         type: "post", //(默认: "get") 请求方式 ("post" 或 "get")， 默认为 "get"。注意：其它 http请求方法，如 put和 delete也可以使用，但仅部分浏览器支持。
         async: false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
         contentType: "application/x-www-form-urlencoded",//(默认: "application/x-www-form-urlencoded") 发送信息至服务器时内容编码类型。默认值适合大多数应用场合。
@@ -84,7 +84,7 @@ function CheckUserName() {
 function emailBinding() {
     var User;
     $.ajax({
-        url: "User/verifyEmail", //(默认: 当前页地址) 发送请求的地址
+        url: "/User/verifyEmail", //(默认: 当前页地址) 发送请求的地址
         type: "post", //(默认: "get") 请求方式 ("post" 或 "get")， 默认为 "get"。注意：其它 http请求方法，如 put和 delete也可以使用，但仅部分浏览器支持。
         async: false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
         contentType: "application/x-www-form-urlencoded",//(默认: "application/x-www-form-urlencoded") 发送信息至服务器时内容编码类型。默认值适合大多数应用场合。
@@ -121,7 +121,7 @@ function emailBinding() {
 function phoneBinding() {
     var User;
     $.ajax({
-        url: "User/verifyPhone", //(默认: 当前页地址) 发送请求的地址
+        url: "/User/verifyPhone", //(默认: 当前页地址) 发送请求的地址
         type: "post", //(默认: "get") 请求方式 ("post" 或 "get")， 默认为 "get"。注意：其它 http请求方法，如 put和 delete也可以使用，但仅部分浏览器支持。
         async: false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
         contentType: "application/x-www-form-urlencoded",//(默认: "application/x-www-form-urlencoded") 发送信息至服务器时内容编码类型。默认值适合大多数应用场合。
@@ -157,12 +157,13 @@ function phoneBinding() {
 //发送邮件验证码
 function sentPhone() {
     $.ajax({
-        url: "User/sendEmail", //(默认: 当前页地址) 发送请求的地址
+        url: "/User/sendEmail", //(默认: 当前页地址) 发送请求的地址
         type: "post", //(默认: "get") 请求方式 ("post" 或 "get")， 默认为 "get"。注意：其它 http请求方法，如 put和 delete也可以使用，但仅部分浏览器支持。
         async: false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
         contentType: "application/x-www-form-urlencoded",//(默认: "application/x-www-form-urlencoded") 发送信息至服务器时内容编码类型。默认值适合大多数应用场合。
         data: {
             email: $("#email").val(),//userName:$("#adminNo").val(),
+            sendFlag:"register",
         },
         dataType: 'json',
         success: function (json) {//如果调用servlet成功，响应200。请求成功后回调函数。这个方法有两个参数：服务器返回数据，返回状态(可以缺省)。
@@ -185,7 +186,7 @@ function sentPhone() {
 function yanzhengma() {
     var reEmail = false;
     $.ajax({
-        url: "User/verifyCode", //(默认: 当前页地址) 发送请求的地址
+        url: "/User/verifyCode", //(默认: 当前页地址) 发送请求的地址
         type: "post", //(默认: "get") 请求方式 ("post" 或 "get")， 默认为 "get"。注意：其它 http请求方法，如 put和 delete也可以使用，但仅部分浏览器支持。
         async: false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
         contentType: "application/x-www-form-urlencoded",//(默认: "application/x-www-form-urlencoded") 发送信息至服务器时内容编码类型。默认值适合大多数应用场合。
@@ -219,7 +220,7 @@ function yanzhengma() {
 //保存注册数据
 function saveData() {
     $.ajax({
-        url: "User/regist", //(默认: 当前页地址) 发送请求的地址
+        url: "/User/regist", //(默认: 当前页地址) 发送请求的地址
         type: "post", //(默认: "get") 请求方式 ("post" 或 "get")， 默认为 "get"。注意：其它 http请求方法，如 put和 delete也可以使用，但仅部分浏览器支持。
         async: false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
         contentType: "application/x-www-form-urlencoded",//(默认: "application/x-www-form-urlencoded") 发送信息至服务器时内容编码类型。默认值适合大多数应用场合。
