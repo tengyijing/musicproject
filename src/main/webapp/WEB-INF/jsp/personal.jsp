@@ -315,12 +315,8 @@
 
                                 });
 
-                        $(".avatar-save")
-                            .on(
-                                "click",
-                                function () {
-                                    var img_lg = document
-                                        .getElementById('imageHead');
+                        $(".avatar-save").on("click", function () {
+                                    var img_lg = document.getElementById('imageHead');
                                     // 截图小的显示框内的内容
                                     html2canvas(
                                         img_lg,
@@ -342,7 +338,7 @@
                                                 var newImg = document
                                                     .createElement("img");
                                                 newImg.src = dataUrl;
-                                                //alert(dataUrl);
+                                                alert(dataUrl);
                                                 imagesAjax(dataUrl);
                                             }
                                         });
@@ -350,11 +346,10 @@
                                 })
 
                         function imagesAjax(src) {
-                            $
-                                .ajax({
-                                    url: "upHeadImage.do",
+                            $.ajax({
+                                    url: "/User/upHeadImage",
                                     data: {
-                                        imgdata: src,
+                                        imgDate: src,
                                     },
                                     async: false,
                                     type: "POST",
@@ -499,6 +494,7 @@
                 <p>
                     <em>绑定邮箱地址：</em> <input type="text" name="email" id="email"
                                             style="width: 200px; height: 30px; border: 1px #ccc solid; margin-top: 11px; font-size: 12px; color: #343434; float: left">
+                    <span><button>发送验证码</button></span>
                 </p>
                 <a style="text-decoration: none; cursor: pointer;" href="#"
                    class="public_m3" onclick="getEmail();">保存修改</a>
