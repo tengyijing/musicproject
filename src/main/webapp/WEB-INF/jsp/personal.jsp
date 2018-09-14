@@ -340,7 +340,6 @@
 																var newImg = document
 																		.createElement("img");
 																newImg.src = dataUrl;
-																alert(dataUrl);
 																imagesAjax(dataUrl);
 															}
 														});
