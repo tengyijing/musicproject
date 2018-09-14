@@ -222,7 +222,7 @@ public class PlayMusicCotroller {
 			String lrc = DownloadLyric.startDownload(songName, singerName);
 			
 		/*	// 正式版本才能用
-			String path = IMAGE_SERVER_URL+FileUploadUtils.fileUpload2(lrc, DownloadLyric.LRC_EXT);
+			String path = IMAGE_SERVER_URL+FileUploadUtils.fileUpload(lrc, DownloadLyric.LRC_EXT);
 			//将歌词文件路径添加到对应的音乐
 			TbMusic music = new TbMusic();
 			music.setMid(id);
