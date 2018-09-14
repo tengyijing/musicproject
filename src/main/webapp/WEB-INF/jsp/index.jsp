@@ -23,11 +23,12 @@
 	rel="stylesheet" />
 <script src="/source/SearchMusic/js/qikoo.js"></script>
 <script type="text/javascript">
-	var menuid = 1;
+	var menuid = 2;
 </script>
 </head>
 
 <body onload="getName('${username}');">
+<a href="javascript:ab()">sdfsdfsdf</a>
 	<header class="header">
 	<div class="header-container" style="width: 1200px;">
 		<div class="header-top">

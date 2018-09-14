@@ -1,6 +1,9 @@
 package cn.qst.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 
 
 import cn.qst.pojo.AlbumResult;
+import cn.qst.pojo.TbMusic;
 import cn.qst.service.MusicClassifyService;
 import cn.qst.service.MusicService;
 
@@ -36,8 +40,38 @@ public class MusicClassifyController {
 	@ResponseBody
 	@RequestMapping("/musicClassify/queryAll")
 	public PageInfo<AlbumResult> queryAll(@RequestParam(value="pageIndex",defaultValue="1")Integer pageNum) {
-		/*EasyUiDataGridResult fundSnameAll = musicClassifyService.fundSnameAll(1, 4);*/
-		PageInfo<AlbumResult> pageInfo = musicClassifyService.fundSnameAll(pageNum,1);
+		PageInfo<AlbumResult> pageInfo = musicClassifyService.fundSnameAll(pageNum,4);
 		return pageInfo;
+	}
+	
+	
+	/**
+	 * 音乐分类
+	 */
+	@ResponseBody
+	@RequestMapping("/musicClassify/queryByCid")
+	public PageInfo<TbMusic> queryByCid(Integer cid,Integer pageIndex){
+		PageInfo<TbMusic> pageInfo = musicClassifyService.fundQuery(pageIndex,4,cid);
+		return pageInfo;
+	}
+	
+	/**
+	 * 音乐排行
+	 */
+	@ResponseBody
+	@RequestMapping("/musicClassify/rank")
+	public List<Integer> queryRank(Integer mid){
+		List<Integer> list = new ArrayList<>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
+		list.add(5);
+		list.add(6);
+		list.add(7);
+		list.add(8);
+		list.add(9);
+		list.add(10);
+		return list;
 	}
 }

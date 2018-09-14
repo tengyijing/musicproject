@@ -312,8 +312,17 @@
 <select id="selectBySname" resultMap="BaseResultMap">
 SELECT *
 FROM `tb_music`
-where `sname` = #{ssname}
+where `sname` = #{ssname} 
 </select>
+
+
+<select id="selectByCid" resultType="java.lang.Integer">
+SELECT mid
+FROM `tb_music_category`
+where `cid` = #{cid} 
+
+</select>
+
 
 
 </mapper>

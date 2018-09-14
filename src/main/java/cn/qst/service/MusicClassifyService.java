@@ -32,4 +32,18 @@ public interface MusicClassifyService {
 	 * 对所有歌手进行分页处理
 	 */
 	PageInfo<AlbumResult> fundSnameAll(int page , int rows);
+	
+	
+	/**
+	 * 对音乐进行分类
+	 */
+	PageInfo<TbMusic> fundQuery(Integer page,Integer rows,Integer cid);
+	
+	
+	/**
+	 * 对音乐进行排行
+	 * @param mid
+	 * @return
+	 */
+	List<TbMusic> queryRank(Integer mid);
 }

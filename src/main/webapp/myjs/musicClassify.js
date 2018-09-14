@@ -3,7 +3,7 @@ $(function() {
 		type : 'get',
 		url : '/admin/queryMcategoryAll',
 		success : function(data) {
-			var str = "<h1 style='font-size:30px'>全部</h1>"
+			var str = "<h1 style='font-size:30px'><a href='javascript:void(0)' onclick='location.reload()'>全部</a></h1>"
 			for (var i = 0; i < data.length; i++) {
 				str+="<dl class='mod-tags1' style='clear:both;'>";
 				if (data[i].parentid == 0) {
@@ -11,7 +11,7 @@ $(function() {
 					var j = i + 1;
 					while (j < data.length) {
 						if (data[j].parentid != 0) {
-							str += "<dd><a href='javascript:choose("+data[j].cid+")'>" + data[j].cname + "</a></dd>";
+							str += "<dd><a href='javascript:choose("+data[j].cid+",1)'>" + data[j].cname + "</a></dd>";
 						} else {
 							break;
 						}
@@ -44,81 +44,19 @@ $(function (){
 			}
 			str+="</ul >";
 			str1+="<a>当前页为"+data.pageNum+"</a>"
-			str1+="<a href='javascript:page("+(data.pageNum-1>data.firstPage?data.pageNum-1:data.firstPage)+")'>上一页</a>";
-			if(data.pageNum==data.firstPage){
-				for(var i=data.firstPage;i<data.firstPage+5;i++){
-					if(i<=data.lastPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				if(data.pageNum+4<data.lastPage){
-					str1+="<a>...</a>";
-					str1+="<a href='javascript:page("+data.lastPage+")'>"+data.lastPage+"</a>";
-				}
-			}else if(data.pageNum==data.firstPage+1){
-				for(var i=data.firstPage;i<data.pageNum;i++){
-					if(i<=data.lastPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				for(var i=data.pageNum;i<data.pageNum+4;i++){
-					if(i<=data.lastPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				if(data.pageNum+3<data.lastPage){
-					str1+="<a>...</a>";
-					str1+="<a href='javascript:page("+data.lastPage+")'>"+data.lastPage+"</a>";
-				}
-			}else if(data.pageNum==data.lastPage){
-				if(data.pageNum-4>data.firstPage){	
-					str1+="<a href='javascript:page("+data.firstPage+")'>"+data.firstPage+"</a>";
-					str1+="<a>...</a>";
-				}
-				for(var i=data.pageNum-4;i<=data.lastPage;i++){
-					if(i>=data.firstPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				
-			}else if(data.pageNum==data.lastPage-1){
-				if(data.pageNum-3>data.firstPage){
-					
-					str1+="<a href='javascript:page("+data.firstPage+")'>"+data.firstPage+"</a>";
-					str1+="<a>...</a>";
-				}
-				for(var i=data.pageNum-3;i<data.pageNum;i++){
-					if(i>=data.firstPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				for(var i=data.pageNum;i<=data.lastPage;i++){
-					if(i>=data.firstPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-						
-			}else{
-				if(data.pageNum-2>data.firstPage){
-					str1+="<a href='javascript:page("+data.firstPage+")'>"+data.firstPage+"</a>";
-					str1+="<a>...</a>";
-				}
-				for(var i=data.pageNum-2;i<data.pageNum;i++){
-					if(i>=data.firstPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				for(var i=data.pageNum;i<=data.pageNum+2;i++){
-					if(i<=data.lastPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				if(data.pageNum+2<data.lastPage){
-					str1+="<a>...</a>";
-					str1+="<a href='javascript:page("+data.lastPage+")'>"+data.lastPage+"</a>";
-				}
+			str1+="<a href='javascript:page("+(data.hasPreviousPage?data.prePage:data.pageNum)+")'>上一页</a>";
+			if(data.navigatepageNums[0]>1){
+				str1+="<a href='javascript:page(1)'>1</a>";
+				str1+="<a>...</a>";
 			}
-			str1+="<a href='javascript:page("+(data.pageNum<data.lastPage?data.pageNum+1:data.lastPage)+")'>下一页</a>";
+			for(var i=0;i<data.navigatepageNums.length;i++){
+				str1+="<a href='javascript:page("+data.navigatepageNums[i]+")'>"+data.navigatepageNums[i]+"</a>"
+			}
+			if(data.navigatepageNums[4]<data.pages){
+				str1+="<a>...</a>";
+				str1+="<a href='javascript:page("+data.pages+")'>"+data.pages+"</a>"
+			}
+			str1+="<a href='javascript:page("+(data.hasNextPage?data.nextPage:data.pageNum)+")'>下一页</a>";
 				$("#songer").html(str);
 				$("#pageSonger").html(str1)
 		}
@@ -143,84 +81,62 @@ function page(pageIndex){
 			}
 			str+="</ul >";
 			str1+="<a>当前页为"+data.pageNum+"</a>"
-			str1+="<a href='javascript:page("+(data.pageNum-1>data.firstPage?data.pageNum-1:data.firstPage)+")'>上一页</a>";
-			if(data.pageNum==data.firstPage){
-				for(var i=data.firstPage;i<data.firstPage+5;i++){
-					if(i<=data.lastPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				if(data.pageNum+4<data.lastPage){
-					str1+="<a>...</a>";
-					str1+="<a href='javascript:page("+data.lastPage+")'>"+data.lastPage+"</a>";
-				}
-			}else if(data.pageNum-1==data.firstPage){
-				for(var i=data.firstPage;i<data.pageNum;i++){
-					if(i<=data.lastPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				for(var i=data.pageNum;i<data.pageNum+4;i++){
-					if(i<=data.lastPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				if(data.pageNum+3<data.lastPage){
-					str1+="<a>...</a>";
-					str1+="<a href='javascript:page("+data.lastPage+")'>"+data.lastPage+"</a>";
-				}
-			}else if(data.pageNum==data.lastPage){
-				if(data.pageNum-4>data.firstPage){	
-					str1+="<a href='javascript:page("+data.firstPage+")'>"+data.firstPage+"</a>";
-					str1+="<a>...</a>";
-				}
-				for(var i=data.pageNum-4;i<=data.lastPage;i++){
-					if(i>=data.firstPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				
-			}else if(data.pageNum==data.lastPage-1){
-				if(data.pageNum-3>data.firstPage){
-					str1+="<a href='javascript:page("+data.firstPage+")'>"+data.firstPage+"</a>";
-					str1+="<a>...</a>";
-				}
-				for(var i=data.pageNum-3;i<data.pageNum;i++){
-					if(i>=data.firstPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				for(var i=data.pageNum;i<=data.lastPage;i++){
-					if(i>=data.firstPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}		
-				
-			}else{
-				if(data.pageNum-2>data.firstPage){
-					str1+="<a href='javascript:page("+data.firstPage+")'>"+data.firstPage+"</a>";
-					str1+="<a>...</a>";
-				}
-				for(var i=data.pageNum-2;i<data.pageNum;i++){
-					if(i>=data.firstPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				for(var i=data.pageNum;i<=data.pageNum+2;i++){
-					if(i<=data.lastPage){
-						str1+="<a href='javascript:page("+i+")'>"+i+"</a>";
-					}
-				}
-				if(data.pageNum+2<data.lastPage){
-					str1+="<a>...</a>";
-					str1+="<a href='javascript:page("+data.lastPage+")'>"+data.lastPage+"</a>";
-				}
+			str1+="<a href='javascript:page("+(data.hasPreviousPage?data.prePage:data.pageNum)+")'>上一页</a>";
+			if(data.navigatepageNums[0]>1){
+				str1+="<a href='javascript:page(1)'>1</a>";
+				str1+="<a>...</a>";
 			}
-			str1+="<a href='javascript:page("+(data.pageNum<data.lastPage?data.pageNum+1:data.lastPage)+")'>下一页</a>";
+			for(var i=0;i<data.navigatepageNums.length;i++){
+				str1+="<a href='javascript:page("+data.navigatepageNums[i]+")'>"+data.navigatepageNums[i]+"</a>"
+			}
+			if(data.navigatepageNums[4]<data.pages){
+				str1+="<a>...</a>";
+				str1+="<a href='javascript:page("+data.pages+")'>"+data.pages+"</a>"
+			}
+			str1+="<a href='javascript:page("+(data.hasNextPage?data.nextPage:data.pageNum)+")'>下一页</a>";
 				$("#songer").html(str);
 				$("#pageSonger").html(str1)
 			
 		}
 	})	
+}
+function choose(cid,pageIndex){
+	$.ajax({
+		type:'get',
+		url:'/musicClassify/queryByCid',
+		data:{cid:cid,pageIndex:pageIndex},
+		success:function(data){
+			
+			var str1 = "";
+			var str = "<ul class='show'>";
+			for(var i=0;i<data.list.length;i++){
+				str+="<li class='albumBox'>";
+				str+="<div class='album' style='background-color: #535B5E'><p>";
+				str+="<a href='?menuid="+menuid+"'><img width='220' height='220' src='"+data.list[i].image+"' class='attachment-220x220 wp-post-image' alt='"+data.list[i].manme+"' /> " ;
+				str+=		"<span><em>"+data.list[i].mname+"</em></span></a></p>";
+				str+="<a style='background-color: #535B5E' href='?menuid="+menuid+"'><span>歌手</span><strong>"+data.list[i].sname+"</strong></a>";
+				str+="<a style='background-color: #535B5E' href='?menuid="+menuid+"'><span>试听</span><strong>"+data.list[i].playsum+"<em>万</em></strong></a>";
+				str+="</div></li>";
+			}
+			str+="</ul >";
+			str1+="<a>当前页为"+data.pageNum+"</a>"
+			str1+="<a href='javascript:choose("+cid+","+(data.hasPreviousPage?data.prePage:data.pageNum)+")'>上一页</a>";
+			if(data.navigatepageNums[0]>1){
+				str1+="<a href='javascript:choose("+cid+",1)'>1</a>";
+				str1+="<a>...</a>";
+			}
+			for(var i=0;i<data.navigatepageNums.length;i++){
+				str1+="<a href='javascript:choose("+cid+","+data.navigatepageNums[i]+")'>"+data.navigatepageNums[i]+"</a>"
+			}
+			if(data.navigatepageNums[4]<data.pages){
+				str1+="<a>...</a>";
+				str1+="<a href='javascript:choose("+cid+","+data.pages+")'>"+data.pages+"</a>"
+			}
+			str1+="<a href='javascript:choose("+cid+","+(data.hasNextPage?data.nextPage:data.pageNum)+")'>下一页</a>";
+				$("#songer").html(str);
+				$("#pageSonger").html(str1)
+			
+		}
+	})
 }
 
