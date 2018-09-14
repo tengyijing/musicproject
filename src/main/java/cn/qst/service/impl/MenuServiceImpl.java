@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cn.qst.mapper.TbMenuMapper;
 import cn.qst.pojo.TbMenu;
 import cn.qst.pojo.TbMenuExample;
@@ -27,11 +26,6 @@ public class MenuServiceImpl implements MenuService {
 		return menuMapper.selectByExample(null);
 	}
 
-	@Override
-	public int addMenu(TbMenu tbMenu) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List<TbMenu> queryByParent(Integer mid) {
@@ -47,5 +41,4 @@ public class MenuServiceImpl implements MenuService {
 		// TODO Auto-generated method stub
 		return menuMapper.selectByPrimaryKey(mid);
 	}
-
 }

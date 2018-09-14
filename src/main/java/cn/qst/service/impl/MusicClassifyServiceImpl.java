@@ -41,16 +41,16 @@ public class MusicClassifyServiceImpl implements MusicClassifyService{
 
 
 	@Override
-	public EasyUiDataGridResult fundSnameAll(int page, int rows) {
+	public PageInfo<AlbumResult> fundSnameAll(int page, int rows) {
 		// TODO Auto-generated method stub
 		PageHelper.startPage(page, rows);
 		List<AlbumResult> queryAll = albumResult.queryAll();
 		PageInfo<AlbumResult> info = new PageInfo<>(queryAll);
-		EasyUiDataGridResult result = new EasyUiDataGridResult();
+		/*EasyUiDataGridResult result = new EasyUiDataGridResult();
 		result.setTotal(info.getTotal());
-		System.out.println(info.toString());
-		result.setRows(queryAll);
-		return result;
+		result.setPageInfo(info);
+		result.setRows(queryAll);*/
+		return info;
 	}
 
 }

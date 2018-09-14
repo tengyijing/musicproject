@@ -153,11 +153,14 @@ padding-top: 12px;
 .mod-tags1 dl.mod-tags-h173 {
 	height: 173px !important;
 }  
+
+#pageSonger a{
+float: left;
+padding: 5px;
+}
 </style>
 </head>
 <body onload="getName('${username}');">
-<a href="/musicClassify/queryAll">dsfsdf</a>
-
 	<header class="header">
 	<div class="header-container" style="width: 1200px;">
 		<div class="header-top">
@@ -269,162 +272,13 @@ padding-top: 12px;
 	<c:choose>
 		<c:when test="${musicListSize2== null or musicListSize2=='0'}">
 
-			<section class="section_cont" style="margin-top:-40px;"> <!--在线首发 开始-->
-			<div class="new_songs new_common">
-				<!--第1页-->
-				<ul class="show">
-					<li class="albumBox">
-						<div class="album" style="background-color: #535B5E">
-							<p>
-								<a href="?p=16"><img width="220" height="220"
-									src="../../source/pic/album1-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="帽子戏法 - 魏晨" /> <span><em>帽子戏法</em><em>魏晨</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=16"><span>歌曲</span><strong>5</strong></a>
-							<a style="background-color: #535B5E" href="?p=16"><span>试听</span><strong>1860<em>万</em></strong></a>
-						</div>
-					</li>
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=13"><img width="220" height="220"
-									src="../../source/pic/album2-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="哎呦，不错哦 - 周杰伦" />
-									<span><em>爱呀</em><em>金玟岐</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=13"><span>歌曲</span><strong>12</strong></a>
-							<a style="background-color: #535B5E" href="?p=13"><span>试听</span><strong>3750<em>万</em></strong></a>
-						</div>
-					</li>
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=10"><img width="220" height="220"
-									src="../../source/pic/album3-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="新地球 - 林俊杰" /> <span><em>哎呦，不错哦</em><em>周杰伦</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=10"><span>歌曲</span><strong>12</strong></a>
-							<a style="background-color: #535B5E" href="?p=10"><span>试听</span><strong>4020<em>万</em></strong></a>
-						</div>
-					</li>
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=7"><img width="220" height="220"
-									src="../../source/pic/album4-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="album5" /> <span><em>他说</em><em>林俊杰</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=7"><span>歌曲</span><strong>12</strong></a>
-							<a style="background-color: #535B5E" href="?p=7"><span>试听</span><strong>2060<em>万</em></strong></a>
-						</div>
-					</li>
-				</ul>
-
+			<section class="section_cont" style="margin-top:-40px;" > <!--在线首发 开始-->
+			<div class="new_songs new_common" id="songer" >
 			</div>
-			<div class="new_songs new_common" style="margin-top: -20px;">
-				<!--第2页-->
-				<ul class="show">
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=16"><img width="220" height="220"
-									src="../../source/pic/album5-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="帽子戏法 - 魏晨" /> <span><em>三十未满</em><em>苏醒</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=16"><span>歌曲</span><strong>5</strong></a>
-							<a style="background-color: #535B5E" href="?p=16"><span>试听</span><strong>1860<em>万</em></strong></a>
-						</div>
-					</li>
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=13"><img width="220" height="220"
-									src="../../source/pic/album6-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="哎呦，不错哦 - 周杰伦" />
-									<span><em>敬世人</em><em>徐若瑄</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=13"><span>歌曲</span><strong>12</strong></a>
-							<a style="background-color: #535B5E" href="?p=13"><span>试听</span><strong>3750<em>万</em></strong></a>
-						</div>
-					</li>
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=10"><img width="220" height="220"
-									src="../../source/pic/album7-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="新地球 - 林俊杰" /> <span><em>我怀念的</em><em>孙燕姿</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=10"><span>歌曲</span><strong>12</strong></a>
-							<a style="background-color: #535B5E" href="?p=10"><span>试听</span><strong>4020<em>万</em></strong></a>
-						</div>
-					</li>
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=7"><img width="220" height="220"
-									src="../../source/pic/album8-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="album5" /> <span><em>阴天</em><em>莫文蔚</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=7"><span>歌曲</span><strong>12</strong></a>
-							<a style="background-color: #535B5E" href="?p=7"><span>试听</span><strong>2060<em>万</em></strong></a>
-						</div>
-					</li>
-				</ul>
-
+			<div id="pageSonger" style="margin-left: 40%"  >
+			
 			</div>
-			<div class="new_songs new_common" style="margin-top: -20px;">
-				<!--第3页-->
-				<ul class="show">
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=16"><img width="220" height="220"
-									src="../../source/pic/album9-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="帽子戏法 - 魏晨" /> <span><em>贝加尔湖畔</em><em>李健</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=16"><span>歌曲</span><strong>5</strong></a>
-							<a style="background-color: #535B5E" href="?p=16"><span>试听</span><strong>1860<em>万</em></strong></a>
-						</div>
-					</li>
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=13"><img width="220" height="220"
-									src="../../source/pic/album10-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="哎呦，不错哦 - 周杰伦" />
-									<span><em>黑暗中的笑脸</em><em>李亦捷</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=13"><span>歌曲</span><strong>12</strong></a>
-							<a style="background-color: #535B5E" href="?p=13"><span>试听</span><strong>3750<em>万</em></strong></a>
-						</div>
-					</li>
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=10"><img width="220" height="220"
-									src="../../source/pic/album11-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="新地球 - 林俊杰" /> <span><em>One
-											Last Time</em><em>Ariana Grande</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=10"><span>歌曲</span><strong>12</strong></a>
-							<a style="background-color: #535B5E" href="?p=10"><span>试听</span><strong>4020<em>万</em></strong></a>
-						</div>
-					</li>
-					<li class="albumBox">
-						<div class="album">
-							<p>
-								<a href="?p=7"><img width="220" height="220"
-									src="../../source/pic/album12-220x220.jpg"
-									class="attachment-220x220 wp-post-image" alt="album5" /> <span><em>大城小爱</em><em>王力宏</em></span></a>
-							</p>
-							<a style="background-color: #535B5E" href="?p=7"><span>歌曲</span><strong>12</strong></a>
-							<a style="background-color: #535B5E" href="?p=7"><span>试听</span><strong>2060<em>万</em></strong></a>
-						</div>
-					</li>
-				</ul>
-
-			</div>
-			<!--在线首发 结束--> </section>
+				 </section>
 		</c:when>
 		<c:otherwise>
 			<!-- 音乐馆 模块 结束 -->

@@ -1,3 +1,5 @@
+<%@page import="cn.qst.pojo.TbMusic"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -117,14 +119,14 @@ var type = '${type}';
 										</div>
 										<div class="control" hp="123">
 										    <c:choose>
-                                            <%-- <c:when test="${music.love==1}"> --%>
-                                            <c:when test="${music.isdownload==true}">
-                                            <a class="cicon love" style="background-position:0 -131px" loveN="1"></a> 
-                                            </c:when>
-                                            <c:otherwise>
-                                            <a class="cicon love" loveN="0"></a> 
-                                            </c:otherwise>
-                                            </c:choose> 
+	                                            <%-- <c:when test="${music.love==1}"> --%>
+	                                            <c:when test="${love!=null && love.contains(music.mid)}">
+	                                            	<a class="cicon love" style="background-position:0 -131px" loveN="1"></a> 
+	                                            </c:when>
+	                                            <c:otherwise>
+	                                            	<a class="cicon love" loveN="0"></a> 
+	                                            </c:otherwise>
+                                            </c:choose>
 											<a href="/music/detail?mid=${music.mid}" title="音乐详情" class="cicon more" style="display: none"></a>
 											<a class="cicon dele" style="display: none"></a>
 										</div>
@@ -183,7 +185,7 @@ var type = '${type}';
 				</div>
 				<div class="mainOuther">
 					<div class="albumCover">
-						<a><img src="playmusic/images/2.jpg" width="200" height="200" id="canvas1" class="canvas1"></a>
+						<a><img src="playmusic/images/uploading.gif" width="200" height="200" id="canvas1" class="canvas1"></a>
 					</div>
 					<div class="albumSale"></div>
 					<div id="lyr" class="lyr"></div>
@@ -193,20 +195,21 @@ var type = '${type}';
 		<div class="bottom" style="background-color: black;">
 			<div class="playerWrap">
 				<div class="playerCon" playStyle="0">
-					<a href="#" class="pbtn prevBtn"></a>
-					<a href="#" class="pbtn playBtn" isplay="0"></a>
-					<a href="#" class="pbtn nextBtn"></a>
+					<a  class="pbtn prevBtn"></a>
+					<a  class="pbtn playBtn" isplay="0"></a>
+					<a  class="pbtn nextBtn"></a>
 					<div style="color: #fff;" class="modesuiji">随机播放</div>
 					<div style="color: #fff;" class="modeshunxv">顺序播放</div>
 					<div style="color: #fff;" class="modedanqu">单曲循环</div>
-					<a href="#" class="mode" onClick="mode2()"></a>
-					<a href="#" class="mode2" onClick="mode3()"></a>
-					<a href="#" class="mode3" onClick="mode()"></a>
+					<a  class="mode" onClick="mode2()"></a>
+					<a  class="mode2" onClick="mode3()"></a>
+					<a  class="mode3" onClick="mode()"></a>
 				</div>
 				<div class="playInfo">
 					<div class="trackInfo">
-						<a href="#" class="songName" singID="0" onclick="xs()">未知歌名</a> - <a href="#"
-							class="songPlayer">未知歌手</a>
+						<a class="songName" singID="0" onclick="xs()">未知歌名</a>
+							- 
+						<a class="songPlayer">未知歌手</a>
 						<div class="trackCon">
 							<a class="tc1" onclick="tc1change()"></a>
 							<a class="tc2"></a>

@@ -11,6 +11,8 @@ public class TbMenu {
 
     private Boolean status;
 
+    private Boolean isparent;
+
     public Integer getMid() {
         return mid;
     }
@@ -51,9 +53,17 @@ public class TbMenu {
         this.status = status;
     }
 
+    public Boolean getIsparent() {
+        return isparent;
+    }
+
+    public void setIsparent(Boolean isparent) {
+        this.isparent = isparent;
+    }
+
 	@Override
 	public String toString() {
 		return "TbMenu [mid=" + mid + ", mname=" + mname + ", parentmid=" + parentmid + ", ename=" + ename + ", status="
-				+ status + "]";
+				+ status + ", isparent=" + isparent + "]";
 	}
 }

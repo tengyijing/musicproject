@@ -3,6 +3,8 @@ package cn.qst.comman.pojo;
 import java.io.Serializable;
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+
 
 /**
  * 分页数据返回结果
@@ -12,8 +14,12 @@ import java.util.List;
 public class EasyUiDataGridResult implements Serializable {
 	//数据总数
 	private Long total;
+
+	
 	//分页的数据
 	private List<?> rows;
+	
+	
 	public Long getTotal() {
 		return total;
 	}
