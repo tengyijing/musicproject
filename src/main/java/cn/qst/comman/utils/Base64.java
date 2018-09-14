@@ -34,7 +34,11 @@ public class Base64 {
 		return encoder.encode(data);// 返回Base64编码过的字节数组字符串
 	}
 
-	// base64字符串转化成图片
+	/**
+	 * base64字符串 转化为byte数组，并返回
+	 * @param imgStr
+	 * @return
+	 */
 	public static byte[] GenerateImage(String imgStr) { // 对字节数组字符串进行Base64解码并生成图片
 		if (imgStr == null) // 图像数据为空
 			return null;

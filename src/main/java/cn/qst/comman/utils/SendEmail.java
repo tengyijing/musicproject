@@ -40,7 +40,7 @@ public class SendEmail {
      * @param email 接受验证码的邮箱
      * @return 验证码
      */
-    public static String sendEamilCode(String email) {
+    public static String sendEamilCode(String email, String sendFlag) {
         HtmlEmail send = new HtmlEmail();
         String resultCode = achieveCode(); // 获取随机验证码
         try{
@@ -51,8 +51,15 @@ public class SendEmail {
             send.addTo(email); //接收者的QQEamil
             send.setFrom("963087276@qq.com", "疯自"); //第一个参数是发送者的QQEamil   第二个参数是发送者QQ昵称
                     send.setAuthentication("963087276@qq.com", "puuyqttsagdzbcce"); //第一个参数是发送者的QQEamil   第二个参数是刚刚获取的授权码
-            send.setSubject("注册u唱"); //Eamil的标题
-            send.setMsg("欢迎注u唱平台，此次注册验证码:   " + resultCode + "   请妥善保管"); //Eamil的内容
+            if (sendFlag.equals("register")) {
+            	send.setSubject("注册u唱"); //Eamil的标题
+                send.setMsg("欢迎注u唱平台，此次注册验证码:   " + resultCode + "   请妥善保管"
+                		+ "   验证码三分钟内有效，三分钟内不重复发送"); //Eamil的内容
+            } else if (sendFlag.equals("changePassword")) {
+            	send.setSubject("修改密码");
+            	send.setMsg("欢迎使用u唱平台，您正在修改密码，此次验证码：          " + resultCode + "    请妥善保管"
+            			+ "   验证码三分钟内有效，三分钟内不重复发送");
+            } 
             send.send(); //发送
         } catch (EmailException e) {
             e.printStackTrace();

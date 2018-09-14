@@ -32,7 +32,12 @@ public class FileUploadUtils {
 			return null;
 		}
 	}
-	
+	/**
+	 * 比特流上传图片
+	 * @param bytes 比特数据
+	 * @param extName 文件后缀名
+	 * @return
+	 */
 	public static String fileUpload(byte[] bytes ,String  extName) {
 		try {
 			if(extName==null) {
