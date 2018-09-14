@@ -161,8 +161,6 @@ padding: 5px;
 </style>
 </head>
 <body onload="getName('${username}');">
-<a href="/musicClassify/queryAll">dsfsdf</a>
-
 	<header class="header">
 	<div class="header-container" style="width: 1200px;">
 		<div class="header-top">

@@ -357,6 +357,10 @@
     <select id="selectCityByPid" parameterType="java.lang.Integer" resultType="cn.qst.pojo.TbCity">
 		SELECT * FROM tb_city WHERE `pid` = #{value}
 	</select>
+
+    <update id = "changePassword" parameterType="cn.qst.pojo.TbUser">
+        update tb_user set `password` = #{user.password} where `uname` = #{user.uname}
+    </update>
 </mapper>
 
 
