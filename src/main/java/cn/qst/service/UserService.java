@@ -110,5 +110,5 @@ public interface UserService {
 	 * @param user 用户名，以及图片的url地址
 	 * @return 修改成功即返回true 失败即false
 	 */
-	Boolean upHeadImage(TbUser user);
+	int upHeadImage(TbUser user);
 }

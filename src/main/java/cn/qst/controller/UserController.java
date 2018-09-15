@@ -93,9 +93,17 @@ public class UserController {
 		//jpg图片后缀,以及上传图片的不带ip地址的url
 		String path = FileUploadUtils.fileUpload(bs, "jgp");
 		//拼接ip和地址
-		user.setImage(IMAGE_SERVER_URL + path);
+		String url = IMAGE_SERVER_URL + path;
+		user.setImage(url);
 		//将图片存入数据库
-		return userService.upHeadImage(user);
+		int flag =  userService.upHeadImage(user);
+		//更新session中的图片的数据
+		if (flag == 1) {
+			session.setAttribute("imgstr", url);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**

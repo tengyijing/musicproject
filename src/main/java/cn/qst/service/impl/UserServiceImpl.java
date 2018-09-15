@@ -179,9 +179,9 @@ public class UserServiceImpl implements UserService {
 	 * @return 修改成功即返回true 失败即false
 	 */
 	@Override
-	public Boolean upHeadImage(TbUser user) {
+	public int upHeadImage(TbUser user) {
 		// TODO Auto-generated method stub
-		return tbUserMapper.upHeadImage(user) == 1 ? true : false; 
+		return tbUserMapper.upHeadImage(user); 
 	}
 	
 	

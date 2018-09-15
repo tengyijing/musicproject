@@ -41,16 +41,12 @@ var type = '${type}';
 			        $(window).load(function(){bian('${type}')});</script>
 			<div class="mainNav">
 			<div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;">
-         <c:choose>
-        <c:when test="${imgstr== null or imgstr==''}">
-            <a href="/userInfo"><img src="/playmusic/images/user.png" id="img1"/></a>
-        </c:when>
-        <c:otherwise>
-        <a href="/userInfo"><img src="${imgstr}" id="img2"/></a>
-        </c:otherwise>
-        </c:choose>
+ 
+        
+        <a href="User/personalInfo"><img src="${imgstr}" id="img2"/></a>
+    
          </div>
-         <div id="name" style="padding-top:21px;"><a href="userInfo.do" style="cursor:pointer;color:#fff" >${username}</a></div>
+         <div id="name" style="padding-top:21px;"><a href="User/personalInfo" style="cursor:pointer;color:#fff" >${username}</a></div>
 			</div>
 		</div>
 		<div class="middle">
@@ -76,7 +72,7 @@ var type = '${type}';
 							<ul class="menuUL2">
 							<c:forEach items="${musicList}" var="music" varStatus="index1">
 								<li class="menuLi2 cur">
-								<div  class="beijing hp" single2="${music.name }">
+								<div  class="beijing hp" single2="${music.name}">
 								 <i class="icon isplay2"></i>
 								 <a href="/play?type=${music.mlid }"style="color:black; background-color:transparent;">${music.name }</a>
 								 <i class="cicon dele2" single3="${music.mlid }" delNo="${index1.index}"></i>
