@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.qst.pojo.TbMcategory;
 import cn.qst.pojo.TbMenu;
+import cn.qst.pojo.TbMenuContent;
 import cn.qst.service.MenuService;
 import cn.qst.service.MusicClassifyService;
 
@@ -32,7 +33,13 @@ public class PageController {
 
 	// 主页跳转
 	@RequestMapping("/")
-	public String indexJsp() {
+	public String indexJsp(Map<String, Object>map) {
+		List<TbMenuContent> queryByName = menuService.queryByName();
+		List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
+		List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
+		map.put("huadong",queryByName );
+		map.put("newsong", queryIndexNew);
+		map.put("hotsong", queryIndexHot);
 		return "index";
 	}
 
@@ -40,6 +47,20 @@ public class PageController {
 	@RequestMapping("/{page}")
 	public String pageJsp(String page, Integer menuid, Map<String, Object> map) {
 		map.put("menuid", menuid);
+		if(menuid!=null) {
+			/**
+			 * 获取主页的内容
+			 */
+			if(menuid==2) {
+				List<TbMenuContent> queryByName = menuService.queryByName();
+				List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
+				List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
+				map.put("huadong",queryByName);
+				map.put("newsong", queryIndexNew);
+				map.put("hotsong", queryIndexHot);
+			}	
+		}
+		
 		return page;
 	}
 
@@ -74,20 +95,19 @@ public class PageController {
 			}
 		}
 		List<Object> list = new ArrayList<>();
-		TbMenu tbMenu = menuService.query(menuid);
+		TbMenu tbMenu  = menuService.query(menuid);
 		List<TbMenu> mCList = new ArrayList<>();
 		// 取得父菜单的id和判断是否需要直接跳转到首个子菜单id
 		Integer parent = 0;
 		//取得个单独页面的菜单选项
-		List<TbMenu> mClsit1 = new ArrayList<>();
-		
+		List<TbMenu> mClsit1 = new ArrayList<>();	
 		Integer child = 0;
 		String name;
 		// 判断传回的值的菜单属性是否是父菜单
 		if (tbMenu.getIsparent()) {
 			parent = tbMenu.getMid();
 			mCList = menuService.queryByParent(tbMenu.getMid());	
-				//判断其子类是否是一级父类
+				//判断其子类是否是一级父类不是就获取该类的父类。进行显示
 				if (tbMenu.getParentmid() != 12) {
 					parent = tbMenu.getParentmid();
 					child = tbMenu.getMid();

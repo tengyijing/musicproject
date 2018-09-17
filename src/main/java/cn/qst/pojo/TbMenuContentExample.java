@@ -164,6 +164,66 @@ public class TbMenuContentExample {
             return (Criteria) this;
         }
 
+        public Criteria andMusicidIsNull() {
+            addCriterion("musicid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidIsNotNull() {
+            addCriterion("musicid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidEqualTo(Integer value) {
+            addCriterion("musicid =", value, "musicid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidNotEqualTo(Integer value) {
+            addCriterion("musicid <>", value, "musicid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidGreaterThan(Integer value) {
+            addCriterion("musicid >", value, "musicid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("musicid >=", value, "musicid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidLessThan(Integer value) {
+            addCriterion("musicid <", value, "musicid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidLessThanOrEqualTo(Integer value) {
+            addCriterion("musicid <=", value, "musicid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidIn(List<Integer> values) {
+            addCriterion("musicid in", values, "musicid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidNotIn(List<Integer> values) {
+            addCriterion("musicid not in", values, "musicid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidBetween(Integer value1, Integer value2) {
+            addCriterion("musicid between", value1, value2, "musicid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicidNotBetween(Integer value1, Integer value2) {
+            addCriterion("musicid not between", value1, value2, "musicid");
+            return (Criteria) this;
+        }
+
         public Criteria andTitleIsNull() {
             addCriterion("title is null");
             return (Criteria) this;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.qst.comman.pojo.AdminResult;
 import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.comman.pojo.EasyUiTreeNode;
+import cn.qst.pojo.TbMenuContent;
 import cn.qst.service.AdminService;
 
 import java.util.List;
@@ -58,10 +59,18 @@ public class AdminController {
 		//判断该类的父类是否还有子节点 没有的话把自身改为子目录
 		return adminService.isParent(parentId);
 	}
+	
+	//查询菜单内容
 	@RequestMapping("/menu/content")
 	@ResponseBody
 	public EasyUiDataGridResult getMenuContent(Integer page , Integer rows , Integer mid) {
-		
-		return null;
+		return adminService.getMenuConten(page,rows,mid);
+	}
+	
+	//修改菜单内容
+	@RequestMapping("/content/edit")
+	@ResponseBody
+	public AdminResult updateContent(TbMenuContent content) {
+		return adminService.updateContent(content);
 	}
 }

@@ -152,6 +152,7 @@ public class UserController {
 	public String exitUser(HttpSession session) {
 		session.removeAttribute("username");
 		session.removeAttribute("imgstr");
+		session.removeAttribute("user");
 		return "index";
 	}
 

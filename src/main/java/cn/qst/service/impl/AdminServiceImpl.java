@@ -6,10 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import cn.qst.comman.pojo.AdminResult;
+import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.comman.pojo.EasyUiTreeNode;
+import cn.qst.mapper.TbMenuContentMapper;
 import cn.qst.mapper.TbMenuMapper;
 import cn.qst.pojo.TbMenu;
+import cn.qst.pojo.TbMenuContent;
+import cn.qst.pojo.TbMenuContentExample;
 import cn.qst.pojo.TbMenuExample;
 import cn.qst.pojo.TbMenuExample.Criteria;
 import cn.qst.service.AdminService;
@@ -19,6 +26,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private TbMenuMapper tbMenuMapper;
+	
+	@Autowired
+	private TbMenuContentMapper tbMenuContentMapper;
 	//根据父类id查询菜单
 	@Override
 	public List<EasyUiTreeNode> getMenubyParentId(int id) {
@@ -115,6 +125,34 @@ public class AdminServiceImpl implements AdminService {
 			menu.setIsparent(false);
 			tbMenuMapper.updateByPrimaryKeySelective(menu);
 		}
+		return AdminResult.ok();
+	}
+	
+	//查询菜单内容
+	@Override
+	public EasyUiDataGridResult getMenuConten(Integer page, Integer rows, Integer mid) {
+		//初始化分页插件
+		PageHelper.startPage(page, rows);
+		//查询出数据
+		TbMenuContentExample example = new TbMenuContentExample();
+		example.setOrderByClause("playsum desc");
+		cn.qst.pojo.TbMenuContentExample.Criteria criteria = example.createCriteria();
+		criteria.andMidEqualTo(mid);
+		
+		List<TbMenuContent> contents = tbMenuContentMapper.selectByExample(example);
+		//获取分页数据
+		PageInfo<TbMenuContent> info = new PageInfo<>(contents);
+		//创建返回结果对象
+		EasyUiDataGridResult result = new EasyUiDataGridResult();
+		result.setRows(contents);
+		result.setTotal(info.getTotal());
+		return result;
+	}
+	
+	//修改内容
+	@Override
+	public AdminResult updateContent(TbMenuContent content) {
+		tbMenuContentMapper.updateByPrimaryKeySelective(content);
 		return AdminResult.ok();
 	}
 }

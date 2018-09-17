@@ -3,6 +3,7 @@ package cn.qst.service;
 import java.util.List;
 
 import cn.qst.pojo.TbMenu;
+import cn.qst.pojo.TbMenuContent;
 /**
  * 
  * @author daihong
@@ -29,5 +30,22 @@ public interface MenuService {
 	 */
 	public TbMenu query(Integer mid);
 
+	/**
+	 * 保存主菜单的名称来查询它的子菜单
+	 * @param mname
+	 * @return
+	 */
+	public List<TbMenuContent> queryByName();
 	
+	/**
+	 * 查询主页需要的新歌
+	 * @return
+	 */
+	public List<TbMenuContent> queryIndexNew();
+	
+	/**
+	 * 查询主页需要的热歌
+	 * @return
+	 */
+	public List<TbMenuContent> queryIndexHot();
 }
