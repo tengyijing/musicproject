@@ -130,7 +130,7 @@ body::-webkit-scrollbar-track-piece {
 		<div class="dataEye">
 
 			<div class="contentleft">
-				<a href="../../index.jsp"><img
+				<a href="/"><img
 					src="../../source/images/logo.png"></a>
 			</div>
 			<div

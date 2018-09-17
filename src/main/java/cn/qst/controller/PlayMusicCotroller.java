@@ -106,9 +106,7 @@ public class PlayMusicCotroller {
 		// 传过来id的话，就直接播放这首歌
 		if( mid != 0 ) defalutId = mid;
 		else if( musics!=null && musics.size()>0 ) defalutId=musics.get(0).getMid();
-		
-		// map.addAttribute("id", defalutId);
-		
+		map.addAttribute("id", defalutId);
 		// 将我喜爱的音乐的id到数组中，控制前端红星的显示
 		List<Integer> loves = null;
 		if( loveList != null && loveList.size()>0 ) {

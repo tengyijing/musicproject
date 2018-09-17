@@ -23,11 +23,22 @@ public class MusicController {
 	@Value("${IMAGE_SERVER_URL}")
 	private String IMAGE_SERVER_URL;
 	
-	// 跳转到音乐详情
+	// 跳转到音乐详情（需要获取音乐的所有评论）
 	@RequestMapping("/music/detail")
 	public String musicDetailPage(String mid) {
-		return null;
+		return "";
 	}
+	
+	/* 		待添加
+	 * 
+	 * 添加评论
+	 * 	传入参数：
+	 * 		音乐id
+	 * 		评论id（对于回复而言）
+	 * 		评论内容
+	 */
+	
+	
 	
 	//添加音乐
 	@RequestMapping("/music/addmusic")
