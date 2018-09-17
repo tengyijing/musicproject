@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +35,14 @@ public class PageController {
 
 	// 主页跳转
 	@RequestMapping("/")
-	public String indexJsp(Map<String, Object>map) {
+	public String indexJsp(Map<String, Object>map,HttpSession session) {
 		List<TbMenuContent> queryByName = menuService.queryByName();
 		List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
 		List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
 		map.put("huadong",queryByName );
 		map.put("newsong", queryIndexNew);
 		map.put("hotsong", queryIndexHot);
+		session.setAttribute("hot", queryIndexHot);
 		return "index";
 	}
 
@@ -86,6 +89,7 @@ public class PageController {
 	@ResponseBody
 	@RequestMapping("/admin/queryMenuAll")
 	public List<Object> queryMenuAll(Integer menuid) {
+		System.out.println(menuid);
 		List<TbMenu> tbMenus = menuService.queryAll();
 		List<TbMenu> mPList = new ArrayList<>();
 		// 查询所有一级菜单

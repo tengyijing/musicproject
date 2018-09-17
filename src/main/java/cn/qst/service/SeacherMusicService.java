@@ -2,6 +2,7 @@ package cn.qst.service;
 
 
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -16,5 +17,6 @@ public interface SeacherMusicService {
 	Map<String,Object> searcherByStr(String str);
 	
 	
+
 	
 }
