@@ -3,7 +3,9 @@ package cn.qst.service;
 import java.util.List;
 
 import cn.qst.comman.pojo.AdminResult;
+import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.comman.pojo.EasyUiTreeNode;
+import cn.qst.pojo.TbMenuContent;
 
 public interface AdminService {
 
@@ -16,5 +18,10 @@ public interface AdminService {
 	void deleteMenu(Integer id);
 
 	AdminResult isParent(Integer parentId);
+
+	EasyUiDataGridResult getMenuConten(Integer page, Integer rows, Integer mid);
+
+	AdminResult updateContent(TbMenuContent content);
+
 
 }

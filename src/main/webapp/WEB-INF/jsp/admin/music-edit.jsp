@@ -8,11 +8,15 @@
 	    <table cellpadding="5">
 	         <tr>
 	            <td>音乐名:</td>
-	            <td><input class="easyui-textbox" type="text" name="mname" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="mname" data-options="required:true" style="width: 180px;"></input></td>
 	        </tr>
 	        <tr>
 	            <td>歌手:</td>
-	            <td><input class="easyui-textbox" type="text" name="sname" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="sname" data-options="required:true" style="width: 180px;"></input></td>
+	        </tr>
+	         <tr>
+	            <td>播放量:</td>
+	            <td><input class="easyui-textbox" type="text" name="playsum" data-options="required:true" style="width: 180px;"></input></td>
 	        </tr>
 	        <tr>
 	            <td>展示图片:</td>
@@ -42,11 +46,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$(function(){
-		//实例化编辑器
-		itemEditEditor = TAOTAO.createEditor("#itemeEditForm [name=desc]");
-	});
-	
 	function submitForm(){
 		if(!$('#itemeEditForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');

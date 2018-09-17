@@ -7,12 +7,13 @@
         	<th data-options="field:'mid',width:60">音乐ID</th>
             <th data-options="field:'mname',width:200">音乐名</th>
             <th data-options="field:'sname',width:100">歌手</th>
+            <th data-options="field:'playsum',width:100">播放量</th>
             <th data-options="field:'uploaddate',width:130,align:'center',formatter:TAOTAO.formatDateTime">上传时间</th>
             <th data-options="field:'status',width:60,align:'center',formatter:TAOTAO.formatItemStatus">状态</th>
         </tr>
     </thead>
 </table>
-<div id="itemEditWindow" class="easyui-window" title="编辑音乐" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/admin/music-edit'" style="width:80%;height:80%;padding:10px;">
+<div id="itemEditWindow" class="easyui-window" title="编辑音乐" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/admin/music-edit'" style="width:40%;height:60%;padding:10px;">
 </div>
 <div id="itemsearchWindow" class="easyui-window" title="搜索音乐" data-options="modal:true,closed:true,iconCls:'icon-search',href:'/admin/music-search'" style="width:40%;height:40%;padding:5px;">
 </div>
