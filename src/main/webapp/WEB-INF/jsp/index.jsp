@@ -28,6 +28,7 @@
 </head>
 
 <body onload="getName('${username}');">
+<a href="/searchMusic">sdfsdf</a>
 
 	<header class="header">
 	<div class="header-container" style="width: 1200px;">
@@ -40,7 +41,7 @@
 			</ul>
 			</nav>
 			<div class="header-search" style="margin-left: -20px;">
-				<form action="searchMusic.do" method="post" id="searchform">
+				<form action="searchMusic" method="post" id="searchform">
 					<input style="width: 170px;" type="text" class="text"
 						placeholder="我是歌手第四季" name="musicName" id="musicName" speech
 						x-webkit-speech /> <span class="btn" id="vid"
@@ -100,7 +101,7 @@
 	</div>
 	</header>
 	<section class="section_cont" style="margin-top:20px;"> <!--轮播图 开始 -->
-	<div class="main_banner">
+	<div class="main_banner" >
 		<div class="main_banner_bg"></div>
 		<div class="main_banner_wrap">
 			<canvas id="myCanvas" width="0" height="0"></canvas>
@@ -110,32 +111,23 @@
 				</a> <a href="javascript:void(0)" class="banner_btn btn_next js_next">
 					<span class="banner_btn_arrow"><i></i></span>
 				</a>
-				<ul>
-					<li id="imgCard0"><a href=""><span style="opacity: 0;"></span></a>
-						<img
-						src="/source/content-top-resource/main_banner/big0120150101183428.jpg"
-						alt="">
-						<p style="bottom: 0">周杰伦粉丝版</p></li>
-					<li id="imgCard1"><a href=""><span style="opacity: 0.4;"></span></a>
-						<img
-						src="/source/content-top-resource/main_banner/big0020150102211033.jpg"
-						alt="">
-						<p>乐侃有声节目第二期</p></li>
-					<li id="imgCard2"><a href=""><span style="opacity: 0.4;"></span></a>
-						<img
-						src="source/content-top-resource/main_banner/big0320150101183351.jpg"
-						alt="">
-						<p>乐见大牌：灵魂段子手</p></li>
-					<li id="imgCard3"><a href=""><span style="opacity: 0.4;"></span></a>
-						<img
-						src="source/content-top-resource/main_banner/big0420150101224343.jpg"
-						alt="">
-						<p>王力宏四年心血结晶</p></li>
-					<li id="imgCard4"><a href=""><span style="opacity: 0.4;"></span></a>
-						<img
-						src="source/content-top-resource/main_banner/big0720150102210934.jpg"
-						alt="">
-						<p>《武媚》女神团美艳大比拼</p></li>
+				<ul >
+				<c:forEach items="${huadong}" var="hua" varStatus="stat">
+					<c:if test="${stat.first }">
+					<li id='imgCard${stat.index }'><a href="play?id=${hua.id }">
+					<span style='opacity: 0;'>
+					</span></a><img src='${hua.image }'alt=''>
+					<p style='bottom: 0'>${hua.title }</p></li>
+					</c:if>
+					<c:if test="${!stat.first }">
+					<li id='imgCard${stat.index }'><a href="play?id=${hua.id }">
+					<span style='opacity: 0.4;'>
+					</span></a><img src='${hua.image }'alt=''>
+					<p >${hua.title}</p></li>
+					</c:if>
+					
+					
+				</c:forEach>
 				</ul>
 				<!--火狐倒影图层-->
 				<p id="rflt"></p>
@@ -158,47 +150,23 @@
 				<span class="line line-left"></span> <span class="line line-right"></span>
 			</div>
 			<div class="main-slider tab-cont">
-				<ul class="slider-wrapper">
-					<li><a href="playMusic.do?id=104&type=1" target='_new'
-						class="img"> <img src="source/images/cont/slider_img1.jpg"
+				<ul class="slider-wrapper" id="indexnew">
+				
+				<c:forEach items="${newsong }" var="new_song" varStatus="stat">
+				<c:if test="${stat.count<=4 }">
+					
+					<li><a href="play?id=${new_song.id }" target='_new'
+						class="img"> <img src="${new_song.image }" width="100%" height="100%"
 							alt="#"> <span class="mask"></span> <i class="icon-play"></i>
 					</a>
 						<div class="info">
 							<div class="title">
-								<a href="playMusic.do?id=104&type=1" target='_new'>终于等到你</a>
+								<a href="play?id=${new_song.id }" target='_new'>${new_song.title}</a>
 							</div>
-							<a href="playMusic.do?id=104&type=1" target='_new' class="author">张靓颖</a>
+							<a href="playMusic?id=${new_song.id }" target='_new' class="author">${new_song.sname }</a>
 						</div></li>
-					<li><a href="playMusic.do?id=20&type=1" target='_new'
-						class="img"> <img src="source/images/cont/slider_img2.jpg"
-							alt="#"> <span class="mask"></span> <i class="icon-play"></i>
-					</a>
-						<div class="info">
-							<div class="title">
-								<a href="playMusic.do?id=20&type=1" target='_new'>红色高跟鞋</a>
-							</div>
-							<a href="playMusic.do?id=20&type=1" target='_new' class="author">蔡健雅</a>
-						</div></li>
-					<li><a href="playMusic.do?id=35&type=1" target='_new'
-						class="img"> <img src="source/images/cont/slider_img3.jpg"
-							alt="#"> <span class="mask"></span> <i class="icon-play"></i>
-					</a>
-						<div class="info">
-							<div class="title">
-								<a href="playMusic.do?id=35&type=1" target='_new'>远走高飞</a>
-							</div>
-							<a href="playMusic.do?id=35&type=1" target='_new' class="author">金志文</a>
-						</div></li>
-					<li><a href="playMusic.do?id=58&type=1" target='_new'
-						class="img"> <img src="source/images/cont/slider_img4.jpg"
-							alt="#"> <span class="mask"></span> <i class="icon-play"></i>
-					</a>
-						<div class="info">
-							<div class="title">
-								<a href="playMusic.do?id=58&type=1" target='_new'>他不懂</a>
-							</div>
-							<a href="playMusic.do?id=58&type=1" target='_new' class="author">张杰</a>
-						</div></li>
+				</c:if>
+				</c:forEach>
 				</ul>
 				<div class="slider-btns">
 					<span class="cur"><i></i></span> <span><i></i></span> <span><i></i></span>
@@ -215,86 +183,23 @@
 				</h2>
 				<span class="line line-left"></span> <span class="line line-right"></span>
 			</div>
-			<a href="javascript:;" class="readAll">全部<i class="icon-sprite"></i></a>
-			<div class="main-tab tab-title">
-				<a href="javascript:;" class="item item-cur">全部</a> <a
-					href="javascript:;" class="item">华语</a> <a href="javascript:;"
-					class="item">欧美</a> <a href="javascript:;" class="item">港台</a> <a
-					href="javascript:;" class="item">韩国</a> <a href="javascript:;"
-					class="item">日本</a>
-			</div>
 			<ul class="mv-list tab-cont">
-				<li class="item"><a href="playMusic.do?id=34&type=1"
+			
+			<c:forEach items="${hotsong}" var="hot_song" varStatus="stat">
+			<c:if test="${stat.count<=8 }">
+			
+			<li class="item"><a href="play?id=${hot_song.id }"
 					target='_new' class="img"><img
-						src="source/images/cont/mv_img1.jpg" alt="#"><i
+						src="${hot_song.image }"  alt="#"><i
 						class="icon-play"></i></a>
 					<div class="info">
-						<a href="playMusic.do?id=34&type=1" target='_new' class="title">最初的梦想</a>
-						<a href="playMusic.do?id=34&type=1" target='_new' class="author">范玮琪</a>
-						<span class="play-total"><i class="icon-sprite"></i>18万</span>
+						<a href="play?id=${hot_song.id }" target='_new' class="title">${hot_song.title }</a>
+						<a href="play?id=${hot_song.id }" target='_new' class="author">${hot_song.sname }</a>
+						<span class="play-total"><i class="icon-sprite"></i>${hot_song.playsum }万</span>
 					</div></li>
-				<li class="item"><a href="playMusic.do?id=1&type=1" class="img"><img
-						src="source/images/cont/mv_img2.jpg" alt="#"><i
-						class="icon-play"></i></a>
-					<div class="info">
-						<a href="playMusic.do?id=1&type=1" class="title">漂洋过海来看你</a> <a
-							href="playMusic.do?id=1&type=1" class="author">周深</a> <span
-							class="play-total"><i class="icon-sprite"></i>11万</span>
-					</div></li>
-				<li class="item"><a href="playMusic.do?id=79&type=1"
-					target='_new' class="img"><img
-						src="source/images/cont/mv_img3.jpg" alt="#"><i
-						class="icon-play"></i></a>
-					<div class="info">
-						<a href="playMusic.do?id=79&type=1" target='_new' class="title">暧昧</a>
-						<a href="playMusic.do?id=79&type=1" target='_new' class="author">薛之谦</a>
-						<span class="play-total"><i class="icon-sprite"></i>28万</span>
-					</div></li>
-				<li class="item"><a href="playMusic.do?id=95&type=1"
-					target='_new' class="img"><img
-						src="source/images/cont/mv_img4.jpg" alt="#"><i
-						class="icon-play"></i></a>
-					<div class="info">
-						<a href="playMusic.do?id=95&type=1" target='_new' class="title">年少有你</a>
-						<a href="playMusic.do?id=95&type=1" target='_new' class="author">李易峰</a>
-						<span class="play-total"><i class="icon-sprite"></i>35万</span>
-					</div></li>
-				<li class="item"><a href="playMusic.do?id=26&type=1"
-					target='_new' class="img"><img
-						src="source/images/cont/mv_img5.jpg" alt="#"><i
-						class="icon-play"></i></a>
-					<div class="info">
-						<a href="playMusic.do?id=26&type=1" target='_new' class="title">追光者</a>
-						<a href="playMusic.do?id=26&type=1" target='_new' class="author">岑宁儿</a>
-						<span class="play-total"><i class="icon-sprite"></i>36万</span>
-					</div></li>
-				<li class="item"><a href="playMusic.do?id=47&type=1"
-					target='_new' class="img"><img
-						src="source/images/cont/mv_img6.jpg" alt="#"><i
-						class="icon-play"></i></a>
-					<div class="info">
-						<a href="playMusic.do?id=47&type=1" target='_new' class="title">我们的明天</a>
-						<a href="playMusic.do?id=47&type=1" target='_new' class="author">鹿晗</a>
-						<span class="play-total"><i class="icon-sprite"></i>19万</span>
-					</div></li>
-				<li class="item"><a href="playMusic.do?id=41&type=1"
-					target='_new' class="img"><img
-						src="source/images/cont/mv_img7.jpg" alt="#"><i
-						class="icon-play"></i></a>
-					<div class="info">
-						<a href="playMusic.do?id=41&type=1" target='_new' class="title">老街</a>
-						<a href="playMusic.do?id=41&type=1" target='_new' class="author">李荣浩</a>
-						<span class="play-total"><i class="icon-sprite"></i>29万</span>
-					</div></li>
-				<li class="item"><a href="playMusic.do?id=72&type=1"
-					target='_new' class="img"><img
-						src="source/images/cont/mv_img8.jpg" alt="#"><i
-						class="icon-play"></i></a>
-					<div class="info">
-						<a href="playMusic.do?id=72&type=1" target='_new' class="title">不再见</a>
-						<a href="playMusic.do?id=72&type=1" target='_new' class="author">陈学冬</a>
-						<span class="play-total"><i class="icon-sprite"></i>42万</span>
-					</div></li>
+			</c:if>
+			
+			</c:forEach>
 			</ul>
 		</div>
 	</div>

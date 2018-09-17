@@ -152,6 +152,7 @@ public class UserController {
 	public String exitUser(HttpSession session) {
 		session.removeAttribute("username");
 		session.removeAttribute("imgstr");
+		session.removeAttribute("user");
 		return "index";
 	}
 
@@ -182,6 +183,7 @@ public class UserController {
 		if (user != null) {
 			session.setAttribute("username", user.getUname());
 			session.setAttribute("imgstr", user.getImage());
+			session.setAttribute("user", user);
 			return true;
 		} else {
 			return false;

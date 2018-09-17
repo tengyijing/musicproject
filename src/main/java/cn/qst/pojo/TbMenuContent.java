@@ -70,4 +70,11 @@ public class TbMenuContent {
     public void setMid(Integer mid) {
         this.mid = mid;
     }
+
+	@Override
+	public String toString() {
+		return "TbMenuContent [id=" + id + ", title=" + title + ", image=" + image + ", playsum=" + playsum + ", sname="
+				+ sname + ", mid=" + mid + "]";
+	}
+    
 }
