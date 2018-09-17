@@ -166,8 +166,8 @@ var TT = TAOTAO = {
      */
     createWindow : function(params){
     	$("<div>").css({padding:"5px"}).window({
-    		width : params.width?params.width:"80%",
-    		height : params.height?params.height:"80%",
+    		width : params.width?params.width:"40%",
+    		height : params.height?params.height:"40%",
     		modal:true,
     		title : params.title?params.title:" ",
     		href : params.url,
@@ -216,7 +216,6 @@ var TT = TAOTAO = {
 				});
 			});
 		});
-    	
     	$(".lyricsFileUpload").click(function(){
 			var _self = $(this);
 			KindEditor.editor(TT.kingEditorParams).loadPlugin('image', function() {
