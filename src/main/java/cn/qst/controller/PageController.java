@@ -95,20 +95,19 @@ public class PageController {
 			}
 		}
 		List<Object> list = new ArrayList<>();
-		TbMenu tbMenu = menuService.query(menuid);
+		TbMenu tbMenu  = menuService.query(menuid);
 		List<TbMenu> mCList = new ArrayList<>();
 		// 取得父菜单的id和判断是否需要直接跳转到首个子菜单id
 		Integer parent = 0;
 		//取得个单独页面的菜单选项
-		List<TbMenu> mClsit1 = new ArrayList<>();
-		
+		List<TbMenu> mClsit1 = new ArrayList<>();	
 		Integer child = 0;
 		String name;
 		// 判断传回的值的菜单属性是否是父菜单
 		if (tbMenu.getIsparent()) {
 			parent = tbMenu.getMid();
 			mCList = menuService.queryByParent(tbMenu.getMid());	
-				//判断其子类是否是一级父类
+				//判断其子类是否是一级父类不是就获取该类的父类。进行显示
 				if (tbMenu.getParentmid() != 12) {
 					parent = tbMenu.getParentmid();
 					child = tbMenu.getMid();

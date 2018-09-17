@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../source/css/reset.css">
 
     <script src="../../source/js/jquery.min.js"></script>
-    <script src="../../source/js/index.js"></script>
+    <script src="/myjs/index.js"></script>
     <!-- 中部样式 -->
     <link rel="stylesheet" type="text/css" href="../../source/SearchMusic/css/scroll.css">
     <link rel="stylesheet" type="text/css" href="../../source/SearchMusic/css/lovesearch.css">
@@ -27,6 +27,7 @@
     <script src="../../myjs/qikoo.js"></script>
     <script language="javascript">
         userLogin('${username}');
+        menuid = 0;
     </script>
 </head>
 <body onload="getName('${username}');">
