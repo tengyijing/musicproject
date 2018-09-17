@@ -133,9 +133,6 @@ public class PageController {
 		if(mClsit1.size()!=0) {
 			list.add(mClsit1);
 		}
-		
-		
-		
 		return list;
 	}
 
