@@ -3,6 +3,8 @@ package cn.qst.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.qst.comman.pojo.AdminResult;
 import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.pojo.TbMusic;
+import cn.qst.pojo.TbUser;
 import cn.qst.service.MusicService;
 
 @Controller
@@ -26,7 +29,7 @@ public class MusicController {
 	// 跳转到音乐详情（需要获取音乐的所有评论）
 	@RequestMapping("/music/detail")
 	public String musicDetailPage(String mid) {
-		return "";
+		return "musicdetail";
 	}
 	
 	/* 		待添加
@@ -37,7 +40,12 @@ public class MusicController {
 	 * 		评论id（对于回复而言）
 	 * 		评论内容
 	 */
-	
+	public String addComment(HttpSession session, String mid, String cid, String context) {
+		// 获取评论用户
+		TbUser user = (TbUser) session.getAttribute("user");
+		
+		return null;
+	}
 	
 	
 	//添加音乐
