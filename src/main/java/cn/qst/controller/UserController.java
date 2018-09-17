@@ -182,6 +182,7 @@ public class UserController {
 		if (user != null) {
 			session.setAttribute("username", user.getUname());
 			session.setAttribute("imgstr", user.getImage());
+			session.setAttribute("user", user);
 			return true;
 		} else {
 			return false;

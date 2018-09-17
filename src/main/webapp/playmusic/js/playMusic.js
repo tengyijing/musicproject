@@ -589,7 +589,7 @@ $(function(){
 		/*外观改变*/
 		var html="";
 		html+='<div class="manyou">';
-		html+='<a href="/music/detail?mid='+sid+'" class="manyouA">查看详细信息</a>';
+		html+='<a href="/music/detail?mid='+sid+'" class="manyouA"  target="_blank">查看详细信息</a>';
 		html+='</div>';
 		$(".start em").css({
 			"background":"",

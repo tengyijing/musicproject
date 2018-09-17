@@ -14,7 +14,11 @@ import info.monitorenter.cpdetector.io.ASCIIDetector;
 import info.monitorenter.cpdetector.io.CodepageDetectorProxy;
 import info.monitorenter.cpdetector.io.JChardetFacade;
 import info.monitorenter.cpdetector.io.UnicodeDetector;
-
+/**
+ * 
+ * @author Asimple
+ * @Description 歌词获取类
+ */
 public class DownloadLyric {
 	private static HttpRequest request = new HttpRequest();
 	public final static String LRC_EXT = "lrc";
@@ -120,7 +124,12 @@ public class DownloadLyric {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * 从url中获取歌词
+	 * @param url
+	 * @return 歌词字符串
+	 */
 	public static String download(String url) {
 		try {
 			StringBuffer strBuff = new StringBuffer();
