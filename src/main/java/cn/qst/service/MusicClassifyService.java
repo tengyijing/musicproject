@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.pojo.AlbumResult;
 import cn.qst.pojo.TbMcategory;
+import cn.qst.pojo.TbMenuContent;
 import cn.qst.pojo.TbMusic;
 
 /**
@@ -45,5 +46,5 @@ public interface MusicClassifyService {
 	 * @param mid
 	 * @return
 	 */
-	List<TbMusic> queryRank(Integer mid);
+	List<TbMenuContent> queryRank(Integer mid);
 }

@@ -269,8 +269,10 @@
 <c:choose>
     <c:when test="${musicListSize2== null or musicListSize2=='0'}">
 
-        <section class="section_cont" style="margin-top:-40px;"> <!--在线首发 开始-->
-            <div class="new_songs new_common" id="songer">
+        <section class="section_cont" style="margin-top:-40px;" > <!--在线首发 开始-->
+            <div id="songer" >
+            
+            
             </div>
             <div id="pageSonger" style="margin-left: 40%">
 
