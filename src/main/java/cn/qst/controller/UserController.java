@@ -179,7 +179,8 @@ public class UserController {
 	}
 
 	/**
-	 * 登陆，检查账号密码时候正确，并将用户名 以及 图片的名称 存入session中 分别命名为 “usrename” “imgstr”
+	 * 登陆，检查账号密码时候正确，并将
+	 * 用户名 以及 图片的url 用户所有信息  存入session中 分别命名为 “usrename” “imgstr” “user”
 	 *
 	 * @return
 	 */

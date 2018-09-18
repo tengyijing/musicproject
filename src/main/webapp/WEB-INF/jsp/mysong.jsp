@@ -37,11 +37,6 @@
     <!-- 分页样式 -->
     <link rel="stylesheet" type="text/css"
           href="../../source/SearchMusic/fenye/css/zxf_page.css"/>
-
-    <!--提示框-->
-    <link href="../../source/SearchMusic/css/qikoo.css" type="text/css"
-          rel="stylesheet"/>
-    <script src="../../myjs/qikoo.js"></script>
     <style>
         /*滚动条*/
         ::-webkit-scrollbar {
@@ -81,11 +76,10 @@
           rel="stylesheet"/>
     <script src="../../myjs/qikoo.js"></script>
     <script type="text/javascript">
-        var menuid =
-        ${menuid}
+        var menuid = ${menuid}
     </script>
 </head>
-<body onload="getName('${username}');userLogin('${username}');">
+<body onload="getName('${sessionScope.username}');userLogin('${username}');">
 <header class="header">
     <div class="header-container" style="width:1200px;">
         <div class="header-top">
@@ -95,6 +89,7 @@
 
                 </ul>
             </nav>
+
                <div class="header-search" style="margin-left:-20px;">
         <form action="searchMusic.do" method="post" id="searchform" onsubmit="return searchNull()">
           <input style="width:170px;" type="text" class="text" placeholder="我是歌手第四季" name="musicName" id="musicName" speech x-webkit-speech onkeyup="searchStr(this.value)" />
@@ -115,20 +110,21 @@
 
           </div>
         </div>
+
             <div id="nameicon" class="center_header"
                  style="margin-left: 60px; margin-right: 10px; float: left; display: none">
-                <a href="User/personalInfo"><img src="${imgstr}" id="img2" /></a>
+                <a href="/User/personalInfo"><img src="${imgstr}" id="img2"/></a>
             </div>
             <div id="name" style="display: none; padding-top: 35px;">
-                <a href="User/personalInfo" style="cursor: pointer"><i
+                <a href="/User/personalInfo" style="cursor: pointer"><i
                         onmouseover="xianshi()" onmouseout="xiaoshi2()">${username}</i></a>
             </div>
             <div id="xianshi">
                 <p style="margin-left: 5px; margin-top: 3px;">
-                    <a href="User/personalInfo"><img src="/images/person.png"></a>
+                    <a href="/User/personalInfo"><img src="/images/person.png"></a>
                 </p>
                 <p style="margin-left: 4px; margin-top: 5px;">
-                    <a href="User/exit"><img src="/images/exit.png"></a>
+                    <a href="/User/exit"><img src="/images/exit.png"></a>
                 </p>
             </div>
             <div class="header-login" style="margin-right: -10px;">
@@ -142,37 +138,29 @@
 <!-- 中部上 -->
 <section id="banner" style="margin-top:30px; color:#FFFFFF">
     <div class="image round" style="margin-top: -50px;">
-        <c:choose>
-            <c:when test="${imgstr== null or imgstr==''}">
-                <a><img src="../../source/mysong/images/pic02.jpg" alt="Pic 02"/></a>
-            </c:when>
-            <c:otherwise>
-                <a><img src="${imgstr}" id="img2"/></a>
-            </c:otherwise>
-        </c:choose>
+        <a><img src="${imgstr}" id="img2"/></a>
     </div>
-
     <div class="header1">
         <div
                 style="float: left; margin-left: 541px; margin-right: 15px; margin-top: 10px;">
-            <h3>${friendListSize}</h3>
+            <h3>${attentionFriend}</h3>
             <h3 style="margin-top: 10px;">关注</h3>
         </div>
         <div style="float: left;" class="jiange"></div>
         <div style="float: left; margin-left: 15px; margin-top: 10px;">
-            <h3>${good}</h3>
-            <h3 style="margin-top: 10px;">点赞</h3>
+            <h3>${fansFriend}</h3>
+            <h3 style="margin-top: 10px;">粉丝</h3>
         </div>
     </div>
 </section>
 <!-- end -->
 <!-- 中部中 -->
 <div class="header-login3" style="margin-top: 20px;" id="topmysongChild">
-    <!-- <a class="open-vip" id="playall">我的作品</a>
+    <a class="open-vip" id="playall">我的作品</a>
     <a class="open-vip" id="guanzhu">关注</a>
     <a class="open-vip" id="shangchuan">上传音乐作品</a>
     <a class="open-vip" id="share">分享至音乐圈</a>
-    <a class="open-vip" id="listening">听歌排行</a> -->
+    <a class="open-vip" id="listening">听歌排行</a>
 </div>
 
 
