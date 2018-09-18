@@ -35,13 +35,12 @@ public class PageController {
 
 	// 主页跳转
 	@RequestMapping("/")
-	public String indexJsp(Map<String, Object>map,HttpSession session) {
+	public String indexJsp(HttpSession session) {
 		List<TbMenuContent> queryByName = menuService.queryByName();
 		List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
 		List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
-		map.put("huadong",queryByName );
-		map.put("newsong", queryIndexNew);
-		map.put("hotsong", queryIndexHot);
+		session.setAttribute("huadong", queryByName);
+		session.setAttribute("newsong", queryIndexNew);
 		session.setAttribute("hot", queryIndexHot);
 		return "index";
 	}
@@ -50,20 +49,6 @@ public class PageController {
 	@RequestMapping("/{page}")
 	public String pageJsp(String page, Integer menuid, Map<String, Object> map) {
 		map.put("menuid", menuid);
-		if(menuid!=null) {
-			/**
-			 * 获取主页的内容
-			 */
-			if(menuid==2) {
-				List<TbMenuContent> queryByName = menuService.queryByName();
-				List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
-				List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
-				map.put("huadong",queryByName);
-				map.put("newsong", queryIndexNew);
-				map.put("hotsong", queryIndexHot);
-			}	
-		}
-		
 		return page;
 	}
 
@@ -88,7 +73,7 @@ public class PageController {
 	 */
 	@ResponseBody
 	@RequestMapping("/admin/queryMenuAll")
-	public List<Object> queryMenuAll(Integer menuid) {
+	public List<Object> queryMenuAll(Integer menuid,Map<String, Object> map) {
 		System.out.println(menuid);
 		List<TbMenu> tbMenus = menuService.queryAll();
 		List<TbMenu> mPList = new ArrayList<>();
@@ -136,6 +121,21 @@ public class PageController {
 		if(mClsit1.size()!=0) {
 			list.add(mClsit1);
 		}
+		
+		
+		/**
+		 * 获取主页的内容
+		 */
+		if(menuid==2) {
+			List<TbMenuContent> queryByName = menuService.queryByName();
+			List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
+			List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
+			map.put("huadong",queryByName);
+			map.put("newsong", queryIndexNew);
+			map.put("hotsong", queryIndexHot);
+		}	
+		
+		
 		return list;
 	}
 

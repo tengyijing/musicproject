@@ -54,6 +54,7 @@ public class MusicClassifyController {
 	@RequestMapping("/musicClassify/queryByCid")
 	public PageInfo<TbMusic> queryByCid(Integer cid,Integer pageIndex){
 		PageInfo<TbMusic> pageInfo = musicClassifyService.fundQuery(pageIndex,8,cid);
+		System.out.println(pageInfo.toString());
 		return pageInfo;
 	}
 	

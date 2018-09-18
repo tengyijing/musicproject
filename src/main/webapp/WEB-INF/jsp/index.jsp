@@ -147,7 +147,7 @@
 				<c:forEach items="${newsong }" var="new_song" varStatus="stat">
 				<c:if test="${stat.count<=4 }">
 					
-					<li><a href="play?id=${new_song.id }" target='_new'
+					<li><a href="play?id=${new_song.musicid }" target='_new'
 						class="img"> <img src="${new_song.image }" width="100%" height="100%"
 							alt="#"> <span class="mask"></span> <i class="icon-play"></i>
 					</a>
@@ -177,7 +177,7 @@
 			</div>
 			<ul class="mv-list tab-cont">
 			
-			<c:forEach items="${hotsong}" var="hot_song" varStatus="stat">
+			<c:forEach items="${hot}" var="hot_song" varStatus="stat">
 			<c:if test="${stat.count<=8 }">
 			
 			<li class="item"><a href="play?id=${hot_song.musicid }"
