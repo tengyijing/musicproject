@@ -174,7 +174,6 @@ function childMenu(tbMenu) {
 			str += "</div>";
 			str += "	<div class='bd'>";
 			str += "<ul class='song-list'>";
-
 			str += topRank(tbMenu[i].mid);
 			str += "</ul>";
 			str += "</div></div>";
@@ -208,8 +207,8 @@ function topRank(mid) {
 							str +=	"	<a title='"+data[i].sname+"' href='playMusic.do?id=79&type=1' target='_new'>"+data[i].sname+"</a>"
 						}else{
 							str += "</div><div class='song-info'><div class='info'><div class='song'>";
-							str += "<a  title='"+ data[i].title+ "' style='text-decoration:none;' href='playMusic.do?id=1&type=1' target='_new'>"+data[i].title+"</a><span class='artist'>";
-							str += " <span class='author_list'  title='"+ data[i].sname+ "' style='float:right' ><a hidefocus='true' href='playMusic.do?id=1&type=1' target='_new'>"+ data[i].sname+ "</a>";
+							str += "<a  title='"+ data[i].title+ "' style='text-decoration:none;' href='play?id="+data[i].musicid+"' target='_new'>"+data[i].title+"</a><span class='artist'>";
+							str += " <span class='author_list'  title='"+ data[i].sname+ "' style='float:right' ><a hidefocus='true' href='play?id="+data[i].musicid+"' target='_new'>"+ data[i].sname+ "</a>";
 							str += "</span></span></div></div></div>";
 							str += "<div class='opera-icon' >";
 							str += "<a href='javascript:;' class='opera-icon-play icon icon-music-play js-play-song'></a>";

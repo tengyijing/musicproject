@@ -13,7 +13,7 @@
 <script type="text/javascript" src="/source/js/jquery.js"></script>
 <script src="/source/js/script.js"></script>
 <script src="/myjs/index.js"></script>
-
+<script src="/myjs/searcher.js"></script>
 
 <!-- 轮播图 -->
 <link rel="stylesheet" type="text/css"
@@ -24,6 +24,8 @@
 <script src="/myjs/qikoo.js"></script>
 <script type="text/javascript">
 	var menuid = 2;
+
+	var searchvalue = document.get
 </script>
 </head>
 
@@ -41,10 +43,10 @@
 			</ul>
 			</nav>
 			<div class="header-search" style="margin-left: -20px;">
-				<form action="searchMusic.do" method="post" id="searchform">
+				<form action="/seacher" method="post" id="searchform" onsubmit="return searchNull()">
 					<input style="width: 170px;" type="text" class="text"
 						placeholder="我是歌手第四季" name="musicName" id="musicName" speech
-						x-webkit-speech /> <span class="btn" id="vid"
+						x-webkit-speech onkeyup="searchStr(this.value)"/> <span class="btn" id="vid"
 						style="float: left;"><i><img style="margin-top: 6px;"
 							src="/source/images/video.png"></i></span> <span class="btn"
 						onclick="search();"><i class="icon-sprite"></i></span>
@@ -53,24 +55,14 @@
 					<iframe frameborder=0 width=290 height=330 marginheight=0
 						marginwidth=0 scrolling=no src="video.jsp"></iframe>
 				</div>
-				<div class="result">
-					<a href="playMusic.do?id=46&type=1" target='_new'
-						class="result-item"> <span class="rank">1</span> <span
-						class="title">房间</span> <span class="num">3.4万</span>
-					</a> <a href="playMusic.do?id=26&type=1" target='_new'
-						class="result-item"> <span class="rank">2</span> <span
-						class="title">追光者</span> <span class="num">2.1万</span>
-					</a> <a href="playMusic.do?id=35&type=1" target='_new'
-						class="result-item"> <span class="rank">3</span> <span
-						class="title">远走高飞</span> <span class="num">12.5万</span>
-					</a> <a href="playMusic.do?id=38&type=1" target='_new'
-						class="result-item"> <span class="rank">4</span> <span
-						class="title">春风十里不如你</span> <span class="num">7万</span>
-					</a> <a href="playMusic.do?id=89&type=1" target='_new'
-						class="result-item"> <span class="rank">5</span> <span
-						class="title">童话镇</span> <span class="num">6.8万</span>
-					</a>
-
+				<div class="result" id="searchBox">
+				<c:forEach items="${hot}" var="hot_song" varStatus="stat">
+				<c:if test="${stat.count<=6 }">
+				<a  class="result-item" href="play?id=${hot_song.musicid}" target='_new'> 
+				<span class="rank">${stat.count }</span> 
+				<span class="title">${hot_song.title}</span> <span class="num">${hot_song.playsum }万</span></a>
+				</c:if>	
+				</c:forEach>				
 				</div>
 			</div>
 
@@ -114,13 +106,13 @@
 				<ul >
 				<c:forEach items="${huadong}" var="hua" varStatus="stat">
 					<c:if test="${stat.first }">
-					<li id='imgCard${stat.index }'><a href=''>
+					<li id='imgCard${stat.index }'><a href="play?id=${hua.musicid }">
 					<span style='opacity: 0;'>
 					</span></a><img src='${hua.image }'alt=''>
 					<p style='bottom: 0'>${hua.title }</p></li>
 					</c:if>
 					<c:if test="${!stat.first }">
-					<li id='imgCard${stat.index }'><a href=''>
+					<li id='imgCard${stat.index }'><a href="play?id=${hua.musicid }">
 					<span style='opacity: 0.4;'>
 					</span></a><img src='${hua.image }'alt=''>
 					<p >${hua.title}</p></li>
@@ -155,15 +147,15 @@
 				<c:forEach items="${newsong }" var="new_song" varStatus="stat">
 				<c:if test="${stat.count<=4 }">
 					
-					<li><a href="playMusic.do?id=104&type=1" target='_new'
+					<li><a href="play?id=${new_song.id }" target='_new'
 						class="img"> <img src="${new_song.image }" width="100%" height="100%"
 							alt="#"> <span class="mask"></span> <i class="icon-play"></i>
 					</a>
 						<div class="info">
 							<div class="title">
-								<a href="playMusic.do?id=104&type=1" target='_new'>${new_song.title}</a>
+								<a href="play?id=${new_song.musicid }" target='_new'>${new_song.title}</a>
 							</div>
-							<a href="playMusic.do?id=104&type=1" target='_new' class="author">${new_song.sname }</a>
+							<a href="playMusic?id=${new_song.musicid }" target='_new' class="author">${new_song.sname }</a>
 						</div></li>
 				</c:if>
 				</c:forEach>
@@ -188,13 +180,13 @@
 			<c:forEach items="${hotsong}" var="hot_song" varStatus="stat">
 			<c:if test="${stat.count<=8 }">
 			
-			<li class="item"><a href="playMusic.do?id=34&type=1"
+			<li class="item"><a href="play?id=${hot_song.musicid }"
 					target='_new' class="img"><img
 						src="${hot_song.image }"  alt="#"><i
 						class="icon-play"></i></a>
 					<div class="info">
-						<a href="playMusic.do?id=34&type=1" target='_new' class="title">${hot_song.title }</a>
-						<a href="playMusic.do?id=34&type=1" target='_new' class="author">${hot_song.sname }</a>
+						<a href="play?id=${hot_song.musicid }" target='_new' class="title">${hot_song.title }</a>
+						<a href="play?id=${hot_song.musicid }" target='_new' class="author">${hot_song.sname }</a>
 						<span class="play-total"><i class="icon-sprite"></i>${hot_song.playsum }万</span>
 					</div></li>
 			</c:if>

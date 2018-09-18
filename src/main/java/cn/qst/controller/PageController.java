@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +35,14 @@ public class PageController {
 
 	// 主页跳转
 	@RequestMapping("/")
-	public String indexJsp(Map<String, Object>map) {
+	public String indexJsp(Map<String, Object>map,HttpSession session) {
 		List<TbMenuContent> queryByName = menuService.queryByName();
 		List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
 		List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
 		map.put("huadong",queryByName );
 		map.put("newsong", queryIndexNew);
 		map.put("hotsong", queryIndexHot);
+		session.setAttribute("hot", queryIndexHot);
 		return "index";
 	}
 
@@ -86,6 +89,7 @@ public class PageController {
 	@ResponseBody
 	@RequestMapping("/admin/queryMenuAll")
 	public List<Object> queryMenuAll(Integer menuid) {
+		System.out.println(menuid);
 		List<TbMenu> tbMenus = menuService.queryAll();
 		List<TbMenu> mPList = new ArrayList<>();
 		// 查询所有一级菜单
@@ -95,20 +99,19 @@ public class PageController {
 			}
 		}
 		List<Object> list = new ArrayList<>();
-		TbMenu tbMenu = menuService.query(menuid);
+		TbMenu tbMenu  = menuService.query(menuid);
 		List<TbMenu> mCList = new ArrayList<>();
 		// 取得父菜单的id和判断是否需要直接跳转到首个子菜单id
 		Integer parent = 0;
 		//取得个单独页面的菜单选项
-		List<TbMenu> mClsit1 = new ArrayList<>();
-		
+		List<TbMenu> mClsit1 = new ArrayList<>();	
 		Integer child = 0;
 		String name;
 		// 判断传回的值的菜单属性是否是父菜单
 		if (tbMenu.getIsparent()) {
 			parent = tbMenu.getMid();
 			mCList = menuService.queryByParent(tbMenu.getMid());	
-				//判断其子类是否是一级父类
+				//判断其子类是否是一级父类不是就获取该类的父类。进行显示
 				if (tbMenu.getParentmid() != 12) {
 					parent = tbMenu.getParentmid();
 					child = tbMenu.getMid();
@@ -133,9 +136,6 @@ public class PageController {
 		if(mClsit1.size()!=0) {
 			list.add(mClsit1);
 		}
-		
-		
-		
 		return list;
 	}
 

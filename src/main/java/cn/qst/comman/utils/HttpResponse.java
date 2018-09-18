@@ -3,9 +3,9 @@ package cn.qst.comman.utils;
 import java.util.Vector;
 
 /**
- * ��Ӧ
+ * 
  * @author Asimple
- *
+ * @Description 响应类
  */
 
 public class HttpResponse {

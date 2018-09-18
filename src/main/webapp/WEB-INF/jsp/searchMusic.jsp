@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../source/css/reset.css">
 
     <script src="../../source/js/jquery.min.js"></script>
-    <script src="../../source/js/index.js"></script>
+    <script src="/myjs/index.js"></script>
     <!-- 中部样式 -->
     <link rel="stylesheet" type="text/css" href="../../source/SearchMusic/css/scroll.css">
     <link rel="stylesheet" type="text/css" href="../../source/SearchMusic/css/lovesearch.css">
@@ -30,23 +30,22 @@
     </script>
 </head>
 <body onload="getName('${username}');">
+${song.song }
 <header class="header">
     <div class="header-container">
         <div class="header-top">
             <a href="../../index.jsp" class="logo"></a>
             <nav class="header-nav">
                 <ul>
-                    <li><a href="../../index.jsp" class="header-nav__cur">音乐基地</a></li>
-                    <li><a href="myMusic.do">我的歌声</a></li>
-                    <li><a href="playList.do?type=1" target='_new'>音乐盒</a></li>
-                    <c:choose>
-                        <c:when test="${username== null or username==''}">
-                            <li onclick="userLogin2('${username}')"><a>唱聊IM</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="bin/chat.jsp">唱聊IM</a></li>
-                        </c:otherwise>
-                    </c:choose>
+                <c:forEach items="${TbMenu }" var="tbmenu" varStatus="stat">
+                <c:if test="${stat.count==1 }">
+                <li><a href="index?menuid=2" class="header-nav__cur">${tbmenu.mname}</a></li>
+                </c:if>
+                <c:if test="${stat.count!=1 }">
+                 <li><a href="/${tbmenu.ename }?menuid=${tbmenu.mid}" >${tbmenu.mname}</a></li>
+                
+                </c:if>
+                </c:forEach>
                 </ul>
             </nav>
             <div class="header-search">
@@ -158,7 +157,9 @@
         <a class="open-vip" id="addTo">添加到</a>
         <div class="jump">
             <div class="inner-container">
+ 
                 <ul class="menuUL3" style="width:120px;height:200px;">
+              
                     <c:forEach items="${musicList3}" var="music" varStatus="index1">
                         <li class="menuLi3 cur">
                             <a class="beijing" single="${music.songSingle}">
@@ -188,24 +189,24 @@
      style="margin-top:40%; margin-left: 70px;">
     <div class="scrollView">
         <!-- <div class="scroll"></div> -->
+ 
         <ul class="songUL">
-            <c:forEach items="${musicList4}" var="music" varStatus="index">
-
+            <c:forEach items="${song.song}" var="music" varStatus="index">
                 <li class="songList">
                     <div class="songLmain">
                         <div class="check">
-                            <input class="checkIn" type="checkbox" name="choose" value="${music.id}">
+                            <input class="checkIn" type="checkbox" name="choose" value="${music.mid}">
                         </div>
                         <div class="start">
                             <em sonN="2" style="font-size: 16px;">${index.index+1 }</em>
                         </div>
                         <div class="songBd">
                             <div class="col colsn" style="font-size: 16px;"><a
-                                    href="playMusic.do?id=${music.id }&type=1" target='_new' ">${music.musicName}</a>
+                                    href="playMusic.do?id=${music.mid }&type=1" target='_new' ">${music.mname}</a>
                             </div>
-                            <div class="col colcn" style="font-size: 16px;"><a>${music.singer }</a></div>
-                            <div class="col colcn" style="font-size: 16px;"><a>${music.special }</a></div>
-                            <div class="col colcn" style="font-size: 16px;">${music.time }</div>
+                            <div class="col colcn" style="font-size: 16px;"><a>${music.sname }</a></div>
+                            <div class="col colcn" style="font-size: 16px;"><a>${music.mname }</a></div>
+                            <div class="col colcn" style="font-size: 16px;">${music.uploaddate }</div>
                         </div>
                         <div class="control">
                             <a class="cicon more"></a>

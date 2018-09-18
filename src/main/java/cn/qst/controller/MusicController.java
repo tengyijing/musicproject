@@ -8,10 +8,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import cn.qst.comman.pojo.AdminResult;
 import cn.qst.comman.pojo.EasyUiDataGridResult;
+import cn.qst.comman.utils.DownloadLyric;
+import cn.qst.comman.utils.JsonUtils;
 import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.MusicService;
@@ -28,9 +32,40 @@ public class MusicController {
 	
 	// 跳转到音乐详情（需要获取音乐的所有评论）
 	@RequestMapping("/music/detail")
-	public String musicDetailPage(String mid) {
+	public String musicDetailPage(ModelMap map,String mid) {
+		if( mid == null ) {
+			return "500";
+		}
+		// 根据id获取音乐
+		int id = Integer.parseInt(mid);
+		TbMusic music = musicService.selectByPrimaryKey(id);
+		map.addAttribute("music", music);
+		
+		// 处理歌词（去掉前面的[]）
+		String lrcUrl = music.getLyricsurl();
+		String lrc = "";
+		if( lrcUrl == null || "".equals(lrcUrl.trim()) ) { // 歌词没有保存
+			lrc = DownloadLyric.startDownload(music.getMname(), music.getSname());
+		} else {// 已经保存好歌词
+			lrc = DownloadLyric.download(lrcUrl);
+		}
+		if( lrc == null || "".equals(lrc) ) lrc = "暂无歌词";
+		else {
+			lrc = lrc.replaceAll("\\[.*\\]", "<br/>");
+			// 去掉多余的<br/>
+			lrc = lrc.replaceAll("<br/>\\s(<br/>\\s)+", "<br/>");
+		}
+		map.addAttribute("lrc", lrc);
+		
+		// 获取当前音乐的评论
+		
+		
 		return "musicdetail";
 	}
+	
+	// 根据音乐id获取评论(分页，待添加)
+	
+	
 	
 	/* 		待添加
 	 * 
@@ -40,11 +75,11 @@ public class MusicController {
 	 * 		评论id（对于回复而言）
 	 * 		评论内容
 	 */
-	public String addComment(HttpSession session, String mid, String cid, String context) {
+	@RequestMapping(value="/music/comment", method= {RequestMethod.POST})
+	@ResponseBody
+	public String addComment(String uid, String mid, String cid, String content) {
 		// 获取评论用户
-		TbUser user = (TbUser) session.getAttribute("user");
-		
-		return null;
+		return JsonUtils.objectToJson("成功");
 	}
 	
 	

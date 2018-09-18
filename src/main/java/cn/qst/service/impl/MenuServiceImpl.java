@@ -58,7 +58,7 @@ public class MenuServiceImpl implements MenuService {
 		// TODO Auto-generated method stub
 		TbMenuContentExample example = new TbMenuContentExample();
 		cn.qst.pojo.TbMenuContentExample.Criteria criteria3 = example.createCriteria();
-		criteria3.andMidEqualTo(2);
+		criteria3.andMidEqualTo(18);
 		List<TbMenuContent> selectByExample3 = meunContentMapper.selectByExample(example);
 		return selectByExample3;
 	}

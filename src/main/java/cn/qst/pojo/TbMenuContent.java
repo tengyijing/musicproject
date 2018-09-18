@@ -3,6 +3,8 @@ package cn.qst.pojo;
 public class TbMenuContent {
     private Integer id;
 
+    private Integer musicid;
+
     private String title;
 
     private String image;
@@ -19,6 +21,14 @@ public class TbMenuContent {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getMusicid() {
+        return musicid;
+    }
+
+    public void setMusicid(Integer musicid) {
+        this.musicid = musicid;
     }
 
     public String getTitle() {
@@ -63,8 +73,8 @@ public class TbMenuContent {
 
 	@Override
 	public String toString() {
-		return "TbMenuContent [id=" + id + ", title=" + title + ", image=" + image + ", playsum=" + playsum + ", sname="
-				+ sname + ", mid=" + mid + "]";
+		return "TbMenuContent [id=" + id + ", musicid=" + musicid + ", title=" + title + ", image=" + image
+				+ ", playsum=" + playsum + ", sname=" + sname + ", mid=" + mid + "]";
 	}
     
 }
