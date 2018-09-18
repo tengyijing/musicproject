@@ -78,7 +78,8 @@
         var menuid = ${menuid}
     </script>
 </head>
-<body onload="getName('${sessionScope.username}');userLogin('${username}');">
+<body onload="getName('${sessionScope.username}');userLogin('${username}');
+getFansAndAttention('${user.uid	}')">
 <header class="header">
     <div class="header-container" style="width:1200px;">
         <div class="header-top">
@@ -131,17 +132,17 @@
             </div>
 
             <div id="nameicon" class="center_header"
-                 style="margin-left: 60px; margin-right: 10px; float: left; display: none">
-                <a href="/User/personalInfo"><img src="${imgstr}" id="img2"/></a>
-            </div>
-            <div id="name" style="display: none; padding-top: 35px;">
-                <a href="/User/personalInfo" style="cursor: pointer"><i
-                        onmouseover="xianshi()" onmouseout="xiaoshi2()">${username}</i></a>
-            </div>
-            <div id="xianshi">
-                <p style="margin-left: 5px; margin-top: 3px;">
-                    <a href="/User/personalInfo"><img src="/images/person.png"></a>
-                </p>
+				style="margin-left: 60px; margin-right: 10px; float: left; display: none">
+				<a href="personal"><img src="${imgstr}" id="img2" /></a>
+			</div>
+			<div id="name" style="display: none; padding-top: 35px;">
+				<a href="personal" style="cursor: pointer"><i
+					onmouseover="xianshi()" onmouseout="xiaoshi2()">${username}</i></a>
+			</div>
+			<div id="xianshi">
+				<p style="margin-left: 5px; margin-top: 3px;">
+					<a href="personal"><img src="/images/person.png"></a>
+				</p>
                 <p style="margin-left: 4px; margin-top: 5px;">
                     <a href="/User/exit"><img src="/images/exit.png"></a>
                 </p>
@@ -162,12 +163,12 @@
     <div class="header1">
         <div
                 style="float: left; margin-left: 541px; margin-right: 15px; margin-top: 10px;">
-            <h3>${attentionFriend}</h3>
+            <h3 id="attention">${attention}</h3>
             <h3 style="margin-top: 10px;">关注</h3>
         </div>
         <div style="float: left;" class="jiange"></div>
         <div style="float: left; margin-left: 15px; margin-top: 10px;">
-            <h3>${fansFriend}</h3>
+            <h3 id="fans">${fans}</h3>
             <h3 style="margin-top: 10px;">粉丝</h3>
         </div>
     </div>

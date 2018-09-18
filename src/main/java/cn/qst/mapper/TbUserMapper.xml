@@ -391,6 +391,40 @@
     update tb_user set `image` = #{image,jdbcType=CHAR}
     where `uname` = #{uname,jdbcType=CHAR}
     </update>
+    
+    <select id="selectUserInfo" parameterType="cn.qst.pojo.TbUser" resultType="cn.qst.pojo.TbUser">
+    	select * from tb_user where uid = #{value}
+    </select>
+    
+    <!-- 用户关注信息 -->
+    
+    <resultMap id="attention" type="cn.qst.pojo.TbAttention">
+        <result column="uid" property="uid"/>
+        <result column="bid" property="bid"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="attention_all">
+        `uid`,
+        `bid`
+    </sql>
+
+    <!--auto generated Code -->
+    <insert id="attentionUser" parameterType="cn.qst.pojo.TbAttention" >
+        INSERT INTO tb_attention (`uid`, `bid`) VALUES (#{uid}, #{bid})
+    </insert>
+    
+    <select id="selectAttention" parameterType="java.lang.String" resultType="java.lang.Integer">
+    	SELECT COUNT(*) FROM tb_attention WHERE uid = #{value}
+    </select>
+    
+    <select id="selectFans" parameterType="java.lang.String" resultType="java.lang.Integer">
+    	SELECT COUNT(*) FROM tb_attention WHERE bid = #{value}
+    </select>
+    
+    <select id="verfiyAttentioned" parameterType="cn.qst.pojo.TbAttention" resultType="java.lang.String">
+    	select `uid` from tb_attention where uid = #{uid} and bid = #{bid}
+    </select>
 </mapper>
 
 

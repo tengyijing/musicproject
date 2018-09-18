@@ -113,29 +113,15 @@
 					<img src="../../source/person/images/shezhi.png" /> <em>资料管理</em>
 					<b></b>
 				</div>
-				<span class="gjszmdm"> <a href="#" class="center_in_self"><font>信息资料</font></a>
+				<span class="gjszmdm"> <a href="#public_m2"
+					class="center_in_self"><font>信息资料</font></a>
 				</span>
 				<!--一条开始-->
 				<div class="centers_listm_one_in" style="width: 210px;">
 					<img src="../../source/person/images/suo.png" /> <em>账户安全</em> <b></b>
 				</div>
-				<span class="gjszmdm"> <a href="#" class="center_in_self"><font>邮箱绑定</font></a>
-					<a href="#" class="center_in_self"><font>手机绑定</font></a> 
-				</span>
-				<!--一条开始-->
-				<div class="centers_listm_one_in" style="width: 210px;">
-					<img src="../../source/person/images/wdssc.png" /> <em>收藏管理</em> <b></b>
-				</div>
-				<span class="gjszmdm"> <a href="#" class="center_in_self"><font>喜欢的歌曲</font></a>
-					<a href="#" class="center_in_self"><font>收藏歌单</font></a>
-				</span>
-				<!--一条开始-->
-				<div class="centers_listm_one_in" style="width: 210px;">
-					<img src="../../source/person/images/mysong.png" /> <em>作品管理</em>
-					<b></b>
-				</div>
-				<span class="gjszmdm"> <a href="#" class="center_in_self"><font>我的原创</font></a>
-					<a href="#" class="center_in_self"><font>我的翻唱</font></a>
+				<span class="gjszmdm"> <a href="#fst1" class="center_in_self"><font>邮箱绑定</font></a>
+					<a href="#fst2" class="center_in_self"><font>手机绑定</font></a>
 				</span>
 				<!--一条开始-->
 				<div class="centers_listm_one_in" style="width: 210px;">
@@ -180,10 +166,8 @@
 					<div class="zp_nrm_l">
 
 						<img src="${imgstr}" id="img4" />
-
 						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#avatar-modal" style="margin: 10px 15px 10px 19px">修改头像
-						</button>
+							data-target="#avatar-modal" style="margin: 10px 15px 10px 19px">修改头像</button>
 						<!-- 更换头像开始 -->
 						<div class="user_pic" style="margin: 10px;"></div>
 
@@ -393,6 +377,7 @@
 
 							<p>
 								<em>VIP：</em>
+
 								<c:choose>
 									<c:when test="${user.vip == 0 }">
 										<!-- 充值会员 暂时不做-->
@@ -407,7 +392,6 @@
 									</c:otherwise>
 								</c:choose>
 							</p>
-
 							<p>
 								<em>性别：</em>
 								<c:choose>
@@ -441,10 +425,19 @@
 								</c:choose>
 							</p>
 							<p>
-								<em>居住城市：</em> <span> <span id="province"> <span><a
-											onclick="allCityInfo()">立即添加</a> </span>
+								<em>居住城市：</em> <span> <span id="province"> <c:choose>
+											<c:when
+												test="${userInfo.uid != null && userInfo.uid != user.uid}">
+
+											</c:when>
+											<c:otherwise>
+												<span><a onclick="allCityInfo()">立即添加</a></span>
+											</c:otherwise>
+										</c:choose>
+
 								</span> <span id="cityInfo"> </span>
 								</span>
+
 							</p>
 							<a
 								style="text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;"
@@ -476,7 +469,7 @@
 			</div>
 			<!--一条开始-->
 			<div class="public_m1">
-
+				<a name="fst1"></a>
 				<div class="public_m2">绑定邮箱修改</div>
 				<!--提示信息-->
 				<div class="tip_notem">

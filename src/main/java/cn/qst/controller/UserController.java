@@ -107,10 +107,10 @@ public class UserController {
 	}
 
 	/**
-	 * 根据用户地址id 查询用户地址信息
+	 * 根据用户地址id 查询用户地址信息,
 	 *
 	 * @param addressId
-	 * @return
+	 * @return 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/userCityInfo")
@@ -155,20 +155,19 @@ public class UserController {
 		session.removeAttribute("user");
 		return "index";
 	}
-
+	
 	/**
-	 * 查询用户个人信息，根据登陆时session中存储的“username”的用户名
+	 * 点击头像显示用户的个人信息，传入用户的uid
+	 * 查询用户个人信息，根据传入的id查询用户个人信息
 	 *
-	 * @param request
-	 *            获取session对象
-	 * @return 跳转到个人信息页面
+	 * @param request 传入用户信息
+	 * @return 返回到userInfo 页面  只显示用户的信息
 	 */
 	@RequestMapping("/personalInfo")
-	public String personalInfo(HttpServletRequest request) {
-		String uname = (String) request.getSession().getAttribute("username");
-		TbUser user = userService.selectPersonalInfo(uname);
-		request.setAttribute("user", user);
-		return "personal";
+	public String personalInfo(HttpServletRequest request, String uid) {
+		TbUser user = userService.selectUserInfo(uid);
+		request.setAttribute("userInfo", user);
+		return "userInfo";
 	}
 
 	/**
