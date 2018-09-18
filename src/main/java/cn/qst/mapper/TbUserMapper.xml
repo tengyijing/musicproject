@@ -336,7 +336,7 @@
 
     <select id="selectByUnameOrUname"
             parameterType="java.lang.String" resultType="cn.qst.pojo.TbUser">
-		select `uid`, `uname`,`password`,
+		select `uid`, `uname`, `password`,
 		`email`, `phone`, `sex`, `vip`,
 		`address`, `image`, `status`
 		from

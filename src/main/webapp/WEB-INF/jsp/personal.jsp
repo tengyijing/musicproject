@@ -120,15 +120,13 @@
 					<img src="../../source/person/images/suo.png" /> <em>账户安全</em> <b></b>
 				</div>
 				<span class="gjszmdm"> <a href="#" class="center_in_self"><font>邮箱绑定</font></a>
-					<a href="#" class="center_in_self"><font>手机绑定</font></a> <a
-					href="#" class="center_in_self"><font>密码修改</font></a>
-
+					<a href="#" class="center_in_self"><font>手机绑定</font></a> 
 				</span>
 				<!--一条开始-->
 				<div class="centers_listm_one_in" style="width: 210px;">
 					<img src="../../source/person/images/wdssc.png" /> <em>收藏管理</em> <b></b>
 				</div>
-				<span class="gjszmdm"> <a href="#" class="center_in_self"><font>收藏歌曲</font></a>
+				<span class="gjszmdm"> <a href="#" class="center_in_self"><font>喜欢的歌曲</font></a>
 					<a href="#" class="center_in_self"><font>收藏歌单</font></a>
 				</span>
 				<!--一条开始-->
