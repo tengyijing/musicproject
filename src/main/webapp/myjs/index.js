@@ -1,3 +1,25 @@
+
+function getFansAndAttention(uid) {
+	$.ajax({
+		url:"/attention/selectAttentionAndFans",
+		type:'post',
+		async:false,
+		contentType:"application/x-www-form-urlencoded",
+		data:{
+			uid:uid,
+		},
+		dataType:'json',
+		success:function(data) {
+			var str = "";
+			str += data[0];
+			$('#attention').html(str);
+			str = "";
+			str += data[1];
+			$('#fans').html(str);
+		}
+	})
+}
+
 $(function () {
 	$.ajax({
 		type:'get',
@@ -46,8 +68,6 @@ $(function () {
 		}
 	})
 })
-
-
 
 
 $(function(){

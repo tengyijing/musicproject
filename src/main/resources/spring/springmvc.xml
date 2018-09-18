@@ -31,7 +31,7 @@
             <mvc:mapping path="/User/personalInfo"/>
             <mvc:mapping path="/mysong"/>
             <mvc:mapping path="/singer"/>
-            <mvc:mapping path="huati"/>
+            <mvc:mapping path="/huati"/>
             <bean class="cn.qst.intercept.LoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
