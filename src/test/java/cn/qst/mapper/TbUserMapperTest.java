@@ -1,16 +1,18 @@
 package cn.qst.mapper;
 
 import cn.qst.comman.jedis.JedisClient;
-import cn.qst.pojo.TbUser;
+import cn.qst.comman.utils.JsonUtils;
+import cn.qst.pojo.TbMenuContent;
+import cn.qst.service.MenuService;
+import cn.qst.service.impl.MenuServiceImpl;
+
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
+
+import java.util.List;
 
 /**
  * @author lk
@@ -21,21 +23,24 @@ public class TbUserMapperTest {
 
     @Autowired
     TbUserMapper tbUserMapper;
+	private ApplicationContext applicationContext;
 
-    @Test
-    public void selectByUname() {
-        String user =tbUserMapper.selectByUname("lkk123");
-        System.out.println(user);
-    }
     
     @Test
     public void jedisTest() {
-    	ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
+    	applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
     	//获取jedisClient对象
     	JedisClient jedisClient = applicationContext.getBean(JedisClient.class);
-    	jedisClient.set("first", "100");
-		String result = jedisClient.get("first");
-		System.out.println(result);
+    	MenuService menuService = new MenuServiceImpl();
+    	List<TbMenuContent> queryByName;
+		String jsonName = jedisClient.hget("CONTENT","huadong");
+		if(jsonName!=null && !"".equals(jsonName.trim())) {
+			queryByName = JsonUtils.jsonToList(jsonName, TbMenuContent.class);
+		}else {
+			queryByName = menuService.queryByName();
+			//存入缓存
+			jedisClient.hset("CONTENT", "huadong", JsonUtils.objectToJson(queryByName));
+		}
     }
 }
 
