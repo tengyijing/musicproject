@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class TbComment {
     private Integer cdid;
-
+    
     private Date cdate;
 
-    private String uid;
+    private TbUser user;
 
     private Integer parentid;
 
@@ -33,15 +33,15 @@ public class TbComment {
         this.cdate = cdate;
     }
 
-    public String getUid() {
-        return uid;
-    }
+    public TbUser getUser() {
+		return user;
+	}
 
-    public void setUid(String uid) {
-        this.uid = uid == null ? null : uid.trim();
-    }
+	public void setUser(TbUser user) {
+		this.user = user;
+	}
 
-    public Integer getParentid() {
+	public Integer getParentid() {
         return parentid;
     }
 

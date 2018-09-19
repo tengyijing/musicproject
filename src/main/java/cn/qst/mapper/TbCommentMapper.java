@@ -1,36 +1,23 @@
 package cn.qst.mapper;
 
-import cn.qst.pojo.TbComment;
-import cn.qst.pojo.TbCommentExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+
+import cn.qst.pojo.TbComment;
 
 public interface TbCommentMapper {
-    int countByExample(TbCommentExample example);
-
-    int deleteByExample(TbCommentExample example);
-
-    int deleteByPrimaryKey(Integer cdid);
-
-    int insert(TbComment record);
-
-    int insertSelective(TbComment record);
-
-    List<TbComment> selectByExampleWithBLOBs(TbCommentExample example);
-
-    List<TbComment> selectByExample(TbCommentExample example);
-
-    TbComment selectByPrimaryKey(Integer cdid);
-
-    int updateByExampleSelective(@Param("record") TbComment record, @Param("example") TbCommentExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") TbComment record, @Param("example") TbCommentExample example);
-
-    int updateByExample(@Param("record") TbComment record, @Param("example") TbCommentExample example);
-
-    int updateByPrimaryKeySelective(TbComment record);
-
-    int updateByPrimaryKeyWithBLOBs(TbComment record);
-
-    int updateByPrimaryKey(TbComment record);
+    // 添加评论
+	int save(TbComment comment);
+	
+	// 删除评论
+	int delete(int cdid);
+	
+	// 根据mid查找对应的评论
+	List<TbComment> selectByMid(int mid);
+	
+	// 统计总数
+	int countAllByMid(int mid);
+	
+	// 精彩评论
+	List<TbComment> top10Comment(int mid);
+	
 }

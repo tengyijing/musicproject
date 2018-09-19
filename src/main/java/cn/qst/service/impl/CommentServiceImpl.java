@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import cn.qst.mapper.TbCommentMapper;
 import cn.qst.pojo.TbComment;
-import cn.qst.pojo.TbCommentExample;
-import cn.qst.pojo.TbCommentExample.Criteria;
 import cn.qst.service.CommentService;
 
 /**
@@ -26,10 +27,35 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Override
 	public List<TbComment> selectByMid(int mid) {
-		TbCommentExample example = new TbCommentExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andMidEqualTo(mid);
-		return commentDao.selectByExample(example);
+		return commentDao.selectByMid(mid);
+	}
+
+	@Override
+	public boolean addComment(TbComment comment) {
+		return commentDao.save(comment)==1;
+	}
+
+	@Override
+	public List<TbComment> selectTop10(int id) {
+		return commentDao.top10Comment(id);
+	}
+
+	@Override
+	public boolean deleteComment(int cdid) {
+		return commentDao.delete(cdid)==1;
+	}
+
+	@Override
+	public PageInfo<TbComment> selectByPage(Integer pageIndex, Integer rows, Integer mid) {
+		PageHelper.startPage(pageIndex, rows);
+		List<TbComment> list = commentDao.selectByMid(mid);
+		PageInfo<TbComment> info = new PageInfo<>(list, 5);
+		return info;
+	}
+
+	@Override
+	public int countTotal(int mid) {
+		return commentDao.countAllByMid(mid);
 	}
 
 }

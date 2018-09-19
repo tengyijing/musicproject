@@ -433,7 +433,7 @@
     <select id="verfiyAttentioned" parameterType="cn.qst.pojo.TbAttention" resultType="java.lang.String">
     	select `uid` from tb_attention where uid = #{uid} and bid = #{bid}
     </select>
-    
+      
     <delete id="cancelAttention" parameterType = "cn.qst.pojo.TbAttention">
     	DELETE FROM tb_attention WHERE uid = #{uid} AND bid = #{bid}
     </delete>
@@ -445,6 +445,15 @@
     <select id="showFans" parameterType="java.lang.String" resultMap="fansCtxUser">
         SELECT * FROM `tb_attention` WHERE `bid` = #{bid}
     </select>
+
+    <select id ="queryAttention" resultType="java.lang.String" >
+    select `bid` from tb_attention where `uid` = #{id}
+    </select>
+
+    <select id ="queryFans" resultType="java.lang.String"  >
+    select `uid` from tb_attention where `bid` = #{id}
+    </select>
+
 </mapper>
 
 

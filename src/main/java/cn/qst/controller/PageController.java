@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.qst.comman.jedis.JedisClient;
+import cn.qst.comman.utils.JsonUtils;
 import cn.qst.pojo.TbMcategory;
 import cn.qst.pojo.TbMenu;
 import cn.qst.pojo.TbMenuContent;
@@ -32,13 +34,45 @@ public class PageController {
 
 	@Autowired
 	private MusicClassifyService musicClassifyService;
+	
+	@Autowired
+	private JedisClient jedisClient;
 
 	// 主页跳转
 	@RequestMapping("/")
 	public String indexJsp(HttpSession session) {
-		List<TbMenuContent> queryByName = menuService.queryByName();
-		List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
-		List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
+		//滑动轮播列表
+		List<TbMenuContent> queryByName;
+		//新歌模块列表
+		List<TbMenuContent> queryIndexNew;
+		//热歌模块列表
+		List<TbMenuContent> queryIndexHot;
+		//从redis缓存获取数据
+		String jsonName = jedisClient.hget("CONTENT","huadong");
+		//判断数据是否存在
+		if(jsonName!=null && !"".equals(jsonName.trim())) {
+			queryByName = JsonUtils.jsonToList(jsonName, TbMenuContent.class);
+		}else {
+			queryByName = menuService.queryByName();
+			//存入缓存
+			jedisClient.hset("CONTENT", "huadong", JsonUtils.objectToJson(queryByName));
+		}
+		String jsonNew = jedisClient.hget("CONTENT","newsong");
+		if(jsonNew!=null && !"".equals(jsonNew.trim())) {
+			queryIndexNew = JsonUtils.jsonToList(jsonNew, TbMenuContent.class);
+		}else {
+			queryIndexNew = menuService.queryIndexNew();
+			//存入缓存
+			jedisClient.hset("CONTENT", "newsong", JsonUtils.objectToJson(queryIndexNew));
+		}
+		String jsonHot = jedisClient.hget("CONTENT","hot");
+		if(jsonHot!=null && !"".equals(jsonHot.trim())) {
+			queryIndexHot = JsonUtils.jsonToList(jsonHot, TbMenuContent.class);
+		}else {
+			queryIndexHot = menuService.queryIndexHot();
+			//存入缓存
+			jedisClient.hset("CONTENT", "jsonHot", JsonUtils.objectToJson(queryIndexHot));
+		}
 		session.setAttribute("huadong", queryByName);
 		session.setAttribute("newsong", queryIndexNew);
 		session.setAttribute("hot", queryIndexHot);
@@ -69,7 +103,6 @@ public class PageController {
 	 * 根据不同的页面返回相应的菜单
 	 * 
 	 * @param id通过id来得到当前跳转页面的菜单属性
-	 * @return 返回一个json数据到前台页面
 	 */
 	@ResponseBody
 	@RequestMapping("/admin/queryMenuAll")
@@ -121,21 +154,7 @@ public class PageController {
 		if(mClsit1.size()!=0) {
 			list.add(mClsit1);
 		}
-		
-		
-		/**
-		 * 获取主页的内容
-		 */
-		if(menuid==2) {
-			List<TbMenuContent> queryByName = menuService.queryByName();
-			List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
-			List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
-			map.put("huadong",queryByName);
-			map.put("newsong", queryIndexNew);
-			map.put("hotsong", queryIndexHot);
-		}	
-		
-		
+	
 		return list;
 	}
 

@@ -6,10 +6,12 @@ import cn.qst.comman.utils.MD5Utils;
 import cn.qst.comman.utils.SendEmail;
 import cn.qst.comman.utils.TimeUtils;
 import cn.qst.pojo.TbCity;
+
 import cn.qst.pojo.TbMusiclist;
 import cn.qst.pojo.TbProvince;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.MusiclistService;
+
 import cn.qst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,8 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
-import java.util.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author lk 2018/9/7 11:23
