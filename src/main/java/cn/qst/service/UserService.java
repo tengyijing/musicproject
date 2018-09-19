@@ -111,4 +111,11 @@ public interface UserService {
 	 * @return 修改成功即返回true 失败即false
 	 */
 	int upHeadImage(TbUser user);
+	
+	/**
+	 * 根据传入的id 查询用户信息
+	 * @param uid 用户id
+	 * @return
+	 */
+	TbUser selectUserInfo(String uid);
 }

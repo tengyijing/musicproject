@@ -1,4 +1,25 @@
-$(function() {
+function getFansAndAttention(uid) {
+	$.ajax({
+		url:"/attention/selectAttentionAndFans",
+		type:'post',
+		async:false,
+		contentType:"application/x-www-form-urlencoded",
+		data:{
+			uid:uid,
+		},
+		dataType:'json',
+		success:function(data) {
+			var str = "";
+			str += data[0];
+			$('#attention').html(str);
+			str = "";
+			str += data[1];
+			$('#fans').html(str);
+		}
+	})
+}
+
+$(function () {
 	$.ajax({
 		type : 'get',
 		url : '/admin/queryMenuAll',
@@ -59,11 +80,12 @@ $(function() {
 	})
 })
 
-$(function() {
-	$("#vid").click(function(event) {
-		event.stopPropagation();// 阻止mousedown 事件冒泡（注意只阻止了mousedown事件）
-		event.preventDefault();// 阻止当前元素默认事件
-		$(".videoFrame").show();
+
+$(function(){
+	$("#vid").click(function (event) {
+	    event.stopPropagation();//阻止mousedown 事件冒泡（注意只阻止了mousedown事件）
+	    event.preventDefault();//阻止当前元素默认事件
+		 $(".videoFrame").show();
 	});
 	$(document).click(function() {
 		$(".videoFrame").hide();

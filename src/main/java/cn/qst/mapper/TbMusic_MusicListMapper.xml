@@ -13,4 +13,8 @@
 		SELECT COUNT(*) FROM `tb_music_musiclist` WHERE `mlid`=#{0} AND `mid`=#{1}
 	</select>
 	
+	<delete id="delAll">
+		DELETE FROM `tb_music_musiclist` WHERE `mlid`=#{0}
+	</delete>
+	
 </mapper>

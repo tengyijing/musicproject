@@ -149,10 +149,11 @@ var str = "";
 					onsubmit="return searchNull()">
 					<input style="width: 170px;" type="text" class="text"
 						placeholder="我是歌手第四季" name="musicName" id="musicName" speech
-						x-webkit-speech onkeyup="searchStr(this.value)" /> <span
+	x-webkit-speech onkeyup="searchStr(this.value)" /> <span
 						class="btn" id="vid" style="float: left;"><i><img
 							style="margin-top: 6px;" src="../../source/images/video.png"></i></span>
 					<span class="btn" onclick="search();"><i class="icon-sprite"></i></span>
+
 				</form>
 				<div class="videoFrame">
 					<iframe frameborder=0 width=290 height=330 marginheight=0
@@ -167,31 +168,29 @@ var str = "";
 						</c:if>
 					</c:forEach>
 
+					<div id="nameicon" class="center_header"
+						style="margin-left: 60px; margin-right: 10px; float: left; display: none">
+						<a href="personal"><img src="${imgstr}" id="img2" /></a>
+					</div>
+					<div id="name" style="display: none; padding-top: 35px;">
+						<a href="personal" style="cursor: pointer"><i
+							onmouseover="xianshi()" onmouseout="xiaoshi2()">${username}</i></a>
+					</div>
+					<div id="xianshi">
+						<p style="margin-left: 5px; margin-top: 3px;">
+							<a href="personal"><img src="/images/person.png"></a>
+						</p>
+						<p style="margin-left: 4px; margin-top: 5px;">
+							<a href="User/exit"><img src="/images/exit.png"></a>
+						</p>
+					</div>
+					<div class="header-login" style="margin-right: -10px;">
+						<a href="/login" class="open-green" id="login">登录</a> <a
+							href="/regist" class="open-vip" id="reg">注册</a>
+					</div>
+
 				</div>
 			</div>
-
-			<div id="nameicon" class="center_header"
-				style="margin-left: 60px; margin-right: 10px; float: left; display: none">
-				<a href="User/personalInfo"><img src="${imgstr}" id="img2" /></a>
-			</div>
-			<div id="name" style="display: none; padding-top: 35px;">
-				<a href="User/personalInfo" style="cursor: pointer"><i
-					onmouseover="xianshi()" onmouseout="xiaoshi2()">${username}</i></a>
-			</div>
-			<div id="xianshi">
-				<p style="margin-left: 5px; margin-top: 3px;">
-					<a href="User/personalInfo"><img src="/images/person.png"></a>
-				</p>
-				<p style="margin-left: 4px; margin-top: 5px;">
-					<a href="User/exit"><img src="/images/exit.png"></a>
-				</p>
-			</div>
-			<div class="header-login" style="margin-right: -10px;">
-				<a href="/login" class="open-green" id="login">登录</a> <a
-					href="/regist" class="open-vip" id="reg">注册</a>
-			</div>
-		</div>
-	</div>
 	</header>
 
 	<!-- 精彩推荐 -->
