@@ -18,6 +18,24 @@
 	      </bean>
 	   </mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	<!--设置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--需要拦截的controller连接-->
+            <mvc:mapping path="/User/changUserInfo"/>
+            <mvc:mapping path="/User/upHeadImage"/>
+            <mvc:mapping path="/User/userCityInfo"/>
+            <mvc:mapping path="/User/allProvinceInfo"/>
+            <mvc:mapping path="/User/CityInfoById"/>
+            <mvc:mapping path="/User/personalInfo"/>
+            <mvc:mapping path="/mysong"/>
+            <mvc:mapping path="/singer"/>
+            <mvc:mapping path="/huati"/>
+            <bean class="cn.qst.intercept.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+	
 	<!-- 加载文件服务器的配置文件 -->
 	<context:property-placeholder location="classpath:fastdfs/resource.properties"/>
 	<!-- 定义文件上传解析器 -->

@@ -1,5 +1,7 @@
 package cn.qst.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,9 +12,8 @@ import cn.qst.comman.pojo.AdminResult;
 import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.comman.pojo.EasyUiTreeNode;
 import cn.qst.pojo.TbMenuContent;
+import cn.qst.pojo.TbUser;
 import cn.qst.service.AdminService;
-
-import java.util.List;
 
 
 /**
@@ -72,5 +73,20 @@ public class AdminController {
 	@ResponseBody
 	public AdminResult updateContent(TbMenuContent content) {
 		return adminService.updateContent(content);
+	}
+	
+	//查询用户
+	@RequestMapping("/user/list")
+	@ResponseBody
+	public EasyUiDataGridResult selectUser(Integer page , Integer rows,TbUser user) {
+		return adminService.selectUser(page,rows,user);
+	}
+	
+	//修改用户状态
+	@RequestMapping("/user/status")
+	@ResponseBody
+	public AdminResult updateUserstatus(String ids , boolean status) {
+		String[] split = ids.split(",");
+		return adminService.updateUserStatus(split, status);
 	}
 }

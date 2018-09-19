@@ -27,4 +27,9 @@ public class Music_MusicListServiceImpl implements Music_MusicListService {
 		return music_muscilistDao.countByMlidAndMid(mlid, mid);
 	}
 
+	@Override
+	public int delAll(int mlid) {
+		// TODO Auto-generated method stub
+		return  music_muscilistDao.delAll(mlid);
+	}
 }

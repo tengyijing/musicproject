@@ -73,8 +73,8 @@ public class TbMenuContent {
 
 	@Override
 	public String toString() {
-		return "TbMenuContent [id=" + id + ", title=" + title + ", image=" + image + ", playsum=" + playsum + ", sname="
-				+ sname + ", mid=" + mid + "]";
+		return "TbMenuContent [id=" + id + ", musicid=" + musicid + ", title=" + title + ", image=" + image
+				+ ", playsum=" + playsum + ", sname=" + sname + ", mid=" + mid + "]";
 	}
     
 }

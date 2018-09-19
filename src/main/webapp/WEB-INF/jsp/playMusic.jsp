@@ -34,37 +34,47 @@ var type = '${type}';
 	</div>
 	<div class="playerMain">
 		<div class="top">
-			<a style="cursor: pointer;" href="/index" target="_blank">
-			<h2 class="logoaichang" onmouseover="huan()" onmouseout="huan2()">爱唱音乐</h2></a>
+			<h2 class="logoaichang" onmouseover="huan()" onmouseout="huan2()"><a style="cursor: pointer; color:white;" href="/index" target="_blank">爱唱音乐</a></h2>
 			        <script> $(window).load(function(){fPlay('${id}')});
 			        $(window).load(function(){bian('${type}')});</script>
-			<div class="mainNav">
-			<div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;">
- 
-        
-        <a href="User/personalInfo" target="_blank"><img src="${imgstr}" id="img2"/></a>
-    
-         </div>
-	         <div id="name" style="padding-top:21px;">
-	         	<a href="User/personalInfo" style="cursor:pointer;color:#fff" target="_blank" >${username}</a></div>
-			</div>
+			<c:choose>
+				<c:when test="${empty user}">
+					<div class="header-login" style="margin-right: -10px;color:white;">
+						<a href="/login" class="open-green" id="login">登录</a> 
+						<a href="/regist" class="open-vip" id="reg">注册</a>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="mainNav">
+						<div id="nameicon" class="center_header"
+							style="margin-left: 60px; margin-right: 10px; float: left;">
+							<a href="User/personalInfo" target="_blank"><img
+								src="${imgstr}" id="img2" /></a>
+						</div>
+						<div id="name" style="padding-top: 21px;">
+							<a href="User/personal" style="cursor: pointer; color: #fff"
+								target="_blank">${username}</a>
+						</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="middle">
 			<div class="mainWrap">
 				<div class="leftBar">
 					<ul class="menuUL">
 						<li class="menuLi cur">
-							<a href="/play?type=now" class="bianse" onclick="menuLi()">
+							<a  class="bianse" onclick="menuLi()">
 								<i class="icon iplay"></i> 正在播放
 							</a>
 						</li>
 						<li class="menuLi cur">
-							<a href="/play?type=history" class="bianse2" onclick="menuLi3()">
+							<a class="bianse2" onclick="menuLi3()">
 								<i class="icon ihst"></i> 播放历史
 							</a>
 						</li>
 						<li class="menuLi cur">
-							<a href="/play?type=myLove" class="bianse3" onclick="menuLi5()">
+							<a class="bianse3" onclick="menuLi5()">
 								<i class="icon ishouc"></i> 我喜欢的音乐
 							</a>
 						</li>
@@ -77,7 +87,7 @@ var type = '${type}';
 								<li class="menuLi2 cur">
 								<div  class="beijing hp" single2="${music.name}">
 								 <i class="icon isplay2"></i>
-								 <a href="/play?type=${music.mlid }"style="color:black; background-color:transparent;">${music.name }</a>
+								 <a onclick="playasynch(${music.mlid})" style="color:black; background-color:transparent;">${music.name }</a>
 								 <i class="cicon dele2" single3="${music.mlid }" delNo="${index1.index}"></i>
 								 </div>
 								</li>
@@ -85,7 +95,6 @@ var type = '${type}';
 							</ul>
 						</div>
 					</div>
-
 					<audio id="audio" src="http://other.web.nf01.sycdn.kuwo.cn/resource/n3/84/59/1143440808.mp3"></audio>
 				</div>
 				<div class="mainBody">
@@ -108,7 +117,7 @@ var type = '${type}';
 											<input class="checkIn" name="choose" type="checkbox" select="0" value="${music.mid}">
 										</div>
 										<div class="start">
-											<em sonN="${music.mid}" lrc="${music.lyricsurl}" musicUrl="${music.fileurl}" imgurl="${music.image }" ListId="${index.index}"><input type="text" style="display:none;" name="son" value="${music.mid}">${index.index+1}</em>
+											<em  sonN="${music.mid}" lrc="${music.lyricsurl}" musicUrl="${music.fileurl}" imgurl="${music.image }" ListId="${index.index}"><input type="text" style="display:none;" name="son" value="${music.mid}">${index.index+1}</em>
 										</div>
 										<div class="songBd">
 											<div class="col colsn">${music.mname}</div>
@@ -133,7 +142,6 @@ var type = '${type}';
 								</c:forEach>
 							</ul>
 						</div>
-						
 					</div>
 					<div class="songSingleChoose">
 					    <div class="inner-container"> 

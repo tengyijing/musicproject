@@ -27,7 +27,11 @@ import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbMusicExample;
 import cn.qst.service.MusicClassifyService;
 
-
+/**
+ * 音乐分类
+ * @author daihong
+ *
+ */
 @Service
 public class MusicClassifyServiceImpl implements MusicClassifyService{
 
@@ -92,6 +96,19 @@ public class MusicClassifyServiceImpl implements MusicClassifyService{
 			criteria.andMidEqualTo(mid);
 			List<TbMenuContent> selectByExample = menuContentMapper.selectByExample(tbMenuContentExample);
 			return selectByExample;				
+	}
+
+
+
+	@Override
+	public List<TbMusic> queryBySname(String sname) {
+		
+		// TODO Auto-generated method stub
+		TbMusicExample example = new TbMusicExample();
+		cn.qst.pojo.TbMusicExample.Criteria criteria = example.createCriteria();
+		criteria.andSnameEqualTo(sname);
+		List<TbMusic> selectByExample = musicMapper.selectByExample(example);
+		return selectByExample;
 	}
 
 }

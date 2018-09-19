@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +35,13 @@ public class PageController {
 
 	// 主页跳转
 	@RequestMapping("/")
-	public String indexJsp(Map<String, Object>map) {
+	public String indexJsp(HttpSession session) {
 		List<TbMenuContent> queryByName = menuService.queryByName();
 		List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
 		List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
-		map.put("huadong",queryByName );
-		map.put("newsong", queryIndexNew);
-		map.put("hotsong", queryIndexHot);
+		session.setAttribute("huadong", queryByName);
+		session.setAttribute("newsong", queryIndexNew);
+		session.setAttribute("hot", queryIndexHot);
 		return "index";
 	}
 
@@ -47,20 +49,6 @@ public class PageController {
 	@RequestMapping("/{page}")
 	public String pageJsp(String page, Integer menuid, Map<String, Object> map) {
 		map.put("menuid", menuid);
-		if(menuid!=null) {
-			/**
-			 * 获取主页的内容
-			 */
-			if(menuid==2) {
-				List<TbMenuContent> queryByName = menuService.queryByName();
-				List<TbMenuContent> queryIndexNew = menuService.queryIndexNew();
-				List<TbMenuContent> queryIndexHot = menuService.queryIndexHot();
-				map.put("huadong",queryByName);
-				map.put("newsong", queryIndexNew);
-				map.put("hotsong", queryIndexHot);
-			}	
-		}
-		
 		return page;
 	}
 
@@ -81,11 +69,11 @@ public class PageController {
 	 * 根据不同的页面返回相应的菜单
 	 * 
 	 * @param id通过id来得到当前跳转页面的菜单属性
-	 * @return 返回一个json数据到前台页面
 	 */
 	@ResponseBody
 	@RequestMapping("/admin/queryMenuAll")
-	public List<Object> queryMenuAll(Integer menuid) {
+	public List<Object> queryMenuAll(Integer menuid,Map<String, Object> map) {
+		System.out.println(menuid);
 		List<TbMenu> tbMenus = menuService.queryAll();
 		List<TbMenu> mPList = new ArrayList<>();
 		// 查询所有一级菜单
@@ -132,6 +120,7 @@ public class PageController {
 		if(mClsit1.size()!=0) {
 			list.add(mClsit1);
 		}
+	
 		return list;
 	}
 

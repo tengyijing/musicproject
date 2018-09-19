@@ -49,7 +49,22 @@ var TT = TAOTAO = {
         	return '<span style="color:red;">下线</span>';
         } 
     },
-    
+    formatUserSex : function formatStatus(val,row){
+        if (val == 0){
+            return '男';
+        } else if(val == 1){
+        	return '女';
+        } else{
+        	return '其他';
+        }
+    },
+    formatUserStatus : function formatStatus(val,row){
+        if (val == 1){
+            return '正常';
+        } else{
+        	return '<span style="color:red;">冻结</span>';
+        } 
+    },
     init : function(data){
     	// 初始化图片上传组件
     	this.initPicUpload(data);

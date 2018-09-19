@@ -65,10 +65,10 @@ public class MusicServiceImpl implements MusicService {
 		TbMusicExample example = new TbMusicExample();
 		Criteria criteria = example.createCriteria();
 		if(music.getMname()!=null&&!music.getMname().isEmpty()) {
-			criteria.andMnameEqualTo(music.getMname());
+			criteria.andMnameLike("%"+music.getMname()+"%");
 		}
 		if(music.getSname()!=null&&!music.getSname().isEmpty()) {
-			criteria.andSnameEqualTo(music.getSname());
+			criteria.andSnameLike("%"+music.getSname()+"%");
 		}
 		List<TbMusic> list = tbMusicMapper.selectByExample(example );
 		//获取分页信息

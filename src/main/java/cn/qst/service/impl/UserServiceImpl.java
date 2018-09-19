@@ -183,7 +183,11 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return tbUserMapper.upHeadImage(user); 
 	}
-	
-	
 
+	@Override
+	public TbUser selectUserInfo(String uid) {
+		// TODO Auto-generated method stub
+		return tbUserMapper.selectUserInfo(uid);
+	}
+	
 }

@@ -1,5 +1,6 @@
 package cn.qst.mapper;
 
+import cn.qst.pojo.TbAttention;
 import cn.qst.pojo.TbCity;
 import cn.qst.pojo.TbProvince;
 import cn.qst.pojo.TbUser;
@@ -105,4 +106,65 @@ public interface TbUserMapper {
      * @return
      */
     int upHeadImage(TbUser user);
+    
+    /**
+     * 根据传入的用户id 查询用户个人信息
+     *
+     * @param uid 传入的id
+     * @return 用户信息
+     */
+    TbUser selectUserInfo(String uid);
+    
+    /**
+     * 用户关注用户
+     *
+     * @param tbAttention uid 关注其他用户id， bid 被关注
+     * @return
+     */
+    int attentionUser(TbAttention tbAttention);
+    
+    /**
+     * 查询用户关注的人数
+     * 
+     * @param uid 用户id
+     * @return 用户关注的人数
+     */
+    int selectAttention(String uid);
+    
+    /**
+     * 查询用户的粉丝数量
+     * 
+     * @param did 用户的id
+     * @return 用户的分析数量
+     */
+    int selectFans(String did);
+    
+    /**
+     * 验证用户uid，是否关注了 用户bid
+     * @param attention 封装了用户uid，和用户bid
+     * @return 用户的uid
+     */
+    String verfiyAttentioned(TbAttention attention);
+    
+    /**
+     * 取消关注
+     * @param attention 封装了关注人的id，以及被关注人
+     * @return 影响的行数
+     */
+    int cancelAttention(TbAttention attention);
+    
+    
+    /**
+     * 获取关注人的id
+     * @param id
+     * @return
+     */
+    List<String> queryAttention(String id); 
+    
+    /**
+     * 获取被关注的id
+     * @param id
+     * @return
+     */
+    List<String> queryFans(String id);
 }

@@ -8,4 +8,5 @@ public interface TbMusic_MusicListMapper {
 	int delete(int mlid, int mid);
 	// 统计次数
 	int countByMlidAndMid(int mlid, int mid);
+	int delAll(int mlid);
 }
