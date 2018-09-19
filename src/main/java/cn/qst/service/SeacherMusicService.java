@@ -2,12 +2,9 @@ package cn.qst.service;
 
 
 
-import java.util.List;
+
 import java.util.Map;
 
-import com.github.pagehelper.PageInfo;
-
-import cn.qst.pojo.TbMusic;
 
 
 

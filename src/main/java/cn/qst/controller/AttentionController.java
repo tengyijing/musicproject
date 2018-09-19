@@ -83,4 +83,13 @@ public class AttentionController {
     	TbUser user = (TbUser) request.getSession().getAttribute("user");
     	return attentionService.cancelAttention(user.getUid(), bid);
     }
+    
+    @ResponseBody
+    @RequestMapping("/queryAttentioned")
+    public  List<TbUser> queryAttentioned(String id){
+    	List<TbUser> queryAttention = attentionService.queryAttention(id);
+    	return queryAttention;
+    }
+    
+    
 }

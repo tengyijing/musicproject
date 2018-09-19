@@ -153,4 +153,18 @@ public interface TbUserMapper {
      */
     int cancelAttention(TbAttention attention);
     
+    
+    /**
+     * 获取关注人的id
+     * @param id
+     * @return
+     */
+    List<String> queryAttention(String id); 
+    
+    /**
+     * 获取被关注的id
+     * @param id
+     * @return
+     */
+    List<String> queryFans(String id);
 }

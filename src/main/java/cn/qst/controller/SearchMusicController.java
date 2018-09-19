@@ -57,9 +57,8 @@ public class SearchMusicController {
 	private Set<String> historyList;
 	/**
 	 * 针对搜索框的内容体现	
-	 * @param musicName
-	 * @param request
-	 * @return
+	 * @param musicName 前台搜索内容
+	 * @param request 读取session中的信息
 	 */
 	@ResponseBody
 	@RequestMapping(value="/search",method=RequestMethod.POST)
@@ -80,10 +79,10 @@ public class SearchMusicController {
 	}	
 	
 	/**
-	 * 跳到查询页面
-	 * @param musicName
-	 * @param map
-	 * @param request
+	 * post提交方式跳到查询页面
+	 * @param musicName 前台传回查询数据
+	 * @param map 封装数据供前台读取
+	 * @param request 读取session中的信息
 	 * @return
 	 */
 	@RequestMapping(value = "/seacher",method=RequestMethod.POST)
@@ -100,7 +99,6 @@ public class SearchMusicController {
 
 		List<TbMenu> queryByParent = menuService.queryByParent(12);
 		map.put("TbMenu", queryByParent);
-		PageHelper.startPage(1, 2);
 			Map<String, Object> map2 = seacherMusicService.searcherByStr(musicName);
 			map.put("song", map2);	
 			TbUser user = (TbUser)request.getSession().getAttribute("user");
@@ -115,12 +113,11 @@ public class SearchMusicController {
 	
 	
 	/**
-	 * 跳到查询页面
-	 * @param musicName
-	 * @param map
-	 * @param request
-	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * get方式跳到查询页面
+	 * @param musicName 前台传回查询数据
+	 * @param map 封装数据供前台读取
+	 * @param request 读取session中的信息
+	 * @throws UnsupportedEncodingException 转换字符编码抛出异常
 	 */
 	@RequestMapping( "/seacher")
 	public String serachMusic1(String musicName,ModelMap map,HttpServletRequest request) throws UnsupportedEncodingException {
@@ -130,7 +127,6 @@ public class SearchMusicController {
 		 */
 		List<TbMenu> queryByParent = menuService.queryByParent(12);
 		map.put("TbMenu", queryByParent);
-		PageHelper.startPage(1, 2);
 			Map<String, Object> map2 = seacherMusicService.searcherByStr(name);
 			map.put("song", map2);	
 			TbUser user = (TbUser)request.getSession().getAttribute("user");
@@ -146,8 +142,8 @@ public class SearchMusicController {
 	
 	/**
 	 * 添加歌曲到歌单中
-	 * @param mlid
-	 * @param mid
+	 * @param mlid 读取前台歌单id
+	 * @param mid 读取前台歌曲id
 	 * @return
 	 */
 	@ResponseBody
