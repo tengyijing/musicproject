@@ -86,7 +86,11 @@ public class PlayMusicCotroller {
 		if( type == null || "now".equals(type) ) { // 默认正在播放
 			// 如果传过来id，代表直接播放歌曲，可以直接将歌曲添加到正在播放列表
 			if( mid != 0 ) {
+				//根据id获取音乐
 				TbMusic music = musicService.selectByPrimaryKey(mid);
+				//修改音乐播放量
+				music.setPlaysum(music.getPlaysum()+1);
+				musicService.updateMusic(music);
 				if( nowList == null ) nowList = new ArrayList<>();
 				// 去重
 				boolean flag = true;
@@ -169,6 +173,9 @@ public class PlayMusicCotroller {
 		 */
 		
 		TbMusic music = musicService.selectByPrimaryKey(mid);
+		//修改音乐播放量
+		music.setPlaysum(music.getPlaysum()+1);
+		musicService.updateMusic(music);
 		map.addAttribute("music", music);
 		//更新当前播放音乐id
 		this.nowMid = mid;
