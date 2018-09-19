@@ -72,4 +72,21 @@ public class AttentionServiceImpl implements AttentionService {
 		attention.setBid(bid);
 		return tbUserMapper.verfiyAttentioned(attention) != null ? true : false;
 	}
+
+	/**
+     * 取消关注
+     * @param uid 关注人id
+     * @param bid 被关注人id
+     * @return 取消成功即返回true，失败即返回false
+     */
+	@Override
+	public Boolean cancelAttention(String uid, String bid) {
+		// TODO Auto-generated method stub
+		TbAttention attention = new TbAttention();
+		attention.setUid(uid);
+		attention.setBid(bid);
+		return tbUserMapper.cancelAttention(attention) == 1 ? true : false;
+	}
+	
+	
 }

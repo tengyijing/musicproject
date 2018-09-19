@@ -119,7 +119,7 @@ function attention(bid) {
 //取消关注
 function cancelAttention(bid) {
     $.ajax({
-        url:"",
+        url:"/attention/cancelAttentioned",
         type:"post",
         async:false,
         contentType:"application/x-www-form-urlencoded",

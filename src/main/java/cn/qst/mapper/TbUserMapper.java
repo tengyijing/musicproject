@@ -146,4 +146,11 @@ public interface TbUserMapper {
      */
     String verfiyAttentioned(TbAttention attention);
     
+    /**
+     * 取消关注
+     * @param attention 封装了关注人的id，以及被关注人
+     * @return 影响的行数
+     */
+    int cancelAttention(TbAttention attention);
+    
 }
