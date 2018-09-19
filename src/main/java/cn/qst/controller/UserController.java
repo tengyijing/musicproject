@@ -6,10 +6,8 @@ import cn.qst.comman.utils.MD5Utils;
 import cn.qst.comman.utils.SendEmail;
 import cn.qst.comman.utils.TimeUtils;
 import cn.qst.pojo.TbCity;
-import cn.qst.pojo.TbMenuContent;
 import cn.qst.pojo.TbProvince;
 import cn.qst.pojo.TbUser;
-import cn.qst.service.MenuService;
 import cn.qst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -45,9 +42,6 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private MenuService menuService;
 
 	/**
 	 * 将客户端空白输入传入""转为null

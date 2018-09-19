@@ -97,9 +97,7 @@ public class AttentionServiceImpl implements AttentionService {
 	@Override
 	public List<TbUser> queryAttention(String id) {
 		// TODO Auto-generated method stub
-		System.out.println("111111111111111111111111111");
 		List<String> attention = tbUserMapper.queryAttention(id);
-		attention.forEach(name->System.out.println(name));
 		List<TbUser> tbUsers = new ArrayList<>();
 		for(String string:attention) {
 			TbUserExample example = new TbUserExample();

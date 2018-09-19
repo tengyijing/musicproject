@@ -77,12 +77,54 @@
     <script src="../../myjs/qikoo.js"></script>
     <script type="text/javascript">
         var menuid = ${menuid}
+        
+        function queryAttention(id){
+        	$.ajax({
+        		type:'get',
+        		url:'/attention/queryAttentioned',
+        		data:{id:id},
+        		success:function(data){
+        			var str = "";
+        			if(data.length==0){
+        				str+="<div style='margin-left:40%'><img id='tupian' src='../../source/mysong/images/guanzhu.jpg'/></div>";
+        			}
+        			for(var i=0;i<data.length;i++){
+        				str+="<div  style='margin-left:20px;float:left'><a href='/User/personalInfo?uid="+data[i].uid+"'><img src='"+data[i].image+"'></a>";
+        				str+="<a >"+data[i].uname+"</a></div>";
+        			}
+        			
+        			$("#guanzhu").html(str)
+        		}
+        	})
+        }
+        
+        
+        function queryFans(id){
+        	$.ajax({
+        		type:'get',
+        		url:'/attention/queryFans',
+        		data:{id:id},
+        		success:function(data){
+        			var str = "";
+        			if(data.length==0){
+        				str+="<div style='margin-left:40%'><img   id='tupian' src='../../source/mysong/images/guanzhu.jpg'/></div>";
+        			}
+        			for(var i=0;i<data.length;i++){
+        				str+="<div  style='margin-left:20px;float:left'><a href='/User/personalInfo?uid="+data[i].uid+"'><img src='"+data[i].image+"'></a>";
+        				str+="<a >"+data[i].uname+"</a></div>";
+        			}
+        			
+        			$("#guanzhu").html(str)
+        		}
+        	})
+        }
+        
     </script>
 </head>
 <body onload="getName('${sessionScope.username}');userLogin('${username}');
 getFansAndAttention('${user.uid	}')">
 
-<a href="/attention/queryAttentioned?id=${user.uid }">sdfsdf</a>
+
 
 
 <header class="header">
@@ -143,18 +185,18 @@ getFansAndAttention('${user.uid	}')">
 <!-- 中部上 -->
 <section id="banner" style="margin-top:30px; color:#FFFFFF">
     <div class="image round" style="margin-top: -50px;">
-        <a><img src="${imgstr}" id="img2"/></a>
+        <a><img src="${imgstr}" id="img2" /></a>
     </div>
     <div class="header1">
         <div
                 style="float: left; margin-left: 541px; margin-right: 15px; margin-top: 10px;">
             <h3 id="attention">${attention}</h3>
-            <a style="margin-top: 10px;color: white;font-size: 22px">关注</a>
+            <a style="margin-top: 10px;color: white;font-size: 22px" href="javascript:queryAttention('${user.uid }')" >关注</a>
         </div>
         <div style="float: left;" class="jiange"></div>
         <div style="float: left; margin-left: 15px; margin-top: 10px;">
             <h3 id="fans">${fans}</h3>
-            <a style="margin-top: 10px;color: white;font-size: 22px">粉丝	</a>
+            <a style="margin-top: 10px;color: white;font-size: 22px"  href="javascript:queryFans('${user.uid }')">粉丝	</a>
         </div>
     </div>
 </section>
@@ -166,17 +208,8 @@ getFansAndAttention('${user.uid	}')">
 
 
 <!-- 关注界面 -->
-<div >
-    <div class="header-login3"
-         style="margin-left: 580px; margin-top: -120px; margin-bottom: 100px;">
-        <a class="open-vip" id="add">关注更多好友</a>
-    </div>
-    <div id="fudong2"
-         style="position:absolute;margin-left: -90px; margin-top: -100px; z-index: 9999;display: none;">
-        <iframe frameborder=0 width=400 height=400 marginheight=0
-                marginwidth=0 scrolling=no src="getInfoOfUserClustering.do"></iframe>
-    </div>
-    <div id="fudong"
+<div id="guanzhu" style="margin-left: 5% ">
+    <%-- <div id="fudong"
          style="margin-left: -90px; margin-top: -100px; z-index: 9999; display: none;">
         <iframe frameborder=0 width=400 height=400 marginheight=0
                 marginwidth=0 scrolling=no src="addfriendiframe.jsp"></iframe>
@@ -215,7 +248,7 @@ getFansAndAttention('${user.uid	}')">
         </c:otherwise>
     </c:choose>
 
-
+ --%>
 </div>
 
 

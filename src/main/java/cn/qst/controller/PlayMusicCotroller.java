@@ -16,12 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.druid.sql.dialect.oracle.ast.clause.ModelClause.ReturnRowsClause;
-import com.alibaba.druid.support.json.JSONUtils;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.fasterxml.jackson.databind.util.ArrayBuilders.BooleanBuilder;
-
-import cn.qst.comman.fastdfs.FileUploadUtils;
 import cn.qst.comman.utils.DownloadLyric;
 import cn.qst.comman.utils.JsonUtils;
 import cn.qst.pojo.PlaySynchResult;
@@ -64,10 +58,6 @@ public class PlayMusicCotroller {
 	public String playPage(ModelMap map, HttpSession session, String type, String id) {
 		// 用户登录后可访问
 		TbUser user = (TbUser) session.getAttribute("user");
-//		/*--------删除开始-----------*/
-//		TbUser user = new TbUser();
-//		user.setUid("1");
-//		/*--------删除结束-----------*/
 		
 		// 查询用户歌单
 		if( user != null ) {
@@ -114,7 +104,6 @@ public class PlayMusicCotroller {
 		Integer defalutId = null;
 		// 传过来id的话，就直接播放这首歌
 		if( mid != 0 ) defalutId = mid;
-//		else if( musics!=null && musics.size()>0 ) defalutId=musics.get(0).getMid();
 		map.addAttribute("id", defalutId);
 		// 将我喜爱的音乐的id到数组中，控制前端红星的显示
 		List<Integer> loves = null;
@@ -316,11 +305,6 @@ public class PlayMusicCotroller {
 		Map<String, Object> result = new HashMap<>();
 		// 获取创建歌单的用户
 		TbUser user = (TbUser) session.getAttribute("user");
-		
-//		/*--------删除开始-----------*/
-//		if( user == null ) user = new TbUser();
-//		user.setUid("1");
-//		/*--------删除结束-----------*/
 		
 		if( "v".equalsIgnoreCase(s.trim()) ) { // 验证名字是否存在 falg=true为不存在
 			boolean flag = musiclistService.selectByNameAndUid(musicListName, user.getUid())==null;

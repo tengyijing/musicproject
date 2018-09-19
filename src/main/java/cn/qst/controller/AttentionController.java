@@ -90,6 +90,13 @@ public class AttentionController {
     	List<TbUser> queryAttention = attentionService.queryAttention(id);
     	return queryAttention;
     }
+  
     
+    @ResponseBody
+    @RequestMapping("/queryFans")
+    public  List<TbUser> queryFans(String id){
+    	List<TbUser> queryAttention = attentionService.queryFans(id);
+    	return queryAttention;
+    }
     
 }

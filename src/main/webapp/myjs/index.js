@@ -41,8 +41,14 @@ $(function () {
 									+ data[3][i].mname + "</a></li>";
 						}
 					} else if (data[3][i].parentmid != 12) {
-						str1 += "<a class='open-vip' href='/play'>"
+						if(data[3][i].mid==14){
+							str1 += "<a class='open-vip' href='/play' target='_new'>"
 								+ data[3][i].mname + "</a>";
+						}else{
+							str1 += "<a class='open-vip' href='#'>"
+								+ data[3][i].mname + "</a>";
+						}
+						
 					} else {
 						alert("sdfsdfsdfsd")
 					}
@@ -243,5 +249,7 @@ function topRank(mid) {
 			})
 	return str;
 }
+
+
 
 
