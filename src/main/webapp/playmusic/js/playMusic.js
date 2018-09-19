@@ -121,11 +121,13 @@ function userLogin(username) {
 			$(".bianse3").css("background-color","#fff");
 			$(".bianse2").css("background-color","#fff");
 			$(".bianse").css("background-color","#f0f0f0");
+			playasynch("now");
 		}
 		function menuLi3(){
 			$(".bianse").css("background-color","#fff");
 			$(".bianse3").css("background-color","#fff");
 			$(".bianse2").css("background-color","#f0f0f0");
+			playasynch("history");
 		}
 		function menuLi4(){
 			//$(".bianse2").css("background-color","#fff");
@@ -134,6 +136,58 @@ function userLogin(username) {
 			$(".bianse").css("background-color","#fff");
 			$(".bianse2").css("background-color","#fff");
 			$(".bianse3").css("background-color","#f0f0f0");
+			playasynch("myLove");
+		}
+		
+		//播放页面的异步请求
+		function playasynch(type){
+			$.ajax({
+			    url : "/play/playasynch", 
+				type: "post", 
+				async:true,
+				contentType:"application/x-www-form-urlencoded",
+				data: {"type":type},
+		        success: function(data){//如果调用servlet成功，响应200。请求成功后回调函数。这个方法有两个参数：服务器返回数据，返回状态(可以缺省)。
+		        	$(".songUL").find("li").remove();
+		        	$.each(data.musics,function(n,music){
+		        		var str = "<li class=\"songList\" ListName=\""+music.mid+"\">";
+		        		str+="<div class=\"songLMain\"><div class=\"check\"><input class=\"checkIn\" name=\"choose\" type=\"checkbox\" select=\"0\" value=\""+music.mid+"\"></div>";
+		        		str+="<div class=\"start\">";
+		        		str+="<em  sonN=\""+music.mid+"\" lrc=\""+music.lyricsurl+"\" musicUrl=\""+music.fileurl+"\" imgurl=\""+music.image+"\" ListId=\""+n+"\"><input type=\"text\" style=\"display:none;\" name=\"son\" value=\""+music.mid+"\">"+(parseInt(n)+1)+"</em>";
+		        		str+="</div><div class=\"songBd\">";
+		        		str+="<div class=\"col colsn\">"+music.mname+"</div>";
+		        		str+="<div class=\"col colcn\">"+music.sname+"</div>";
+		        		str+="<div class=\"col\">待添加</div></div>";
+		        		str+="<div class=\"control\" hp=\"123\">";
+		        		if(data.loves!=null&&$.inArray(music.mid,data.loves)>-1){
+		        			str+="<a class=\"cicon love\" style=\"background-position:0 -131px\" loveN=\"1\"></a>";
+		        		}else{
+		        			str+="<a class=\"cicon love\" loveN=\"0\"></a>";
+		        		}
+		        		str+="<a href=\"/music/detail?mid="+music.mid+"\" title=\"音乐详情\" class=\"cicon more\" style=\"display: none\" target=\"_blank\"></a>";
+		        		str+="<a class=\"cicon dele\" style=\"display: none\"></a></div></div></li>";
+		        		$(".songUL").append(str);
+		        		if(music.mid==data.nowMid){
+		        			var html="";
+		        			html+='<div class="manyou">';
+		        			html+='<a href="/music/detail?mid='+music.mid+'" class="manyouA"  target="_blank">查看详细信息</a>';
+		        			html+='</div>';
+		        			$(".start em").css({
+		        				"background":"",
+		        				"color":""
+		        			});
+		        			$(".manyou").remove();
+		        			$(".songList").css("background-color","#f5f5f5");
+		        			$("ul em:eq("+(parseInt(n))+")").css({
+		        				"background":'url("playmusic/css/images/T1X4JEFq8qXXXaYEA_-11-12.gif") no-repeat',
+		        				"color":""
+		        			});
+		        			$("ul em:eq("+(parseInt(n))+")").parent().parent().parent().append(html);
+		        			$("ul em:eq("+(parseInt(n))+")").parent().parent().parent().css("background-color","#f0f0f0");
+		        		}
+		        	});
+		        }
+			});
 		}
 		
 		function bian(type){
@@ -216,15 +270,14 @@ function userLogin(username) {
 			}
 		
 		//音乐从列表删除
-		function moveMusic(sid,type){
+		function moveMusic(sid){
 				$.ajax({
 				    url : "/delMusicFromList", 
 					type: "post", 
 					async:false,//(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
 					contentType:"application/x-www-form-urlencoded",
 					data: {
-						id:sid,
-						ty:type,
+						id:sid
 			        },
 					success: function(data){
 					}  
@@ -278,7 +331,7 @@ function userLogin(username) {
 $(function(){
 
 	//我喜爱的音乐，小红心系列操作
-	$(".love").click(function(){
+	$(".songUL").on("click",".love",function(){
 		var loveN=$(this).attr("loveN");
 		var sid=$(this).parent().parent().find(".start em").attr("sonN");
 		var singID = $(".songName").attr("singID");
@@ -364,7 +417,7 @@ $(function(){
 	/*复选框*/
 	
 	//点选
-	$(".checkIn").click(function(){
+	$(".songUL").on("click",".checkIn",(function(){
 		var s=$(this).attr("select");
 		if (s==0) {
 			$(this).css("background-position","-37px -710px");
@@ -374,7 +427,7 @@ $(function(){
 			$(this).css("background-position","");
 			$(this).attr("select","0");
 		};		
-	});
+	}));
 	
 	//全选
 	$(".checkAll").click(function(){
@@ -423,7 +476,7 @@ $(function(){
 			qikoo.dialog2.confirm('确定要删除所选的歌曲吗？',function(){
 				for(var i=0;i<ch.length;i++){
 					if(ch[i].checked){
-						moveMusic(ch[i].value,type);
+						moveMusic(ch[i].value);
 					}
 				}
 				var listlen = $(".songUL li").length-1;
@@ -538,7 +591,7 @@ $(function(){
 
 	
 	/*点击列表播放按钮*/
-	$(".start em").click(function(){
+	$(".songUL").on("click",".start em",function(){
 		qw = true
 		/*开始放歌*/
 		var sid=$(this).attr("sonN");
