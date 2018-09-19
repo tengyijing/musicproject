@@ -10,9 +10,14 @@
 <link rel="shortcut icon" href="../../source/images/logo-b.png" />
 <link rel="stylesheet" href="../../source/css/index.css">
 <link rel="stylesheet" href="../../source/css/reset.css">
+<link rel="stylesheet" href="/myjs/bootstrap.min.css">
+
+
 
 <script src="../../source/js/jquery.min.js"></script>
 <script src="/myjs/index.js"></script>
+<script src="/myjs/searcher.js"></script>
+<script src="/myjs/bootstrap.min.js"></script>
 <!-- 中部样式 -->
 <link rel="stylesheet" type="text/css"
 	href="../../source/SearchMusic/css/scroll.css">
@@ -44,7 +49,6 @@
     		var j = 0;
     		var ch = document.getElementsByName("choose");
     		var pankong = $(".menuUL3").find("li").length>0;
-    		alert(pankong);
     		for (var i = 0; i < ch.length; i++) {
     			if (ch[i].checked) {
     				j++;
@@ -63,11 +67,15 @@
 					$(".menuLi3").click(function () {
 						for(var i=0;i<ch.length;i++){
 							if(ch[i].checked){
-								addSongsingle(ch[i].value, objname);	
+								var str = addSongsingle(ch[i].value, objname);	
+								if(str==false){
+									alert("已有该歌曲");
+								}else{
+									alert("添加成功");
+								}
 							}
 						}
 						$(".jump").hide();
-    					qikoo.dialog2.alert("添加成功");
     					for (var i = 0; i < ch.length; i++) {
     						ch[i].checked = false;
     					}
@@ -87,26 +95,37 @@
     
     
     function addSongsingle(sid, single) {
-    	alert("sdfsdfsdf")
+var str = "";
     	$.ajax({
     		type : 'get',
     		url : '/serachAdd',
     		async : false,// (默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为
     						// false。注意，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
     		data : {
-    			mlid : sid,
-    			mid : single,
+    			mid : sid,
+    			mlid : single,
     		},
     		success : function(data) {
-    			
+    			str = data;
     		}
 
     	});
+    	return str;
     }
+    
+
+   function queryBySname(obj){
+       //获取查询条件的用户名 
+       var sname = obj.getAttribute("sname")
+       //进行后台跳转
+        window.location.href="/searchBySname?sname="+encodeURI(encodeURI(sname)); 
+       
+   }  
+  
     </script>
 </head>
 <body onload="getName('${username}');">
-<a name="ab">sdfsdf</a>
+
 	<header class="header">
 	<div class="header-container">
 		<div class="header-top">
@@ -124,11 +143,14 @@
 				</c:forEach>
 			</ul>
 			</nav>
-			<div class="header-search">
-				<form action="searchMusic.do" method="post" id="searchform">
+
+			<div class="header-search" style="margin-left: -20px;">
+				<form action="/seacher" method="post" id="searchform"
+					onsubmit="return searchNull()">
 					<input style="width: 170px;" type="text" class="text"
 						placeholder="我是歌手第四季" name="musicName" id="musicName" speech
-						x-webkit-speech /> <span class="btn" id="vid" style="float: left;"><i><img
+						x-webkit-speech onkeyup="searchStr(this.value)" /> <span
+						class="btn" id="vid" style="float: left;"><i><img
 							style="margin-top: 6px;" src="../../source/images/video.png"></i></span>
 					<span class="btn" onclick="search();"><i class="icon-sprite"></i></span>
 				</form>
@@ -136,23 +158,14 @@
 					<iframe frameborder=0 width=290 height=330 marginheight=0
 						marginwidth=0 scrolling=no src="video.jsp"></iframe>
 				</div>
-				<div class="result">
-					<a href="playMusic.do?id=46&type=1" target='_new'
-						class="result-item"> <span class="rank">1</span> <span
-						class="title">房间</span> <span class="num">3.4万</span>
-					</a> <a href="playMusic.do?id=26&type=1" target='_new'
-						class="result-item"> <span class="rank">2</span> <span
-						class="title">追光者</span> <span class="num">2.1万</span>
-					</a> <a href="playMusic.do?id=35&type=1" target='_new'
-						class="result-item"> <span class="rank">3</span> <span
-						class="title">远走高飞</span> <span class="num">12.5万</span>
-					</a> <a href="playMusic.do?id=38&type=1" target='_new'
-						class="result-item"> <span class="rank">4</span> <span
-						class="title">春风十里不如你</span> <span class="num">7万</span>
-					</a> <a href="playMusic.do?id=89&type=1" target='_new'
-						class="result-item"> <span class="rank">5</span> <span
-						class="title">童话镇</span> <span class="num">6.8万</span>
-					</a>
+				<div class="result" id="searchBox">
+					<c:forEach items="${hot}" var="hot_song" varStatus="stat">
+						<c:if test="${stat.count<=6 }">
+							<a class="result-item" href="play?id=${hot_song.musicid}"
+								target='_new'> <span class="rank">${stat.count }</span> <span
+								class="title">${hot_song.title}</span> <span class="num">${hot_song.playsum }万</span></a>
+						</c:if>
+					</c:forEach>
 
 				</div>
 			</div>
@@ -182,7 +195,7 @@
 	</header>
 
 	<!-- 精彩推荐 -->
-	<div class="main" id="recommend">
+	<div class="main" id="recommend" style="height: 300px">
 		<div class="main-inner">
 			<div class="carousel">
 				<div class="carousel-slider">
@@ -217,12 +230,22 @@
 				<input  type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()"  class="checkIn" >
 				</span>
 				歌曲(${musicListSize})
-			</div>-->
-	<div class="playHd"
-		style="margin-top: 40%; margin-left: 70px; width: 1200px;">
+			</div>-->		
+			<div class="tabbable playHb " id="tabs-791225"  style="margin-top:-0%; margin-left: 70px; width: 1200px;">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#panel-109245" data-toggle="tab">歌曲</a>
+					</li>
+					<li>
+						<a href="#panel-455747" data-toggle="tab">歌手</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="panel-109245">
+								
+	<div style="margin-top: 100px">
 		<div class="header-login2" style="margin-top: -5%">
-			<a class="open-vip" id="playall">播放全部</a> <a class="open-vip"
-				id="addTo" onclick="add()">添加到</a>
+ 	<a class="open-vip" id="addTo" onclick="add()">添加到</a>
 			<div class="jump">
 				<div class="inner-container">
 
@@ -230,7 +253,7 @@
 
 						<c:forEach items="${musicList}" var="music" varStatus="index1">
 							<li class="menuLi3 cur"><a class="beijing"
-								single="${music.mlid}"   onclick="name1(this)"> ${music.name}</a></li>
+								single="${music.mlid}" onclick="name1(this)"> ${music.name}</a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -239,23 +262,21 @@
 			<a class="open-vip" id="piliang" onclick="checkIn()">批量操作</a>
 		</div>
 
-		<div class="phInner">
+		<div class="phInner" id="displaycol">
 			<div style="float: left; margin-top: 10px; width: 10px;">
 				<input type="checkbox" name="allChecked" id="allChecked"
 					onclick="DoCheck()" class="checkIn">
 			</div>
 			<div class="col" style="margin-left: 54px;">
 				歌曲(${song.song.size()})</div>
-			<div class="col">演唱者</div>
-			<div class="col">专辑</div>
-			<div class="col">上传时间</div>
+			<div class="col" style="margin-left:-50px ">演唱者</div>
+			<div class="col" style="margin-left:-25px ">专辑</div>
+			<div class="col"  style="margin-left:-25px ">上传时间</div>
 		</div>
 	</div>
-	<div class="playBd" style="margin-top: 40%; margin-left: 70px;">
+	<div >
 		<div class="scrollView">
-			<!-- <div class="scroll"></div> -->
-
-			<ul class="songUL">
+			<ul class="songUL" id="display">
 				<c:forEach items="${song.song}" var="music" varStatus="index">
 					<li class="songList">
 						<div class="songLmain">
@@ -268,7 +289,7 @@
 							</div>
 							<div class="songBd">
 								<div class="col colsn" style="font-size: 16px;">
-									<a href="play?id=${music.mid } target='_new' ">${music.mname}</a>
+									<a href="play?id=${music.mid }" target='_new' ">${music.mname}</a>
 								</div>
 								<div class="col colcn" style="font-size: 16px;">
 									<a>${music.sname }</a>
@@ -286,126 +307,57 @@
 						</div>
 					</li>
 				</c:forEach>
-				<div class="zxf_pagediv" style="margin-top: 40px;"></div>
+				
 			</ul>
 		</div>
 	</div>
+					</div>
+					<div class="tab-pane" id="panel-455747">
+						<div style="margin-top: 0px">
+		
+
+		<div class="phInner" id="displaycol">
+			
+			<div class="col" style="margin-left: 54px;">
+				歌手名称</div>
+		</div>
+	</div>
+	<div >
+		<div class="scrollView">
+			<ul class="songUL" id="display">
+				<c:forEach items="${song.songer}" var="music" varStatus="index">
+					<li class="songList">
+						<div class="songLmain">
+							<div class="start">
+								<em sonN="2" style="font-size: 16px;">${index.index+1 }</em>
+							</div>
+							<div class="songBd">
+								<div class="col colsn" style="font-size: 16px;">
+									<a href="javascript:void(0)" onclick="queryBySname(this)" sname="${music }" >${music}</a>
+								</div>
+								
+							</div>
+							<div class="control">
+								<a class="cicon more"></a>
+							</div>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+					</div>
+				</div>
+			</div>
+			
+			
+	
 	<!-- 分页部分 -->
 	<script src="../../source/SearchMusic/fenye/js/jquery.min.js"
 		type="text/javascript"></script>
 	<script src="../../source/SearchMusic/fenye/js/zxf_page.js"
 		type="text/javascript"></script>
-	<script type="text/javascript">
-    (function ($) {
-        var zp = {
-            init: function (obj, pageinit) {
-                return (function () {
-                    zp.addhtml(obj, pageinit);
-                    zp.bindEvent(obj, pageinit);
-                }());
-            },
-            addhtml: function (obj, pageinit) {
-                return (function () {
-                    obj.empty();
-                    /*上一页*/
-                    if (pageinit.current > 1) {
-                        obj.append('<a href="searchMusic.do?page=${pageNo-1}&musicName=${musicName}" class="prebtn">上一页</a>');
-                    } else {
-                        obj.remove('.prevPage');
-                        obj.append('<span class="disabled">上一页</span>');
-                    }
-                    /*中间页*/
 
-                    if (pageinit.current > 4 && pageinit.current <= pageinit.pageNum - 5) {
-                        var start = pageinit.current - 2, end = pageinit.current + 2;
-                    } else if (pageinit.current > 4 && pageinit.current > pageinit.pageNum - 5) {
-                        var start = pageinit.pageNum - 4, end = pageinit.pageNum;
-                    } else {
-                        var start = 1, end = 9;
-                    }
-                    for (; start <= end; start++) {
-                        if ((start <= pageinit.pageNum) && (start >= 1)) {
-                            if (start == pageinit.current) {
-                                obj.append('<span class="current">' + start + '</span>');
-                            } else if (start == pageinit.current + 1) {
-                                obj.append('<a href="searchMusic.do?page=' + start + '&musicName=${musicName}" class="zxfPagenum nextpage">' + start + '</a>');
-                            } else {
-                                obj.append('<a href="searchMusic.do?page=' + start + '&musicName=${musicName}" class="zxfPagenum">' + start + '</a>');
-                            }
-                        }
-                    }
-                    if (end < pageinit.pageNum) {
-                        obj.append('<span>...</span>');
-                    }
-                    /*下一页*/
-                    if (pageinit.current >= pageinit.pageNum) {
-                        obj.remove('.nextbtn');
-                        obj.append('<span class="disabled">下一页</span>');
-                    } else {
-                        obj.append('<a href="searchMusic.do?page=${pageNo+1}&musicName=${musicName}" class="nextbtn">下一页</a>');
-                    }
-                    /*尾部*/
-                    obj.append('<span>' + '共' + '<b>' + pageinit.pageNum + '</b>' + '页，' + '</span>');
-                    obj.append('<span><form action="searchMusic.do" method="post" id="from1">到第<input type="text" value="${musicName}" name="musicName" style="display:none;"><input type="text" name="page" class="zxfinput"/>页<button type="submit" class="zxfokbtn" style="margin-top:5px; margin-left:5px;">确定</button></form></span>');
-                    //obj.append('<span class="zxfokbtn"><a onclick="javascript:document.form1.submit();">确定</a></span>');
-                }());
-            },
-            bindEvent: function (obj, pageinit) {
-                return (function () {
-                    obj.on("click", "a.prebtn", function () {
-                        var cur = parseInt(obj.children("span.current").text());
-                        var current = $.extend(pageinit, {"current": cur - 1});
-                        zp.addhtml(obj, current);
-                        if (typeof(pageinit.backfun) == "function") {
-                            pageinit.backfun(current);
-                        }
-                    });
-                    obj.on("click", "a.zxfPagenum", function () {
-                        var cur = parseInt($(this).text());
-                        var current = $.extend(pageinit, {"current": cur});
-                        zp.addhtml(obj, current);
-                        if (typeof(pageinit.backfun) == "function") {
-                            pageinit.backfun(current);
-                        }
-                    });
-                    obj.on("click", "a.nextbtn", function () {
-                        var cur = parseInt(obj.children("span.current").text());
-                        var current = $.extend(pageinit, {"current": cur + 1});
-                        zp.addhtml(obj, current);
-                        if (typeof(pageinit.backfun) == "function") {
-                            pageinit.backfun(current);
-                        }
-                    });
-                    obj.on("click", "span.zxfokbtn", function () {
-                        var cur = parseInt($("input.zxfinput").val());
-                        var current = $.extend(pageinit, {"current": cur});
-                        zp.addhtml(obj, {"current": cur, "pageNum": pageinit.pageNum});
-                        if (typeof(pageinit.backfun) == "function") {
-                            pageinit.backfun(current);
-                        }
-                    });
-                }());
-            }
-        }
-        $.fn.createPage = function (options) {
-            var pageinit = $.extend({
-                pageNum: 15,
-                current: 1,
-                backfun: function () {
-                }
-            }, options);
-            zp.init(this, pageinit);
-        }
-    }(jQuery));
-
-    $(".zxf_pagediv").createPage({
-        pageNum: ${count},
-        current: ${pageNo},
-        backfun: function (e) {
-            //console.log(e);//回调
-        }
-    });
-</script>
 
 
 	<!-- footer -->
