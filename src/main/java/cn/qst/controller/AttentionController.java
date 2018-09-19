@@ -75,4 +75,16 @@ public class AttentionController {
     	return attentionService.verfiyAttentioned(user.getUid(), bid);
     }
     
+    /**
+     * 取消关注
+     * @param request 获取session中的登陆用户id
+     * @param bid 取消关注的用户id
+     * @return 取消成功即返回true，反false
+     */
+    @ResponseBody
+    @RequestMapping("/cancelAttentioned")
+    public Boolean cancelAttentioned(HttpServletRequest request, String bid) {
+    	TbUser user = (TbUser) request.getSession().getAttribute("user");
+    	return attentionService.cancelAttention(user.getUid(), bid);
+    }
 }

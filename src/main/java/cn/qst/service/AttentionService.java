@@ -34,4 +34,12 @@ public interface AttentionService {
      * @return 关注了即返回true，没有即返回false
      */
     Boolean verfiyAttentioned(String uid, String bid);
+    
+    /**
+     * 取消关注
+     * @param uid 关注人id
+     * @param bid 被关注人id
+     * @return 取消成功即返回true，失败即返回false
+     */
+    Boolean cancelAttention(String uid, String bid);
 }
