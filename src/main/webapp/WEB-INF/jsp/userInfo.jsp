@@ -22,7 +22,7 @@
           href="../../source/person/city/city.css">
     <script src="../../source/person/city/Popt.js"></script>
     <script src="../../source/person/city/cityJson.js"></script>
-    <script src="../../myjs/userInfoCityset.js"></script>
+    <script src="../../myjs/userInfo.js"></script>
     <!-- 上传头像 -->
     <script src="../../source/person/headImage/head/jquery.min.js"></script>
 
@@ -83,7 +83,7 @@
     }
 %>
 
-<body onload="getAddress('${userInfo.address}');verfiyAttentioned('${userInfo.uid}');">
+<body onload="getAddress('${userInfo.address}');verfiyAttentioned('${userInfo.uid}');showFansAndAttention('${userInfo.uid}');">
 <!--top-->
 <div class="centers_m">
     <!--清除浮动-->
@@ -121,8 +121,8 @@
                 <img src="../../source/person/images/myfridend.png"/> <em>关注</em>
                 <b></b>
             </div>
-            <span class="gjszmdm"> <a href="#" class="center_in_self"><font>关注的用户</font></a>
-					<a href="#" class="center_in_self"><font>粉丝</font></a>
+            <span class="gjszmdm"> <a href="#fst3" class="center_in_self"><font>关注的用户</font></a>
+					<a href="#fst4" class="center_in_self"><font>粉丝</font></a>
 				</span>
         </div>
 
@@ -226,11 +226,22 @@
             <a name="fst2"></a>
             <div class="public_m2">收藏的歌单</div>
             <!--提示信息-->
-            <div class="tip_notem">
-                <ul>
-                    <li>1. 绑定手机后可直接通过短信接受安全验证等重要操作。</li>
-                    <li>2. 更改手机时，请通过安全验证后重新输入新手机号码绑定。</li>
-                    <li>3. 收到安全验证码后，请在30分钟内完成验证。</li>
+            <div class="main-slider tab-cont">
+                <ul class="mv-list tab-cont">
+                    <c:forEach items="" var="musicLists">
+                        <li class="item">
+                            <a href="/User/userMusicList?mlid=${musicLists.mlid}"
+                               target='_new' class="img">
+                                <img style="width: 200px;height: 200px" src="${musicLists.image}" alt="#">
+                                <i class="icon-play"></i>
+                            </a>
+                            <div class="info">
+                                <a href="/User/userMusicList?mlid=${musicLists.mlid }" target='_new'
+                                   class="author">${musicLists.name }</a>
+                                <span class="play-total"><i class="icon-sprite"></i>${musicLists.playsum}次</span>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>
@@ -246,7 +257,7 @@
                         <li class="item">
                             <a href="/User/userMusicList?mlid=${musicLists.mlid}"
                                target='_new' class="img">
-                                <img style="width: 200px;height: 200px"  src="${musicLists.image}" alt="#">
+                                <img style="width: 200px;height: 200px" src="${musicLists.image}" alt="#">
                                 <i class="icon-play"></i>
                             </a>
                             <div class="info">
@@ -260,6 +271,55 @@
             </div>
         </div>
 
+        <!--一条开始-->
+        <div class="public_m1">
+            <a name="fst3"></a>
+            <div class="public_m2">关注的用户</div>
+            <!--歌单信息-->
+            <div class="main-slider tab-cont">
+                <ul class="mv-list tab-cont" id="attentionUser">
+                    <%--<c:forEach items="" var="musicLists">--%>
+                        <%--<li class="item">--%>
+                            <%--<a href="/User/userMusicList?mlid=${musicLists.mlid}"--%>
+                               <%--target='_new' class="img">--%>
+                                <%--<img style="width: 200px;height: 200px" src="${musicLists.image}" alt="#">--%>
+                                <%--<i class="icon-play"></i>--%>
+                            <%--</a>--%>
+                            <%--<div class="info">--%>
+                                <%--<a href="/User/userMusicList?mlid=${musicLists.mlid }" target='_new'--%>
+                                   <%--class="author">${musicLists.name }</a>--%>
+                                <%--<span class="play-total"><i class="icon-sprite"></i>${musicLists.playsum}次</span>--%>
+                            <%--</div>--%>
+                        <%--</li>--%>
+                    <%--</c:forEach>--%>
+                    <%--ajax xiugai --%>
+                </ul>
+            </div>
+        </div>
+
+        <!--一条开始-->
+        <div class="public_m1">
+            <a name="fst4"></a>
+            <div class="public_m2">粉丝</div>
+            <!--歌单信息-->
+            <div class="main-slider tab-cont">
+                <ul class="mv-list tab-cont" id="fansUser">
+                    <%--<c:forEach items="" var="musicLists">--%>
+                        <%--<li class="item">--%>
+                            <%--<a href="/User/personalInfo?uid=${uid}" target='_new' class="img">--%>
+                                <%--<img style="width: 200px;height: 200px" src="${image}" alt="#">--%>
+                                <%--<i class="icon-play"></i>--%>
+                            <%--</a>--%>
+                            <%--<div class="info">--%>
+                                <%--<a href="/User/personalInfo?uid=${uid}" target='_new'--%>
+                                   <%--class="author">${musicLists.name }</a>--%>
+                            <%--</div>--%>
+                        <%--</li>--%>
+                    <%--</c:forEach>--%>
+                    <%--ajax xiugai --%>
+                </ul>
+            </div>
+        </div>
 
     </div>
 

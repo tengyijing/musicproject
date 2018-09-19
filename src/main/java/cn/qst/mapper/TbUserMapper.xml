@@ -403,6 +403,14 @@
         <result column="bid" property="bid"/>
     </resultMap>
 
+    <resultMap id="attentionCtxUser" type="cn.qst.pojo.TbAttention" extends="attention">
+        <association property="user" column="bid" select="selectByPrimaryKey"/>
+    </resultMap>
+
+    <resultMap id="fansCtxUser" type="cn.qst.pojo.TbAttention" extends="attention">
+        <association property="user" column="uid" select="selectByPrimaryKey"/>
+    </resultMap>
+
     <!--auto generated Code-->
     <sql id="attention_all">
         `uid`,
@@ -429,6 +437,14 @@
     <delete id="cancelAttention" parameterType = "cn.qst.pojo.TbAttention">
     	DELETE FROM tb_attention WHERE uid = #{uid} AND bid = #{bid}
     </delete>
+
+    <select id="showAttention" parameterType="java.lang.String" resultMap="attentionCtxUser">
+        SELECT * FROM `tb_attention` WHERE `uid` = #{uid}
+    </select>
+
+    <select id="showFans" parameterType="java.lang.String" resultMap="fansCtxUser">
+        SELECT * FROM `tb_attention` WHERE `bid` = #{bid}
+    </select>
 </mapper>
 
 

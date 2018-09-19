@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author lk
  * 2018/9/17 20:13
@@ -87,6 +89,24 @@ public class AttentionServiceImpl implements AttentionService {
 		attention.setBid(bid);
 		return tbUserMapper.cancelAttention(attention) == 1 ? true : false;
 	}
-	
-	
+
+    /**
+     * 显示用户关注的用户信息
+     * @param uid
+     * @return
+     */
+    @Override
+    public List<TbAttention> showAttention(String uid) {
+        return tbUserMapper.showAttention(uid);
+    }
+
+    /**
+     * 显示用户的粉丝信息
+     * @param bid
+     * @return
+     */
+    @Override
+    public List<TbAttention> showFans(String bid) {
+        return tbUserMapper.showFans(bid);
+    }
 }

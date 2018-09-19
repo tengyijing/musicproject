@@ -1,5 +1,6 @@
 package cn.qst.controller;
 
+import cn.qst.pojo.TbAttention;
 import cn.qst.pojo.TbUser;
 import cn.qst.service.AttentionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +59,20 @@ public class AttentionController {
 		list.add(fans);
 		return list;
 	}
+
+    /**
+     * 根据传入的用户id 查询用户的关注信息
+     * @param uid 用户id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/showFansAndAttention")
+	public List<List<TbAttention>> showFansAndAttention(String uid) {
+        List<TbAttention> attentionList = attentionService.showAttention(uid);
+        List<TbAttention> fansList = attentionService.showFans(uid);
+        List<List<TbAttention>> list = Arrays.asList(attentionList, fansList);
+	    return list;
+    }
 
 	/**
 	 * 判断登陆的用户是否关注了从页面传入的uid的用户 是否关注

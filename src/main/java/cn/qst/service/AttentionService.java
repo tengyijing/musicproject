@@ -1,6 +1,10 @@
 package cn.qst.service;
 
 
+import cn.qst.pojo.TbAttention;
+
+import java.util.List;
+
 public interface AttentionService {
 
     /**
@@ -42,4 +46,19 @@ public interface AttentionService {
      * @return 取消成功即返回true，失败即返回false
      */
     Boolean cancelAttention(String uid, String bid);
+
+    /**
+     * 显示用户关注的用户信息
+     * @param uid
+     * @return
+     */
+    List<TbAttention> showAttention(String uid);
+
+    /**
+     * 显示用户的粉丝信息
+     * @param bid
+     * @return
+     */
+    List<TbAttention> showFans(String bid);
+
 }
