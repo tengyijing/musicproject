@@ -69,17 +69,6 @@ function gitCityInfo() {
     })
 }
 
-function judgment(flag) {
-    var str = "";
-    if (flag == true) {
-        str += "<a style=\"text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;\"";
-        str += "class=\"public_m3\" onclick=\"attention(" + bid + ");\">取消关注</a>";
-    } else {
-        str += "<a style=\"text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;\"";
-        str += "class=\"public_m3\" onclick=\"cancelAttention(" + bid + ");\">关注</a>";
-    }
-    $('#attention').html(str);
-}
 
 //验证登陆用户，是否关注了点击头像显示信息的用户
 //没有即显示关注按钮，有则显示取消关注按钮
@@ -94,10 +83,10 @@ function verfiyAttentioned(bid) {
 			var str = "";
 		    if (data == true) {
 		        str += "<a style=\"text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;\"";
-		        str += "class=\"public_m3\" onclick=\"cancelAttention(' " + bid + " ');\">取消关注</a>";
+		        str += "class=\"public_m3\" onclick=\"cancelAttention('" +bid+ "');\">取消关注</a>";
 		    } else {
                 str += "<a style=\"text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;\"";
-                str += "class=\"public_m3\" onclick=\"attention( ' " + bid + " ' );\">关注</a>";
+                str += "class=\"public_m3\" onclick=\"attention('" +bid+ "');\">关注</a>";
 		    }
 		    $('#attention').html(str);
 		}
@@ -112,7 +101,16 @@ function attention(bid) {
         contentType:"application/x-www-form-urlencoded",
         data:{bid:bid},
         success : function (data) {
-            judgment(data);
+        	var str = "";
+		    if (data == true) {
+		    	alert("关注成功")
+		        str += "<a style=\"text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;\"";
+		        str += "class=\"public_m3\" onclick=\"cancelAttention('" +bid+ "');\">取消关注</a>";
+		    } else {
+                str += "<a style=\"text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;\"";
+                str += "class=\"public_m3\" onclick=\"attention('" +bid+ "');\">关注</a>";
+		    }
+		    $('#attention').html(str);
         }
     })
 }
@@ -125,7 +123,16 @@ function cancelAttention(bid) {
         contentType:"application/x-www-form-urlencoded",
         data:{bid:bid},
         success : function (data) {
-            judgment(data);
+        	var str = "";
+		    if (data == false) {
+		        str += "<a style=\"text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;\"";
+		        str += "class=\"public_m3\" onclick=\"cancelAttention('" +bid+ "');\">取消关注</a>";
+		    } else {
+		    	alert("取消成功")
+                str += "<a style=\"text-decoration: none; cursor: pointer; width: 265px; margin-right: 313px; background-color: #FA3B4A;\"";
+                str += "class=\"public_m3\" onclick=\"attention('" +bid+ "');\">关注</a>";
+		    }
+		    $('#attention').html(str);
         }
     })
 }

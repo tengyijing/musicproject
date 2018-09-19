@@ -23,14 +23,14 @@ public class AttentionServiceImpl implements AttentionService {
      * 关注用户
      *
      * @param uid 关注用户
-     * @param did 被关注用户
+     * @param bid 被关注用户
      * @return 写入成功即返回true，失败即返回false
      */
     @Override
-    public Boolean insert(String uid, String did) {
+    public Boolean insert(String uid, String bid) {
         TbAttention attention = new TbAttention();
-        attention.setUid("uid");
-        attention.setBid("did");
+        attention.setUid(uid);
+        attention.setBid(bid);
         return tbUserMapper.attentionUser(attention) == 1 ? true : false;
     }
 
@@ -48,13 +48,13 @@ public class AttentionServiceImpl implements AttentionService {
 
 	 /**
      * 用户的粉丝数
-     * @param did 用户id
+     * @param bid 用户id
      * @return 用户粉丝的数量
      */
 	@Override
-	public int selectFans(String did) {
+	public int selectFans(String bid) {
 		// TODO Auto-generated method stub
-		return tbUserMapper.selectFans(did);
+		return tbUserMapper.selectFans(bid);
 	}
 	
 	
