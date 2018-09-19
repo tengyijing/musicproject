@@ -267,3 +267,18 @@ function getArea(obj) {
     $("#_citysheng li:eq(2)").addClass("citySel");
     return g;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

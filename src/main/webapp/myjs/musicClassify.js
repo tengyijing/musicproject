@@ -46,7 +46,7 @@ $(function (){
 				 for(var i=j*4;i<s;i++){
 						str+="<li class='albumBox'>";
 						str+="<div class='album' style='background-color: #535B5E'><p>";
-						str+="<a href='/searchBySname?sname="+encodeURI(encodeURI(data.list[i].sname))+"'><img width='220' height='220' src='../../source/pic/album1-220x220.jpg' class='attachment-220x220 wp-post-image' alt='"+data.list[i].sname+"' /> " ;
+						str+="<a href='/searchBySname?sname="+encodeURI(encodeURI(data.list[i].sname))+"'><img width='220' height='220' src='../../source/pic/album"+(i+1)+"-220x220.jpg' class='attachment-220x220 wp-post-image' alt='"+data.list[i].sname+"' /> " ;
 						str+=		"<span><em>"+data.list[i].sname+"</em></span></a></p>";
 						str+="<a style='background-color: #535B5E' href='/searchBySname?sname="+encodeURI(encodeURI(data.list[i].sname))+"'><span>歌曲</span><strong>"+data.list[i].songs+"</strong></a>";
 						str+="<a style='background-color: #535B5E' href='/searchBySname?sname="+encodeURI(encodeURI(data.list[i].sname))+"'><span>试听</span><strong>"+data.list[i].tryListening+"<em>万</em></strong></a>";
@@ -95,7 +95,7 @@ function page(pageIndex){
 				 for(var i=j*4;i<s;i++){
 						str+="<li class='albumBox'>";
 						str+="<div class='album' style='background-color: #535B5E'><p>";
-						str+="<a href='/searchBySname?sname="+encodeURI(encodeURI(data.list[i].sname))+"'><img width='220' height='220' src='../../source/pic/album1-220x220.jpg' class='attachment-220x220 wp-post-image' alt='"+data.list[i].sname+"' /> " ;
+						str+="<a href='/searchBySname?sname="+encodeURI(encodeURI(data.list[i].sname))+"'><img width='220' height='220' src='../../source/pic/album"+(i+1)+"-220x220.jpg' class='attachment-220x220 wp-post-image' alt='"+data.list[i].sname+"' /> " ;
 						str+=		"<span><em>"+data.list[i].sname+"</em></span></a></p>";
 						str+="<a style='background-color: #535B5E' href='/searchBySname?sname="+encodeURI(encodeURI(data.list[i].sname))+"'><span>歌曲</span><strong>"+data.list[i].songs+"</strong></a>";
 						str+="<a style='background-color: #535B5E' href='/searchBySname?sname="+encodeURI(encodeURI(data.list[i].sname))+"'><span>试听</span><strong>"+data.list[i].tryListening+"<em>万</em></strong></a>";
