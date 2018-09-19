@@ -118,7 +118,6 @@ var type = '${type}';
 										</div>
 										<div class="control" hp="123">
 										    <c:choose>
-	                                            <%-- <c:when test="${music.love==1}"> --%>
 	                                            <c:when test="${love!=null && love.contains(music.mid)}">
 	                                            	<a class="cicon love" style="background-position:0 -131px" loveN="1"></a> 
 	                                            </c:when>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -18,6 +19,10 @@
 				text-decoration: none;
 			}
 		</style>
+		<script>
+			var loginId = '${sessionScope.user.uid}';
+			var musicId = '${music.mid}';
+		</script>
 	</head>
 	<body>
 		<div class="top">
@@ -82,7 +87,7 @@
 						<div class="n-cmt" id="comment-box" >
 							<div id="auto-id-U98sFDT6iBe13DBo">
 								<div class="u-title u-title-1">
-									<h3><span class="f-ff2">评论</span></h3><span class="sub s-fc3">共<span class="j-flag">6159</span>条评论</span>
+									<h3><span class="f-ff2">评论</span></h3><span class="sub s-fc3">共<span class="j-flag" id="count">${counts}</span>条评论</span>
 								</div>
 								<div class="m-cmmt">
 									<div class="iptarea">
@@ -105,46 +110,159 @@
 													</div>
 													<div class="btns f-cb f-pr">
 														<c:choose>
-				                                            <c:when test="${sessionScope.user==null}">
-				                                            	<a class="btn u-btn u-btn-1 j-flag" id="comment" onclick="submit(null, ${music.mid})">评论</a>
-				                                            </c:when>
-				                                            <c:otherwise>
-				                                            	<a class="btn u-btn u-btn-1 j-flag" id="comment" onclick="submit(${sessionScope.user.uid}, ${music.mid})">评论</a>
-				                                            </c:otherwise>
-			                                            </c:choose>
+															 <c:when test="${sessionScope.user==null}">
+															 	<a class="btn u-btn u-btn-1 j-flag" id="comment" onclick="submit1()">评论</a>
+															 </c:when>
+															 <c:otherwise>
+															 	<a class="btn u-btn u-btn-1 j-flag" id="comment" onclick="submit1()">评论</a>
+															 </c:otherwise>
+														</c:choose>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+									<div id="jcpl">
+										<c:if test="${top10!=null and top10.size()>0}">
+											<div class="cmmts j-flag" >
+												<h3 class="u-hd4">精彩评论</h3>
+												<c:forEach items="${top10}" var="ite" varStatus="ind">
+													<div  class="itm" >
+														<div class="head">
+															<a href="/user/home?id=${ ite.user.uid}">
+																<img src="${ ite.user.image}">
+															</a>
+														</div>
+														<div class="cntwrap">
+															<div class="">
+																<div class="cnt f-brk"><a href="/user/home?id=${ ite.user.uid}" class="s-fc7">${ ite.user.uname}</a>：${ ite.content }</div>
+															</div>
+															<div class="rp">
+																<div class="time s-fc4"><f:formatDate value="${ite.cdate}" pattern="yyyy-MM-dd"/></div>
+																<a href="javascript:void(0)">
+																	<i class="zan u-icn2 u-icn2-12"></i> (${ite.likesum })
+																</a>
+																<span class="sep">|</span>
+																<a class="s-fc3" onclick="showReplay('jcpl${ind.index}')" >回复</a>
+																<c:choose>
+																	<c:when test="${sessionScope.user != null and sessionScope.user.uid==ite.user.uid}">
+																		<span class="sep">|</span>
+																		<a class="s-fc3" onclick="deleteComment(${ite.cdid})">删除</a>
+																	</c:when>
+																</c:choose>
+															</div>
+														</div>
+													</div>
+													<div id="jcpl${ind.index}" style="display:none;">
+														<div>
+															<div class="rept m-quk m-quk-1 f-pr">
+																<div class="iner">
+																	<div class="corr u-arr u-arr-1">
+																		<em class="arrline">◆</em>
+																		<span class="arrclr">◆</span>
+																	</div>
+																	<div class="m-cmmtipt m-cmmtipt-1 f-cb f-pr">
+																		<div class="u-txtwrap holder-parent f-pr j-wrap" style="display: block;">
+																			<textarea class="u-txt area j-flag" id="zxpl${ite.cdid}" placeholder="回复${ite.user.uname}" style="overflow: hidden;">回复${ite.user.uname}:</textarea>
+																		</div>
+																		<div class="btns f-cb f-pr">
+																			<a class="btn u-btn u-btn-1 j-flag" rpid="${ite.cdid}" onclick="replay(this,'#zxpl${ite.cdid}')">回复</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</c:forEach>
+											</div><br/><br/>
+										</c:if>
+									</div>
 									<div class="cmmts j-flag" >
-										<h3 class="u-hd4">精彩评论</h3>
-										<div  class="itm" >
-											<div class="head">
-												<a href="/user/home?id=20686351"><img src="http://p1.music.126.net/DYgPoURrbWh1B7Dp_qODNw==/19045740416754223.jpg?param=50y50"></a>
-											</div>
-											<div class="cntwrap">
-												<div class="">
-													<div class="cnt f-brk"><a href="/user/home?id=20686351" class="s-fc7">音痴音痴怪我咯丶</a>：很想知道这歌是先有英文版还是中文版。</div>
+										<h3 class="u-hd4">最新评论</h3>
+										<div id="zxpl">
+											<c:if test="${comments==null or comments.size()==0 }">
+												<div class="itm">
+													暂无评论
 												</div>
-												<div class="rp">
-													<div class="time s-fc4">2014年12月11日</div>
-													<a data-id="6963159" data-type="like" href="javascript:void(0)">
-														<i class="zan u-icn2 u-icn2-12"></i> (14428)
-													</a>
-													<span class="sep">|</span>
-													<a href="" class="s-fc3" >回复</a></div>
-											</div>
+											</c:if>
+											<c:forEach items="${comments}" var="ite" varStatus="ind">
+												<div class="itm" >
+														<div class="head">
+															<a href="/user/home?id=${ite.user.uid}">
+																<img src="${ ite.user.image}">
+															</a>
+														</div>
+														<div class="cntwrap">
+															<div class="">
+																<div class="cnt f-brk"><a href="/user/home?id=${ ite.user.uid}" class="s-fc7">${ ite.user.uname}</a>：${ ite.content }</div>
+															</div>
+															<div class="rp">
+																<div class="time s-fc4"><f:formatDate value="${ite.cdate}" pattern="yyyy-MM-dd"/></div>
+																<a href="javascript:void(0)">
+																	<i class="zan u-icn2 u-icn2-12"></i> (${ite.likesum })
+																	<!-- u-icn2-13 -->
+																</a>
+																<span class="sep">|</span>
+																<a class="s-fc3" onclick="showReplay('zxpl${ind.index}')">回复</a>
+																<c:choose>
+																	<c:when test="${sessionScope.user != null and sessionScope.user.uid==ite.user.uid}">
+																		<span class="sep">|</span>
+																		<a class="s-fc3" onclick="deleteComment(${ite.cdid})">删除</a>
+																	</c:when>
+																</c:choose>
+															</div>
+														</div>
+													</div>
+												<div id="zxpl${ind.index}" style="display:none;">
+													<div>
+														<div class="rept m-quk m-quk-1 f-pr">
+															<div class="iner">
+																<div class="corr u-arr u-arr-1">
+																	<em class="arrline">◆</em>
+																	<span class="arrclr">◆</span>
+																</div>
+																<div class="m-cmmtipt m-cmmtipt-1 f-cb f-pr">
+																	<div class="u-txtwrap holder-parent f-pr j-wrap" style="display: block;">
+																		<textarea class="u-txt area j-flag" id="zxpl${ite.cdid}" placeholder="回复${ite.user.uname}" style="overflow: hidden;">回复${ite.user.uname}:</textarea>
+																	</div>
+																	<div class="btns f-cb f-pr">
+																		<a class="btn u-btn u-btn-1 j-flag" rpid="${ite.cdid}" onclick="replay(this, '#zxpl${ite.cdid}')">回复</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</c:forEach>
 										</div>
 									</div>
 									<!--分页插件-->
-									<div class="j-flag auto-1536890855062-parent">
-										<div class="auto-1536890855062 u-page">
-											<a href="#" class="zbtn zprv js-p-1536890855062 js-disabled" id="auto-id-KgJ8NsEkR2lUugPG">上一页</a>
-											<a href="#" class="zpgi zpg1 js-i-1536890855062 js-selected" id="auto-id-HpTBl10MvebbESFx">1</a>
-											<span class="zdot">...</span>
-											<a href="#" class="zpgi zpg9 js-i-1536890855062" id="auto-id-8WLhbE0zLCV1SLDm">308</a>
-											<a href="#" class="zbtn znxt js-n-1536890855062" id="auto-id-sDbQW74NGydVKca4">下一页</a></div>
+									<div class="j-flag">
+										<div class="u-page" id="pageinfo">
+											<a class="zbtn zprv js-disabled">上一页</a>
+											<c:forEach begin="1" end="${page-1}" var="ite" varStatus="ind">
+												<c:choose>
+													<c:when test="${ite==1}">
+														<a class="zpgi zpg9 js-selected">${ite}</a>
+													</c:when>
+													<c:otherwise>
+														<a class="zpgi zpg9" onclick="goPage(${ite})">${ite}</a>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+											<c:if test="${page>5}">
+												<span class="zdot">...</span>
+												<a class="zpgi zpg9" onclick="goPage(${page})">${page}</a>
+											</c:if>
+											<c:choose>
+												<c:when test="${page>1}">
+													<a class="zbtn znxt" onclick="goPage(1)">下一页</a>
+												</c:when>
+												<c:otherwise>
+													<a class="zbtn znxt js-disabled">下一页</a>
+												</c:otherwise>
+											</c:choose>
+										</div>
 									</div>
 								</div>
 							</div>

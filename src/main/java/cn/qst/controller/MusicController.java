@@ -3,21 +3,20 @@ package cn.qst.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
 import cn.qst.comman.pojo.AdminResult;
 import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.comman.utils.DownloadLyric;
-import cn.qst.comman.utils.JsonUtils;
+import cn.qst.pojo.TbComment;
 import cn.qst.pojo.TbMusic;
-import cn.qst.pojo.TbUser;
+import cn.qst.service.CommentService;
 import cn.qst.service.MusicService;
 
 @Controller
@@ -25,12 +24,14 @@ public class MusicController {
 	
 	@Autowired
 	private MusicService musicService;
+	@Autowired
+	private CommentService commentService;
 	
 	//上传文件urlip地址
 	@Value("${IMAGE_SERVER_URL}")
 	private String IMAGE_SERVER_URL;
 	
-	// 跳转到音乐详情（需要获取音乐的所有评论）
+	// 跳转到音乐详情（需要获取音乐的精彩评论和所有评论）
 	@RequestMapping("/music/detail")
 	public String musicDetailPage(ModelMap map,String mid) {
 		if( mid == null ) {
@@ -57,31 +58,23 @@ public class MusicController {
 		}
 		map.addAttribute("lrc", lrc);
 		
-		// 获取当前音乐的评论
+		// 获取当前音乐的精彩评论
+		List<TbComment> topComents = commentService.selectTop10(id);
+		map.addAttribute("top10", topComents);
 		
-		
+		// 分页查询最新评论
+		List<TbComment> comments = commentService.selectByMid(id);
+		int endIndex = comments.size()>10?10:comments.size();
+		comments = comments.subList(0, endIndex);
+		map.addAttribute("comments", comments);
+		// 查询保存评论总数
+		int countAll = commentService.countTotal(id);
+		map.addAttribute("counts", countAll);
+		// 查询保存总页数
+		int page = countAll/10+(countAll%10==0?0:1);
+		map.addAttribute("page", page);
 		return "musicdetail";
 	}
-	
-	// 根据音乐id获取评论(分页，待添加)
-	
-	
-	
-	/* 		待添加
-	 * 
-	 * 添加评论
-	 * 	传入参数：
-	 * 		音乐id
-	 * 		评论id（对于回复而言）
-	 * 		评论内容
-	 */
-	@RequestMapping(value="/music/comment", method= {RequestMethod.POST})
-	@ResponseBody
-	public String addComment(String uid, String mid, String cid, String content) {
-		// 获取评论用户
-		return JsonUtils.objectToJson("成功");
-	}
-	
 	
 	//添加音乐
 	@RequestMapping("/music/addmusic")
