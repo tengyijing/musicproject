@@ -6,21 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>音乐圈</title>
-<link rel="shortcut icon" href="../../source/images/logo-b.png" />
-<link rel="stylesheet" href="../../source/css/reset.css">
-<link rel="stylesheet" href="../../source/css/index.css">
-<script src="../../source/js/jquery.js"></script>
-<script src="../../source/js/script.js"></script>
-<script src="/myjs/index.js"></script>
-<script src="source/mysong/js/main2.js"></script>
-<!-- 中部 -->
-<link href="../../source/css/common.css?v7.2" type="text/css"
-	rel="stylesheet" />
-<link href="../../source/css/public.css?v1" type="text/css"
-	rel="stylesheet" />
-<!-- 音乐人 -->
-<link rel="stylesheet" type="text/css"
-	href="../../source/singer/css/style2.css" />
+
+  <link rel="shortcut icon" href="../../source/images/logo-b.png" />
+  <link rel="stylesheet" href="../../source/css/reset.css">
+  <link rel="stylesheet" href="../../source/css/index.css">
+  <script src="../../source/js/jquery.js"></script>
+  <script src="../../source/js/script.js"></script>
+  <script src="/myjs/index.js"></script>
+  <script src="source/mysong/js/main2.js"></script>
+  <script src="/myjs/searcher.js"></script>
+  <!-- 中部 -->
+  <link href="../../source/css/common.css?v7.2" type="text/css" rel="stylesheet" />
+  <link href="../../source/css/public.css?v1" type="text/css" rel="stylesheet" />
+  <!-- 音乐人 -->
+<link rel="stylesheet" type="text/css" href="../../source/singer/css/style2.css" />
 <script type="text/javascript" src="../../source/singer/js/modernizr.js"></script>
 
 <!-- 分页样式 -->
@@ -73,45 +72,85 @@ var menuid=${menuid}
 </script>
 </head>
 <body onload="getName('${username}');userLogin('${username}');">
-	<header class="header">
-	<div class="header-container" style="width: 1200px;">
-		<div class="header-top">
-			<a href="../../index.jsp" class="logo"></a>
-			<nav class="header-nav">
-			<ul id="topmusicCircle">
 
+  <header class="header">
+    <div class="header-container"  style="width:1200px;">
+            <div class="header-top">
+        <a href="../../index.jsp" class="logo"></a>
+        <nav class="header-nav">
+          <ul id="topmusicCircle">
+            
+           
+          </ul>
+        </nav>
+           <div class="header-search" style="margin-left:-20px;">
+        <form action="searchMusic.do" method="post" id="searchform" onsubmit="return searchNull()">
+          <input style="width:170px;" type="text" class="text" placeholder="我是歌手第四季" name="musicName" id="musicName" speech x-webkit-speech onkeyup="searchStr(this.value)" />
+          <span class="btn" id="vid" style="float:left;"><i><img  style="margin-top:6px;"src="../../source/images/video.png" ></i></span>
+          <span class="btn" onclick="search();"><i class="icon-sprite"></i></span>
+          </form>
+          <div class="videoFrame">
+           <iframe  frameborder=0 width=290 height=330 marginheight=0 marginwidth=0 scrolling=no src="video.jsp"></iframe>
+          </div>
+          <div class="result" id="searchBox">
+         <c:forEach items="${hot}" var="hot_song" varStatus="stat">
+				<c:if test="${stat.count<=6 }">
+				<a  class="result-item" href="play?id=${hot_song.musicid}" target='_new'> 
+				<span class="rank">${stat.count }</span> 
+				<span class="title">${hot_song.title}</span> <span class="num">${hot_song.playsum }万</span></a>
+				</c:if>	
+		</c:forEach>				
 
-			</ul>
-			</nav>
-			<div class="header-search" style="margin-left: -20px;">
-				<form action="searchMusic.do" method="post" id="searchform">
-					<input style="width: 170px;" type="text" class="text"
-						placeholder="我是歌手第四季" name="musicName" id="musicName" speech
-						x-webkit-speech /> <span class="btn" id="vid"
-						style="float: left;"><i><img style="margin-top: 6px;"
-							src="../../source/images/video.png"></i></span> <span class="btn"
-						onclick="search();"><i class="icon-sprite"></i></span>
-				</form>
-				<div class="videoFrame">
-					<iframe frameborder=0 width=290 height=330 marginheight=0
-						marginwidth=0 scrolling=no src="video.jsp"></iframe>
-				</div>
-				<div class="result">
-					<a href="playMusic.do?id=46&type=1" target='_new'
-						class="result-item"> <span class="rank">1</span> <span
-						class="title">房间</span> <span class="num">3.4万</span>
-					</a> <a href="playMusic.do?id=26&type=1" target='_new'
-						class="result-item"> <span class="rank">2</span> <span
-						class="title">追光者</span> <span class="num">2.1万</span>
-					</a> <a href="playMusic.do?id=35&type=1" target='_new'
-						class="result-item"> <span class="rank">3</span> <span
-						class="title">远走高飞</span> <span class="num">12.5万</span>
-					</a> <a href="playMusic.do?id=38&type=1" target='_new'
-						class="result-item"> <span class="rank">4</span> <span
-						class="title">春风十里不如你</span> <span class="num">7万</span>
-					</a> <a href="playMusic.do?id=89&type=1" target='_new'
-						class="result-item"> <span class="rank">5</span> <span
-						class="title">童话镇</span> <span class="num">6.8万</span>
+          </div>
+        </div>
+        
+         <div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;display:none">
+        <a href="/personal"><img src="${imgstr}" id="img2"/></a>
+         </div>
+         <div id="name" style="display:none;padding-top:35px;"><a href="/personal" style="cursor:pointer" ><i  onmouseover = "xianshi()"  onmouseout = "xiaoshi2()">${username}</i></a></div>
+         <div id="xianshi">
+         <p style="margin-left:5px;margin-top:3px;"><a href="/personal"><img src="/images/person.png"></a></p>
+         <p style="margin-left:4px;margin-top:5px;"><a href="User/exit"><img src="/images/exit.png"></a></p>
+         </div>
+        <div class="header-login"style="margin-right:-10px;">
+          <a href="/login" class="open-green" id="login">登录</a>
+          <a href="/register" class="open-vip" id="reg">注册</a>
+        </div>
+      </div>
+      <ul class="header-subNav" style="margin-top:20px;" id="topmusicCircleChild">
+       
+      </ul>
+    </div>
+  </header>
+  
+  <!-- 中部 -->
+  <div class="pb-container"> 
+   <div class="pb-container-main pb-after-clear"> 
+   
+    <div class="pb-main pb-mt20"> 
+    
+    <div class="header-login3">
+          <a  href="getDynamic.do" class="open-green" id="quanbu" onclick="red2()">全部动态</a>
+          <a  href="getPartDynamic.do" class="open-vip" id="haoyou" onclick="red()">好友动态</a>
+    </div>
+    
+     <div class="commmain" style="margin-top:30px;"> 
+       <c:forEach items="${dynamicList}" var="dynamic" varStatus="index">
+       <div class="one-atl" style="margin-top:20px;">  
+       <span class="mvList2" style="display: block;">
+       <c:choose>
+        <c:when test="${dynamic.id== null or dynamic.id=='0'}">
+        <a  class="mvList2" style="display: block;"> <img width="220" height="150" src="source/playmusic/images/${dynamic.id}.jpg" alt="" /></a>
+        </c:when>
+        <c:otherwise>
+        <a href="playMusic.do?id=${dynamic.musicId}&type=1" target='_new' class="mvList2" style="display: block;"> <img width="220" height="150" src="http://localhost:8080/images/${dynamic.musicId}.jpg" 
+					 alt="" /> <strong>${dynamic.musicName}</strong>
+				    <strong><font color="#FA3B4A">${dynamic.dynamicer}</font></strong>
+				     <span> <font>${dynamic.musicName}&#8211; ${dynamic.dynamicer}</font>
+				      <font><i></i></font> <font><i></i>1042425
+				      <em>2pic4-12-31</em></font>
+					</span>
+
 					</a>
 
 				</div>

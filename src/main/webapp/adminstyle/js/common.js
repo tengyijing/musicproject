@@ -49,7 +49,22 @@ var TT = TAOTAO = {
         	return '<span style="color:red;">下线</span>';
         } 
     },
-    
+    formatUserSex : function formatStatus(val,row){
+        if (val == 0){
+            return '男';
+        } else if(val == 1){
+        	return '女';
+        } else{
+        	return '其他';
+        }
+    },
+    formatUserStatus : function formatStatus(val,row){
+        if (val == 1){
+            return '正常';
+        } else{
+        	return '<span style="color:red;">冻结</span>';
+        } 
+    },
     init : function(data){
     	// 初始化图片上传组件
     	this.initPicUpload(data);
@@ -166,8 +181,8 @@ var TT = TAOTAO = {
      */
     createWindow : function(params){
     	$("<div>").css({padding:"5px"}).window({
-    		width : params.width?params.width:"80%",
-    		height : params.height?params.height:"80%",
+    		width : params.width?params.width:"40%",
+    		height : params.height?params.height:"40%",
     		modal:true,
     		title : params.title?params.title:" ",
     		href : params.url,
@@ -216,7 +231,6 @@ var TT = TAOTAO = {
 				});
 			});
 		});
-    	
     	$(".lyricsFileUpload").click(function(){
 			var _self = $(this);
 			KindEditor.editor(TT.kingEditorParams).loadPlugin('image', function() {

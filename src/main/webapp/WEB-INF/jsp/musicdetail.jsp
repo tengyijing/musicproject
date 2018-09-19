@@ -1,18 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>LoveMusic</title>
+		<title>音乐详情</title>
 		<meta charset="utf-8">
 		<script type="text/javascript" async="" src="//wr.da.netease.com/ga.js"></script>
 		<link rel="shortcut icon" href="/source/images/logo-b.png" />
+		<link rel="stylesheet" type="text/css" href="/playmusic/css/playMusic.css">
 		<link href="//s2.music.126.net/web/s/core_10d64aacd2e7ecff5b84bc1a4f0d256f.css?10d64aacd2e7ecff5b84bc1a4f0d256f" type="text/css" rel="stylesheet">
 		<link href="//s2.music.126.net/web/s/pt_frame_cb90df5deb9e71bf7f9a7f1d407d3d32.css?cb90df5deb9e71bf7f9a7f1d407d3d32" type="text/css" rel="stylesheet">
-		<script type="text/javascript" charset="UTF-8" async="" src="https://acstatic-dun.126.net/2.3.0_7bbe0ac9/watchman.min.js"></script>
+		<script type="text/javascript" src="/playmusic/js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" charset="UTF-8" src="/playmusic/js/musicDetail.js"></script>
+		<style>
+			a:hover{
+				text-decoration: none;
+			}
+		</style>
 	</head>
 	<body>
-		<div class="g-bd4 f-cb">
+		<div class="top">
+			<a style="display: inline-block;cursor: pointer;margin-top: 5px;margin-left: 20px;font-size: 32px;color: #FFF;" href="/index">爱唱音乐</a>
+			<div class="mainNav" style="margin-top: 0px;">
+				<div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;">
+        			<a href="User/personalInfo" target="_blank">
+        				<c:choose>
+                           <c:when test="${sessionScope.user==null or sessionScope.user.image==null}">
+                           	<img src="/images/headPhoto/user.png"/>
+                           </c:when>
+                           <c:otherwise>
+                           	<img src="${sessionScope.user.image}"/>
+                           </c:otherwise>
+                        </c:choose>
+        			</a>
+        		</div>
+		         <div id="name" style="padding-top:21px;">
+		         	<a href="User/personalInfo" style="cursor:pointer;color:#fff" target="_blank" >${username}</a>
+		         </div>
+			</div>
+		</div>
+		<div class="g-bd4 f-cb" style="margin-top: 56px;">
 			<div class="g-mn4">
 				<div class="g-mn4c">
 					<div class="g-wrap6">
@@ -21,7 +49,7 @@
 								<div class="cvrwrap f-cb f-pr">
 									<div class="u-cover u-cover-6 f-fl">
 										<!-- 歌曲图片 -->
-										<img src="http://p1.music.126.net/-IRIgBXX12ZdupIQgcHFLQ==/109951163281530923.jpg?param=130y130" class="j-img">
+										<img src="${music.image }" class="j-img">
 										<span class="msk f-alpha"></span>
 									</div>
 								</div>
@@ -30,10 +58,10 @@
 										<i class="lab u-icn u-icn-37"></i>
 										<div class="tit">
 											<!-- 歌曲名 -->
-											<em class="f-ff2">Proud Of You</em>
+											<em class="f-ff2">${music.mname }</em>
 										</div>
 									</div>
-									<p class="des s-fc4">歌手：<span >冯曦妤</span></p>
+									<p class="des s-fc4">歌手：<span >${music.sname }</span></p>
 									<div class="m-info">
 										<div id="content-operation" class="btns f-cb">
 											<a href="javascript:;" class="u-btn2 u-btn2-2 u-btni-addply f-fl"  title="播放"><i><em class="ply"></em>播放</i></a>
@@ -45,19 +73,8 @@
 											<a href="javascript:;" class="u-btni u-btni-cmmt "><i>(<span id="cnt_comment_count">6159</span>)</i></a>
 										</div>
 									</div>
-									<div id="lyric-content" class="bd bd-open f-brk f-ib" >作曲 : 陈光荣<br>作词 : Anders Lee<br>Love in your eyes<br>你的眼中闪烁着爱意<br>Sitting silent by my side<br>静静地坐在我身旁<br>Going on Holding hands<br>请牵着我的手一起<br>Walking through the nights<br>度过这美好的夜晚<br>
-										Hold me up Hold me tight<br>请紧紧地抱住我<br>Lift me up to touch the sky<br>让我感受这天空的辽阔<br>Teaching me to love with heart<br>让我用心爱这世界<br>Helping me open my mind<br>让我看到未来的精彩<br>I can fly<br>我可以飞翔<br>I'm proud that I can fly<br>很高兴我可以飞翔<br>To give the
-											best of mine<br>我愿撒下心中的善意<br>Till the end of the time<br>就这样一直努力下去<br>Believe me I can fly<br>请相信我可以飞翔<br>I'm proud that I can fly<br>很高兴我可以飞翔<br>To give the best of mine<br>也请让我追逐自己的梦想<br>The heaven in the sky<br>找到心中的天堂<br><br><br><br>Stars
-											in the sky<br>望着夜空闪烁的明星<br>Wishing once upon a time<br>想起曾经的愿望是多么美好<br>Give me love Make me smile<br>请给我你的爱，让我去微笑面对这一切<br>Till the end of life<br>直到我生命的尽头<br>Hold me up Hold me tight<br>请紧紧地抱住我<br>Lift me up to touch the sky<br>让我感受这天空的辽阔<br>Teaching
-											me to love with heart<br>让我用心爱这世界<br>Helping me open my mind<br>让我看到未来的精彩<br>I can fly<br>我可以飞翔<br>I'm proud that I can fly<br>很高兴我可以飞翔<br>To give the best of mine<br>我愿撒下心中的善意<br>Till the end of the time<br>就这样一直努力下去<br>Believe me I can fly<br>请相信我可以飞翔<br>I'm
-											proud that I can fly<br>很高兴我可以飞翔<br>To give the best of mine<br>也请让我追逐自己的梦想<br>The heaven in the sky<br>找到心中的天堂<br><br>Can't you believe that you light up my way<br>你不相信吗是你给我带来了一束光<br>No matter how that ease my path<br>让我总能看到前方的路<br>I'll never
-											lose my faith<br>我会永远保持自信<br>See me fly<br>你看我在飞翔<br>I'm proud to fly up high<br>很幸福我飞得越来越高<br>Show you the best of mine<br>也让你看到了全力拼搏的自己<br>Till the end of the time<br>就这样一直努力下去<br>Believe me I can fly<br>请相信我可以飞翔<br>I'm singing in the sky<br>我在蓝天上大声歌唱<br>Show
-											you the best of mine<br>让你看到积极向上的自己<br>The heaven in the sky<br>看到我心中的天堂<br><br>Nothing can stop me<br>我会勇敢走下去<br>Spread my wings so wide<br>随着梦想的翅膀渐渐展开<br>
-									</div>
+									<div id="lyric-content" class="bd bd-open f-brk f-ib" >${lrc}</div>
 								</div>
-							</div>
-							<div id="user-operation" class="lrc-user">
-								<p class="s-fc3">&nbsp;&nbsp;&nbsp;&nbsp;贡献翻译：光年外的猎户座</p>
 							</div>
 						</div>
 						
@@ -70,15 +87,31 @@
 								<div class="m-cmmt">
 									<div class="iptarea">
 										<!--用户头像，没有的话使用默认头像-->
-										<div class="head"><img src="http://p3.music.126.net/SYsO6WaP7j24FbfuEpVv4g==/109951162950116335.jpg?param=50y50"></div>
+										<div class="head">
+											<c:choose>
+	                                            <c:when test="${sessionScope.user==null or sessionScope.user.image==null}">
+	                                            	<img src="/images/headPhoto/user.png"/>
+	                                            </c:when>
+	                                            <c:otherwise>
+	                                            	<img src="${sessionScope.user.image}"/>
+	                                            </c:otherwise>
+                                            </c:choose>
+										</div>
 										<div class="j-flag">
 											<div>
 												<div class="m-cmmtipt f-cb f-pr">
 													<div class="u-txtwrap holder-parent f-pr" style="display: block;">
-															<textarea class="u-txt area j-flag"  placeholder="评论" id=""></textarea>
+															<textarea class="u-txt area j-flag"  placeholder="评论" id="content"></textarea>
 													</div>
 													<div class="btns f-cb f-pr">
-														<a href="" class="btn u-btn u-btn-1 j-flag" id="">评论</a>
+														<c:choose>
+				                                            <c:when test="${sessionScope.user==null}">
+				                                            	<a class="btn u-btn u-btn-1 j-flag" id="comment" onclick="submit(null, ${music.mid})">评论</a>
+				                                            </c:when>
+				                                            <c:otherwise>
+				                                            	<a class="btn u-btn u-btn-1 j-flag" id="comment" onclick="submit(${sessionScope.user.uid}, ${music.mid})">评论</a>
+				                                            </c:otherwise>
+			                                            </c:choose>
 													</div>
 												</div>
 											</div>

@@ -27,7 +27,6 @@ var type = '${type}';
 
 </script>
 </head>
-<%-- <body onload="userLogin('${username}');"> --%>
 <body>
 	<!--模糊画布-->
 	<div class="blur">
@@ -35,7 +34,7 @@ var type = '${type}';
 	</div>
 	<div class="playerMain">
 		<div class="top">
-			<a style="cursor: pointer;" href="/index" >
+			<a style="cursor: pointer;" href="/index" target="_blank">
 			<h2 class="logoaichang" onmouseover="huan()" onmouseout="huan2()">爱唱音乐</h2></a>
 			        <script> $(window).load(function(){fPlay('${id}')});
 			        $(window).load(function(){bian('${type}')});</script>
@@ -43,28 +42,32 @@ var type = '${type}';
 			<div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;">
  
         
-        <a href="User/personalInfo"><img src="${imgstr}" id="img2"/></a>
+        <a href="User/personalInfo" target="_blank"><img src="${imgstr}" id="img2"/></a>
     
          </div>
-         <div id="name" style="padding-top:21px;"><a href="User/personalInfo" style="cursor:pointer;color:#fff" >${username}</a></div>
+	         <div id="name" style="padding-top:21px;">
+	         	<a href="User/personalInfo" style="cursor:pointer;color:#fff" target="_blank" >${username}</a></div>
 			</div>
 		</div>
 		<div class="middle">
 			<div class="mainWrap">
 				<div class="leftBar">
 					<ul class="menuUL">
-						<li class="menuLi cur"><a href="/play?type=now" class="bianse"
-							onclick="menuLi()"> <i
-								class="icon iplay"></i> 正在播放
-						</a></li>
-						<li class="menuLi cur"><a href="/play?type=history" class="bianse2"
-							onclick="menuLi3()"> <i
-								class="icon ihst"></i> 播放历史
-						</a></li>
-						<li class="menuLi cur"><a href="/play?type=myLove" class="bianse3"
-							onclick="menuLi5()"> <i
-								class="icon ishouc"></i> 我喜欢的音乐
-						</a></li>
+						<li class="menuLi cur">
+							<a href="/play?type=now" class="bianse" onclick="menuLi()">
+								<i class="icon iplay"></i> 正在播放
+							</a>
+						</li>
+						<li class="menuLi cur">
+							<a href="/play?type=history" class="bianse2" onclick="menuLi3()">
+								<i class="icon ihst"></i> 播放历史
+							</a>
+						</li>
+						<li class="menuLi cur">
+							<a href="/play?type=myLove" class="bianse3" onclick="menuLi5()">
+								<i class="icon ishouc"></i> 我喜欢的音乐
+							</a>
+						</li>
 					</ul>
 					<div class="collectOut">
 						<span class="colS">创建的歌单</span> <a class="colA" onclick="payment();"></a>
@@ -123,7 +126,7 @@ var type = '${type}';
 	                                            	<a class="cicon love" loveN="0"></a> 
 	                                            </c:otherwise>
                                             </c:choose>
-											<a href="/music/detail?mid=${music.mid}" title="音乐详情" class="cicon more" style="display: none"></a>
+											<a href="/music/detail?mid=${music.mid}" title="音乐详情" class="cicon more" style="display: none" target="_blank"></a>
 											<a class="cicon dele" style="display: none"></a>
 										</div>
 									</div>
@@ -190,9 +193,9 @@ var type = '${type}';
 		<div class="bottom" style="background-color: black;">
 			<div class="playerWrap">
 				<div class="playerCon" playStyle="0">
-					<a  class="pbtn prevBtn"></a>
-					<a  class="pbtn playBtn" isplay="0"></a>
-					<a  class="pbtn nextBtn"></a>
+					<a class="pbtn prevBtn"></a>
+					<a class="pbtn playBtn" isplay="0"></a>
+					<a class="pbtn nextBtn"></a>
 					<div style="color: #fff;" class="modesuiji">随机播放</div>
 					<div style="color: #fff;" class="modeshunxv">顺序播放</div>
 					<div style="color: #fff;" class="modedanqu">单曲循环</div>

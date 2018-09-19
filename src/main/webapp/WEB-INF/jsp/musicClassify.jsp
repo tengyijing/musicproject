@@ -16,7 +16,7 @@
     <script src="../../source/js/script.js"></script>
     <script src="/myjs/index.js"></script>
     <script src="/myjs/musicClassify.js"></script>
-
+<script src="/myjs/searcher.js"></script>
     <!-- 分类 -->
     <link rel="stylesheet" data-dist="true"
           href="../../source/musicclassify/css/lomegwdp.css"/>
@@ -176,40 +176,26 @@
                 <ul id="topmusicClassify">
                 </ul>
             </nav>
-            <div class="header-search" style="margin-left: -20px;">
-                <form action="searchMusic.do" method="post" id="searchform">
-                    <input style="width: 170px;" type="text" class="text"
-                           placeholder="我是歌手第四季" name="musicName" id="musicName" speech
-                           x-webkit-speech/> <span class="btn" id="vid"
-                                                   style="float: left;"><i><img style="margin-top: 6px;"
-                                                                                src="../../source/images/video.png"></i></span>
-                    <span class="btn"
-                          onclick="search();"><i class="icon-sprite"></i></span>
-                </form>
-                <div class="videoFrame">
-                    <iframe frameborder=0 width=290 height=330 marginheight=0
-                            marginwidth=0 scrolling=no src="video.jsp"></iframe>
-                </div>
-                <div class="result">
-                    <a href="playMusic.do?id=46&type=1" target='_new'
-                       class="result-item"> <span class="rank">1</span> <span
-                            class="title">房间</span> <span class="num">3.4万</span>
-                    </a> <a href="playMusic.do?id=26&type=1" target='_new'
-                            class="result-item"> <span class="rank">2</span> <span
-                        class="title">追光者</span> <span class="num">2.1万</span>
-                </a> <a href="playMusic.do?id=35&type=1" target='_new'
-                        class="result-item"> <span class="rank">3</span> <span
-                        class="title">远走高飞</span> <span class="num">12.5万</span>
-                </a> <a href="playMusic.do?id=38&type=1" target='_new'
-                        class="result-item"> <span class="rank">4</span> <span
-                        class="title">春风十里不如你</span> <span class="num">7万</span>
-                </a> <a href="playMusic.do?id=89&type=1" target='_new'
-                        class="result-item"> <span class="rank">5</span> <span
-                        class="title">童话镇</span> <span class="num">6.8万</span>
-                </a>
+           <div class="header-search" style="margin-left:-20px;">
+        <form action="searchMusic.do" method="post" id="searchform" onsubmit="return searchNull()">
+          <input style="width:170px;" type="text" class="text" placeholder="我是歌手第四季" name="musicName" id="musicName" speech x-webkit-speech onkeyup="searchStr(this.value)" />
+          <span class="btn" id="vid" style="float:left;"><i><img  style="margin-top:6px;"src="../../source/images/video.png" ></i></span>
+          <span class="btn" onclick="search();"><i class="icon-sprite"></i></span>
+          </form>
+          <div class="videoFrame">
+           <iframe  frameborder=0 width=290 height=330 marginheight=0 marginwidth=0 scrolling=no src="video.jsp"></iframe>
+          </div>
+          <div class="result" id="searchBox">
+         <c:forEach items="${hot}" var="hot_song" varStatus="stat">
+				<c:if test="${stat.count<=6 }">
+				<a  class="result-item" href="play?id=${hot_song.musicid}" target='_new'> 
+				<span class="rank">${stat.count }</span> 
+				<span class="title">${hot_song.title}</span> <span class="num">${hot_song.playsum }万</span></a>
+				</c:if>	
+				</c:forEach>				
 
-                </div>
-            </div>
+          </div>
+        </div>
 
             <div id="nameicon" class="center_header"
                  style="margin-left: 60px; margin-right: 10px; float: left; display: none">
@@ -269,8 +255,10 @@
 <c:choose>
     <c:when test="${musicListSize2== null or musicListSize2=='0'}">
 
-        <section class="section_cont" style="margin-top:-40px;"> <!--在线首发 开始-->
-            <div class="new_songs new_common" id="songer">
+        <section class="section_cont" style="margin-top:-40px;" > <!--在线首发 开始-->
+            <div id="songer" >
+            
+            
             </div>
             <div id="pageSonger" style="margin-left: 40%">
 

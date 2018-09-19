@@ -6,12 +6,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import cn.qst.comman.pojo.AdminResult;
+import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.comman.pojo.EasyUiTreeNode;
+import cn.qst.mapper.TbMenuContentMapper;
 import cn.qst.mapper.TbMenuMapper;
+import cn.qst.mapper.TbUserMapper;
 import cn.qst.pojo.TbMenu;
+import cn.qst.pojo.TbMenuContent;
+import cn.qst.pojo.TbMenuContentExample;
 import cn.qst.pojo.TbMenuExample;
 import cn.qst.pojo.TbMenuExample.Criteria;
+import cn.qst.pojo.TbUser;
+import cn.qst.pojo.TbUserExample;
 import cn.qst.service.AdminService;
 
 @Service
@@ -19,6 +29,12 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private TbMenuMapper tbMenuMapper;
+	
+	@Autowired
+	private TbMenuContentMapper tbMenuContentMapper;
+	
+	@Autowired
+	private TbUserMapper tbUserMapper;
 	//根据父类id查询菜单
 	@Override
 	public List<EasyUiTreeNode> getMenubyParentId(int id) {
@@ -114,6 +130,80 @@ public class AdminServiceImpl implements AdminService {
 			menu.setMid(parentId);
 			menu.setIsparent(false);
 			tbMenuMapper.updateByPrimaryKeySelective(menu);
+		}
+		return AdminResult.ok();
+	}
+	
+	//查询菜单内容
+	@Override
+	public EasyUiDataGridResult getMenuConten(Integer page, Integer rows, Integer mid) {
+		//初始化分页插件
+		PageHelper.startPage(page, rows);
+		//查询出数据
+		TbMenuContentExample example = new TbMenuContentExample();
+		example.setOrderByClause("playsum desc");
+		cn.qst.pojo.TbMenuContentExample.Criteria criteria = example.createCriteria();
+		criteria.andMidEqualTo(mid);
+		
+		List<TbMenuContent> contents = tbMenuContentMapper.selectByExample(example);
+		//获取分页数据
+		PageInfo<TbMenuContent> info = new PageInfo<>(contents);
+		//创建返回结果对象
+		EasyUiDataGridResult result = new EasyUiDataGridResult();
+		result.setRows(contents);
+		result.setTotal(info.getTotal());
+		return result;
+	}
+	
+	//修改菜单内容
+	@Override
+	public AdminResult updateContent(TbMenuContent content) {
+		tbMenuContentMapper.updateByPrimaryKeySelective(content);
+		return AdminResult.ok();
+	}
+
+	//查询用户
+	@Override
+	public EasyUiDataGridResult selectUser(Integer page, Integer rows, TbUser user) {
+		if(page==null) {
+			page=1;
+		}
+		if(rows==null) {
+			rows=20;
+		}
+		//初始化分页插件
+		PageHelper.startPage(page, rows);
+		//查询用户
+		TbUserExample example =  new TbUserExample();
+		cn.qst.pojo.TbUserExample.Criteria criteria = example.createCriteria();
+		if(user.getUname()!=null&&!"".equals(user.getUname().trim())) {
+			criteria.andUnameLike("%"+user.getUname()+"%");
+		}
+		if(user.getSex()!=null) {
+			criteria.andSexEqualTo(user.getSex());
+		}
+		if(user.getPhone()!=null&&!"".equals(user.getPhone().trim())) {
+			criteria.andUnameLike(user.getPhone());
+		}
+		if(user.getEmail()!=null&&!"".equals(user.getEmail().trim())) {
+			criteria.andEmailEqualTo(user.getEmail());
+		}
+		List<TbUser> userList = tbUserMapper.selectByExample(example);
+		PageInfo<TbUser> info = new PageInfo<>(userList);
+		EasyUiDataGridResult result = new EasyUiDataGridResult();
+		result.setTotal(info.getTotal());
+		result.setRows(userList);
+		return result;
+	}
+
+	//冻结用户
+	@Override
+	public AdminResult updateUserStatus(String[] ids , boolean status) {
+		for (String uid : ids) {
+			TbUser user = new TbUser();
+			user.setUid(uid);
+			user.setStatus(status);
+			tbUserMapper.updateByPrimaryKeySelective(user);
 		}
 		return AdminResult.ok();
 	}

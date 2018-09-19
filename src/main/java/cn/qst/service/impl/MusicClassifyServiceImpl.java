@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.mapper.AlbumResultMapper;
 import cn.qst.mapper.TbMcategoryMapper;
+import cn.qst.mapper.TbMenuContentMapper;
 import cn.qst.mapper.TbMenuMapper;
 import cn.qst.mapper.TbMusicMapper;
 import cn.qst.pojo.AlbumResult;
@@ -19,6 +20,8 @@ import cn.qst.pojo.TbMcategory;
 import cn.qst.pojo.TbMcategoryExample;
 import cn.qst.pojo.TbMcategoryExample.Criteria;
 import cn.qst.pojo.TbMenu;
+import cn.qst.pojo.TbMenuContent;
+import cn.qst.pojo.TbMenuContentExample;
 import cn.qst.pojo.TbMenuExample;
 import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbMusicExample;
@@ -39,6 +42,9 @@ public class MusicClassifyServiceImpl implements MusicClassifyService{
 	
 	@Autowired
 	private TbMenuMapper menuMapper;
+	
+	@Autowired
+	private TbMenuContentMapper menuContentMapper;
 	
 	@Override
 	public List<TbMcategory> mcategories(Integer pid) {
@@ -79,26 +85,13 @@ public class MusicClassifyServiceImpl implements MusicClassifyService{
 
 
 	@Override
-	public List<TbMusic> queryRank(Integer mid) {
-	
+	public List<TbMenuContent> queryRank(Integer mid) {
 		// TODO Auto-generated method stub
-		TbMenuExample example = new TbMenuExample();
-		cn.qst.pojo.TbMenuExample.Criteria criteria= example.createCriteria();
-		criteria.andMidEqualTo(mid);
-		List<TbMenu> selectByExample = menuMapper.selectByExample(example);
-		String mname = selectByExample.get(0).getMname();
-		String name = null;
-		for(int i=0;i<mname.length();i++) {
-			if(mname.charAt(i)=='新') {
-				name = "新";
-				break;
-			}
-		}
-		if(name.equals("新")) {
-			
-			
-		}
-		return null;
+			TbMenuContentExample tbMenuContentExample = new TbMenuContentExample();
+			cn.qst.pojo.TbMenuContentExample.Criteria criteria = tbMenuContentExample.createCriteria();
+			criteria.andMidEqualTo(mid);
+			List<TbMenuContent> selectByExample = menuContentMapper.selectByExample(tbMenuContentExample);
+			return selectByExample;				
 	}
 
 }

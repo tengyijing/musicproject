@@ -34,6 +34,12 @@
 	         		<li data-options="attributes:{'url':'/admin/index-menu-content'}">菜单内容维护</li>
 	         	</ul>
          	</li>
+         	<li>
+         		<span>用户管理</span>
+         		<ul>
+	         		<li data-options="attributes:{'url':'/admin/user-list'}">用户列表</li>
+	         	</ul>
+         	</li>
          </ul>
     </div>
     <div data-options="region:'center',title:''">

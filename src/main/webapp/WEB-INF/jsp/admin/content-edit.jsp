@@ -1,47 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<link href="/adminstyle/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="/adminstyle/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/adminstyle/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
 	<form id="contentEditForm" class="itemForm" method="post">
-		<input type="hidden" name="categoryId"/>
 		<input type="hidden" name="id"/>
 	    <table cellpadding="5">
 	        <tr>
+	            <td>音乐id:</td>
+	            <td><input class="easyui-textbox" type="text" name="musicid"  style="width: 180px;"></input></td>
+	        </tr>
+	        <tr>
 	            <td>内容标题:</td>
-	            <td><input class="easyui-textbox" type="text" name="title" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="title"  style="width: 180px;"></input></td>
 	        </tr>
 	        <tr>
-	            <td>内容子标题:</td>
-	            <td><input class="easyui-textbox" type="text" name="subTitle" style="width: 280px;"></input></td>
+	            <td>歌手名:</td>
+	            <td><input class="easyui-textbox" type="text" name="sname"  style="width: 180px;"></input></td>
 	        </tr>
 	        <tr>
-	            <td>内容描述:</td>
-	            <td><input class="easyui-textbox" name="titleDesc" data-options="multiline:true,validType:'length[0,150]'" style="height:60px;width: 280px;"></input>
-	            </td>
-	        </tr>
-	         <tr>
-	            <td>URL:</td>
-	            <td><input class="easyui-textbox" type="text" name="url" style="width: 280px;"></input></td>
-	        </tr>
-	        <tr>
-	            <td>图片:</td>
-	            <td>
-	                <input type="hidden" name="pic" />
-	                <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
+	            <td>播放量:</td>
+	            <td><input class="easyui-textbox" name="playsum"  style="width: 180px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>图片2:</td>
+	            <td>展示图片:</td>
 	            <td>
-	            	<input type="hidden" name="pic2" />
-	            	<a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td>内容:</td>
-	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="content"></textarea>
+	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">更新图片</a>
+	                 <input type="hidden" name="image"/>
 	            </td>
 	        </tr>
 	    </table>
@@ -52,10 +38,8 @@
 	</div>
 </div>
 <script type="text/javascript">
-var contentEditEditor ;
 $(function(){
-	contentEditEditor = TT.createEditor("#contentEditForm [name=content]");
-	TT.initOnePicUpload();
+	contentEditEditor = TAOTAO.createEditor("#contentEditForm [name=desc]");
 });
 
 var contentEditPage = {
@@ -64,13 +48,11 @@ var contentEditPage = {
 				$.messager.alert('提示','表单还未填写完成!');
 				return ;
 			}
-			contentEditEditor.sync();
-			
-			$.post("/rest/content/edit",$("#contentEditForm").serialize(), function(data){
+			$.post("/content/edit",$("#contentEditForm").serialize(), function(data){
 				if(data.status == 200){
-					$.messager.alert('提示','新增内容成功!');
+					$.messager.alert('提示','修改内容成功!');
 					$("#contentList").datagrid("reload");
-					TT.closeCurrentWindow();
+					//TT.closeCurrentWindow();
 				}
 			});
 		},
@@ -78,5 +60,4 @@ var contentEditPage = {
 			
 		}
 };
-
 </script>
