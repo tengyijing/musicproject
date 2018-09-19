@@ -417,7 +417,11 @@
 			<systemPath>${project.basedir}/src/main/resources/lib/httpmime-4.2.5.jar</systemPath>
 		</dependency>
 		
-		
+		<!-- Redis客户端 -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
 	</dependencies>
 	<!-- 插件配置 -->
 	<build>
