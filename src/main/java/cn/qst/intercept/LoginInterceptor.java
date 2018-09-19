@@ -25,7 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                            ModelAndView modelAndView) throws Exception {
         TbUser user = (TbUser) (httpServletRequest.getSession().getAttribute("user"));
         if (user == null) {
-            httpServletResponse.sendRedirect("login");
+            httpServletResponse.sendRedirect("/login");
         }
     }
 
