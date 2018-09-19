@@ -24,7 +24,7 @@ function searchStr(str1) {
 				str += "<p style=' font-size:18px' >歌手</p>";
 				for ( var item in data["songer"]) {
 					if(parseInt(item)<3){
-						str += "<a href='/play?id=" + data["songer"][item]
+						str += "<a href='/searchBySname?sname="+encodeURI(encodeURI(data["songer"][item]))
 						+ "' target='_new' class='result-item'>";
 				str += "<span class='rank'>" + (parseInt(item) + 1)
 						+ "</span><span class='title'>" + data["songer"][item]
@@ -49,7 +49,10 @@ function searchStr(str1) {
 				}
 				strs = str;
 			}
-
+			/*strs += "<p style=' font-size:10px' >历史记录</p>";
+				for(var item in data["history"]){
+					strs +="<a href='/seacher?musicName="+encodeURI(encodeURI(data["songer"][item]))+"'>"+data["history"][item]+"</a>"
+				}*/
 			$("#searchBox").html(strs);
 		}
 	})
@@ -64,8 +67,6 @@ function searchNull(){
 	        	return false;
 	        }      
 }
-
-
 
 
 

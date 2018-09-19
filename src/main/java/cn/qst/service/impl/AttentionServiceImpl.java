@@ -2,7 +2,13 @@ package cn.qst.service.impl;
 
 import cn.qst.mapper.TbUserMapper;
 import cn.qst.pojo.TbAttention;
+import cn.qst.pojo.TbUser;
+import cn.qst.pojo.TbUserExample;
+import cn.qst.pojo.TbUserExample.Criteria;
 import cn.qst.service.AttentionService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -87,6 +93,36 @@ public class AttentionServiceImpl implements AttentionService {
 		attention.setBid(bid);
 		return tbUserMapper.cancelAttention(attention) == 1 ? true : false;
 	}
-	
-	
+
+	@Override
+	public List<TbUser> queryAttention(String id) {
+		// TODO Auto-generated method stub
+		System.out.println("111111111111111111111111111");
+		List<String> attention = tbUserMapper.queryAttention(id);
+		attention.forEach(name->System.out.println(name));
+		List<TbUser> tbUsers = new ArrayList<>();
+		for(String string:attention) {
+			TbUserExample example = new TbUserExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andUidEqualTo(string);
+			List<TbUser> byExample = tbUserMapper.selectByExample(example );
+			tbUsers.addAll(byExample);
+		}
+		return tbUsers;
+	}
+
+	@Override
+	public List<TbUser> queryFans(String id) {
+		// TODO Auto-generated method stub
+		List<String> fans = tbUserMapper.queryFans(id);
+		List<TbUser> tbUsers = new ArrayList<>();
+		for(String string:fans) {
+			TbUserExample example = new TbUserExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andUidEqualTo(string);
+			List<TbUser> byExample = tbUserMapper.selectByExample(example );
+			tbUsers.addAll(byExample);
+		}
+		return tbUsers;
+	}
 }

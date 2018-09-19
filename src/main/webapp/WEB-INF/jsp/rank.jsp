@@ -54,7 +54,7 @@ var menuid=${menuid}
           </ul>
         </nav>
         <div class="header-search" style="margin-left:-20px;">
-        <form action="searchMusic.do" method="post" id="searchform" onsubmit="return searchNull()">
+        <form action="/seacher" method="post" id="searchform" onsubmit="return searchNull()">
           <input style="width:170px;" type="text" class="text" placeholder="我是歌手第四季" name="musicName" id="musicName" speech x-webkit-speech onkeyup="searchStr(this.value)" />
           <span class="btn" id="vid" style="float:left;"><i><img  style="margin-top:6px;"src="../../source/images/video.png" ></i></span>
           <span class="btn" onclick="search();"><i class="icon-sprite"></i></span>

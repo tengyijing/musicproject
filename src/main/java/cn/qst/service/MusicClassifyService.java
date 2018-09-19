@@ -47,4 +47,10 @@ public interface MusicClassifyService {
 	 * @return
 	 */
 	List<TbMenuContent> queryRank(Integer mid);
+	
+	/**
+	 * 根据歌手查找音乐
+	 * @return
+	 */
+	List<TbMusic> queryBySname(String sname);
 }
