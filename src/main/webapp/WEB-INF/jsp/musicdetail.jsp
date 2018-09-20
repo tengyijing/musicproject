@@ -69,7 +69,7 @@
 									<p class="des s-fc4">歌手：<span >${music.sname }</span></p>
 									<div class="m-info">
 										<div id="content-operation" class="btns f-cb">
-											<a href="/play?id=${music.mid}" class="u-btn2 u-btn2-2 u-btni-addply f-fl"  title="播放"><i><em class="ply"></em>播放</i></a>
+											<a href="/play?id=${music.mid}" target="_blank" class="u-btn2 u-btn2-2 u-btni-addply f-fl"  title="播放"><i><em class="ply"></em>播放</i></a>
 											<a class="u-btni u-btni-fav " href="javascript:showList();">
 												<i>添加到歌单</i>
 											</a>
