@@ -64,7 +64,7 @@ public class MusicClassifyController {
 		}else if(type.equals("newsong")) {
 			return (List<TbMenuContent>)request.getSession().getAttribute("newsong");
 		}else if(type.equals("songer")){
-			return (List<TbMenuContent>)request.getSession().getAttribute("newsong");	
+			return (List<TbMenuContent>)request.getSession().getAttribute("songer");	
 		}else {
 			List<TbMenuContent> queryRank = musicClassifyService.queryRank(mid);
 			return queryRank;	
