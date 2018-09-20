@@ -223,7 +223,6 @@ function topRank(mid,type) {
 				url : '/musicClassify/rank',
 				async : false,
 				success : function(data) {
-					alert(type)
 					for (var i = 0; i < data.length; i++) {
 						str += "<li class=' top" + (i+1) + "'><div class='index'>"
 								+ (i + 1) + "</div>";
