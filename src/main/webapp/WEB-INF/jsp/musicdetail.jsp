@@ -128,13 +128,13 @@
 												<c:forEach items="${top10}" var="ite" varStatus="ind">
 													<div  class="itm" >
 														<div class="head">
-															<a href="/user/home?id=${ ite.user.uid}">
+															<a href="/User/personalInfo?uid=${ ite.user.uid}">
 																<img src="${ ite.user.image}">
 															</a>
 														</div>
 														<div class="cntwrap">
 															<div class="">
-																<div class="cnt f-brk"><a href="/user/home?id=${ ite.user.uid}" class="s-fc7">${ ite.user.uname}</a>：${ ite.content }</div>
+																<div class="cnt f-brk"><a href="/User/personalInfo?uid=${ ite.user.uid}" class="s-fc7">${ ite.user.uname}</a>：${ ite.content }</div>
 															</div>
 															<div class="rp">
 																<div class="time s-fc4"><f:formatDate value="${ite.cdate}" pattern="yyyy-MM-dd"/></div>
@@ -185,13 +185,13 @@
 											<c:forEach items="${comments}" var="ite" varStatus="ind">
 												<div class="itm" >
 														<div class="head">
-															<a href="/user/home?id=${ite.user.uid}">
+															<a href="/User/personalInfo?uid=${ite.user.uid}">
 																<img src="${ ite.user.image}">
 															</a>
 														</div>
 														<div class="cntwrap">
 															<div class="">
-																<div class="cnt f-brk"><a href="/user/home?id=${ ite.user.uid}" class="s-fc7">${ ite.user.uname}</a>：${ ite.content }</div>
+																<div class="cnt f-brk"><a href="/User/personalInfo?uid=${ ite.user.uid}" class="s-fc7">${ite.user.uname}</a>：${ ite.content }</div>
 															</div>
 															<div class="rp">
 																<div class="time s-fc4"><f:formatDate value="${ite.cdate}" pattern="yyyy-MM-dd"/></div>
@@ -208,7 +208,7 @@
 																</c:choose>
 															</div>
 														</div>
-													</div>
+													</div>`
 												<div id="zxpl${ind.index}" style="display:none;">
 													<div>
 														<div class="rept m-quk m-quk-1 f-pr">
