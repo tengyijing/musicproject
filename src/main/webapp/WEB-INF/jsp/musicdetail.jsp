@@ -70,12 +70,25 @@
 									<div class="m-info">
 										<div id="content-operation" class="btns f-cb">
 											<a href="/play?id=${music.mid}" class="u-btn2 u-btn2-2 u-btni-addply f-fl"  title="播放"><i><em class="ply"></em>播放</i></a>
-											<a class="u-btni u-btni-fav " href="javascript:;">
-												<i>收藏</i>
+											<a class="u-btni u-btni-fav " href="javascript:showList();">
+												<i>添加到歌单</i>
 											</a>
 											<a class="u-btni u-btni-dl " href="${music.fileurl}"><i>下载</i></a>
 											<a href="#commentList" class="u-btni u-btni-cmmt "><i>(<span id="cnt_comment_count">${counts}</span>)</i></a>
 										</div>
+									</div>
+									<div class="songSingleChoose" style="margin-top: -15px;margin-left: 66px;">
+									    <div class="inner-container"> 
+											<ul class="menuUL3" style="width:120px;height:200px;">
+												<c:forEach items="${mylist}" var="ite" varStatus="ind">
+													<li class="menuLi3 cur">
+														<a class="beijing" single="${ite.mlid}" onclick="addList(this)">
+													 		<i class="icon isplay2"></i>${ite.name}
+													 	</a>
+													</li>
+												</c:forEach>
+											</ul>
+									   </div>
 									</div>
 									<div id="lyric-content" class="bd bd-open f-brk f-ib" >${lrc}</div>
 								</div>

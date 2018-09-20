@@ -80,6 +80,7 @@ public class PageController {
 			queryIndexSonger = JsonUtils.jsonToList(jsonSonger, TbMenuContent.class);
 		} else {
 			queryIndexSonger = menuService.queryIndexSonger();
+			jedisClient.hset("CONTENT", "songer", JsonUtils.objectToJson(queryIndexHot));
 		}
 		session.setAttribute("huadong", queryByName);
 		session.setAttribute("newsong", queryIndexNew);

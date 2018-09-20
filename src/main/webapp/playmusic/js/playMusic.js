@@ -294,7 +294,6 @@ function userLogin(username) {
 					contentType:"application/x-www-form-urlencoded",
 					data: {id:sid,
 						   lid:single,
-						   type:"sing",
 			        },
 					success: function(data){
 						data = JSON.parse(data);
@@ -663,6 +662,7 @@ $(function(){
 		$(".songName").html(songName);
 		$(".songPlayer").html(singerName);
 		$(".tc3").attr("href", "/music/detail?mid="+sid);
+		$(".tc3").attr("target", "_blank");
 		/*换右侧图片*/
 		var urlImg = $(this).attr("imgurl");
 		$("#canvas1").attr("src", urlImg);
