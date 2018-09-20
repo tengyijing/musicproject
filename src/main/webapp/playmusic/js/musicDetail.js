@@ -1,3 +1,22 @@
+
+//增加下载
+
+function musicdown(musicurl){
+	$.ajax({
+		url:"/file/downlowd",
+		type:"get",
+		dataType:'json',
+		data:{musicurl:musicurl},
+		success:function(data){
+			if(data==200){
+				alert("下载成功,请在桌面查看");
+			}else{
+				alert("下载失败");
+			}
+		}
+	})
+}
+
 // 添加评论
 function submit1() {
 	var context = $("#content").val();

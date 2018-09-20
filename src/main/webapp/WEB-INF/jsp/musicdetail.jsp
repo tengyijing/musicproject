@@ -73,7 +73,7 @@
 											<a class="u-btni u-btni-fav " href="javascript:showList();">
 												<i>添加到歌单</i>
 											</a>
-											<a class="u-btni u-btni-dl " href="${music.fileurl}"><i>下载</i></a>
+											<a class="u-btni u-btni-dl " onclick="musicdown('${music.fileurl}')"><i>下载</i></a>
 											<a href="#commentList" class="u-btni u-btni-cmmt "><i>(<span id="cnt_comment_count">${counts}</span>)</i></a>
 										</div>
 									</div>
