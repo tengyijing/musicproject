@@ -30,8 +30,6 @@
 </head>
 
 <body onload="getName('${username}');">
-<a href = "/User/personalInfo?uid=0fc1df322d394a6c9853e8a31f1680c3">测试点击头像显示用户信息</a>
-
 	<header class="header">
 	<div class="header-container" style="width: 1200px;">
 		<div class="header-top">

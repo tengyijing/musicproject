@@ -70,9 +70,15 @@ public class UserController {
 	 * @return 重定向到个人显示信息界面
 	 */
 	@RequestMapping(value = "/changUserInfo", method = { RequestMethod.POST })
-	public String changeUserInfo(TbUser user) {
+	public String changeUserInfo(TbUser user, HttpServletRequest request, HttpSession session) {
 		userService.changeUserInfo(user);
-		return "redirect:personalInfo";
+		String uid = ((TbUser) request.getSession().getAttribute("user")).getUid();
+		//用户简单个人信息
+		TbUser userInfo = userService.selectUserInfo(uid);
+		session.setAttribute("username", userInfo.getUname());
+		session.setAttribute("imgstr", userInfo.getImage());
+		session.setAttribute("user", userInfo);
+		return "personal";
 	}
 
 	/**
