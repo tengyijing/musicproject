@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.qst.comman.jedis.JedisClient;
 import cn.qst.comman.pojo.AdminResult;
 import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.comman.pojo.EasyUiTreeNode;
@@ -28,6 +29,9 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private JedisClient jedisClient;
 		
 	//根据父类id查询菜单
 	@RequestMapping("/menu/list")
@@ -72,6 +76,10 @@ public class AdminController {
 	@RequestMapping("/content/edit")
 	@ResponseBody
 	public AdminResult updateContent(TbMenuContent content) {
+		//同步缓存
+		jedisClient.hdel("CONTENT", "huadong");
+		jedisClient.hdel("CONTENT", "newsong");
+		jedisClient.hdel("CONTENT", "hot");
 		return adminService.updateContent(content);
 	}
 	

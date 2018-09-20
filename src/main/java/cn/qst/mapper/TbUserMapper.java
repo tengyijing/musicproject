@@ -152,8 +152,21 @@ public interface TbUserMapper {
      * @return 影响的行数
      */
     int cancelAttention(TbAttention attention);
-    
-    
+
+    /**
+     * 显示用户关注的用户信息
+     * @param uid
+     * @return
+     */
+    List<TbAttention> showAttention(String uid);
+
+    /**
+     * 显示用户的粉丝信息
+     * @param bid
+     * @return
+     */
+    List<TbAttention> showFans(String bid);
+
     /**
      * 获取关注人的id
      * @param id
@@ -167,4 +180,5 @@ public interface TbUserMapper {
      * @return
      */
     List<String> queryFans(String id);
+
 }

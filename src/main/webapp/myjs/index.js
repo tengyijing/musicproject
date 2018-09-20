@@ -41,8 +41,14 @@ $(function () {
 									+ data[3][i].mname + "</a></li>";
 						}
 					} else if (data[3][i].parentmid != 12) {
-						str1 += "<a class='open-vip' href='/play'>"
+						if(data[3][i].mid==14){
+							str1 += "<a class='open-vip' href='/play' target='_new'>"
 								+ data[3][i].mname + "</a>";
+						}else{
+							str1 += "<a class='open-vip' href='#'>"
+								+ data[3][i].mname + "</a>";
+						}
+						
 					} else {
 						alert("sdfsdfsdfsd")
 					}
@@ -196,7 +202,7 @@ function childMenu(tbMenu) {
 			str += "</div>";
 			str += "	<div class='bd'>";
 			str += "<ul class='song-list'>";
-			str += topRank(tbMenu[i].mid);
+			str += topRank(tbMenu[i].mid,tbMenu[i].ename);
 			str += "</ul>";
 			str += "</div></div>";
 		}
@@ -205,14 +211,14 @@ function childMenu(tbMenu) {
 
 }
 
-function topRank(mid) {
+function topRank(mid,type) {
 	var str = "";
 	$
 			.ajax({
 				type : 'get',
 				data : {
 					mid : mid,
-					menuid : menuid
+					type: type
 				},
 				url : '/musicClassify/rank',
 				async : false,
@@ -243,5 +249,7 @@ function topRank(mid) {
 			})
 	return str;
 }
+
+
 
 

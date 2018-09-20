@@ -13,6 +13,7 @@ import cn.qst.comman.pojo.AdminResult;
 import cn.qst.comman.pojo.EasyUiDataGridResult;
 import cn.qst.mapper.TbMusicMapper;
 import cn.qst.mapper.TbMusic_MusicListMapper;
+import cn.qst.pojo.TbMenuContent;
 import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbMusicExample;
 import cn.qst.pojo.TbMusicExample.Criteria;
@@ -105,5 +106,5 @@ public class MusicServiceImpl implements MusicService {
 			tbMusicMapper.updateByPrimaryKeySelective(music);
 		}
 		return AdminResult.ok();
-	}	
+	}
 }
