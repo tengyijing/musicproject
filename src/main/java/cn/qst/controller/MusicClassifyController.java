@@ -55,9 +55,8 @@ public class MusicClassifyController {
 	 */
 	@ResponseBody
 	@RequestMapping("/musicClassify/rank")
-	public List<TbMenuContent> queryRank(Integer mid,Integer menuid){
+	public List<TbMenuContent> queryRank(Integer mid){
 		List<TbMenuContent> queryRank = musicClassifyService.queryRank(mid);
 		return queryRank;
 	}
-	
 }

@@ -71,7 +71,7 @@ public class PageController {
 		}else {
 			queryIndexHot = menuService.queryIndexHot();
 			//存入缓存
-			jedisClient.hset("CONTENT", "jsonHot", JsonUtils.objectToJson(queryIndexHot));
+			jedisClient.hset("CONTENT", "hot", JsonUtils.objectToJson(queryIndexHot));
 		}
 		session.setAttribute("huadong", queryByName);
 		session.setAttribute("newsong", queryIndexNew);
