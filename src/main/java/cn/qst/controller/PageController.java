@@ -47,35 +47,47 @@ public class PageController {
 		List<TbMenuContent> queryIndexNew;
 		//热歌模块列表
 		List<TbMenuContent> queryIndexHot;
+		//歌手模块
+		List<TbMenuContent> queryIndexSonger;
 		//从redis缓存获取数据
 		String jsonName = jedisClient.hget("CONTENT","huadong");
 		//判断数据是否存在
-		if(jsonName!=null && !"".equals(jsonName.trim())) {
-			queryByName = JsonUtils.jsonToList(jsonName, TbMenuContent.class);
-		}else {
-			queryByName = menuService.queryByName();
-			//存入缓存
-			jedisClient.hset("CONTENT", "huadong", JsonUtils.objectToJson(queryByName));
-		}
-		String jsonNew = jedisClient.hget("CONTENT","newsong");
-		if(jsonNew!=null && !"".equals(jsonNew.trim())) {
-			queryIndexNew = JsonUtils.jsonToList(jsonNew, TbMenuContent.class);
-		}else {
-			queryIndexNew = menuService.queryIndexNew();
-			//存入缓存
-			jedisClient.hset("CONTENT", "newsong", JsonUtils.objectToJson(queryIndexNew));
-		}
-		String jsonHot = jedisClient.hget("CONTENT","hot");
-		if(jsonHot!=null && !"".equals(jsonHot.trim())) {
-			queryIndexHot = JsonUtils.jsonToList(jsonHot, TbMenuContent.class);
-		}else {
-			queryIndexHot = menuService.queryIndexHot();
-			//存入缓存
-			jedisClient.hset("CONTENT", "jsonHot", JsonUtils.objectToJson(queryIndexHot));
-		}
-		session.setAttribute("huadong", queryByName);
-		session.setAttribute("newsong", queryIndexNew);
-		session.setAttribute("hot", queryIndexHot);
+		
+			if(jsonName!=null && !"".equals(jsonName.trim())) {
+				queryByName = JsonUtils.jsonToList(jsonName, TbMenuContent.class);
+			}else {
+				queryByName = menuService.queryByName();
+				//存入缓存
+				jedisClient.hset("CONTENT", "huadong", JsonUtils.objectToJson(queryByName));
+			}
+			String jsonNew = jedisClient.hget("CONTENT","newsong");
+			if(jsonNew!=null && !"".equals(jsonNew.trim())) {
+				queryIndexNew = JsonUtils.jsonToList(jsonNew, TbMenuContent.class);
+			}else {
+				queryIndexNew = menuService.queryIndexNew();
+				//存入缓存
+				jedisClient.hset("CONTENT", "newsong", JsonUtils.objectToJson(queryIndexNew));
+			}
+			String jsonHot = jedisClient.hget("CONTENT","hot");
+			if(jsonHot!=null && !"".equals(jsonHot.trim())) {
+				queryIndexHot = JsonUtils.jsonToList(jsonHot, TbMenuContent.class);
+			}else {
+				queryIndexHot = menuService.queryIndexHot();
+				//存入缓存
+				jedisClient.hset("CONTENT", "jsonHot", JsonUtils.objectToJson(queryIndexHot));
+			}
+			String jsonSonger = jedisClient.hget("Content", "songer");
+			if(jsonSonger!=null && !"".equals(jsonSonger.trim())) {
+				queryIndexSonger = JsonUtils.jsonToList(jsonSonger, TbMenuContent.class);
+			}else {
+				queryIndexSonger = menuService.queryIndexSonger();
+			}
+			session.setAttribute("huadong", queryByName);
+			session.setAttribute("newsong", queryIndexNew);
+			session.setAttribute("hot", queryIndexHot);
+		session.setAttribute("songer", queryIndexSonger);
+		
+		
 		return "index";
 	}
 

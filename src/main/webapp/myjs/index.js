@@ -202,7 +202,7 @@ function childMenu(tbMenu) {
 			str += "</div>";
 			str += "	<div class='bd'>";
 			str += "<ul class='song-list'>";
-			str += topRank(tbMenu[i].mid);
+			str += topRank(tbMenu[i].mid,tbMenu[i].ename);
 			str += "</ul>";
 			str += "</div></div>";
 		}
@@ -211,18 +211,19 @@ function childMenu(tbMenu) {
 
 }
 
-function topRank(mid) {
+function topRank(mid,type) {
 	var str = "";
 	$
 			.ajax({
 				type : 'get',
 				data : {
 					mid : mid,
-					menuid : menuid
+					type: type
 				},
 				url : '/musicClassify/rank',
 				async : false,
 				success : function(data) {
+					alert(type)
 					for (var i = 0; i < data.length; i++) {
 						str += "<li class=' top" + (i+1) + "'><div class='index'>"
 								+ (i + 1) + "</div>";
