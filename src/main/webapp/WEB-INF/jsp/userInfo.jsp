@@ -121,8 +121,8 @@
                 <img src="../../source/person/images/myfridend.png"/> <em>关注</em>
                 <b></b>
             </div>
-            <span class="gjszmdm"> <a href="#fst3" class="center_in_self"><font>关注的用户</font></a>
-					<a href="#fst4" class="center_in_self"><font>粉丝</font></a>
+            <span class="gjszmdm"> <a href="#fst4" class="center_in_self"><font>关注的用户</font></a>
+					<a href="#fst3" class="center_in_self"><font>粉丝</font></a>
 				</span>
         </div>
 
@@ -274,7 +274,7 @@
         <!--一条开始-->
         <div class="public_m1">
             <a name="fst3"></a>
-            <div class="public_m2">关注的用户</div>
+            <div class="public_m2">粉丝</div>
             <!--歌单信息-->
             <div class="main-slider tab-cont">
                 <ul class="mv-list tab-cont" id="attentionUser">
@@ -300,7 +300,7 @@
         <!--一条开始-->
         <div class="public_m1">
             <a name="fst4"></a>
-            <div class="public_m2">粉丝</div>
+            <div class="public_m2">关注的用户</div>
             <!--歌单信息-->
             <div class="main-slider tab-cont">
                 <ul class="mv-list tab-cont" id="fansUser">

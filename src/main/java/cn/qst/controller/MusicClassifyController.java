@@ -69,7 +69,5 @@ public class MusicClassifyController {
 			List<TbMenuContent> queryRank = musicClassifyService.queryRank(mid);
 			return queryRank;	
 		}
-		
 	}
-	
 }

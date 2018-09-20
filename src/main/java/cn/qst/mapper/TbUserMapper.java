@@ -181,4 +181,11 @@ public interface TbUserMapper {
      */
     List<String> queryFans(String id);
 
+    /**
+     * 效验用户状态
+     * @param uname
+     * @return
+     */
+    int verfiyUserStatus(String uname);
+    
 }
