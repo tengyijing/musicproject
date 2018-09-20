@@ -453,7 +453,10 @@
     <select id ="queryFans" resultType="java.lang.String"  >
     select `uid` from tb_attention where `bid` = #{id}
     </select>
-
+    
+    <select id="verfiyUserStatus" parameterType="java.lang.String" resultType="java.lang.Integer">
+    	select `status` from `tb_user` where `uname` = #{value}
+    </select>
 </mapper>
 
 
