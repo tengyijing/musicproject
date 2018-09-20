@@ -1,9 +1,11 @@
 package cn.qst.service;
 
+import java.util.List;
+
+import cn.qst.pojo.TbUser;
 
 import cn.qst.pojo.TbAttention;
 
-import java.util.List;
 
 public interface AttentionService {
 
@@ -60,5 +62,19 @@ public interface AttentionService {
      * @return
      */
     List<TbAttention> showFans(String bid);
-
+    
+    /**
+     * 得到用户的关注人的信息
+     * @param id
+     * @return
+     */
+    List<TbUser> queryAttention(String id);
+    
+    
+    /**
+     * 得到用户的被关注人的信息
+     * @param id
+     * @return
+     */
+    List<TbUser> queryFans(String id);
 }

@@ -27,7 +27,6 @@ public class MusiclistServiceImpl implements MusiclistService {
 		return list;
 	}
 
-
 	@Override
 	public boolean deleteById(int mlid) {
 		return musicListDao.deleteByPrimaryKey(mlid)==1;

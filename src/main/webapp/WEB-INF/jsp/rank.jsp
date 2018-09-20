@@ -54,7 +54,7 @@ var menuid=${menuid}
           </ul>
         </nav>
         <div class="header-search" style="margin-left:-20px;">
-        <form action="searchMusic.do" method="post" id="searchform" onsubmit="return searchNull()">
+        <form action="/seacher" method="post" id="searchform" onsubmit="return searchNull()">
           <input style="width:170px;" type="text" class="text" placeholder="我是歌手第四季" name="musicName" id="musicName" speech x-webkit-speech onkeyup="searchStr(this.value)" />
           <span class="btn" id="vid" style="float:left;"><i><img  style="margin-top:6px;"src="../../source/images/video.png" ></i></span>
           <span class="btn" onclick="search();"><i class="icon-sprite"></i></span>
@@ -86,17 +86,19 @@ var menuid=${menuid}
          </div>
          <div id="name" style="display:none;padding-top:35px;"><a href="userInfo.do" style="cursor:pointer" ><i  onmouseover = "xianshi()"  onmouseout = "xiaoshi2()">${username}</i></a></div>
          <div id="xianshi">
-         <p style="margin-left:5px;margin-top:3px;"><a href="userInfo.do"><img src="../../source/images/个人.png"></a></p>
-         <p style="margin-left:4px;margin-top:5px;"><a href="Logout.do"><img src="../../source/images/退出.png"></a></p>
+         	<p style="margin-left: 5px; margin-top: 3px;">
+					<a href="personal"><img src="/images/person.png"></a>
+				</p>
+				<p style="margin-left: 4px; margin-top: 5px;">
+					<a href="User/exit"><img src="/images/exit.png"></a>
+			</p>
          </div>
         <div class="header-login"style="margin-right:-10px;">
-          <a href="login.jsp" class="open-green" id="login">登录</a>
-          <a href="regist.jsp" class="open-vip" id="reg">注册</a>
+          <a href="/login" class="open-green" id="login">登录</a>
+          <a href="/regist" class="open-vip" id="reg">注册</a>
         </div>
       </div>
       <ul class="header-subNav" style="margin-top:20px;" id="toprankChild">
-       
-        
       </ul>
     </div>
   </header>
@@ -111,11 +113,6 @@ var menuid=${menuid}
 					
 					<div class='ranklist-wrapper clearfix'
 						style="margin: 0 auto; width: 920px;" id="ranktop" >
-						
-					
-				
-					
-					
 					</div>
 				</div>
 				<!-- end 上方右边模块 -->

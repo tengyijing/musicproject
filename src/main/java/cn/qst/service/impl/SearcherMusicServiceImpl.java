@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import cn.qst.mapper.TbMusicMapper;
+import cn.qst.mapper.TbMusic_MusicListMapper;
 import cn.qst.pojo.TbMusic;
 import cn.qst.pojo.TbMusicExample;
 import cn.qst.pojo.TbMusicExample.Criteria;
@@ -21,6 +23,9 @@ public class SearcherMusicServiceImpl implements SeacherMusicService {
 
 	@Autowired
 	private TbMusicMapper musicMapper;
+	
+	@Autowired
+	private TbMusic_MusicListMapper musicListMapper;
 
 	@Override
 	public Map<String, Object> searcherByStr(String str) {
@@ -68,6 +73,20 @@ public class SearcherMusicServiceImpl implements SeacherMusicService {
 		
 		return map;
 	}
+
+	@Override
+	public Boolean addMusic(Integer mlid, Integer mid) {
+		// TODO Auto-generated method stub
+		int countByMlidAndMid = musicListMapper.countByMlidAndMid(mlid, mid);
+		if(countByMlidAndMid==0) {
+			musicListMapper.save(mlid, mid);
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	
 
 
 

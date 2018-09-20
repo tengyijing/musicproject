@@ -167,4 +167,18 @@ public interface TbUserMapper {
      */
     List<TbAttention> showFans(String bid);
 
+    /**
+     * 获取关注人的id
+     * @param id
+     * @return
+     */
+    List<String> queryAttention(String id); 
+    
+    /**
+     * 获取被关注的id
+     * @param id
+     * @return
+     */
+    List<String> queryFans(String id);
+
 }
