@@ -77,10 +77,10 @@ var menuid=${menuid}
          <div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;display:none">
          <c:choose>
         <c:when test="${imgstr== null or imgstr==''}">
-            <a href="userInfo.do"><img src="../../source/images/user.png" id="img1"/></a>
+            <a href="/personal"><img src="../../source/images/user.png" id="img1"/></a>
         </c:when>
         <c:otherwise>
-        <a href="userInfo.do"><img src="${imgstr}" id="img2"/></a>
+        <a href="/personal"><img src="${imgstr}" id="img2"/></a>
         </c:otherwise>
         </c:choose>
          </div>

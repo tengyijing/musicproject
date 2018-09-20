@@ -48,11 +48,11 @@ var type = '${type}';
 					<div class="mainNav">
 						<div id="nameicon" class="center_header"
 							style="margin-left: 60px; margin-right: 10px; float: left;">
-							<a href="User/personalInfo" target="_blank"><img
+							<a href="/personal" target="_blank"><img
 								src="${imgstr}" id="img2" /></a>
 						</div>
 						<div id="name" style="padding-top: 21px;">
-							<a href="User/personal" style="cursor: pointer; color: #fff"
+							<a href="/personal" style="cursor: pointer; color: #fff"
 								target="_blank">${username}</a>
 						</div>
 					</div>
