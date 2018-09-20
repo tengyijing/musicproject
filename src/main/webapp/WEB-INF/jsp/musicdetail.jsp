@@ -69,13 +69,12 @@
 									<p class="des s-fc4">歌手：<span >${music.sname }</span></p>
 									<div class="m-info">
 										<div id="content-operation" class="btns f-cb">
-											<a href="javascript:;" class="u-btn2 u-btn2-2 u-btni-addply f-fl"  title="播放"><i><em class="ply"></em>播放</i></a>
+											<a href="/play?id=${music.mid}" class="u-btn2 u-btn2-2 u-btni-addply f-fl"  title="播放"><i><em class="ply"></em>播放</i></a>
 											<a class="u-btni u-btni-fav " href="javascript:;">
 												<i>收藏</i>
 											</a>
-											<a class="u-btni u-btni-share " href="javascript:;"><i>分享</i></a>
-											<a class="u-btni u-btni-dl " href="javascript:;"><i>下载</i></a>
-											<a href="javascript:;" class="u-btni u-btni-cmmt "><i>(<span id="cnt_comment_count">6159</span>)</i></a>
+											<a class="u-btni u-btni-dl " href="${music.fileurl}"><i>下载</i></a>
+											<a href="#commentList" class="u-btni u-btni-cmmt "><i>(<span id="cnt_comment_count">${counts}</span>)</i></a>
 										</div>
 									</div>
 									<div id="lyric-content" class="bd bd-open f-brk f-ib" >${lrc}</div>
@@ -102,7 +101,7 @@
 	                                            </c:otherwise>
                                             </c:choose>
 										</div>
-										<div class="j-flag">
+										<div class="j-flag" id="commentList">
 											<div>
 												<div class="m-cmmtipt f-cb f-pr">
 													<div class="u-txtwrap holder-parent f-pr" style="display: block;">
@@ -129,17 +128,17 @@
 												<c:forEach items="${top10}" var="ite" varStatus="ind">
 													<div  class="itm" >
 														<div class="head">
-															<a href="/user/home?id=${ ite.user.uid}">
+															<a href="/User/personalInfo?uid=${ ite.user.uid}">
 																<img src="${ ite.user.image}">
 															</a>
 														</div>
 														<div class="cntwrap">
 															<div class="">
-																<div class="cnt f-brk"><a href="/user/home?id=${ ite.user.uid}" class="s-fc7">${ ite.user.uname}</a>：${ ite.content }</div>
+																<div class="cnt f-brk"><a href="/User/personalInfo?uid=${ ite.user.uid}" class="s-fc7">${ ite.user.uname}</a>：${ ite.content }</div>
 															</div>
 															<div class="rp">
 																<div class="time s-fc4"><f:formatDate value="${ite.cdate}" pattern="yyyy-MM-dd"/></div>
-																<a href="javascript:void(0)">
+																<a onclick="dianzan(${ite.cdid})">
 																	<i class="zan u-icn2 u-icn2-12"></i> (${ite.likesum })
 																</a>
 																<span class="sep">|</span>
@@ -181,26 +180,23 @@
 										<h3 class="u-hd4">最新评论</h3>
 										<div id="zxpl">
 											<c:if test="${comments==null or comments.size()==0 }">
-												<div class="itm">
-													暂无评论
-												</div>
+												<div class="itm">暂无评论</div>
 											</c:if>
 											<c:forEach items="${comments}" var="ite" varStatus="ind">
 												<div class="itm" >
 														<div class="head">
-															<a href="/user/home?id=${ite.user.uid}">
+															<a href="/User/personalInfo?uid=${ite.user.uid}">
 																<img src="${ ite.user.image}">
 															</a>
 														</div>
 														<div class="cntwrap">
 															<div class="">
-																<div class="cnt f-brk"><a href="/user/home?id=${ ite.user.uid}" class="s-fc7">${ ite.user.uname}</a>：${ ite.content }</div>
+																<div class="cnt f-brk"><a href="/User/personalInfo?uid=${ ite.user.uid}" class="s-fc7">${ite.user.uname}</a>：${ ite.content }</div>
 															</div>
 															<div class="rp">
 																<div class="time s-fc4"><f:formatDate value="${ite.cdate}" pattern="yyyy-MM-dd"/></div>
-																<a href="javascript:void(0)">
+																<a onclick="dianzan(${ite.cdid})">
 																	<i class="zan u-icn2 u-icn2-12"></i> (${ite.likesum })
-																	<!-- u-icn2-13 -->
 																</a>
 																<span class="sep">|</span>
 																<a class="s-fc3" onclick="showReplay('zxpl${ind.index}')">回复</a>
@@ -208,11 +204,11 @@
 																	<c:when test="${sessionScope.user != null and sessionScope.user.uid==ite.user.uid}">
 																		<span class="sep">|</span>
 																		<a class="s-fc3" onclick="deleteComment(${ite.cdid})">删除</a>
-																	</c:when>
+                                                                 </c:when>
 																</c:choose>
 															</div>
 														</div>
-													</div>
+													</div>`
 												<div id="zxpl${ind.index}" style="display:none;">
 													<div>
 														<div class="rept m-quk m-quk-1 f-pr">
@@ -237,33 +233,35 @@
 										</div>
 									</div>
 									<!--分页插件-->
-									<div class="j-flag">
-										<div class="u-page" id="pageinfo">
-											<a class="zbtn zprv js-disabled">上一页</a>
-											<c:forEach begin="1" end="${page-1}" var="ite" varStatus="ind">
+									<c:if test="${comments!=null and comments.size()!=0 }">
+										<div class="j-flag">
+											<div class="u-page" id="pageinfo">
+												<a class="zbtn zprv js-disabled">上一页</a>
+												<c:forEach begin="1" end="${page}" var="ite" varStatus="ind">
+													<c:choose>
+														<c:when test="${ite==1}">
+															<a class="zpgi zpg9 js-selected">${ite}</a>
+														</c:when>
+														<c:otherwise>
+															<a class="zpgi zpg9" onclick="goPage(${ite})">${ite}</a>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+												<c:if test="${page>5}">
+													<span class="zdot">...</span>
+													<a class="zpgi zpg9" onclick="goPage(${page})">${page}</a>
+												</c:if>
 												<c:choose>
-													<c:when test="${ite==1}">
-														<a class="zpgi zpg9 js-selected">${ite}</a>
+													<c:when test="${page>1}">
+														<a class="zbtn znxt" onclick="goPage(1)">下一页</a>
 													</c:when>
 													<c:otherwise>
-														<a class="zpgi zpg9" onclick="goPage(${ite})">${ite}</a>
+														<a class="zbtn znxt js-disabled">下一页</a>
 													</c:otherwise>
 												</c:choose>
-											</c:forEach>
-											<c:if test="${page>5}">
-												<span class="zdot">...</span>
-												<a class="zpgi zpg9" onclick="goPage(${page})">${page}</a>
-											</c:if>
-											<c:choose>
-												<c:when test="${page>1}">
-													<a class="zbtn znxt" onclick="goPage(1)">下一页</a>
-												</c:when>
-												<c:otherwise>
-													<a class="zbtn znxt js-disabled">下一页</a>
-												</c:otherwise>
-											</c:choose>
+											</div>
 										</div>
-									</div>
+									</c:if>
 								</div>
 							</div>
 						</div>

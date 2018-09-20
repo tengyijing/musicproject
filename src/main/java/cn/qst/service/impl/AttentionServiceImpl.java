@@ -14,6 +14,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author lk
  * 2018/9/17 20:13
@@ -29,14 +31,14 @@ public class AttentionServiceImpl implements AttentionService {
      * 关注用户
      *
      * @param uid 关注用户
-     * @param did 被关注用户
+     * @param bid 被关注用户
      * @return 写入成功即返回true，失败即返回false
      */
     @Override
-    public Boolean insert(String uid, String did) {
+    public Boolean insert(String uid, String bid) {
         TbAttention attention = new TbAttention();
-        attention.setUid("uid");
-        attention.setBid("did");
+        attention.setUid(uid);
+        attention.setBid(bid);
         return tbUserMapper.attentionUser(attention) == 1 ? true : false;
     }
 
@@ -54,13 +56,13 @@ public class AttentionServiceImpl implements AttentionService {
 
 	 /**
      * 用户的粉丝数
-     * @param did 用户id
+     * @param bid 用户id
      * @return 用户粉丝的数量
      */
 	@Override
-	public int selectFans(String did) {
+	public int selectFans(String bid) {
 		// TODO Auto-generated method stub
-		return tbUserMapper.selectFans(did);
+		return tbUserMapper.selectFans(bid);
 	}
 	
 	
@@ -93,6 +95,26 @@ public class AttentionServiceImpl implements AttentionService {
 		attention.setBid(bid);
 		return tbUserMapper.cancelAttention(attention) == 1 ? true : false;
 	}
+
+    /**
+     * 显示用户关注的用户信息
+     * @param uid
+     * @return
+     */
+    @Override
+    public List<TbAttention> showAttention(String uid) {
+        return tbUserMapper.showAttention(uid);
+    }
+
+    /**
+     * 显示用户的粉丝信息
+     * @param bid
+     * @return
+     */
+    @Override
+    public List<TbAttention> showFans(String bid) {
+        return tbUserMapper.showFans(bid);
+    }
 
 	@Override
 	public List<TbUser> queryAttention(String id) {

@@ -58,11 +58,11 @@
 				<div class="result" id="searchBox">
 				<c:forEach items="${hot}" var="hot_song" varStatus="stat">
 				<c:if test="${stat.count<=6 }">
-				<a  class="result-item" href="play?id=${hot_song.musicid}" target='_new'> 
-				<span class="rank">${stat.count }</span> 
+				<a  class="result-item" href="play?id=${hot_song.musicid}" target='_new'>
+				<span class="rank">${stat.count }</span>
 				<span class="title">${hot_song.title}</span> <span class="num">${hot_song.playsum }万</span></a>
-				</c:if>	
-				</c:forEach>				
+				</c:if>
+				</c:forEach>
 				</div>
 			</div>
 
@@ -117,8 +117,8 @@
 					</span></a><img src='${hua.image }'alt=''>
 					<p >${hua.title}</p></li>
 					</c:if>
-					
-					
+
+
 				</c:forEach>
 				</ul>
 				<!--火狐倒影图层-->
@@ -143,10 +143,10 @@
 			</div>
 			<div class="main-slider tab-cont">
 				<ul class="slider-wrapper" id="indexnew">
-				
+
 				<c:forEach items="${newsong }" var="new_song" varStatus="stat">
 				<c:if test="${stat.count<=4 }">
-					
+
 					<li><a href="play?id=${new_song.musicid }" target='_new'
 						class="img"> <img src="${new_song.image }" width="100%" height="100%"
 							alt="#"> <span class="mask"></span> <i class="icon-play"></i>
@@ -176,10 +176,10 @@
 				<span class="line line-left"></span> <span class="line line-right"></span>
 			</div>
 			<ul class="mv-list tab-cont">
-			
+
 			<c:forEach items="${hot}" var="hot_song" varStatus="stat">
 			<c:if test="${stat.count<=8 }">
-			
+
 			<li class="item"><a href="play?id=${hot_song.musicid }"
 					target='_new' class="img"><img
 						src="${hot_song.image }"  alt="#"><i
@@ -190,7 +190,7 @@
 						<span class="play-total"><i class="icon-sprite"></i>${hot_song.playsum }万</span>
 					</div></li>
 			</c:if>
-			
+
 			</c:forEach>
 			</ul>
 		</div>

@@ -403,6 +403,14 @@
         <result column="bid" property="bid"/>
     </resultMap>
 
+    <resultMap id="attentionCtxUser" type="cn.qst.pojo.TbAttention" extends="attention">
+        <association property="user" column="bid" select="selectByPrimaryKey"/>
+    </resultMap>
+
+    <resultMap id="fansCtxUser" type="cn.qst.pojo.TbAttention" extends="attention">
+        <association property="user" column="uid" select="selectByPrimaryKey"/>
+    </resultMap>
+
     <!--auto generated Code-->
     <sql id="attention_all">
         `uid`,
@@ -429,16 +437,26 @@
     <delete id="cancelAttention" parameterType = "cn.qst.pojo.TbAttention">
     	DELETE FROM tb_attention WHERE uid = #{uid} AND bid = #{bid}
     </delete>
-    
-      <select id ="queryAttention" resultType="java.lang.String" >
+
+    <select id="showAttention" parameterType="java.lang.String" resultMap="attentionCtxUser">
+        SELECT * FROM `tb_attention` WHERE `uid` = #{uid}
+    </select>
+
+    <select id="showFans" parameterType="java.lang.String" resultMap="fansCtxUser">
+        SELECT * FROM `tb_attention` WHERE `bid` = #{bid}
+    </select>
+
+    <select id ="queryAttention" resultType="java.lang.String" >
     select `bid` from tb_attention where `uid` = #{id}
     </select>
-    
-    
+
     <select id ="queryFans" resultType="java.lang.String"  >
     select `uid` from tb_attention where `bid` = #{id}
     </select>
-   
+    
+    <select id="verfiyUserStatus" parameterType="java.lang.String" resultType="java.lang.Integer">
+    	select `status` from `tb_user` where `uname` = #{value}
+    </select>
 </mapper>
 
 
