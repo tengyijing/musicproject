@@ -2,7 +2,7 @@ package cn.qst.pojo;
 
 public class TbUser {
     private String uid;
-
+    
     private String uname;
 
     private String password;

@@ -118,4 +118,11 @@ public interface UserService {
 	 * @return
 	 */
 	TbUser selectUserInfo(String uid);
+	
+	/**
+	 * 效验用户状态
+	 * @param uname
+	 * @return
+	 */
+	Boolean verfiyUserStatus(String uname);
 }
