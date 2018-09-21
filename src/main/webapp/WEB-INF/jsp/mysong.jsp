@@ -89,7 +89,7 @@
         				str+="<div style='margin-left:40%'><img id='tupian' src='../../source/mysong/images/guanzhu.jpg' height='51px' width='52px'/></div>";
         			}
         			for(var i=0;i<data.length;i++){
-        				str+="<div  style='margin-left:20px;float:left'><a href='/User/personalInfo?uid="+data[i].uid+"'><img src='"+data[i].image+"' height='51px' width='52px'></a>";
+        				str+="<div  style='margin-left:20px;float:left'><a href='/User/personalInfo?uid="+data[i].uid+"' target=\"new\"><img src='"+data[i].image+"' height='51px' width='52px'></a>";
         				str+="<a >"+data[i].uname+"</a></div>";
         			}
         			
@@ -97,8 +97,6 @@
         		}
         	})
         }
-        
-        
         function queryFans(id){
         	$.ajax({
         		type:'get',
@@ -110,7 +108,7 @@
         				str+="<div style='margin-left:40%'><img   id='tupian' src='../../source/mysong/images/guanzhu.jpg'/></div>";
         			}
         			for(var i=0;i<data.length;i++){
-        				str+="<div  style='margin-left:20px;float:left'><a href='/User/personalInfo?uid="+data[i].uid+"'><img src='"+data[i].image+"' height='51px' width='52px'></a>";
+        				str+="<div  style='margin-left:20px;float:left'><a href='/User/personalInfo?uid="+data[i].uid+"' target=\"new\"><img src='"+data[i].image+"' height='51px' width='52px'></a>";
         				str+="<a >"+data[i].uname+"</a></div>";
         			}
         			

@@ -29,19 +29,12 @@
 			<a style="display: inline-block;cursor: pointer;margin-top: 5px;margin-left: 20px;font-size: 32px;color: #FFF;" href="/index">爱唱音乐</a>
 			<div class="mainNav" style="margin-top: 0px;">
 				<div id="nameicon" class="center_header" style="margin-left:60px;margin-right:10px;float:left;">
-        			<a href="User/personalInfo" target="_blank">
-        				<c:choose>
-                           <c:when test="${sessionScope.user==null or sessionScope.user.image==null}">
-                           	<img src="/images/headPhoto/user.png"/>
-                           </c:when>
-                           <c:otherwise>
-                           	<img src="${sessionScope.user.image}"/>
-                           </c:otherwise>
-                        </c:choose>
+        			<a href="/personal" target="_blank">
+                           	<img src="${sessionScope.imgstr}"/>
         			</a>
         		</div>
 		         <div id="name" style="padding-top:21px;">
-		         	<a href="User/personalInfo" style="cursor:pointer;color:#fff" target="_blank" >${username}</a>
+		         	<a href="/personal" style="cursor:pointer;color:#fff" target="_blank" >${username}</a>
 		         </div>
 			</div>
 		</div>
@@ -105,14 +98,7 @@
 									<div class="iptarea">
 										<!--用户头像，没有的话使用默认头像-->
 										<div class="head">
-											<c:choose>
-	                                            <c:when test="${sessionScope.user==null or sessionScope.user.image==null}">
-	                                            	<img src="/images/headPhoto/user.png"/>
-	                                            </c:when>
-	                                            <c:otherwise>
-	                                            	<img src="${sessionScope.user.image}"/>
-	                                            </c:otherwise>
-                                            </c:choose>
+	                                           <img src="${sessionScope.imgstr}"/>
 										</div>
 										<div class="j-flag" id="commentList">
 											<div>
@@ -158,7 +144,7 @@
 																<a class="s-fc3" onclick="showReplay('jcpl${ind.index}')" >回复</a>
 																<c:choose>
 																	<c:when test="${sessionScope.user != null and sessionScope.user.uid==ite.user.uid}">
-																		<span class="sep">|</span>
+																	<span class="sep">|</span>
 																		<a class="s-fc3" onclick="deleteComment(${ite.cdid})">删除</a>
 																	</c:when>
 																</c:choose>

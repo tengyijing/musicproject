@@ -104,13 +104,13 @@
 				<ul >
 				<c:forEach items="${huadong}" var="hua" varStatus="stat">
 					<c:if test="${stat.first }">
-					<li id='imgCard${stat.index }'><a href="/music/detail?mid=${hua.musicid}">
+					<li id='imgCard${stat.index }'><a href="/music/detail?mid=${hua.musicid}" target=new">
 					<span style='opacity: 0;'>
 					</span></a><img src='${hua.image }'alt=''>
 					<p style='bottom: 0'>${hua.title }</p></li>
 					</c:if>
 					<c:if test="${!stat.first }">
-					<li id='imgCard${stat.index }'><a href="/music/detail?mid=${hua.musicid}">
+					<li id='imgCard${stat.index }'><a href="/music/detail?mid=${hua.musicid}" target=new">
 					<span style='opacity: 0.4;'>
 					</span></a><img src='${hua.image }'alt=''>
 					<p >${hua.title}</p></li>
@@ -145,15 +145,15 @@
 				<c:forEach items="${newsong }" var="new_song" varStatus="stat">
 				<c:if test="${stat.count<=4 }">
 
-					<li><a href="/music/detail?mid=${new_song.musicid}" target='_new'
+					<li><a href="/music/detail?mid=${new_song.musicid}" target='new'
 						class="img"> <img src="${new_song.image }" width="100%" height="100%"
 							alt="#"> <span class="mask"></span> <i class="icon-play"></i>
 					</a>
 						<div class="info">
 							<div class="title">
-								<a href="/music/detail?mid=${new_song.musicid}" target='_new'>${new_song.title}</a>
+								<a href="/music/detail?mid=${new_song.musicid}" target='new'>${new_song.title}</a>
 							</div>
-							<a href="/music/detail?mid=${new_song.musicid}" target='_new' class="author">${new_song.sname }</a>
+							<a href="/music/detail?mid=${new_song.musicid}" target='new' class="author">${new_song.sname }</a>
 						</div></li>
 				</c:if>
 				</c:forEach>
@@ -178,13 +178,13 @@
 			<c:forEach items="${hot}" var="hot_song" varStatus="stat">
 			<c:if test="${stat.count<=8 }">
 
-			<li class="item"><a href="play?id=${hot_song.musicid }"
-					target='_new' class="img"><img
+			<li class="item"><a href="/music/detail?mid=${hot_song.musicid }"
+					target='new' class="img"><img
 						src="${hot_song.image }"  alt="#"><i
 						class="icon-play"></i></a>
 					<div class="info">
-						<a href="/music/detail?mid=${hot_song.musicid}" target='_new' class="title">${hot_song.title }</a>
-						<a href="/music/detail?mid=${hot_song.musicid}" target='_new' class="author">${hot_song.sname }</a>
+						<a href="/music/detail?mid=${hot_song.musicid}" target='new' class="title">${hot_song.title }</a>
+						<a href="/music/detail?mid=${hot_song.musicid}" target='new' class="author">${hot_song.sname }</a>
 						<span class="play-total"><i class="icon-sprite"></i>${hot_song.playsum }万</span>
 					</div></li>
 			</c:if>
@@ -213,6 +213,5 @@
 	</footer>
 	<script type="text/javascript"
 		src="source/content-top-resource/js/index.js"></script>
-
 </body>
 </html>
