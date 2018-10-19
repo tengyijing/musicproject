@@ -171,7 +171,7 @@
 <header class="header">
     <div class="header-container" style="width: 1200px;">
         <div class="header-top">
-            <a href="../../index.jsp" class="logo"></a>
+            <a href="../../index" class="logo"></a>
             <nav class="header-nav">
                 <ul id="topmusicClassify">
                 </ul>
